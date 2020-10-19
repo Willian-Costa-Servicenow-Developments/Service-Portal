@@ -13,6 +13,7 @@ This type of list in card format offers a differentiated display, with the possi
 # how to implement
 
 1 - Import and Commit the Update set: "Drag and Drop Update Set"
+
 2 - Search the widget with name: "OCL: Card List Records"
 
 # Development
