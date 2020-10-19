@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unload unload_date="2020-10-19 14:47:42">
+<sp_widget action="INSERT_OR_UPDATE">
+<category>custom</category>
+<client_script><![CDATA[function ($scope, $location, spUtil, amb, $http, spAriaUtil, $timeout,$rootScope, spNavStateManager) {
+	/* widget controller */
+	var c = this;
+
+	c.generateDrillDown = function(element, row, parent){
+		
+		if($("#"+ element).attr("data-colapsed") == 'true'){
+			drillDestroy(element);
+			return;
+		}	
+		var parms = {};
+		parms.action = "drill_down";
+		parms.parent = parent;
+		c.server.get(parms).then(function(r){
+			collapseDrill(element);
+			createRow(element, row, r.data.childs);
+		});
+		
+	}
+	
+	$(document).on('click', '.drill_down_item', function(){
+		c.generateDrillDown($(this).attr('id'), $(this).attr('data-row'), $(this).attr('data-parent'));
+	});
+
+	function createRow(element, row, data){
+		var body = "";
+		body += "<section class='section-sp-line'>";
+		body += "<div class='sp-table'>";
+		// Generate Tbody
+		for(var i in data){
+			if($('#' + data[0].parent + '_hidden_row' + row).length)
+				continue;
+			body += '<div id="'+data[0].parent+'_hidden_row'+ i + '" data-row="'+ i +'" data-parent="' + data[i].sys_id +'" class="sp-row drill_down_item">';
+			for(var k in data[i]){
+				if(data[i][k].display_value){	
+					body += '<div class=" cell">';
+					if(k == c.data.fields_array[0])
+							body += '<span class="arrow"> <i class="fa fa-caret-right"></i> </span>';	
+					body += data[i][k].display_value;
+					body += '</div>';
+				}
+			}
+			body += '</div>';
+		}
+		body += '</div>';
+		body += "</section>";
+		$('#' + element).after(body);
+	}
+	
+	function drillDestroy(element){
+		console.log("fechou");
+		element = "#" + element;
+		$(element).next().remove("section.section-sp-line");
+		$(element).find(".arrow .fa").removeClass("fa-caret-down").addClass("fa-caret-right");
+		$(element).attr("data-colapsed", "false");
+	}
+	
+	function collapseDrill(element){
+		element = "#" + element;
+		$(element).attr("data-colapsed", true);
+		$(element).find(".arrow .fa").removeClass("fa-caret-right").addClass("fa-caret-down");
+	}
+	
+	var eventNames = {
+		click: 'data_table.click',
+		setFilter: 'data_table.setFilter',
+		setKeywords: 'data_table.setKeywords'
+	};
+
+	$scope.getNumber = function(num) {
+		return new Array(num);
+	}
+
+	$scope.mathMin = function(v1,v2) {
+		return Math.min(v1,v2);
+	}
+
+	function getData(updateUrl) {
+		var f = $scope.data;
+		spUtil.update($scope).then(function(data) {
+			f.view = data.view;
+			if ($scope.options.fromUrl && updateUrl)
+				setPermalink(f.table, f.filter, f.o, f.d, f.p);
+
+			if ($scope.options.show_breadcrumbs && data.filterBreadcrumbs)
+				$scope.$broadcast('widget-filter-breadcrumbs.setBreadcrumbs', data.filterBreadcrumbs.data, data.filter);
+
+			initRecordWatcher(f.table, f.filter);
+		});
+	}
+
+	function setPermalink(table, filter, orderBy, orderDirection, page){
+		$scope.ignoreLocationChange = true;
+		var search = $location.search();
+		angular.extend(search, {
+			spa: 1,
+			table: table,
+			filter: filter,
+			p: page,
+			o: orderBy,
+			d: orderDirection
+		});
+		$location.search(search);
+	}
+
+	var watcher;
+	function initRecordWatcher(table, filter){
+		if (watcher)
+			watcher.unsubscribe();
+
+		if (table && filter) {
+			var watcherChannel = amb.getChannelRW(table, filter);
+			amb.connect();
+			watcher = watcherChannel.subscribe(function(message) {
+				if (!message.data)
+					return;
+				switch(message.data.action) {
+					case "change":
+						updateRowFromRW(message);
+						break;
+					case "exit":
+						// A record was removed
+					case "enter":
+						// A record was added
+					default:
+						spUtil.update($scope);
+						break;
+				}
+			});
+		}
+	}
+
+	function updateRowFromRW(message) {
+		if (message.data && message.data.sys_id && $scope.data.list) {
+			var row, field;
+			for(var i=0;i<$scope.data.list.length; i++) {
+				row = $scope.data.list[i];
+				if (row.sys_id == message.data.sys_id) {
+					var fields = Object.getOwnPropertyNames(message.data.record);
+					for(var f in fields) {
+						field = fields[f];
+						if(typeof row[field] !== 'undefined') {
+							row[field].display_value = message.data.record[field].display_value;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	$scope.$on('$destroy', function() {
+		if (watcher)
+			watcher.unsubscribe();
+	});
+
+	$scope.setPageNum = function(num) {
+		$scope.data.p = num;
+		$(".card-item").hide();
+		getData(true);
+	}
+
+	$scope.setOrderBy = function(field) {
+		var d = "asc";
+
+		if ($scope.data.o == field.element) {
+			if ($scope.data.d == "asc")
+				d = "desc";
+			else
+				d = "asc";
+		}
+
+		if (d === "asc") {
+			spAriaUtil.sendLiveMessage($scope.data.msg.sortingByAsc);
+		} else if (d === "desc") {
+			spAriaUtil.sendLiveMessage($scope.data.msg.sortingByDesc);
+		}
+
+		$scope.data.o = field.element;
+		$scope.data.d = d;
+
+		$scope.setSearch(true);
+	}
+
+	$scope.setSearch = function(updateUrl) {
+		$scope.data.p = 1;
+		getData(updateUrl);
+	}
+
+	$scope.$on(eventNames.setFilter, function(e, newFilter){
+		$scope.data.filter = newFilter;
+		$scope.setSearch(false);
+	});
+
+	$scope.$on(eventNames.setKeywords, function(e, keywords){
+		$scope.data.keywords = keywords;
+		$scope.setSearch(false);
+	});
+
+
+
+	$scope.rowsWerePruned = function() {
+		if (!$scope.data.list)
+			return;
+
+		$scope.rowsPruned = $scope.mathMin($scope.data.window_end,$scope.data.row_count) - $scope.data.window_start - $scope.data.list.length;
+		return $scope.rowsPruned > 0;
+	}
+
+	$scope.showFilter = function() {
+		return !$scope.data.list.length && !$scope.data.num_pages && !$scope.data.invalid_table && !$scope.loadingData;
+	}
+
+	c.appendQuery = function(query){
+		if ($scope.data.filter.length > 1)
+			$scope.data.filter += '^';
+		$scope.data.filter += query;
+		$scope.setSearch();
+
+	}
+
+	// Makes Widget Async
+	$scope.data = $scope.options;
+	$scope.loadingData = true;
+	$scope.server.update().then(function() {
+		//if ($scope.data.newButtonUnsupported)
+		//("Service Portal: New button not supported for sys_attachment list");
+		$scope.loadingData = false;
+		initRecordWatcher($scope.data.table, $scope.data.filter);
+	});
+
+	function parseQuery(table, queryString){
+		return $http.post('/api/now/sp/parsequery/' + table, queryString).then(function(response){
+			return response.data.result;
+		});
+	}
+
+	c.createQueryTerm = function(table, field, sys_id, operator){
+		return $http.get('/api/now/sp/getInOutQueryTerm', {
+			params: {
+				table: table,
+				sys_id: sys_id,
+				field: field,
+				operator: operator
+			}
+		}).then(function(response){
+			if (response && response.data && response.data.result)
+				return response.data.result.parts;
+		});
+	}
+
+	c.showMatching = function(field, newTerm) {
+		var queryString = $scope.data.filter;
+		var eq = "";
+		parseQuery($scope.data.table, queryString).then(function(oldTerms) {
+			for(var i=0; i<oldTerms.length; i++){
+				var term = oldTerms[i];
+				if (isSameField(newTerm, term))
+					continue;
+
+				if (eq.length)
+					eq += '^';
+
+				eq += getEncodedTerm(term);
+			}
+			if (eq.length)
+				eq += '^';
+			eq += getEncodedTerm(newTerm);
+
+			$scope.data.filter = eq;
+			$scope.setSearch();
+		});
+	};
+
+	c.filterOut = function(field, newTerm) {
+		var eq = $scope.data.filter;
+		if (eq.length)
+			eq += '^';
+
+		eq += getEncodedTerm(newTerm);
+		$scope.data.filter = eq;
+		$scope.setSearch();
+	};
+
+	function isSameField(t1, t2) {
+		if ('left' in t1 && 'left' in t2)
+			return t1.left.query_term_field === t2.left.query_term_field;
+		else if ('left' in t1)
+			return t1.left.query_term_field === t2.query_term_field;
+		else if ('left' in t2)
+			return t1.query_term_field === t2.left.query_term_field;
+		return t1.query_term_field === t2.query_term_field;
+	}
+
+	function getEncodedTerm(term) {
+		var eq;
+		if (term.left) {
+			eq = getEncodedTerm(term.left);
+			eq += '^OR';
+			eq += getEncodedTerm(term.right);
+		} else {
+			eq = term.query_term_field;
+			eq += term.operator;
+			eq += term.value;
+		}
+		return eq;
+	}
+
+}]]></client_script>
+<controller_as>c</controller_as>
+<css>div.sp-table{
+  display:block;
+  width:100%;
+}
+
+div.sp-table &gt; .sp-row{
+  display:flex;
+  width:100%;
+  flex-direction:horizonal;
+}
+div.sp-table &gt; div &gt; div{
+  display: block;
+  flex-grow:1;
+  width: 30%;
+  border-bottom:1px solid #ddd;
+  //vertical-align: middle;
+  height:30px;
+  padding:4px;
+}
+
+.section-sp-line{
+  position: relative;
+  left: 18px;
+  width: 100%;
+  
+  .drill_down_item{
+    padding: 10px 0;
+    .cell{
+      padding: 0 15px;
+    }
+  }
+
+</css>
+<data_table>sp_instance_table</data_table>
+<demo_data/>
+<description/>
+<docs display_value=""/>
+<field_list>title,table,field_list,filter,maximum_entries,order_by,order_direction</field_list>
+<has_preview>false</has_preview>
+<id/>
+<internal>false</internal>
+<link><![CDATA[function link(scope, element, attrs, controller) {
+
+
+	scope.showHideRow = function(id){
+		if($('#' + id).css('display') != 'none')
+			$('#' + id).hide();
+		else
+			$('#' + id).show();
+	}
+}]]></link>
+<name>OCL: Project list Drill Down</name>
+<option_schema>[{"name":"child_table","section":"Data","default_value":"pm_project_task","label":"Child Table","type":"string"},{"name":"field_relation","section":"Data","default_value":"parent","label":"Field Relation","type":"string"},{"name":"relation_fields_display","section":"Data","default_value":"number,short_description,state","label":"Relation Fields to display","type":"string"}]</option_schema>
+<public>false</public>
+<roles/>
+<script><![CDATA[(function() {
+
+	data.list = [];
+	data.table = options.table;
+	data.filter = options.filter;
+	data.field_list = options.field_list;
+	data.title = options.title;
+	data.child_table = options.child_table;
+	data.field_relation = options.field_relation;
+	data.relation_fields_display = options.relation_fields_display.split(',');
+	
+	if (data.field_list)
+		data.fields_array = data.field_list.split(',');
+	else
+		data.fields_array = $sp.getListColumns(data.table);
+
+	/*
+		Pagination Configurations
+	*/
+	
+	data.orderBy = options.order_by;
+	data.orderDirection = options.order_direction;
+	data.maximum_entries = options.maximum_entries;
+
+	if (input) {
+		data.p = input.p;
+		data.o = input.o;
+		data.d = input.d;
+		data.q = input.q;
+	}
+
+	data.p = parseInt(data.p) || 1;
+	data.o = input.o || data.orderBy;
+	data.d = input.d || data.orderDirection;
+	data.page_index = data.p - 1;
+
+	data.window_size = parseInt(data.maximum_entries) || 10;
+	data.window_start  = (data.page_index * data.window_size);
+	data.window_end = (((data.page_index + 1) * data.window_size));
+
+
+	// Apply Filters back to page number one
+	if(input.searchFilters)
+		data.p = 1;
+
+	data.show_new = data.show_new || options.show_new;
+	var windowSize = data.window_size || options.maximum_entries || 20;
+	windowSize = parseInt(windowSize);
+	if (isNaN(windowSize) || windowSize < 1)
+		windowSize = 20;
+	data.window_size = windowSize;
+
+	var grForMetaData = new GlideRecord(data.table);
+	var gr = new GlideRecord(data.table);
+	gr.addEncodedQuery(data.filter);
+	data.window_start = data.page_index * data.window_size;
+	data.window_end = (data.page_index + 1) * data.window_size;
+	gr.chooseWindow(data.window_start, data.window_end);
+
+	if (data.o){
+		if (data.d == "asc")
+			gr.orderBy(data.o);
+		else
+			gr.orderByDesc(data.o);
+	}
+
+	gr._query();
+
+	// use GlideRecord to get field labels vs. GlideRecordSecure
+	data.column_labels = {};
+	for (var i in data.fields_array) {
+		var field = data.fields_array[i];
+		var ge = grForMetaData.getElement(field);
+		if (ge == null)
+			continue;
+		data.column_labels[field] = ge.getLabel();
+	}
+
+	data.row_count = gr.getRowCount();
+	data.num_pages = Math.ceil(data.row_count / data.window_size);
+
+	var r_count = 0;
+	while(gr._next()){
+		var record = {};
+		$sp.getRecordElements(record, gr, data.fields_array);
+		if (gr instanceof FilteredGlideRecord) {
+			// FilteredGlideRecord doesn't do field-level
+			// security, so take care of that here
+			for (var f in data.fields_array) {
+				var fld = data.fields_array[f];
+				if (!gr.isValidField(fld))
+					continue;
+
+				if (!gr[fld].canRead()) {
+					record[fld].value = null;
+					record[fld].display_value = null;
+				}
+			}
+		}
+		record.index = r_count++;
+		record.sys_id = gr.getUniqueValue();
+		data.list.push(record);
+	}
+		
+	data.childs = [];
+	if(input.action == "drill_down"){
+		var grChild = new GlideRecord(data.child_table);
+		grChild.addQuery(data.field_relation, input.parent);
+		grChild.query()
+		while(grChild.next()){
+			var record = {};
+			$sp.getRecordElements(record, grChild, data.relation_fields_display);
+			record.sys_id = grChild.getUniqueValue();
+			record.parent = grChild.getValue(data.field_relation);
+			data.childs.push(record);
+		}
+	}
+
+
+})();]]></script>
+<servicenow>false</servicenow>
+<sys_class_name>sp_widget</sys_class_name>
+<sys_created_by>organize.willian</sys_created_by>
+<sys_created_on>2020-10-15 18:14:20</sys_created_on>
+<sys_id>d5c56e3e2fbf10106f619facf699b6cf</sys_id>
+<sys_mod_count>209</sys_mod_count>
+<sys_name>OCL: Project list Drill Down</sys_name>
+<sys_package display_value="Global" source="global">global</sys_package>
+<sys_policy/>
+<sys_scope display_value="Global">global</sys_scope>
+<sys_update_name>sp_widget_d5c56e3e2fbf10106f619facf699b6cf</sys_update_name>
+<sys_updated_by>organize.willian</sys_updated_by>
+<sys_updated_on>2020-10-19 14:46:16</sys_updated_on>
+<template><![CDATA[<div class="sp-table">
+  <div class='sp-row'>
+    <div ng-repeat="field in data.fields_array track by $index" class="table-header-cell">
+      <div class="th-title" title="${Sort by} {{field == data.o ? (data.d == 'asc' ?  '${Descending}': '${Ascending}') : '${Ascending}'}}" role="button" tabindex="0" aria-label="{{data.column_labels[field]}}"><b>{{data.column_labels[field]}}</b></div>
+      <i class="fa" ng-if="field == data.o" ng-class="{'asc': 'fa-chevron-up', 'desc': 'fa-chevron-down'}[data.d]"></i>
+    </div>
+  </div>
+  <div class='sp-row' ng-repeat="item in data.list track by item.sys_id" id="tab_row{{item.index}}" data-colapsed="false" ng-click="c.generateDrillDown('tab_row' + item.index , item.index, item.sys_id)">
+    <div class="table-body-cell" ng-class="{selected: item.selected}" ng-click="go(item.targetTable, item)" ng-repeat="field in ::data.fields_array" data-field="{{::field}}" data-th="{{::data.column_labels[field]}}">
+      <span class="arrow" ng-if="$first"><i class="fa fa-caret-right"></i> </span>
+      <span>{{::item[field].display_value}}</span>
+    </div>
+  </div>
+</div>
+
+
+<span class="clearfix"></span>
+
+<!-- footer -->
+<div class="pagination col-md-12" ng-hide="options.hide_footer" ng-if="data.row_count">
+  <div class="col-md-12">
+    <div class="btn-toolbar m-r pull-left">
+      <div class="btn-group">
+        <a ng-disabled="data.p == 1" href="javascript:void(0)" ng-click="setPageNum(data.p - 1)" class="btn btn-default btn-changes"  aria-label="${Previous page}"><i class="fa fa-chevron-left"></i></a>
+      </div>
+      <div ng-if="data.num_pages > 1" class="btn-group btn-changes">
+        <a ng-repeat="i in getNumber(data.num_pages) track by $index" ng-click="setPageNum($index + 1)" href="javascript:void(0)" ng-class="{active: ($index + 1) == data.p}" type="button" class="btn btn-default btn-changes" aria-label="${Page} {{$index + 1}}">{{$index + 1}}</a>
+      </div>
+      <div class="btn-group">
+        <a ng-disabled="data.p == data.num_pages" href="javascript:void(0)" ng-click="setPageNum(data.p + 1)" class="btn btn-default btn-changes" aria-label="${Next page}"><i class="fa fa-chevron-right"></i></a>
+      </div>
+    </div>
+    <div class="m-t-xs">${Rows {{data.window_start + 1}} - {{ mathMin(data.window_end,data.row_count) }} of {{data.row_count}}}</div>
+
+  </div>]]></template>
+</sp_widget>
+</unload>
