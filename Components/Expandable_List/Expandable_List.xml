@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unload unload_date="2020-10-13 17:01:43">
+<sp_widget action="INSERT_OR_UPDATE">
+<category>custom</category>
+<client_script><![CDATA[function($scope) {
+	/* widget controller */
+	var c = this;
+	c.loading = false;
+
+	$scope.sort = function(field){
+		c.data.action = 'sortByField';
+		$scope.setOrderBy(field);
+		c.server.update().then(function(){
+			c.data.action = '';
+		});
+	}
+
+	$scope.setOrderBy = function(field) {
+		var order = "asc";
+		if ($scope.data.orderField == field) {
+			if ($scope.data.order == "asc")
+				order = "desc";
+			else
+				order = "asc";
+		}
+		$scope.data.orderField = field;
+		$scope.data.order = order;
+	}
+
+	$scope.refresh = function(){
+		c.loading = true;
+		c.data.action = '';
+		$scope.data.orderField = '';
+		$scope.data.order = '';
+		c.server.update().then(function(){
+			c.loading = false;
+		});
+	}
+
+	$scope.expand = function(field, line){
+		var short_class = ".short_col_" + line;
+		var exp_class = ".exp_col_" + line;
+
+		c.data.action= 'getLine';
+		c.data.sys_id= field.sys_id;
+		c.server.update().then(function(){
+			$(short_class).addClass('hide');
+			$(exp_class).removeClass('hide');
+			c.data.action= '';
+		});
+	}
+
+	$scope.close = function(line){
+		var short_class = ".short_col_" + line;
+		var exp_class = ".exp_col_" + line;
+		$(exp_class).addClass('hide');
+		$(short_class).removeClass('hide');
+	}
+}]]></client_script>
+<controller_as>c</controller_as>
+<css>.panel{
+  margin: 10px;
+  background: white;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-family: 'Helvetica';
+
+  .panel-heading{
+    border: 1px solid #E5E5E5;
+    border-bottom: 0px;
+
+    h1{
+      margin: 5px;
+      font-size: 26px;
+
+      i{
+        margin-right: 15px;
+      }
+
+      .refresh_button{
+        float: right;
+        font-size: 21px;
+      }
+    }
+  }
+  .panel-body{
+    margin: 0px;
+    padding: 0px;
+    max-height: 350px;
+    overflow: auto;
+  }
+
+  .panel-footer{
+    border: 1px solid #E5E5E5;
+    border-top: 0px;
+    background: white;
+  }
+}
+
+.list{
+  table{
+    border: 1px solid #E5E5E5;
+    border-radius: 6px;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th{
+    border: 1px solid #E5E5E5;
+    padding: 8px 10px;
+    text-transform:capitalize;
+    cursor: pointer;
+  }
+
+  td{
+    border: 1px solid #E5E5E5;
+    padding: 5px 10px;
+  }
+
+  .list__exp{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+
+    .list__exp--label{
+      font-weight: 550;
+      margin-right: 10px;
+    }
+  }
+
+  .exp_col__buttons{
+    button{
+      margin: 5px;
+    }
+  }
+}
+
+.hide{
+  display: none;
+}
+
+.close_icon{
+  font-size: 20px;
+  float: right;
+}
+
+.loading{
+  border: 1px solid #E5E5E5;
+
+  .loading__loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    margin: 15px auto 15px auto;
+    border-top: 16px solid #2e2e2e;
+    border-bottom: 16px solid #2e2e2e;
+    width: 60px;
+    height: 60px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+  p{
+    text-align: center;
+    font-size: 21px;
+    font-family: 'Helvetica';
+  }
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+</css>
+<data_table>sp_instance_table</data_table>
+<demo_data/>
+<description/>
+<docs display_value=""/>
+<field_list>title,table,field_list,maximum_entries</field_list>
+<has_preview>false</has_preview>
+<id/>
+<internal>false</internal>
+<link><![CDATA[function link(scope, element, attrs, controller) {
+
+}]]></link>
+<name>OCL: Expandable list</name>
+<option_schema>[{"name":"icon_class","section":"other","default_value":"fa fa-flag","label":"Icon full class - like: \"fa fa-flag\"","type":"string"},{"name":"all_fields","section":"other","label":"All Fields","type":"string"}]</option_schema>
+<public>false</public>
+<roles/>
+<script><![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+
+	data.table = options.table || $sp.getParamenter('table');
+	data.fields = options.field_list || $sp.getParamenter('field_list');	
+	data.fields = data.fields.split(',');
+	data.all_fields = options.all_fields || $sp.getParamenter('all_fields');
+	var limit = options.maximum_entries;
+	if(data.all_fields) data.all_fields = data.all_fields.split(',');
+	data.exp_array =[];
+
+	if(input.action == 'getLine'){
+		var grExp = new GlideRecord(data.table);
+		grExp.get(input.sys_id);
+
+		for(var j=0; j < data.all_fields.length; j++){
+			var obj_exp = {
+				display: grExp.getDisplayValue(data.all_fields[j]) || ' - ' ,
+				label: grExp[data.all_fields[j]].getLabel()
+			}
+			data.exp_array.push(obj_exp);
+		}
+		return;
+	}
+
+	data.list = [];
+	data.columns = [];
+	var line = 0, arr_col = [], arr_row = [];
+
+	if(input.action == 'sortByField'){
+		 getData(input.orderField);
+	}
+	
+	function getData(field){
+		var gr = new GlideRecord(data.table);
+		if (field){
+			if (input.order == "asc")
+				gr.orderBy(input.orderField);
+			else
+				gr.orderByDesc(input.orderField);
+		}
+		if(limit) gr.setLimit(limit);
+		gr.query();
+
+		while(gr.next()){
+
+			for(var i=0; i < data.fields.length; i++){
+				var obj = {
+					display: gr.getDisplayValue(data.fields[i]) || ' ... ' ,
+					sys_id: gr.getValue('sys_id')
+				};
+				arr_col.push(obj);
+				if(data.columns.length < data.fields.length){
+					var column_obj = {
+						label: gr[data.fields[i]].getLabel(),
+						name: data.fields[i]
+					}
+					data.columns.push(column_obj);
+				};
+			}
+			arr_row.push(arr_col);
+			arr_row.push(line);
+			data.list.push(arr_row);
+			arr_col = [];
+			arr_row = [];
+			line++;
+		}
+	}
+
+	getData();
+})(); ]]></script>
+<servicenow>false</servicenow>
+<sys_class_name>sp_widget</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-10-08 17:13:52</sys_created_on>
+<sys_id>c41552ac2f331010c5d33f96f699b651</sys_id>
+<sys_mod_count>318</sys_mod_count>
+<sys_name>OCL: Expandable list</sys_name>
+<sys_package display_value="Global" source="global">global</sys_package>
+<sys_policy/>
+<sys_scope display_value="Global">global</sys_scope>
+<sys_update_name>sp_widget_c41552ac2f331010c5d33f96f699b651</sys_update_name>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-10-13 15:17:21</sys_updated_on>
+<template><![CDATA[<div class="panel">
+  <div class="panel-heading">
+    <h1>
+      <span class="refresh_button" ng-click="refresh()"><i class="fa fa-refresh"></i></span>
+      <i class="{{options.icon_class}}"></i>
+      {{c.options.title}}
+    </h1>
+  </div>
+  <div class="panel-body list">
+    <div ng-show="c.loading" class="loading">
+      <div class="loading__loader"></div>
+      <p>${Loading...}</p>
+    </div>
+    <table ng-show="!c.loading">
+      <tbody>
+        <!-- Columns Name -->
+        <tr>
+          <th ng-repeat="column in data.columns" ng-click="sort(column.name)">{{column.label}}
+            <i class="fa" ng-if="column.name == data.orderField" ng-class="{'asc': 'fa-sort-up', 'desc': 'fa-sort-down'}[data.order]"></i>
+            <i class="fa fa-sort" ng-if="column.name != data.orderField"></i>
+          </th>
+        </tr>
+
+        <!-- List -->
+        <tr ng-repeat="record in data.list">
+          <td ng-click="expand(field,record[1])" ng-repeat="field in record[0]" class="short_col_{{record[1]}} pointer">
+            <span>{{field.display}}</span>
+          </td>
+          <td class="exp_col_{{record[1]}} hide" colspan="{{data.columns.length}}">
+            <div class="close_icon">
+              <i class="fa fa-close" ng-click='close(record[1])'></i>  
+            </div>
+            <div ng-repeat="field_exp in data.exp_array" class="list__exp">
+              <span class="list__exp--label">{{field_exp.label}}:</span> {{field_exp.display}}
+            </div>
+            <div class="exp_col__buttons">
+              <button class="btn btn-primary pull-right">Primary</button>
+              <button class="btn btn-secondary pull-right">Secondary</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel-footer">
+    <!-- Something -->
+  </div>
+</div>]]></template>
+</sp_widget>
+</unload>
