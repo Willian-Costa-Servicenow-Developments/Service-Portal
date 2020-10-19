@@ -1,6 +1,5 @@
 /* 
 * Module: Service Portal
-* Created by: Mateus Mazzei Anzolin
 * Version: 1.5
 */
 
