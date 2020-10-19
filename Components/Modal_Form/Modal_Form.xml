@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unload unload_date="2020-10-07 18:49:38">
+<sp_widget action="INSERT_OR_UPDATE">
+<category>custom</category>
+<client_script><![CDATA[function($rootScope, $scope, $timeout, $location, $log, $window, spUtil, nowAttachmentHandler, spAriaUtil, spNavStateManager, $uibModal) {
+
+	var c = this;
+
+	c.openModal = function(event) {
+		$("#modalTemplate").modal(event);
+	}
+	
+	$scope.submitting = false;
+	$scope.mandatory = [];
+	$scope.errorMessages = [];
+	$scope.data.show_sql = false;
+	$scope.saveButtonSuffix = spUtil.getAccelerator('s');
+	$scope.isPageReady = false;
+	$scope.adminMenu = {
+		encodedPageUrl: encodeURIComponent($location.url()),
+		getClientScriptCount: function() {
+			var count = 0;
+			if ($scope.data.f.client_script) {
+				count += $scope.data.f.client_script.onChange.length;
+				count += $scope.data.f.client_script.onLoad.length;
+				count += $scope.data.f.client_script.onSubmit.length;
+			}
+			return count;
+		}
+	};
+	var tableId = $scope.data.sys_id != -1 ? $scope.data.sys_id : ($scope.data.f ? $scope.data.f._attachmentGUID : -1);
+	spUtil.recordWatch($scope, "sys_attachment", "table_sys_id=" + tableId, function (response, data) {
+		$scope.attachmentHandler.getAttachmentList();
+		if (response.data) {
+			var options = {};
+			options.operation = response.data.operation;
+			options.filename = response.data.display_value;
+			options.sys_id = tableId;
+			options.table = $scope.data.table;
+			options.state = (response.data.record && response.data.record.state) ? response.data.record.state.value : "";
+			if (options.operation === 'update' && options.state === 'not_available')
+				$rootScope.$broadcast("attachment.updated", options);
+		}
+	});
+
+	$scope.$on('sn.attachment.scanned', function() {
+		updateAttachmentState($scope.data.table, $scope.data.sys_id);
+	});
+
+	function updateAttachmentState(table, sys_id) {
+		if (sys_id == -1)
+			return;
+		$scope.server.refresh();
+	}
+
+	$rootScope.$on('$sp.html.editor.progress', function(e, conf) {
+		$scope.submitting = conf.state;
+	});
+
+	$scope.getButtonClass = function(action) {
+		if (action.form_style == "destructive")
+			return "btn-danger";
+
+		if (action.form_style == "primary")
+			return "btn-primary";
+
+		return "btn-default";
+	};
+
+	$scope.getUIActions = function(type) {
+		if ($scope.data.disableUIActions)
+			return [];
+		if (type) {
+			return $scope.data.f._ui_actions.filter(function(action) {
+				//We handle the primary action button separately.
+				return !action.primary && action['is_' + type];
+			});
+		} else {
+			return $scope.data.f._ui_actions;
+		}
+	}
+
+	$scope.getPrimaryAction = function() {
+		var primaryActions = $scope.data.f._ui_actions.filter(function(action) {
+			return action.primary;
+
+		});		
+		return (primaryActions.length) ? primaryActions[0] : null;
+	}
+
+	$scope.getUIActionContextMenu = function(event) {
+		var menu = [];
+		if (event.ctrlKey)
+			return menu;
+
+		var contextActions = $scope.getUIActions('context');
+		contextActions.forEach(function(action) {
+			menu.push([action.name, function() {
+				$scope.triggerUIAction(action);
+			}]);
+		});
+
+		if (contextActions.length > 0)
+			menu.push(null);
+		menu.push([$scope.data.exportPDFMsg, function() {
+			exportPDF("");
+		}]);
+		menu.push([$scope.data.exportPDFLandMsg, function() {
+			exportPDF('true');
+		}]);
+
+		return menu;
+	}
+
+	function exportPDF(landscape) {
+		$window.open("/" + $scope.data.f.table + ".do?PDF&landscape=" + landscape + "&sys_id=" + $scope.data.sys_id + "&sysparm_view=" + $scope.data.f.view);
+	}
+
+	//trigger the primary UI Action on save (if there is one)
+	var deregister = $scope.$on('$sp.save', function() {
+		var primaryAction = $scope.getPrimaryAction();
+		c.modalInstance.close();
+		if (primaryAction)
+			$scope.triggerUIAction(primaryAction);
+	});
+	
+	$scope.$on('$destroy', function() {
+		deregister()
+	});
+
+	$scope.triggerUIAction = function(action) {
+		if ($scope.data.disableUIActions && !action.primary) {
+			return;
+		}
+
+		var activeElement = document.activeElement;
+		if (activeElement) {
+			activeElement.blur();
+		}
+
+		$scope.$evalAsync(function() {
+			if (g_form) {
+				$scope.submitting = true;
+				if (!g_form.submit(action.action_name || action.sys_id))
+					$scope.submitting = false;
+			}
+		});
+	}
+
+	$scope.$on("spModel.uiActionComplete", function(evt, response) {
+		$scope.submitting = false;
+		if (response.isActionAborted)
+			return;
+		var sysID = (response.isInsert) ? response.sys_id : $scope.data.sys_id;
+		loadForm($scope.data.table, sysID).then(constructResponseHandler(response));
+	});
+
+	function constructResponseHandler(response) {
+		return function() {
+			$rootScope.$broadcast("sp.form.submitted", {sys_id: (response.isInsert) ? response.sys_id : $scope.data.sys_id});
+			var message;
+			var eventName = "sp.form.record.updated";
+			if (response.isInsert) {
+				message = $scope.data.recordAddedMsg;
+				var search = $location.search();
+				search.sys_id = response.sys_id;
+				search.spa = 1;
+				$location.search(search).replace();
+			} else
+				message = $scope.data.updatedMsg;
+
+			$scope.data.hideRelatedLists = hideRelatedLists();
+			$scope.$emit(eventName, $scope.data.f._fields);
+			$rootScope.$broadcast(eventName, $scope.data.f._fields);
+			$scope.status = message;
+			$timeout(clearStatus, 2000);
+		}
+	}
+
+	var ctrl = this;
+	// switch forms
+	var unregister = $scope.$on('$sp.list.click', onListClick);
+	$scope.$on("$destroy", function() {
+		unregister();
+	})
+
+	function _save() {
+		var primaryAction = $scope.getPrimaryAction();
+		if (primaryAction)
+			$scope.triggerUIAction(primaryAction);
+	}
+	c.closeAndSaveModal = function() {
+		_save();
+		c.data.action = 'save';
+		c.server.update();
+		c.openModal('hide');
+	}
+	function onListClick(evt, arg) {
+		loadForm(arg.table, arg.sys_id);
+	}
+
+	function loadForm(table, sys_id) {
+		var f = {};
+		$scope.data.table = f.table = table;
+		$scope.data.sys_id = f.sys_id = sys_id;
+		f.view = $scope.data.view;
+		return $scope.server.update().then(setupAttachmentHandler);
+	}
+
+	function openRelatedList(e, queryString) {
+		// todo: Open this in a modal
+		$location.search(queryString);
+		e.preventDefault();
+	}
+
+	$scope.$on('spModel.fields.rendered', function() {
+		if (ctrl.panels)
+			ctrl.panels.removeClass('shift-out').addClass('shift-in');
+	});
+
+	var g_form;
+	function initForm(gFormInstance) {
+		if (gFormInstance.getTableName() == $scope.data.f.table) {
+			g_form = gFormInstance;
+			g_form.getFieldNames().forEach(function(element) {
+				if(c.data.readOnly == 'true')  g_form.setReadOnly(element, true)
+			});
+			$scope.isPageReady = true;
+			$timeout(function() {
+				$rootScope.$emit('spModel.gForm.rendered', g_form);
+			}, 175);
+		}
+	}
+
+	$scope.$on('spModel.gForm.initialized', function(e, gFormInstance) {
+		initForm(gFormInstance);
+	});
+
+	$scope.$on('spModel.gForm.env.created', function(e, gFormInstance) {
+		initForm(gFormInstance);
+	});
+
+	// update the comments or worknotes based on activity stream
+	$scope.$on("activity_stream_is_changed", function(event, data) {
+		if (g_form && g_form.hasField(data.fieldName)) {
+			g_form.setValue(data.fieldName, data.input);
+			if (data.fieldToClear != "" && g_form.hasField(data.fieldToClear))
+				g_form.setValue(data.fieldToClear, "");
+		}
+	})
+
+	// Show or hide related lists
+	$scope.$watch('data.f._related_lists', function() {
+		$scope.data.hideRelatedLists = hideRelatedLists();
+	}, true);
+
+	function hideRelatedLists() {
+		if (!$scope.data.f._related_lists)
+			return true;
+
+		if ($scope.options.hideRelatedLists == true)
+			return true;
+
+		if ($scope.data.sys_id == '-1')
+			return true;
+
+		// If all related lists are visible=false then hide
+		if ($scope.data.f._related_lists.length > 0) {
+			for (var i in $scope.data.f._related_lists) {
+				var list = $scope.data.f._related_lists[i];
+				if (list.visible) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	function clearStatus() {
+		$scope.status = "";
+	}
+
+	function setupAttachmentHandler() {
+		$scope.attachmentHandler = new nowAttachmentHandler(appendDone, appendError);
+
+		$scope.$evalAsync(function() {
+			$scope.attachmentHandler.setParams($scope.data.table, $scope.data.f._attachmentGUID, 1024 * 1024 * $scope.data.maxAttachmentSize);
+		});
+
+		$scope.$on('dialog.upload_too_large.show', function(e) {
+			$log.error($scope.data.largeAttachmentMsg);
+			spUtil.addErrorMessage($scope.data.largeAttachmentMsg);
+		});
+	}
+	setupAttachmentHandler();
+
+	function appendDone() {
+		// don't know here whether upload succeeded, so can't show msg either way
+		$scope.$broadcast("sp.attachments.update", $scope.data.f._attachmentGUID);
+		spAriaUtil.sendLiveMessage($scope.data.attachmentSuccessMsg);
+	}
+
+	function appendError(error) {
+		$scope.errorMessages.push(error);
+		spUtil.addErrorMessage(error.msg + error.fileName);
+	}
+
+	if ($scope.data.f.title) {
+		$scope.$emit('sp.widget-modal.set-aria-label', $scope.data.f.title);
+	}
+}]]></client_script>
+<controller_as>c</controller_as>
+<css>button.btn.lookup {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0;
+}
+.add-on{
+  opacity: 0;
+  button{
+    width: 0;
+    padding: 0;
+  }
+}
+div#u_attachment_required {
+  margin-top: 33px;
+}
+.modal-dialog--custom{
+  margin-top: 10%;
+  border-radius: 6px;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 10px 20px rgba(0, 0, 0, 0.04);
+}
+.modal-content--no-border{
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border:none;
+}
+.modal-title--edit{
+  font-family: 'Helvetica';
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 23px;
+  color: black;
+}
+.modal-header--white{
+  background: white;
+  border: 1px solid #E5E5E5;
+  border-radius: 6px 6px 0px 0px;
+  box-sizing: border-box;
+  padding: 14px 20px;
+}
+.modal-body{
+  border: 1px solid #E5E5E5;
+  border-radius: 0px 0px 6px 6px;
+}
+.btn_close{
+  margin-top: -80px;
+  color: white;
+  font-size: 35px;
+  opacity: 1;
+  margin-right: -25px;
+}
+.disable{
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+.active{
+  cursor: pointer;
+  opacity: 1;
+}
+.btn_attachments{
+  height: 37px;
+  background: #FFFFFF;
+  border: 1px solid $primary;
+  box-sizing: border-box;
+  border-radius: 3px;
+  float: left;
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 21px;
+  color: $primary;
+  margin-right: 30px;
+}
+.alert-form{
+  border-color: $primary;
+  color: $primary;
+}
+.alert--title{
+  margin-right: 15px;
+}
+.alert--label{
+  font-size: 13px;
+  font-weight: 400;
+  margin-right: .5em;
+  display: inline-block;
+  background-color: #EB5757;
+}
+.field-label{
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  color: black;
+}
+.panel-footer{
+  margin-bottom: 20px;
+  padding: 20px 0px;
+}
+.panel, .panel-footer{
+  box-shadow: none;
+  border: none;
+  background: white;
+}
+textarea:focus, input:focus, button:focus{
+  outline: none!important;
+}
+
+@media screen and (max-width: 420px){
+	button.btn.btn_attachments {
+    float: none;
+    display: block;
+    margin-bottom: 15px;
+  }
+}</css>
+<data_table>sp_instance</data_table>
+<demo_data/>
+<description/>
+<docs display_value=""/>
+<field_list/>
+<has_preview>false</has_preview>
+<id/>
+<internal>false</internal>
+<link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+<name>OCL: Componente Modal</name>
+<option_schema>[{"name":"read_only_fields","section":"other","label":"Read only fields?","type":"boolean"},{"name":"modal_title","section":"other","label":"Modal Title","type":"string"}]</option_schema>
+<public>false</public>
+<roles/>
+<script><![CDATA[// form functionality - URL parameter driven
+(function($sp) {
+	
+	if(input.action == 'save'){
+		var msg = gs.getMessage('updated_uppercase');
+		gs.addInfoMessage(msg);
+		data.action = '';
+		return;
+	}
+	
+	data.title =  gs.getMessage(options.modal_title);
+	
+  /* "use strict"; -linter issues */
+  // populate the 'data' variable
+	data.attachmentUploadSuccessMsg = gs.getMessage("Attachment upload was successful");
+	data.recordAddedMsg = gs.getMessage("Record Added");
+	data.updatedMsg = gs.getMessage("updated_uppercase");
+	data.exportPDFMsg = gs.getMessage("Export to PDF");
+	data.exportPDFLandMsg = gs.getMessage("Export to PDF (landscape)");
+	data.addAttachmentMsg = gs.getMessage("Add an attachment");
+	data.maxAttachmentSize = parseInt(gs.getProperty("com.glide.attachment.max_size", 1024));
+	if (isNaN(data.maxAttachmentSize))
+		data.maxAttachmentSize = 24;
+	data.largeAttachmentMsg = gs.getMessage("Attached files must be smaller than {0} - please try again", "" + data.maxAttachmentSize + "MB");
+	data.attachmentSuccessMsg = gs.getMessage("Attachment successfully uploaded");
+	
+	data.isAdmin = gs.hasRightsTo('sp/configure.all/execute', null);
+	data.readOnly = options.read_only_fields || false;
+	var isPopup = false;
+
+	if (input) {
+		data.table = input.table;
+		data.sys_id = input.sys_id;
+		data.view = input.view;
+		var result = {};
+		if (input._fields) {
+			result = $sp.saveRecord(input.table, input.sys_id, input._fields);
+			data.sys_id = result.sys_id;
+		}
+
+		if (input.sys_id == '-1')
+			data.isNewRecord = true;
+    		if (input.isPopup === true)
+			isPopup = true;
+	} else {
+		data.table = options.table || $sp.getParameter("t") || $sp.getParameter("table") || $sp.getParameter("sl_table");
+		data.sys_id = options.sys_id || $sp.getParameter("sys_id") || $sp.getParameter("sl_sys_id");
+ 		if (!data.sys_id && options.sys_id_required != "true")
+			data.sys_id = "-1";
+		data.view = options.view || $sp.getParameter("view") || $sp.getParameter("v"); // no default
+	}
+
+	data.query = $sp.getParameter("query") || options.query || "";
+	data.f = {};
+	if (!data.table)
+		return;
+	
+	// Form widget is not a supported way to view an attachment
+	if (data.table == "sys_attachment") {
+		data.tableUnsupported = true;
+		return;
+	}
+
+	if (!GlideTableDescriptor.isValid(data.table))
+		return;
+
+	if (!data.sys_id)
+		return;
+
+	var rec = $sp.getRecord(data.table, data.sys_id);
+	data.isValid = rec.isValid() || data.sys_id == "-1";
+	if (!data.isValid)
+		return;
+
+	data.table = rec.getRecordClassName();
+	data.tableHierarchy = GlideDBObjectManager.getTables(data.table).toArray().join();
+	data.canWrite = rec.canWrite();
+	var hasRecordAccess = data.sys_id == "-1" ? rec.canCreate() : data.canWrite;
+	data.canAttach = hasRecordAccess && gs.hasRole(gs.getProperty('glide.attachment.role')) && !GlideTableDescriptor.get(data.table).getED().getBooleanAttribute("no_attachment");
+	data.f = $sp.getForm(data.table, data.sys_id, data.query, data.view, isPopup);
+
+	// PRB1335036: show appropriate message when record is in cross app scope
+	data.f.outOfScope = !rec.isInSelectedScope();
+	// Populate scope labels only when needed
+	if (data.f.outOfScope) {
+		data.f.recordScopeLabel = gs.getScopeLabelByRecordId(rec.getUniqueValue());
+		data.f.currentScopeLabel = gs.getCurrentApplicationName();
+	}
+	
+	// Activity formatter is hardcoded to set specific options
+	for (var f in data.f._formatters) {
+		var fm = data.f._formatters[f];
+		if (fm.formatter == "activity.xml") {
+			fm.hardcoded = true;
+			fm.widgetInstance = $sp.getWidget('widget-ticket-conversation',
+																{table: data.table,
+																 sys_id: data.sys_id,
+																 includeExtended: true,
+																 hideAttachmentBtn: true,
+																 title: "${Activity}",
+																 use_dynamic_placeholder: true,
+																 btnLabel: "${Post}"});
+		} else if(fm.formatter == "com_glideapp_servicecatalog_veditor" || fm.formatter == "com_glideapp_questionset_default_question_editor") {
+			var qsConfig = $sp.getValue('quick_start_config');
+			if (qsConfig)
+				qsConfig = JSON.parse(qsConfig)[0];
+			fm.widgetInstance = $sp.getWidget(fm.widget, {table: data.table,
+														sys_id: data.sys_id,
+														readonly_variable_editor: qsConfig ? qsConfig.readonly_variable_editor : 'false'});
+		} else
+			fm.widgetInstance = $sp.getWidget(fm.widget, data);
+	}
+})($sp, input, data, options, gs);]]></script>
+<servicenow>false</servicenow>
+<sys_class_name>sp_widget</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-10-05 19:16:14</sys_created_on>
+<sys_id>fc44d3e32f2710109993d5f62799b67f</sys_id>
+<sys_mod_count>71</sys_mod_count>
+<sys_name>OCL: Componente Modal</sys_name>
+<sys_package display_value="Global" source="global">global</sys_package>
+<sys_policy/>
+<sys_scope display_value="Global">global</sys_scope>
+<sys_update_name>sp_widget_fc44d3e32f2710109993d5f62799b67f</sys_update_name>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-10-07 18:47:34</sys_updated_on>
+<template><![CDATA[<div>
+  <button class="btn btn-primary" ng-click="c.openModal('show')">${Open Modal}</button>
+</div>
+<div>
+  <div class="modal fade" id="modalTemplate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog--custom" role="document">
+      <div class="modal-content modal-content--no-border">
+        <div class="modal-header modal-header--white">
+          <h5 class="modal-title modal-title--edit" id="exampleModalLongTitle">{{data.title}}</h5>
+          <button type="button" class="close btn_close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <!-- form -->
+              <div>
+                <sp-model form_model="data.f" mandatory="mandatory"></sp-model>
+              </div>
+              <div>
+                <sp-attachment-manager table="::data.table" sys-id="data.f._attachmentGUID" omit-edit="::!data.canAttach"></sp-attachment-manager>
+                <div title="{{::data.addAttachmentMsg}}" class="pull-right attachment-button">
+                </div>
+              </div>
+              <div ng-if="mandatory.length" class="alert alert-form" style="margin-top: 20px" aria-live="polite" aria-atomic="true">
+                <span ng-if="mandatory.length > 0" class="alert--title">${Required information} </span>
+                <span ng-repeat="f in mandatory" class="label alert--label" ng-bind="f.label"></span>
+              </div>
+              <div class="panel-footer text-right">
+                <span class="file-upload-input">
+                  <input type="file" style="display: none" multiple="true" ng-file-select="attachmentHandler.onFileSelect($files)" class="sp-attachments-input">
+                  <button type="button" class="btn btn_attachments" ng-click="attachmentHandler.openSelector($event)">
+                    ${Add Attachments}
+                    <span class="glyphicon glyphicon-paperclip">
+                    </span>
+                  </button>
+                </span>
+                <button class="btn btn-default" ng-click="c.openModal('hide')">${Cancel}</button>
+                <button class="btn btn-primary" ng-click="c.closeAndSaveModal()">${Save}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+]]></template>
+</sp_widget>
+</unload>
