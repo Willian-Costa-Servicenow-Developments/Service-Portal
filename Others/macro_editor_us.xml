@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2020-08-24 19:51:51">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description/>
+<inserted/>
+<name>Editor Macros</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>97c3030adb3210104cc2cc30399619c3</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-08-24 19:51:50</sys_created_on>
+<sys_id>2bc94bcadb3210104cc2cc3039961905</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-08-24 19:51:50</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>syntax_editor_macro_f1224786db3210104cc2cc303996197d</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="syntax_editor_macro"><syntax_editor_macro action="INSERT_OR_UPDATE"><comments/><name>includega</name><sys_class_name>syntax_editor_macro</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2020-08-24 19:22:09</sys_created_on><sys_id>f1224786db3210104cc2cc303996197d</sys_id><sys_mod_count>1</sys_mod_count><sys_name>includega</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>syntax_editor_macro_f1224786db3210104cc2cc303996197d</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2020-08-24 19:33:28</sys_updated_on><text>getCampus: function () {&#13;
+  var sysparm_field = this.getParameter('sysparm_field');&#13;
+&#13;
+  /*--- any code ---*/&#13;
+&#13;
+  var json = new JSON();&#13;
+  var results = {&#13;
+    "value": "any_value")&#13;
+  };&#13;
+  if(results) return json.encode(results);&#13;
+  else return null;           &#13;
+}</text></syntax_editor_macro></record_update>]]></payload>
+<payload_hash>-2082223800</payload_hash>
+<remote_update_set display_value="Editor Macros">2bc94bcadb3210104cc2cc3039961905</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-08-24 19:51:50</sys_created_on>
+<sys_id>3bc94bcadb3210104cc2cc3039961906</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>17421f610330000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-08-24 19:51:50</sys_updated_on>
+<table/>
+<target_name>includega</target_name>
+<type>Editor Macro</type>
+<update_domain>global</update_domain>
+<update_guid>a6954b0ac03210104cb3f13d2ab8a2b3</update_guid>
+<update_guid_history>a6954b0ac03210104cb3f13d2ab8a2b3:-2082223800,3003cf8611321010e842702050f402d1:-1028737914</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>syntax_editor_macro_4a90c782db3210104cc2cc30399619ba</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="syntax_editor_macro"><syntax_editor_macro action="INSERT_OR_UPDATE"><comments>A common pattern of creating  GlideAggragate</comments><name>varagg</name><sys_class_name>syntax_editor_macro</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2020-08-24 19:13:41</sys_created_on><sys_id>4a90c782db3210104cc2cc30399619ba</sys_id><sys_mod_count>2</sys_mod_count><sys_name>varagg</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>syntax_editor_macro_4a90c782db3210104cc2cc30399619ba</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2020-08-24 19:35:17</sys_updated_on><text>var agg = new GlideAggregate('table_name');&#13;
+agg.addAggregate('COUNT', 'field');&#13;
+agg.orderBy('field');&#13;
+agg.addQuery('field', '&gt;=', 'value');&#13;
+agg.query();&#13;
+while (agg.next()) {&#13;
+    var incidentCount = agg.getAggregate('COUNT', 'field');&#13;
+}</text></syntax_editor_macro></record_update>]]></payload>
+<payload_hash>1637205327</payload_hash>
+<remote_update_set display_value="Editor Macros">2bc94bcadb3210104cc2cc3039961905</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-08-24 19:51:50</sys_created_on>
+<sys_id>6fc94bcadb3210104cc2cc3039961905</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>17421f7bcd30000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-08-24 19:51:50</sys_updated_on>
+<table/>
+<target_name>varagg</target_name>
+<type>Editor Macro</type>
+<update_domain>global</update_domain>
+<update_guid>d106cb0ae7321010678f57ceb77de22e</update_guid>
+<update_guid_history>d106cb0ae7321010678f57ceb77de22e:1637205327,3a61cf060e321010272eaf692a63f3a9:2008307787,701107860a3210100d0cd783b425a1f6:-1327829578</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>syntax_editor_macro_d3614786db3210104cc2cc303996198c</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="syntax_editor_macro"><syntax_editor_macro action="INSERT_OR_UPDATE"><comments>A common pattern of creating  GlideAjax</comments><name>varga</name><sys_class_name>syntax_editor_macro</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2020-08-24 19:17:39</sys_created_on><sys_id>d3614786db3210104cc2cc303996198c</sys_id><sys_mod_count>1</sys_mod_count><sys_name>varga</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>syntax_editor_macro_d3614786db3210104cc2cc303996198c</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2020-08-24 19:35:44</sys_updated_on><text>var ga = new GlideAjax('include_name');&#13;
+ga.addParam('sysparm_name', 'getCampus');&#13;
+ga.addParam('sysparm_field', g_form.getValue("field"));&#13;
+ga.getXML(updateCampus);&#13;
+&#13;
+/*Call Back*/&#13;
+function updateCampus(response) {&#13;
+  var answer = response.responseXML.documentElement.getAttribute("answer");&#13;
+  var clearvalue; &#13;
+  if (answer) {&#13;
+    var returneddata = answer.evalJSON(true);&#13;
+    g_form.setValue("campus", returneddata.value);&#13;
+  } else {&#13;
+    g_form.setValue("campus", clearvalue);&#13;
+  }&#13;
+}</text></syntax_editor_macro></record_update>]]></payload>
+<payload_hash>-208421004</payload_hash>
+<remote_update_set display_value="Editor Macros">2bc94bcadb3210104cc2cc3039961905</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-08-24 19:51:50</sys_created_on>
+<sys_id>77c94bcadb3210104cc2cc3039961906</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>17421f825e70000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-08-24 19:51:50</sys_updated_on>
+<table/>
+<target_name>varga</target_name>
+<type>Editor Macro</type>
+<update_domain>global</update_domain>
+<update_guid>7716cb0a4a3210108a9ead0ad2bd8648</update_guid>
+<update_guid_history>7716cb0a4a3210108a9ead0ad2bd8648:-208421004,b6f103860c32101024fe33efaf12a617:294308921</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
