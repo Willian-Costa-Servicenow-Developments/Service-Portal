@@ -47,24 +47,24 @@ Access to SNDoc is provided by an application in the navigator called 'SNDocs' a
     
     */
 	getUserInfo: function(userID, active) {
-		var user = GlideRecord('sys_user');
-    user.addQuery('sys_id', userID);
-    user.addQuery('active', active);
-    user.query();
+	var user = GlideRecord('sys_user');
+	user.addQuery('sys_id', userID);
+	user.addQuery('active', active);
+	user.query();
     
-		if (!user.next()) 
-      return;
+	if (!user.next()) 
+      		return;
       
-    var json = new JSON();
-    var results = {
-      "name": user.getValue("name"),
-      "manager": user.getValue("manager"),
-      "department": user.getValue("department"),
-      "company": user.getValue("company"),
-      "email": user.getValue("email"),
-      "location": user.getValue("location"),		
-    };
-    return json.encode(results);
+    	var json = new JSON();
+	var results = {
+		"name": user.getValue("name"),
+		"manager": user.getValue("manager"),
+		"department": user.getValue("department"),
+		"company": user.getValue("company"),
+		"email": user.getValue("email"),
+		"location": user.getValue("location"),		
+	};
+	return json.encode(results);
 		
 	},
 
@@ -72,7 +72,7 @@ Access to SNDoc is provided by an application in the navigator called 'SNDocs' a
 
 # How to use
 
- SNDoc is very similar to JSDocs, but with some peculiarities within Servicenow.
+### SNDoc is very similar to JSDocs, but with some peculiarities within Servicenow.
 
 
 To begin, declare a comment block like this:
@@ -86,6 +86,19 @@ To begin, declare a comment block like this:
 ```
 
 Now let's understand each type of information that we need to declare for a better documentation structure.
+
+```JAVASCRIPT
+
+@name - Defines a Function name
+@description - Description of the purpose of this function, what it does, why it exists
+@param {Type} [variable name] - Defines a parameter passed to the function 
+@returns {TYPE} Here is a demonstration of the data to be returned from the execution of the function
+@example
+
+	// In example, use a code block demonstrating how to make a call to this function and what is returned
+    
+```
+
 
 # Reference Links
 
