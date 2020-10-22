@@ -70,7 +70,7 @@ Access to SNDoc is provided by an application in the navigator called 'SNDocs' a
 
 ```
 
-![Instance API SNDocs](https://github.com/WillianCostaOCL/service-now-sp/blob/main/Documentation/images/sndocs-instance.png)
+![Instance API SNDocs](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Documentation/images/sndocs-instance.png)
 
 
 # Where to use
@@ -111,7 +111,7 @@ Now let's understand each type of information that we need to declare for a bett
 
 PS: You can also create new tags
 
-![SNDocs Tags](https://github.com/WillianCostaOCL/service-now-sp/blob/main/Documentation/images/sndocs-new-tags.png)
+![SNDocs Tags](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Documentation/images/sndocs-new-tags.png)
 
 
 # Reference Links
