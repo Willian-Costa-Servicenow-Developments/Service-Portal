@@ -18,3 +18,54 @@ We hope that by sharing this with the ServiceNow communiity that you too can fin
 Full documentation is available upon installation on the 'Help' tab of the 'Instance API Reference' Page
 
 Access to SNDoc is provided by an application in the navigator called 'SNDocs' and then clicking on 'Instance API Reference'
+
+
+# Example
+
+```JAVASCRIPT
+
+/**SNDOC
+    @name getUserInfo
+    @description Function designed to return data from any user (Client and Server)
+    @param {String} [userID] - Sys_id of user
+    @param {Boolean} [active] - Active true or false verification
+    @returns {JSON} JSON containing user data
+    @example
+    var getUser = new SNDOC_Utils().getUserInfo('cff894dcdbc60cd055250fbca3961901');
+
+
+    //Output:
+    {
+      'name': 'Willian Costa',
+      'manager': 'Rodrigo Muniz',
+      'department': 'Professional Services',
+      'company': 'Organize Cloud Labs',
+      'email': 'willian@organizecloudlabs.com',
+      'location': 'Morumbi - SP',
+    }
+    
+    
+    */
+	getUserInfo: function(userID, active) {
+		var user = GlideRecord('sys_user');
+    user.addQuery('sys_id', userID);
+    user.addQuery('active', active);
+    user.query();
+    
+		if (!user.next()) 
+      return;
+      
+    var json = new JSON();
+    var results = {
+      "name": user.getValue("name"),
+      "manager": user.getValue("manager"),
+      "department": user.getValue("department"),
+      "company": user.getValue("company"),
+      "email": user.getValue("email"),
+      "location": user.getValue("location"),		
+    };
+    return json.encode(results);
+		
+	},
+
+```
