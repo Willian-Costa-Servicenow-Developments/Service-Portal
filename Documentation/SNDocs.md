@@ -136,9 +136,9 @@ PS: You can also create new tags
 9 - Click on "Commit Update Set"
 
 
-Ready, SNDocs is installed in your instance
+### Ready, SNDocs is installed in your instance
 
-To check if everything is right, search Filter Navigator for "SNDocs" and find a new module
+### To check if everything is right, search Filter Navigator for "SNDocs" and find a new module
 
 
 # Reference Links
