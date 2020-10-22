@@ -70,6 +70,13 @@ Access to SNDoc is provided by an application in the navigator called 'SNDocs' a
 
 ```
 
+![Instance API SNDocs](https://github.com/WillianCostaOCL/service-now-sp/blob/main/Documentation/images/sndocs-instance.png)
+
+
+# Where to use
+
+## Script includes
+
 # How to use
 
 ### SNDoc is very similar to JSDocs, but with some peculiarities within Servicenow.
@@ -87,17 +94,24 @@ To begin, declare a comment block like this:
 
 Now let's understand each type of information that we need to declare for a better documentation structure.
 
+### SNDoc Tags
+
 ```JAVASCRIPT
 
 @name  // Defines a Function name
 @description  // Description of the purpose of this function, what it does, why it exists
 @param {Type} [variable name] // Defines a parameter passed to the function 
 @returns {TYPE} // Here is a demonstration of the data to be returned from the execution of the function
+@private // Marks a class method as private, and not to be used outside of the script include it is a member of Pattern @private
 @example
 
 	// In example, use a code block demonstrating how to make a call to this function and what is returned
     
 ```
+
+PS: You can also create new tags
+
+![SNDocs Tags](https://github.com/WillianCostaOCL/service-now-sp/blob/main/Documentation/images/sndocs-new-tags.png)
 
 
 # Reference Links
