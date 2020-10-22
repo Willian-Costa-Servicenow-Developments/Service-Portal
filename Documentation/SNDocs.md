@@ -114,6 +114,33 @@ PS: You can also create new tags
 ![SNDocs Tags](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Documentation/images/sndocs-new-tags.png)
 
 
+# How do install SNDocs
+
+1 - Access the  Servicenow Developer Portal and Search for "SNDoc" 
+        or click here: https://developer.servicenow.com/connect.do#!/share/contents/6426327_sndoc
+        
+2 - Download the last version of the plugin SNDoc
+
+3 - Access your instance or the client that is working
+
+4 - In Filter Navigator, go to Module System Update sets > Retrieved Update Sets
+
+5 - On the list page, find the related links: Import Update Set from XML 
+
+6 - Submit the downloaded file
+
+7 - In Retrieved Update Sets search for: SNDoc v1.1 - FULL and open the record
+
+8 - Click on "Preview Update Set", wait to complete 100% after click on close button
+
+9 - Click on "Commit Update Set"
+
+
+Ready, SNDocs is installed in your instance
+
+To check if everything is right, search Filter Navigator for "SNDocs" and find a new module
+
+
 # Reference Links
 
 JSDocs: https://jsdoc.app/
