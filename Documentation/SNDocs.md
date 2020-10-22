@@ -89,10 +89,10 @@ Now let's understand each type of information that we need to declare for a bett
 
 ```JAVASCRIPT
 
-@name - Defines a Function name
-@description - Description of the purpose of this function, what it does, why it exists
-@param {Type} [variable name] - Defines a parameter passed to the function 
-@returns {TYPE} Here is a demonstration of the data to be returned from the execution of the function
+@name  // Defines a Function name
+@description  // Description of the purpose of this function, what it does, why it exists
+@param {Type} [variable name] // Defines a parameter passed to the function 
+@returns {TYPE} // Here is a demonstration of the data to be returned from the execution of the function
 @example
 
 	// In example, use a code block demonstrating how to make a call to this function and what is returned
