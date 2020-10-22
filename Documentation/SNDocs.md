@@ -70,7 +70,22 @@ Access to SNDoc is provided by an application in the navigator called 'SNDocs' a
 
 ```
 
+# How to use
 
+ SNDoc is very similar to JSDocs, but with some peculiarities within Servicenow.
+
+
+To begin, declare a comment block like this:
+
+```JAVASCRIPT
+
+/**SNDOC
+
+*/
+
+```
+
+Now let's understand each type of information that we need to declare for a better documentation structure.
 
 # Reference Links
 
