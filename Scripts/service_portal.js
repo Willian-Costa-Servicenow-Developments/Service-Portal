@@ -1,6 +1,5 @@
 /* 
 * Module: Service Portal
-* Version: 1.5
 */
 
 
@@ -177,6 +176,20 @@ $scope.removeHTML = function (html){
 $('#my_div').fadeOut(800, function(){
   $('#my_div').fadeIn().delay(2000);
 });
+
+/*------------ Get Choice Fields Options -------------*/
+//Server
+var strangeFields = ['short_description','description','title','name']; //List with fields whose type is "choice", but we use it as a String
+var choiceList =  GlideChoiceList.getChoiceList('incident', 'state'); //Return a JAVA Object
+
+//Convert
+if(choiceList.getSize() > 1 && strangeFields.indexOf('state') == -1){
+	var options = [];
+	for (var i=0; i < choiceList.getSize(); i++) {
+		options.push({'value': choiceList.getChoice(i).getValue(), 'label': choiceList.getChoice(i).getLabel()});
+	}	
+	return options;
+}
 
 /* ---------  Continue --------- */
                   .
