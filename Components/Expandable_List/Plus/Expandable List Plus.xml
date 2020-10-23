@@ -1,0 +1,898 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2020-10-23 17:53:15">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description/>
+<inserted/>
+<name>OCL: Expandable_List_Plus</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>92ac23d12fc02010c5d33f96f699b6bf</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-10-23 17:53:14</sys_created_on>
+<sys_id>9f0eabd12fc02010c5d33f96f699b618</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-10-23 17:53:14</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_widget_af9f93832f331010c5d33f96f699b681</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function($scope) {
+	/* widget controller */
+	var c = this;
+
+	/* Variables */
+	c.loading = false;
+	c.showPagination = true;
+	c.modelFields = {};
+
+	$scope.datePicker = {
+		displayValue: '',
+		value: '',
+		name: 'datePicker'
+	};
+
+	/* Sort the list */
+	$scope.sort = function(field){
+		c.data.action = 'refreshData';
+		$scope.setOrderBy(field);
+		c.server.update().then(function(){
+			c.data.action = '';
+		});
+	}
+
+	/* Verify if is ASC or DESC */
+	$scope.setOrderBy = function(field) {
+		var order = "asc";
+		if ($scope.data.orderField == field) {
+			if ($scope.data.order == "asc")
+				order = "desc";
+			else
+				order = "asc";
+		}
+		$scope.data.orderField = field;
+		$scope.data.order = order;
+	}
+
+	/* Refresh the list */
+	$scope.refresh = function(){
+		c.showPagination = false
+		c.loading = true;
+		c.data.action = '';
+		$scope.data.orderField = '';
+		$scope.data.order = '';
+		c.data.searchFilters = [];
+		c.searchText = '';
+		c.data.p = 1;
+
+		for(var f in c.data.fields){
+			var key = c.data.fields[f];
+			c.modelFields[key] = '';
+		}
+
+		c.server.update().then(function(){
+			c.loading = false;
+			c.showPagination = true;
+		});
+	}
+
+	/* Expand a row */
+	$scope.expand = function(field,event){
+		var target = $(event.currentTarget).parent();
+		target.find('td').toggleClass('hide');
+
+		c.data.action= 'getLine';
+		c.data.sys_id= field.sys_id;
+
+		var div_html = target.find('td:last .exp').html();
+		div_html = div_html.replace(/\s/g, '');
+
+		if(div_html != '')
+			return;
+
+		c.server.update().then(function(){
+			target.find('td:last .exp').append(c.data.html);
+			c.data.action= '';
+		});
+	}
+
+	/* Close a row */
+	$scope.close = function(event){
+		var target = $(event.currentTarget).parents('tr');
+		target.find('td').toggleClass('hide');
+	}
+
+	/* Filter in all table */
+	$scope.filter = function(){
+		c.data.p = 1;
+		c.data.action = 'refreshData';
+		c.data.search = c.searchText;
+		c.server.update().then(function(){
+			c.data.action = '';
+		});
+	}
+
+	/* Verify if the user pressed "enter" */
+	$scope.getkeys = function(event, index){
+		if(event.keyCode == 13)
+			c.update(index);
+	}
+
+	/* Previous page */
+	c.prevPage = function(){
+		if(c.data.p == 1)
+			return;
+
+		c.data.p--;
+		c.data.action = 'refreshData';
+		c.server.update().then(function(){
+			c.data.action = '';
+		});
+	}
+
+	/* Next page */
+	c.nextPage = function(){
+		if(c.data.p == c.data.num_pages)
+			return;
+
+		c.data.p++;
+		c.data.action = 'refreshData';
+		c.server.update().then(function(){
+			c.data.action = '';
+		});
+	}
+
+	/* Go to any page */
+	c.goToPage = function(pag){
+		if(pag &gt; c.data.num_pages || pag &lt; 1)
+			return;
+
+		c.data.p = pag;
+		c.data.action = 'refreshData';
+		c.server.update().then(function(){
+			c.data.action = '';
+		});
+	}
+
+	/* Update the list */
+	c.update = function update(index) {
+		c.showPagination = false;
+		c.data.action = 'refreshData';
+		c.data.p = 1;
+
+		c.data.searchFilters = [];
+		for(var f in c.data.fields){
+			var key = c.data.fields[f];
+			var record = {};
+			record.field = key;
+			record.type = c.data.column_types[key];
+			record.value = c.modelFields[key];
+
+			c.data.searchFilters.push(record);	
+		}
+
+		c.server.update().then(function(){
+			c.showPagination = true;
+			c.data.action = '';
+		});
+	};
+}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;/*------- SEARCH BOX -------*/
+
+.search{
+  margin-right: 10px;
+  overflow: auto;
+}
+
+.search__icon{
+  float: right;
+  padding: 7.2px 12px;
+  border: 1px solid #E5E5E5;
+  border-radius: 0px 6px 6px 0px;
+  border-left: none;
+}
+
+.search__input{
+  float: right;
+  border: 1px solid #E5E5E5;
+  border-radius: 6px 0px 0px 6px;
+  padding-left: 12px;
+  width: 250px;
+  height: 30px;
+  border-right: none;
+  margin-right: -3px;
+}
+/*------- END -------*/
+
+/*------- PANEL -------*/
+.panel{
+  margin: 10px;
+  background: white;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-family: 'Helvetica';
+}
+
+/*Head*/
+.panel-heading{
+  border: 1px solid #E5E5E5;
+  border-bottom: 0px;
+}
+
+.title{
+  margin: 5px;
+  font-size: 26px;
+}
+
+.title__icon{
+  margin-right: 15px;
+}
+
+.title__button{
+  float: right;
+  font-size: 21px;
+}
+
+/*Body*/
+.panel-body{
+  margin: 0px;
+  padding: 0px;
+}
+
+/*Footer*/
+.panel-footer{
+  border: 1px solid #E5E5E5;
+  border-top: 0px;
+  background: white;
+  padding: 0px;
+
+  /*pagination*/
+  .pagination{
+    margin: 8px 15px;
+    display: inline;
+  }
+
+  .page-item a{
+    color: black;
+  } 
+
+  .current{
+    color: white!important;
+    background-color:  #424141;
+  }
+
+  .num_pages{
+    background-color: white;
+    color: black;
+  }
+
+  .num_pages:hover{
+    background-color: white;
+    color: black;
+  }
+
+  nav{
+    padding: 5px;
+    overflow: auto;
+  }
+
+  /*goTo*/
+  .goTo__input{
+    height: 34px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    width: 60px;
+  }
+
+  .goTo__button{
+    padding: 7px;
+    border-radius: 3px;
+    border: 1px solid;
+  }
+}
+/*------- END -------*/
+
+/*------- LIST -------*/
+.list{
+  table{
+    border: 1px solid #E5E5E5;
+    border-radius: 6px;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th{
+    border: 1px solid #E5E5E5;
+    padding: 8px 10px;
+    text-transform:capitalize;
+    cursor: pointer;
+  }
+
+  td{
+    border: 1px solid #E5E5E5;
+    padding: 5px 10px;
+  }
+}
+
+.list__short--label{
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display:inline-block;
+}
+
+.list__exp{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.list__exp--label{
+  font-weight: 550;
+  margin-right: 10px;
+}
+
+.exp_buttons{
+  button{
+    margin: 5px;
+  }
+}
+
+/*Columns*/
+.search_field{
+  border: 1px solid #c7c7c7;
+  border-radius: 6px;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.date_time{ 
+  input{
+    border: 1px solid #c7c7c7;
+    border-radius: 6px;
+    padding: 0px;
+    padding-left: 10px;
+    height: 24px;
+  }
+
+  button{
+    padding: 1.4px 8px;
+    border: 1px solid #c7c7c7;
+    border-radius: 6px;
+  }
+}
+
+/*Others*/
+.hide{
+  display: none;
+}
+
+.close_icon{
+  font-size: 20px;
+  float: right;
+}
+/*------- END -------*/
+
+/*------- LOADING -------*/ 
+
+.loading{
+  border: 1px solid #E5E5E5;
+  text-align: center;
+}
+
+.loading__icon{
+  font-size: 35px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  margin-top: 20px;
+}
+
+.loading__p{
+  font-size: 21px;
+  font-family: 'Helvetica';
+  margin-top: 8px;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/*------- END -------*/
+
+/*------- NOT FOUND -------*/ 
+
+.not_found{
+  padding-bottom: 25px;
+  padding-top: 25px;
+  border: 1px solid #E5E5E5;
+  text-align: center;
+}
+
+.not_found__icon{
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.not_found__p{
+  font-size: 19px;
+}
+
+/*------- END -------*/
+
+
+&lt;/css&gt;&lt;data_table&gt;sp_instance_table&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list&gt;title,table,field_list,maximum_entries&lt;/field_list&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id&gt;ocl__expandable_list_plus&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {
+
+}]]&gt;&lt;/link&gt;&lt;name&gt;OCL: Expandable list Plus&lt;/name&gt;&lt;option_schema&gt;[{"name":"icon_class","section":"other","default_value":"","label":"Icon full class - like: \"fa fa-flag\"","type":"string"},{"name":"all_fields","section":"other","label":"All Fields","type":"string"},{"name":"filter","section":"other","label":"Filter","type":"string"}]&lt;/option_schema&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+
+	// Critical Data
+	data.table = options.table || $sp.getParamenter('table');
+	data.fields = options.field_list || $sp.getParamenter('field_list');	
+	data.fields = data.fields.split(',');
+	data.all_fields = options.all_fields || $sp.getParamenter('all_fields');
+	data.limit = options.maximum_entries || 0;
+	data.orderField = input.orderField || data.orderField || '';
+	data.search = input.search || data.search || '';
+	if(data.all_fields) data.all_fields = data.all_fields.split(',');
+	data.filter = options.filter || '';
+	data.exp_array =[];
+	var asc = input.order || '';
+
+	// Expanded line
+	if(input.action == 'getLine'){
+		var grExp = new GlideRecord(data.table);
+		grExp.get(input.sys_id);
+		data.html = '';
+		for(var j=0; j &lt; data.all_fields.length; j++){
+			data.html += '&lt;div class="list__exp"&gt;&lt;span class="list__exp--label"&gt;' + grExp[data.all_fields[j]].getLabel() + ':&lt;/span&gt;'+grExp.getDisplayValue(data.all_fields[j]) + '&lt;/div&gt;';
+		}
+		return;
+	}
+
+	// Query conditions
+	var operator_queries = [];
+	operator_queries['string'] = "LIKE";
+	operator_queries["reference"] = "LIKE";
+	operator_queries["glide_date_time"] = "LIKE";
+	operator_queries["glide_date"] = "LIKE";
+	operator_queries["glide_list"] = "LIKE";
+	operator_queries["translated_text"] = "LIKE";
+	operator_queries["integer"] = "=";
+	operator_queries["decimal"] = "=";
+	operator_queries["choice"] = "=";
+	operator_queries["_choice"] = "=";
+	operator_queries["boolean"] = "=";
+	operator_queries["percent_complete"] = "=";
+
+	// Call the Include
+	var include = new listUtils(data.table, data.fields);
+	data.p = parseInt(input.p) || 1;
+	data.pagination = include.createPagination(data.limit, data.p);
+	data.columns =  include.getColumns(data.table, data.fields);
+
+	// you need to run the getColumns function first, else you'll receive an empty object
+	data.column_types = include.getColumnType();
+
+
+
+	// Update the data
+	if(input.action == 'refreshData'){
+
+		for(var i in input.searchFilters){
+			var field = input.searchFilters[i].field;
+			var type = input.searchFilters[i].type;
+			var operator = operator_queries[type];
+			var value = input.searchFilters[i].value;
+
+			if(value){
+				data.filter = data.filter + "^" + field + operator + value;
+			}
+		}
+		getData(data.orderField, asc, data.search, data.filter);
+		return;
+	}
+
+	/*
+  @description Get the list data
+  @param {String} [order] - Field that we will sort
+  @param {String} [asc]  If the sort is ASC or DESC
+ 	@param {String} [text]  Keyword
+	@param {String} [filter]  Query to filter data
+	*/
+	function getData(order, asc, text,filter){
+		var gr = new GlideRecord(data.table);
+
+		if (order){
+			if (asc == "asc")
+				gr.orderBy(order);
+			else
+				gr.orderByDesc(order);
+		}
+		if(text){
+			gr.addQuery('123TEXTQUERY321', text + "*");
+		}
+		if(filter){
+			gr.addEncodedQuery(filter);
+		}
+		gr.chooseWindow(data.pagination.window_start,data.pagination.window_end);
+		gr.query();
+
+		if(!gr.isValid()){
+			return;
+		}
+		data.num_pages = Math.ceil(gr.getRowCount() / data.pagination.window_size);
+		data.list = include.getRows(gr);
+	}
+	getData();
+})(); 
+
+
+]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-10-16 17:03:50&lt;/sys_created_on&gt;&lt;sys_id&gt;af9f93832f331010c5d33f96f699b681&lt;/sys_id&gt;&lt;sys_mod_count&gt;550&lt;/sys_mod_count&gt;&lt;sys_name&gt;OCL: Expandable list Plus&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_af9f93832f331010c5d33f96f699b681&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-10-23 17:50:47&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;!-------- SEARCH BOX --------&gt;
+&lt;div class="search"&gt;
+  &lt;i class="fa fa-search search__icon btn"&gt;&lt;/i&gt;
+  &lt;input type="text" class="search__input" ng-model="c.searchText" placeholder="Search..." ng-change="filter()"&gt;
+&lt;/div&gt;
+
+&lt;!-------- PANEL --------&gt;
+&lt;div class="panel"&gt;
+  &lt;div class="panel-heading"&gt;
+    &lt;h1 class="title"&gt;
+      &lt;span class="title__button"&gt;
+        &lt;i class="fa fa-search search_colunm" ng-click="view = !view"&gt;&lt;/i&gt;
+        &lt;i class="fa fa-refresh" ng-click="refresh()"&gt;&lt;/i&gt;
+      &lt;/span&gt;
+      &lt;i ng-if="options.icon_class" class="{{options.icon_class}} title__icon"&gt;&lt;/i&gt;
+      {{c.options.title}}
+    &lt;/h1&gt;
+  &lt;/div&gt;
+  &lt;div class="panel-body list"&gt;
+
+    &lt;!-- Loading --&gt;
+    &lt;div ng-show="c.loading" class="loading"&gt;
+      &lt;i class="fa fa-spinner loading__icon" aria-hidden="true"&gt;&lt;/i&gt;
+      &lt;p class="loading__p"&gt;${Loading...}&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-------- LIST --------&gt;
+    &lt;table ng-show="!c.loading"&gt;
+      &lt;tbody&gt;
+        &lt;!-- Columns Name --&gt;
+        &lt;tr&gt;
+          &lt;th ng-repeat="column in data.columns"&gt;
+            &lt;span ng-click="sort(column.name)"&gt;
+              {{column.label}}
+              &lt;i class="fa" ng-if="column.name == data.orderField" ng-class="{'asc': 'fa-sort-up', 'desc': 'fa-sort-down'}[data.order]"&gt;&lt;/i&gt;
+              &lt;i class="fa fa-sort" ng-if="column.name != data.orderField"&gt;&lt;/i&gt;
+            &lt;/span&gt;
+
+            &lt;div ng-switch="column.type"&gt;
+
+
+              &lt;span ng-switch-when="_choice"&gt;
+                &lt;select ng-show="view" ng-model="c.modelFields[column.name]" ng-change="c.update($index)" class="search_field"&gt;
+                  &lt;option value=""&gt;${-- none --}&lt;/option&gt;
+                  &lt;option ng-repeat="choice in column.choices" value="{{choice.value}}"&gt;{{choice.label}}&lt;/option&gt;
+                &lt;/select&gt;
+              &lt;/span&gt;
+
+              &lt;span ng-switch-when="glide_date_time" class="date_time"&gt;
+                &lt;sp-date-picker field="datePicker" ng-model="c.modelFields[column.name]" ng-show="view"  sn-change="c.update($index)" ng-model-options="{getterSetter: true}" sn-disabled="false"&gt;&lt;/sp-date-picker&gt;
+              &lt;/span&gt;
+
+              &lt;span ng-switch-default&gt;
+                &lt;input class="search_field" type="text" ng-show="view" ng-model="c.modelFields[column.name]" ng-keypress="getkeys($event, $index)"&gt;
+              &lt;/span&gt;
+
+            &lt;/div&gt;
+          &lt;/th&gt;
+        &lt;/tr&gt;
+
+        &lt;!-- Lines --&gt;
+        &lt;tr ng-repeat="record in data.list"&gt;
+          &lt;td ng-click="expand(field,$event)" ng-repeat="field in record"  class="pointer list__short"&gt;
+            &lt;span class="list__short--label"&gt;{{field.display}}&lt;/span&gt;
+          &lt;/td&gt;
+          &lt;td class="hide" colspan="{{data.columns.length}}"&gt;
+            &lt;div class="close_icon" ng-click='close($event)'&gt;
+              &lt;i class="fa fa-close"&gt;&lt;/i&gt;  
+            &lt;/div&gt;
+            &lt;div class="exp"&gt;
+      				
+            &lt;/div&gt;
+            &lt;div class="exp_buttons"&gt;
+              &lt;button class="btn btn-primary pull-right"&gt;Primary&lt;/button&gt;
+              &lt;button class="btn btn-secondary pull-right"&gt;Secondary&lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;!-- NOT FOUND --&gt;
+    &lt;div ng-if="data.num_pages == 0" class="not_found"&gt;
+      &lt;i class="fa fa-filter not_found__icon"&gt;&lt;/i&gt;
+      &lt;p class="not_found__p"&gt;${No result found ...}&lt;/p&gt;
+      &lt;p class="not_found__p" ng-if="c.searchText.length &gt; 0 &amp;&amp; c.searchText.length &lt;= 3"&gt;${Try to write more than three letters to have a good search.}&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- FOOTER  --&gt;
+  &lt;div class="panel-footer"&gt;
+
+    &lt;!-- First list --&gt;
+    &lt;nav aria-label="Page navigation" ng-if="c.showPagination"&gt;
+      &lt;ul class="pagination" ng-if="data.num_pages &gt;= 1 &amp;&amp; data.num_pages &lt; 11"&gt;
+        &lt;li class="page-item" ng-click="c.prevPage()" id="btn_prev"&gt;&lt;a class="page-link" href="javascript:void(0)"&gt;&lt;i class="fa fa-angle-left"&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li ng-repeat="i in [].constructor(data.num_pages) track by $index" class="page-item" ng-click="c.goToPage($index + 1)"&gt;
+          &lt;a class="page-link" href="javascript:void(0)" ng-class="{current: ($index + 1) == data.p}"&gt;{{$index + 1}}&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="page-item" id="btn_next" ng-click="c.nextPage()"&gt;&lt;a class="page-link" href="javascript:void(0)"&gt;&lt;i class="fa fa-angle-right"&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;!-- Second list --&gt;
+      &lt;ul class="pagination" ng-if="data.num_pages &gt;= 11"&gt;
+        &lt;li class="page-item" ng-click="c.prevPage()" id="btn_prev"&gt;&lt;a class="page-link" href="javascript:void(0)"&gt;&lt;i class="fa fa-angle-left"&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="page-item"&gt;&lt;span class="num_pages"&gt;{{data.p}} ${of} {{data.num_pages}}&lt;/span&gt;&lt;/li&gt;
+        &lt;li class="page-item" id="btn_next" ng-click="c.nextPage()"&gt;&lt;a class="page-link" href="javascript:void(0)"&gt;&lt;i class="fa fa-angle-right"&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;span class="goTo" ng-if="data.num_pages &gt;= 11"&gt;
+        &lt;input type="number" class="goTo__input" ng-model="c.goPage"&gt;
+        &lt;button class="btn-primary goTo__button" ng-click="c.goToPage(c.goPage)"&gt;${Go}&lt;/button&gt;
+      &lt;/span&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+<payload_hash>742095523</payload_hash>
+<remote_update_set display_value="OCL: Expandable_List_Plus">9f0eabd12fc02010c5d33f96f699b618</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-10-23 17:53:14</sys_created_on>
+<sys_id>d30eabd12fc02010c5d33f96f699b619</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1755695a0050000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-10-23 17:53:14</sys_updated_on>
+<table/>
+<target_name>OCL: Expandable list Plus</target_name>
+<type>Widget</type>
+<update_domain>global</update_domain>
+<update_guid>6f7d27d1e2c02010f0db851afbeae756</update_guid>
+<update_guid_history>6f7d27d1e2c02010f0db851afbeae756:742095523,3b5d27d1d2c02010c8ea95933fd96b6f:-1914477119,302ceb911bc02010c4e862b280b7995b:-438930639,4b8b6791adc02010904bb90a158d01a1:-570272960,67faeb111fc0201013d1f5011be9f8a8:367044666,227aaf1117c020102795619f3342b2db:1790388768,200aa71143c02010a4c6941f2b693e88:1549651235,f4d9e75d1480201082f309cae78ff325:1455347473,ed896bdd58802010fe8f2ea13acfbd68:950149696,5178eb59dd4020104b25eb4b29345ff1:1955358592,6c48275de48020100fc06d4ba5c999e5:2046917760,64972b5964402010af6c9b270b9ce9a2:-139873765,4d16a71deb80201067dfd23b9fd6a4fb:-1831293373,b8b5eb59544020106c335528b25798df:-236207449,7e64e7d90c802010c52ebcd91956b165:1569804834,30736f9977802010800a338abaf6808d:-222352045,32b443596f402010f7d1c4c5c9d96bd9:1569804834,d374cf19d34020105bbc6d86452dc06a:1894749606,ed14cb95ca402010e0d458affde704eb:1769633913,3d8387194b402010f602478acc813b3a:1569804834,fe734719b740201033daf8cd2e9621d8:378665942,88b0cb957140201061ac75ec21eba676:977754357,bc50c7955d402010054ac97f218e6fdd:1292208139,4acd7615fa40201018e43a67e749e64d:713676477,e88b76919d402010997941e56a814ec6:-1101341541,ab85f695ce002010d92b88d9051d2482:1072052150,8c637ad9f2002010fa3e5cf01190b456:726549919,7281fa1ddd002010f360c85fbc57d854:755034605,4200f299320020100e278fb45274eaa7:-238961906,dcefea91f9002010a8c942d789be9ae8:-224948836,78af6ad9eb00201033dbe3fbfea4d908:-1015416067,3527aa91f4002010d459409471939197:-1086036829,9ad6a695c5002010ce6ea65e8ff4a7f4:780212532,0b17be898908a010fd42fc8803ab4d26:-2026184645,8a8e26450f08a0103ab25e698c6d1d75:-117629653,06fd6a451a08a01075fe84311217a761:-1615502060,f8fdee451f08a010b7515567c0367278:1950827782,ca8dea454b08a01078d19ea01035b163:-152516483,465d6a45c608a0108cc84a1bb3111942:-1323024042,8b0c6e05bb08a010cd0c16703a74b01c:-195391784,b1fb26c1f208a010e7f7deae55e0c28c:-207980438,20cb22059108a01043f2f3bc7c834b2a:-1217180623,a09be6052f08a010fdbd0d39fe35a5f7:1992509266,fc7beec17208a0102a3a2d25e1aa1fde:620299242,9d1be205c708a01073a444258f4e9463:-247385350,d30ba2052608a0108b444f0521862f0c:1703221342,b0fa22051b08a01088808772131328da:2104204503,f0daeec1b808a0100055afeaf80b39c7:153597811,bbbaeec1b808a0107133bd345bb5bcbf:603364346,aa6ae6417708a010a31163c0ac3ba058:-254795340,646aaac16d08a0105919f287a1a74dc8:1695811352,f93aaac1f708a010afa6f996bcc9912b:1683769767,321a6ac1be08a01028a967b032f0e30d:298776167,bd0ae2c1e308a010aa73620684e7d879:349481201,60f9a2c1ab08a010738a4038e8d1009a:-568215587,6f9926c1c008a010fb9a5a6b32ed1f6b:838900282,d189e641aa08a010ae5a63f7fc3d458a:1481312069,3079a2c17008a010dbe74166f493ef7a:342551436,5e29ae81ce08a0100ba2aa09cde4e606:875605484,3f192241c608a01007ef6a15705907c1:-327014393,0ef86e81fa08a010e95fe087d95c5aa1:-1340533432,f4e86e418308a0100076841e389d7515:196481910,b7c8ae8dbcc4a0105ce76980b86b7340:1752785977,f258aa8df5c4a0108f60e504d26b8115:-1809757822,0a372e01c708a010179a25bf9f25571f:153424354,b0a6e6415108a0100cdc7215ce95193a:-1948965380,d5f522417808a010ba5598468ff3eda0:184148149,58d56ac9c0c4a0101bdebfaeb26af310:2042447441,af6562015008a0103d74938a7279d2d6:1207513341,d355aa01e208a010d21a3d2a1ccab081:-665466498,dd742ecdbcc4a0109424e9c57a638c48:-284620226,cd54ae8d64c4a01094df8823e2d1097b:1435181044,af046ecd39c4a010710c940108a303b7:-13411767,e3e3ae8d5ac4a010edaf75ecc5b0fccc:-1943288320,9ed26ec9a8c4a010e4a0938d9d7fe52b:1357582592,f662220d68c4a0102684792ff8dddbd5:-1050141423,3e52220dd2c4a0101483b8a6a4bf7789:-1685859179,5022a6c959c4a010bab96e2e5c85023c:-484200315,76f126c994c4a010a158cd213b7c00ec:1295847947,d13f124dd2c4a010e94ebbf9a5cc8a65:1615128400,8c8d9289aac4a01043341cfd71e80a73:-663561116,32cc16c99cc4a010fd3fe77f4d7ec8c5:-1277427439,35bc5ac999c4a010f9df3a661c20a904:129370268,358c96c901c4a0103dffe6156ad4f524:-517536704,c97c96c9f5c4a0102499aa207d67b41c:1200343574,055cd289d1c4a0108d5bdd146c90dd60:-407232910,9c2c92c957c4a0106665654407206d85:1802221748,cf8b5e89f9c4a0106c8f69e08fe1db04:-1461019038,6d4b5a8948c4a010d7281a4a67a2fb0d:-528116591,ed2b5a49b5c4a0106d8b51b0b750c0ab:-1390562607,408a96094cc4a010607250c82b1c64b7:1003099278,126a12c5c1c4a01080f2b49c136b8213:-1801134042,76a99a497cc4a010b33d6ec5705064c0:605164362,e279124524c4a010d6926f280989751f:1038342740,33e7520997c4a010a5edd47ff5a39e6e:1889295236,dd071e458fc4a0101a7bdf13cd82a597:-1309904585,67e516c5d4c4a010843e179923a3a702:-282331784,b995d2c5f3c4a010f5d93a22eac63dd6:640930770,6a85124543c4a010ec6a846291e7244a:1509040659,5f4552c513c4a010b0ac60f17593fd1d:-480237381,e7251e4517c4a010d7f2b2ec1458def1:-764774101,63059e4581c4a01043df37d83577980b:1047259659,aab41e4527c4a01017324cea661696cd:-100628593,f61396455ac4a010a0d0f26e9cdf76ae:1352492306,1c319a81dcc4a01014d0fcd76577325a:439969295,e1b0560580c4a01046942e7f23c62840:398021061,ec1dce41b1c4a010b15b72dd8ba68928:-1576055453,cf7c824149c4a010ec2ade8a819f3b96:2022947576,d07c8241a6c4a010023f0cb8ae657273:-1702401592,0cbb820198c4a010acaa6bc7a0e42f77:-418754082,209b42014bc4a01026b518fb997cc55c:-279756713,bd3b0e01e1c4a0106e14772398b17ea1:2005522461,742b0e011ec4a010055a6ed44b80a69a:-1762619001,aeba82013ac4a010bc2f5aa67f11f9c1:-1374653710,a1ba820181c4a01042f87018291c04b5:-1250593038,60a98acd3284a010c75173ae3a967038:-1374653710,ff38f9455c84a01048542e57f59a6277:-1924546151,cd1839458784a0100a79ac1cbe9c55a1:-750026274,76f739457a84a010107d7cf28b044c9a:-1680933888,89a771054484a0100e0222ba1444d795:394344805,9697f1058c84a010676bab3afdc88361:-1923138740,6cd5f1053484a010f7fc7bb762064523:-526144379,5ea571056184a0107e9f8ef9ab106011:-2115009870,f27571057f84a010e8435b83bcb2780a:1960548698,5255fd81e984a0102f724f2a7c81fc7c:-27932000,4e357dc1f384a010cd3720abb97c3781:-1793457015,c525f5818584a010be134625767242c2:1344223190,2463f9817a84a010d7b077f03fb000f8:1314702018,4943f981c084a01020543cece5cec3f0:1576582503,0c23b581df84a0108097fb850dc467ea:-1836534830,ec0379816884a01041a96e38ff235038:1369220417,0182f1812184a0103439071b4256e3e3:702685528,b2127501fd84a0106c2f1748b857d8b3:892262842,dc40bd01f684a0104e0055a36913c0a6:-1424239274,ef107901cf84a010670155d42d1f1990:-584365642,cbbf61019c84a01027dae4cbaa711fd8:156786490,e65f65012e84a010c881785bd7a2a3aa:608958841,600f654d0d44a01039fdbe9259e98ff8:-868538329,4b18a989d444a0100f67cb0827ee1136:-902270199,bb576989ff44a0101269e9021f2808f6:266363909,68e521897e44a0100ca9733b3d4c3ecd:1740304966,75d4a5098144a010694d161d231d4525:-1595039354,33c46d455344a010df0c0a4455ae7a01:-1603504962,faa42909cb44a01015259e8d80adbc7f:-2131295832,91a465499544a010742d87027e293b48:400982953,b1c36d091d44a01028f0ec624f984c09:-761881291,b24329096844a0106457b74c6e773678:-398270552,f1432d058744a0100e0fdec62d602a57:-1841343831,b0d2e9858c44a0100527e9ae059546f8:472575688,de922d85d744a0102bf06b51b7e9515b:-431349228,3940e985a644a010ff8e24aa42807cf0:60256441,d75f9945b944a010ead3b10b8953face:-1092821146,ac5f11851d44a0100606a0e49e57eaa7:-79474740,041f11850244a01033a4ef4548ef4ba0:1597430597,8fae9945ac44a010a9aa94e8086b1d0a:191049444,b86e5945c444a010dd1cd351bb31c8b9:1943973175,bd5e59451244a0108b6538ae14e2b24a:2079406976,f23e1dc14544a010a0ab3e32fa996df0:1883162651,de8d11454144a010e0abf75345e09ef0:-1625472261,702d91050644a010e7fd490a3b69b4b0:-12888422,a79cd5056144a010ae069b12612c841c:1663816818,453cd105c844a010e643ca2a24ee8f5e:1906782696,e8cb9dc1c644a010e9056964410642d0:-1827431312,e2589d410e44a010d237bc9de4ca2a60:-2106963342,d9481501dd44a01085603f6c7259a228:-435239262,7c3819414d44a010d1acf7167eb1a774:2125066243,cbd755414344a0105b066d4f87e39ceb:-1970809029,3e971541fe44a010988c4257352b6b09:335447162,554715419544a010abffcb7f3358fe00:-1790887014,f3f619cd3d04a010d01b483b4dd2acb7:-2106963342,64e5598d0204a0104001d88f22c196d1:100008876,ae65598d5104a010f73463720cf629fe:203143821,2164194582c0a010bbc3abd3274ec61f:1337510626,b81455cd1e04a0108f0ae6c095d31468:1743706573,f8b3554d2a04a01063d9b736e09a97b0:1455350824,a2128a74c04c60100e1f72f946e9c8fe:1539279085,0a6106743f4c601000513077e367ca98:534830633,c8510674284c6010fa8e66ea6cfdce90:-594080675,4721c274c74c6010d132adf460046340:837596377,ad210634c64c601060b2a939be9e662b:-672767575,ef8f35346b4c601020f3e9f1cb90a823:-1352834053,d5de75b0664c601072b0c5c09bb89ce8:-933765376,71bd71f05f4c6010a035f751b7572353:-1192019242,138d79b0fc4c6010c8bfdb8970ff29be:-1669000214,bb7bf970684c601038c9c606de788ae0:630483779,c95b79303c4c60109705f63a3ac31670:183666659,96ba3570234c6010d4684735e1f2be70:-1492797887,c53afd30594c6010a04661997c32c23b:197873697,6e1a31fcc80c60106b78a22aacd62f6b:-1734428411,819979306e4c6010a8703e793822241c:1872257620,26d8b130024c60103ff862fded7c722c:1570522324,e3a0b5f83e0c6010388f242bd7a22146:-719223040,146075b8030c6010de3cfefdfe861b94:1335770362,a44035b89f0c60103d2ff34bcb3d04d3:-1370833023,6faf21b8590c60100281282f7d643eba:380268083,17cee1b8d40c60102fbbfcf9ded194dc:218472494,01aea1b8ca0c6010af836a424bb5181e:-750649300,918e2578c20c601051279f1e7e63c035:-1699291593,8e2e2578900c6010f862433e9611f119:1249039405,0b1bedf4a10c6010f5b9c131c3c2c261:-1757606294,93b925b4560c60107d596839a45f92e1:1563897174,b38929b45c0c6010d51d86ac13808b15:1546609624,bc296d74c80c6010377847adf73cc7b8:281228365,4db829b4010c6010b73248d31700de0d:-1682611287,c168e9348e0c60102387529a4519dbdf:-381846543,c9c62574d90c601098c20b892fcce3a2:1291756652,498669b0b90c6010e0befbd86c923e08:-343752278,a766a1345f0c601084a55a5d4a23b284:507008518,2a3629b0180c6010484990ff71b0cd4e:-733206328,d2f52d34480c6010e3b04437dbbbbbd8:672763887,14e5ad70320c6010ac0a583b5509f1c3:594014533,f0e1e1b0210c6010a5ad6e43a623e0d3:-2103244684,5dd165b03e0c60102e00a08beb81e105:2051791284,346e51fce7c86010ff823c360920edf7:244791662,d11d1dbcdfc86010d7a3e1ac87f60593:-479103789,c5ac51fca2c860100346fb76460c26dc:-1986770974,9c7c553c71c86010efb89ecb74cf7b49:-319300833,4c1c557c44c860107596141d193caeb1:1473834986,69d9d57ca9c8601036030c49f251ff77:-321750790,5a9999f8c2c860109f92b2789a4d37b9:-2065993181,3d29dd3c89c8601058401d851a987d14:1421635107,02f89d3c83c86010abda708f36d38aaf:184978336,98c81d3c57c86010233e8e2e0c24827c:855345079,5598153c3ec860107b893c8fa5f727ca:-398654239,c148d1b8c0c86010550393148399d486:1156069297,0ef7153c41c86010e10b12369908dbc2:496017094,c1a799f8b1c860108a07c4ee5bfd01f0:1783878315,303799b8a1c8601057d4f2f5e5ccca67:1484182536,e7e61db85fc8601004c89b29553f8611:846170659,0ea611f849c860109950484151cdb82f:-1424108701,ac26ddb86ec86010cf31204ea1b60799:-555025375,12c5ddb8d3c86010218b10c96874ce7d:1570071251,9265d9b858c86010ad0938100715fad8:-1720557865,cb3595b89ec86010a3b7af3e9c638c7b:-1339989303,50e495b802c860102af5e9c70a92a174:603982467,34949d7818c860108c74b7875390ca8e:-938437233,610f387ccc886010e18b89b9255911d3:1345073509,429e387c9f886010fc3742dc9c8114c0:1095272036,217e707c858860102f740e262ff96c58:1105038003,2b2eb03840886010c92a96d0b47edafb:51135801,69dd707cb988601087685c3fb797a536:-1378434848,ac1df43c818860109333f7a2eebc5e69:740825204,297cf438ce88601050d939107e115256:919738900,392c38f4e48860102906ea4701861332:-430967476,6aa674b4a5886010ee04207af35236c8:956747319,c5b534382f8860107dc78f1fc4ae1ffb:-529261423,faa53438498860105e287541f8f88eca:-354813524,cc8438f4e588601014194e8d64b7c2e2:-529261423,7964f4f4ef8860106d66e6f488b0c695:2022639749,5a0370b4c88860104ac67305a4ba1a98:114705808,e88274b493886010bd9964caf4d7f6bf:1650368273,3c1270b4b9886010a750b653f61d2090:672351623,5a1f6cf0ca886010dc3cacb1dad71806:1497921336,7b2ca8bc2b48601003b43c08a815547b:-1308947197,3970d470ef4860100bf0dcb2f16e8403:-1134186775,e33f88303f486010a44c4b5a321e4db8:1898579924,9a757c60e74060108fcd0ef3f3cb33f0:-1864872783,5f60b42cae006010e28963f4474fe2f6:-1296056800,5ddfa0acd60060108a4be53abf248eed:953938143,5c4fec6ce5006010eacd831a561d9ca8:1928350701,e32e68a8360060101de574b79a131a2a:1562041087,c98dec2ccb006010306e930bba57eb53:1817727495,0b7de02c760060101332e09449fe75ed:824848390,8cfce02ce700601031615928e220f54e:-1977509129,a9ec602c08006010d0f6c3ebf6ae4904:1583985138,674ce02ca4006010718bdc8f6b0d2d47:824848390,b1eba4a8c50060106dd5a38699d3f38f:41650418,f869ac688c006010c5d160a535dbc35f:-2079435372,b439a4a8b5006010a7b35ccd66c55e6d:-1227551365,bbe828e48a0060102f499ee646b898de:-1550683386,507728e45900601092c5ee49f39e194d:1683425625,351b14ac5ecc2010763c3915ac011fbd:1926829720,8aba1c604c00601021c5ca6ff4234cb1:-1764771934,b47a14ac70cc20103ba7b64dbf4e0338:-1615123850,6b4a08e4aecc20108a2557bf84f01a08:-1881368721,691a00e420cc201084706a22cfab7d23:-640127517,80d9cc6411cc2010530a09cda7117d97:1179174215,a718cc2c538c20104aedc9f193f3e1f6:2037787219,7ab37f18308c20103e648146f95354ad:-2145599111,bf133b18da8c20105470e24a9a0ba408:-1807310933,1fd27718a18c201005d41da909703680:-320263886,e91177d43a8c20106f6ce79f4ef41e17:874153009,23a03fd0688c20106d79b92a99105045:1051252946,1aeeef54078c2010e4e77b1d2dcdf3e6:716291410,20ae2b14af8c20109b9c21c51f5ba65e:946712581,a06c2b146e8c2010bba55c133edfdd33:-537155394,b857a7505b8c2010fc7f90813e8e2571:1869095969,072727102b8c201044f16ca5436979a5:-673416055,59936b5cb34c2010fd7d41b3f2c55d49:1033366096,23822fd8494c2010805320aefba6172a:-1170160424,b3622fd81c4c2010edc450612e6c7d22:-466019014,faf1ef98a64c2010840c637c532896ad:890478808,a1f0ef18b84c201039de058ca737e18b:88965643,bf50af18d84c201085e0be66ed026983:584382279,f2afdf54384c2010c273200155de6208:-512713226,672e1f186c4c2010b20d397ced682e50:-534574452,5f3917d0ab4c201083957ca474decea4:-1370186017,f7071b141e4c201008f2026e0e8880c0:1599530755,53f6d7142d4c201046eee96b89ecfa69:914047289,08e6d714854c2010bb1fc74b34539261:-1560307199,31a6df90254c20108640763fc4a116ce:-438373401,54e49f903a4c201007020f5f40633d03:2001863170,46b41f90324c20108d4c49f3f966cf76:1611138647,c7139b50274c20108b39761696d26e24:1229231509,e4529310ab4c2010199a15ba975f69b7:-33428031,52f1db10074c20107b1ec3be98e54270:-1241047962,00b1d7dc0b0c20107f51246ca5c71573:-1758157407,bb9113109a4c20106f7568e4dc9d12be:1355259022,40911310e94c20100857a2aecf6fcc1e:911667456,4c511fdc500c2010694dd129a209923a:2033294954,a401d7dc9b0c20107e8c1f355b60e136:-572308910,40c017dcbd0c20107d177782871150c8:1112461902,c7a093dc920c2010d77a5cfacb2ece7a:288882223,5c9093dc0f0c2010842ce005bb5dad72:1458727044,2b60df9c7c0c201029efe5252ed08e8e:-859209335,b7405b5c420c2010da2369f66be513cf:710064773,233f479c6b0c2010bf71b9c0ada0cea1:2005521721,6a2f875c7f0c20107ba19f249f41bfbb:835788400,540e4b5cf10c20108b0832042c15dbc7:-180082269,53ad871c210c2010d6e076625842e1e6:-413791263,7f4d4b1c910c2010a15b324af6dded53:-266968317,1d3cc31c520c201062977d8f65194aaf:1190708198,3ae5c3185a0c20100d86f9fac78bdc03:-139114094,7ac58794830c20108a07f79a01016642:-1118036884,cdc583d4110c20108febf343f521dc9b:-1330273807,6dc4c794860c2010409e8995a9b2e244:672156075,a1840394180c201001fcf3cc71f9456e:1307874256,8f344b14590c201040ad4c3f392bfe9c:-1188311103,ae044354ec0c201020bfbe8672d67f51:811921328,b3d30b147e0c20108455ea5c1a526970:1050840336,02d387d07f0c2010af1290e4b20e1aa9:-937746576,7d834b14f80c2010335307faf0eda24b:-813535821,30438714380c20103838f76238cb1892:-405379453,b1920314150c2010d531fa67e22f8627:-295240371,43a1c7d07f0c2010a5288929f0b77f81:777341331,7791c7d0270c201085e4fd40c6caf903:1553712973,b99143d0240c201083c4a504e161bddb:858955086,091143d0240c20103042e41b7ad10f6f:882671727,48e0cf90630c2010ff2277ac46aac97d:-149534784,efd0cf90df0c201004cf61d9a1f96a59:-1666304169,1c804350ac0c201038fad6b1a15aef10:147085796,e5504390710c2010f71716111c23dfb8:943063014,c4404b90ab0c2010027410586614cc05:552558847,9cdf3690610c20107ad4c0cd910571cd:499086887,287f7290a70c20109b9871118019ec03:1429823309,d63f7e50500c2010656748f15d74c8a0:1097171751,710f3e50c40c2010cb9832dd8a1322af:-1039235089,f2d33f04a3042010c3e67cc537e12d80:2073954465,4cb27fc4c7042010828ebd122b716368:-232885194,6b827fc0e5042010ceaca8e919942b7d:-319917792,dcb1f3c40604201042bacd540add9a67:245410643,de71bbc09a042010d509c0e34359df53:-5546486,5c0eabc0c4042010cf9f2e7a5036f9b6:-188111226,5c8deb04aa042010937aef3b7913a7cd:-1775937778,3aab6f8003042010ff815e06eb632b73:-172694379,3e4a6740ee0420105669adc154e32fb5:525088311,1f0a6f8cf1c0201027c13dc937cd1963:1191135816,a8a927cc24c020103d6ca98887b822d2:525088311,009967401a04201017a7b5057d1aabae:-1605291309,ca89eb00ef04201067d9fb292430c977:-728362371,ca49a3cc97c02010e51500bef3dab0a9:-1277482866,1109e70092042010b6971319f9ef0e65:1526799224,b5376f4c74c020108efa252cc609c329:-1425346218,2037ef88d8c020102a10fea65e79bbe1:-1350824500,35c66f8c01c02010fc2fefa4dd4ab010:1765240191,c376238c70c0201092028f5b1fe01006:-34574053,e3b5ab4cb9c02010ba38d4ed2b8b2711:1576334803,eb85e74cf3c02010a6375198ef1814f9:2038574773,a3e12f4820c020102c7e0f9117074ed6:-2106403937,ea31a3489bc02010c40d4499c646a99e:-979575488,135f1f4820c02010547a8ccc3c2ef1cd:769522820,aa8e17483fc02010470743e4718cc073:720572217,c15e534891c02010a1806e4a8d275437:-145977925,3d3e13483cc02010f5fb25fc54293bf3:1018536825,b81ed7c499c020106c79263bf7777653:1942835408,0c4dd708cac020103a59bf6a9012cd9e:1031516999,b11dd3080ec0201034955ecad835f5c1:-2050876683,f9ec9b8439c020101f77755e6a14ce50:-665894371,6ba9538446c020109f6c805750f8b1c5:1673411589,427ec7ccdf8020107579789e084a9161:1216764614,460ec3cc98802010b681ad7598acc501:-1263626980,6fcd03cce7802010d33f319ea2b911aa:1990079898,c5bd8f0cc08020109631bd3260207d96:-1591090117,569d4b0c08802010d3814070ad5859b1:-122284534,920d830c9d802010e622d4ce1316f5d6:1508607977,58db4f4c59802010a61f3bec630df454:388666565,2cab8f0cff8020100bf4f5dcbfb753b1:1281582748,574b4b0c61802010f5c0fd68cb0f411a:1541642078,8f4a8f0ca78020100b62f3e95d95f08e:-2010578767,f8c94b0c818020104d334d0cef1f1612:544335783,44a9c70c548020100ae615e87346f7da:-836416692,74890bc86d802010ab0130a9a9e19cc3:914835220,61294788188020109eceb769bc0f25fd:1302774259,4cf88b884280201091ea52fbd9690623:1346044359,58984fc86e8020102a4d248a5e19f507:1275740214,f3684b08fd8020104268d24a344e4741:1698897242,e02887c87080201012e2f4932c163173:-1887431220,db180f08c88020106caf6f704debefdc:-1724477173,bce787c89980201033dc5dd950828213:249951655,55a607883f802010546bfeeff2987d3b:1608049882,9a260f08b5802010868f5ff9810feb9a:-2131028108,5e06c70866802010014fa7ea8d56c338:15581164,99c5cb085c80201084772c71fc06d91a:-2131028108,6f83cfc4f8802010de43f14e20399256:-678173377,5163cb0884802010355dc623e6e84413:-289130333,b3230b08198020105e5069863f974bc0:771939896,cb230b089e802010fbfbca445519009a:1559898761,2703cfc4d280201031fc6d08fbd6daa6:1428268106,0ab2c308c2802010a760839cc2ab8dcc:-897337623,8a424fc49e8020105145836b91c47576:-1253062398,e9328fc42d8020102c9d7af816d5dab0:836593443,f41207444a8020104fcb9d872c8559a1:212341997,02f1cbc49a80201062c085eedff0f8e1:1384579545,79d107c4c9802010a5ee06ef8de4ee36:1641356162,53a10704c7802010aa7e575ed881555e:-658898574,7fbd36448a802010955c765d48605a24:117442700,e26d3ac0f8802010b3e514bea805459b:-319572955,d82c7204e88020103bffd56be6c809fa:146546657,f01cf204c98020101c6d5fddccec14e8:-1325919925,fefb72c0cc8020106804efaa2046cc04:-776707659,daeb32c0c28020102dd6c7894c0a2dcc:-1290948255,1e2a32c0de8020103f09e3f8fe3cc0c5:-1810826955,752a32c077802010bac187535b310eb8:2029273381,9ad9fa80e78020102783ab23be442dd5:750815800,98a9fa80978020101d420f4ae32d9178:206302519,7149b640dc8020102e94aaf69a77bd81:1724547480,a3e83680308020105ecedbd6cb76b6aa:-313434727,0588b640ef802010149d2abef9041346:93532092,6e58be40bd8020101f7d94bbe15057bb:-187806051,a877b640968020101df287287f66f63e:-84618851,4447b680d2402010b765daa2ea58c2b5:638045373,79d63240248020100349be0479d4c72a:1668688111,aba67e4ca14020106cf97503ba95376d:759926080,4c967e009d80201069cd31b64f98c303:-1068670460,b67e9a8052402010b1531466d71b7d5b:541871427,4f4ed2804340201019857f82c9b6bb19:1858508489,821e56007840201009b28e13f9b9a369:-593132291,b2bd9280ef402010037e6a5dfa06dcd7:-2108702176,753bd6cc2200201047b3457f1f887047:-1517679890,01dad6007d402010959264fefd5a6254:2019292714,04aa568cc200201010f11773efbc59be:1526997424,834ad2cc6400201046707a73645aee80:939339454,1e8916cc5900201048b642d1917e422a:986488391,3f38d28c110020101372e23e77bb629a:1469296574,7928168cb30020103a338343240dbc13:-1024248815,5494960c4900201065aeb554f163a718:1864467452,3644d20cee002010a2a4c9901940d41f:2144154035,4e14da88b3002010da54d7ede0f43791:-1549999686,9e839ac8d3002010d77788a89ddf10c8:-2031513894,8983d6c8260020107df0fd5cdd37dd2e:-1390135901,7e631e889b00201057afbb8919218b73:-321256016,e0535ac8660020101e9c40c603551e4f:19849045,b91312c8f800201061d75c7f66c293e2:1704240523,0403da88860020102e9770f29bf5c69e:120944150,0f6212c8f000201013b8e7db8503a9b5:1704240523,9bf11a88e5002010969a1387f9566806:1294771853,bee1da88bc002010c4f9a9dbbe924f5b:1290259633,06c15a88c60020108f90e09d57aa05e7:-1853700034,21c19e4819002010bfc55820ab06c550:-1847766276,38b19e48aa0020107afffff1e4375f9b:-1375977585,e691528806002010a78220962dd9e784:-87536620,4421d288d0002010776b001c59fd7927:316913049,b6f0de489f002010c56234d6aa6748e2:-1633787463,c6f05a48f20020106e5dc5149dbb3af1:1379129281,71c0de481400201041cd69a6d531cb78:-1905270151,dfa09a48a8002010b0a3cdaf5fc9d919:-459461779,5c805a482e00201048d8bad008d6372c:74049806,4b50d648ba002010ba94aa2d3fb288f2:2092558063,52401248960020101aa31c774db5f664:1917154290,15305a48b30020100bd0124087359125:-1460113327,ae101648b5002010dad9c5e7779487e7:-1747524485,29ff02481a002010414bef93ccfbae5c:-1446932292,14df0648ea0020103664081792e006e0:341512478,8d5fcec4a0002010fb08f1d54cd12a9c:593496799,1d3f0ec498002010433cf7d8909fbf9b:-1316850450,996ecec47900201048f063a6dd25225e:-1282182776,c86e0ec4b200201088d4b63df984d0fa:1733930632,75adcac4c7002010a7e41cb954bd382e:1745946118,c49dc6c00600201084bd998e75fb9893:769650145,b15d0ec429002010d864e98903d7dc94:1745946118,672d86c45b002010c32b6364bc15db12:-406893446,2dac0ac013002010e8446e82ea927573:-22326305,a33c42c4bf00201071db7e25284f76cb:-1994282104,e78b8e4487002010506de12f74569d39:-19248523,255bce809c0020101561fcacee5c3b81:715188542,e5ba0284b200201028a105a876b02b37:526555128,026ac2c06b0020109989a6b05fc72aba:-838522443,433a4e44b70020105c918c81dc216bea:788800004,16c30240fe002010ef04e24d8b674640:1585456393,517648db04731010ea2703ee2f941f6d:61199481,1f36c8dbd57310100028628bf9bbf083:-1439222661,8f16c8db007310107c9a3713d8738f7b:1397160413,db9544db5c7310106c912f76c01260da:1693181025,277580939f73101021e354dc9a45fc3d:1057195574,ef604893d9731010d4444973cc4bacd7:-1206252309,a6400853b573101005269ab6b3d96322:1245323496,dbf633435a7310108226ac36937aa126:-1839577549,da36b743a5731010050e2693dca2ad51:-1978215533,b0c53f43f17310104cf0890dc2d30a6f:-1839577549,9ef4b343a67310103c87579a11ec2cd0:707905124,28d4738f843310107b1a3e1b15e81516:714256036</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_include_9c8a487c2f086010c5d33f96f699b686</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;public&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;global.listUtils&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;listUtils&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var listUtils = Class.create();
+listUtils.prototype = {
+	
+	/**SNDOC
+	@name initialize
+    @description Constructor method of listUtils
+    @param {String} [table] - ServiceNow Table
+    @param {array} [fields]  fields of the choose table
+    @example
+	
+	var field_arr = ['number','assigned_to','short_description'];
+    var list = new listUtils('incident',field_arr);
+	*/
+	
+	initialize: function(table, fields) {
+		this.t = table;
+		this.f = fields;
+		this.strangeFields = ['short_description','description','title','name'];
+		this.column_types = {};
+	},
+
+	/**SNDOC
+	@name getColumns
+    @description Get the columns data of the choose table 
+    @returns {array} Array containing the columns data
+    @example
+	
+    var list = new listUtils('incident',field_arr);
+	var columns = list.getColumns();
+	
+	//Output:
+    [
+	 {
+		choices [{label: "New", value: "1"},{label: "In Progress", value: "2"},{label: "Canceled", value: "8"}],
+		label: "State",
+		name: "state",
+		type: "_choice"
+	 },
+	 {
+		choices [],
+		label: "Number",
+		name: "number",
+		type: "string"
+	 }
+	]
+	*/
+	getColumns: function(){
+		if(!this.t || !this.f){
+			return;
+		}
+		
+		var columns = [];
+		var grCol = new GlideRecord(this.t);
+		grCol.newRecord();
+		
+		for(var i in this.f){
+			var element = grCol.getElement(this.f[i]);
+			var column_obj = {
+				label: grCol[this.f[i]].getLabel(),
+				name: this.f[i],
+				type: element.getED().getInternalType()
+			};
+			var choiceList =  GlideChoiceList.getChoiceList(this.t, this.f[i]);
+			if(choiceList.getSize() &gt; 1 &amp;&amp; this.strangeFields.indexOf(column_obj.name) == -1){
+				var options = [];
+				for (var i=0; i &lt; choiceList.getSize(); i++) {
+					options.push({'value': choiceList.getChoice(i).getValue(), 'label': choiceList.getChoice(i).getLabel()});
+				}
+				column_obj.type = '_choice';
+				column_obj.choices = options;
+			}
+			else{
+				column_obj.choices = [];
+			}
+			this.column_types[column_obj.name] = column_obj.type;
+			columns.push(column_obj);
+		}
+		return columns;
+	},
+	
+	/**SNDOC
+	@name getColumnType
+    @description Get an object with the columns type 
+    @returns {object} Object containing the columns type
+    @example
+	
+	//you need run the getColumns function first, else you'll recive an empty object
+	var list = new listUtils('incident',field_arr);
+	var columns_type = list.getColumnType();
+	
+	//Output:
+		{number: "string", short_description: "string", state: "_choice", sys_updated_on: "glide_date_time", assigned_to: "reference"}
+	*/
+	getColumnType: function(){
+		return this.column_types;
+	},
+	
+	/**SNDOC
+	@name getRows
+    @description Get an array with the list data 
+	@param {GlideRecord} [gr] - GlideRecord 
+    @returns {Array} Array containing all rows
+    @example
+	
+	var list = new listUtils('incident',field_arr);
+	var rows = list.getRows();
+	
+	//Output:
+	[
+		{display: "INC0000060", sys_id: "1c741bd70b2322007518478d83673af3"},
+		{display: "David Loo", sys_id: "1c741bd70b2322007518478d83673af3"},
+		{display: "Closed", sys_id: "1c741bd70b2322007518478d83673af3"},
+		{display: "Unable to connect to email", sys_id: "1c741bd70b2322007518478d83673af3"},
+		{display: "2016-12-13 18:46:44", sys_id: "1c741bd70b2322007518478d83673af3"}
+	]
+	*/
+	getRows: function(gr){
+		if(!gr){
+			return;
+		}
+		
+		var arr_col = [], list = [];
+		
+		while(gr.next()){
+
+			for(var i=0; i &lt; this.f.length; i++){
+				var fld = this.f[i];
+				var obj = {};
+				if (!gr[fld].canRead()) {
+					obj.display = null;
+					obj.sys_id = null;
+				}
+				else {
+					obj.display = gr.getDisplayValue(this.f[i]) || ' ... ' ;
+					obj.sys_id = gr.getValue('sys_id');
+					/* use it to make a ng-switch, like ng-switch-when="state"
+					type: data.fields[i]  */ 
+				};
+				arr_col.push(obj);
+			}
+			list.push(arr_col);
+			arr_col = [];
+		}
+		return list;
+	},
+	
+	/**SNDOC
+	@name createPagination
+    @description Get an object with the pagination data 
+	@param {Integer} [maximum_entries] - Number of rows per page
+	@param {Integer} [page] - Index of actual page
+    @returns {object} Object containing the pagination data
+    @example
+	
+	// you need to run the getColumns function first, else you'll receive an empty object
+	var list = new listUtils('incident',field_arr);
+	var pagination = list.createPagination(10,1);
+	
+	//Output:
+	{window_end: 10, window_size: 10, window_start: 0}
+	
+	*/
+	createPagination: function(maximum_entries, page){
+		var p, page_index, window_size; 
+		p = parseInt(page) || 1;
+		page_index = p - 1;
+		window_size = parseInt(maximum_entries) || 10;
+
+		if (isNaN(window_size) || window_size &lt; 1)
+			window_size = 20;
+
+		var data = {};
+		data.window_size = window_size;
+		data.window_start  = (page_index * window_size);
+		data.window_end = (((page_index + 1) * window_size));
+
+		return data;
+	},
+
+	type: 'listUtils'
+};
+]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-10-21 12:03:14&lt;/sys_created_on&gt;&lt;sys_id&gt;9c8a487c2f086010c5d33f96f699b686&lt;/sys_id&gt;&lt;sys_mod_count&gt;75&lt;/sys_mod_count&gt;&lt;sys_name&gt;listUtils&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_9c8a487c2f086010c5d33f96f699b686&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-10-23 17:49:19&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+<payload_hash>617161734</payload_hash>
+<remote_update_set display_value="OCL: Expandable_List_Plus">9f0eabd12fc02010c5d33f96f699b618</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-10-23 17:53:14</sys_created_on>
+<sys_id>db0eabd12fc02010c5d33f96f699b619</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>175569446610000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-10-23 17:53:14</sys_updated_on>
+<table/>
+<target_name>listUtils</target_name>
+<type>Script Include</type>
+<update_domain>global</update_domain>
+<update_guid>062d27d119c020108933b4612893ce50</update_guid>
+<update_guid_history>062d27d119c020108933b4612893ce50:617161734,4706e3d9cf802010246759e5438bf23b:1381168007,53d363d97f802010e141f1c04d1082f2:276674543,595583590640201011e2b3f85fe46698:1582462975,f9450b95d4402010da3db0c598e4074b:-640821042,30354359d84020100bace17685ba92e0:398103790,7105cf196b402010396830522ce4af73:-2032285458,04b4cb951d402010227d44302e661495:216331697,70b0cb955a402010ac4257750d1f1990:1313794569,7dac7615c7402010a78f5e94d804bf38:-1866050309,138c7ad14d4020109d3d016a59f225d4:357244558,f5d9fe517b4020109082387ac08ef724:1423728944,bbd6a69593002010734b85eae08ec624:1428970124,96f7f6c94908a010e477eb098e1e9ab8:-181963235,a2e1a5b0360c60107f70055991faf908:-1851644270,a9da34f82c886010f73854455d5036a7:-755057033,29e5fcf43188601058dbda6d381c5a09:-887342670,35b438f4f3886010ccaba057c2fcc40d:-465259102,2ab0783466886010ad13b8ea41c0be4f:492829488,f36f6434448860106d90d713ec48218e:1773060431,9d4facf074886010f512ae3138f9caf1:-556917660,272fa0347e886010ddda636ee90a7764:1544136327,95ce603469886010fcc8a92703a0c3d9:1570886575,8e7eacf08488601011210c67022b447c:1544136327,394e6cb07188601085757b77c7c1eb48:-120432937,38ed60f081886010893a2d4c9adbf463:895245181,770ce8307b886010eaf046b9de5ed0fa:-1851989874,5849e830c5886010c7e49857feabba92:1335586991,d1196430578860104ec55b1ba368a75e:2008057829,04a8a47cab48601097e126a6a4d81920:244841357,26e5a47c2b486010fd71edaaceab7a90:-1236292257,bbc5607cf648601044fe905dc0b99ed7:263061381,8175a47cd2486010c22c93cf5b677868:-2002598693,f155e0bcd1486010b021070429576e83:1212281634,5935247cde486010ac78108facea45c1:-1653640384,0c35e43cbd4860106dcf558e1f1195b1:462149472,ce64e87c15486010025f85acf9c30db9:-1731154387,c4d3a47c8a4860100b350dace8b80516:-4253356,fea3e07c2c486010efc694a4dfcb7ac7:-594967628,7193e07ce8486010f34997976a4b4c4f:860269340,77632c3c14486010d1ab590cca862ba1:173433298,f543a43c2c486010422b4c51653dbeb6:-1563234454,ea13e43c0e486010b32618bbfeafac4b:173433298,caf2e03cfe486010d8f700269431fb26:1785555465,8f62e43c3b486010724f745dceeea645:-73009616,df52a43c9d4860107cef24cf1b04898a:-1074327604,4902e03c08486010436c2a033618a221:318830135,d641e8f8d448601012b4ef173d2ee1a6:-1872617878,91e0a4f8e14860102260808308c74eaf:1093935217,b7b020b85c4860108ef0ac518fc1a62e:1663783682,dd1fd0b8d9486010907e382fef0c160a:-334061169,bfdedc78684860107a616c2b2a4b66f2:1624969102,e6bed0b89c4860101a57989c847f3e04:427005569,d76edc78c248601053ded272784c53b7:554281783,116c10b47f48601086219a100f749d33:-83229756,e9b89074be486010dd4522561dcb2f44:554281783,660890b46a48601008d3e867d71c8c9b:-83229756,d5f710b4a1486010d8ab59c582e3cd19:-384550436,bac75474bf486010139f909f4125ccd8:-685066819,ed97d434bc4860109f3b929c41d47c44:-1354564924,30c6dc349348601039587ca9c6c7476d:-939898226,14765074ce486010c71e2e9af07b608f:439502395,35665074a4486010f912f58006aec199:-1078611486,5c3618b0924860104e27a6da6f9bc679:439502395,caf5d4b0be4860109057ab67b429b638:-1205512527,272218b0c84860107cd696d9d98c8732:581183043,3212d4b0134860104b724e8849d20930:586252611,bdf154b0f5486010f2bf0de69f2a88d0:2115616423,99b1d0b018486010f56d19499aa2dc00:-177392504,e4b0d0701248601015d19c4c2f52afd0:-806585965,a0709470f548601095e06ce4280daeb7:2084285225,22209c3028486010db4299d2d239b40b:1658985382,2d9f48fcfc086010fac5f0758edef8c5:-1087170691,853f48fc7308601018ce8d8b284f4826:1958236029,668b48b8f3086010d4e7401be4a4c200:526759180,fcca0c7c43086010239e96248f57b604:346660563</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
