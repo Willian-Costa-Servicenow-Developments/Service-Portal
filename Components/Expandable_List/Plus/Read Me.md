@@ -1,4 +1,4 @@
-**## Expandable_List Plus**
+**# Expandable_List Plus**
 
 It is a mega list that, when you click on a row, the data expands, presenting more fields and some buttons.
 
