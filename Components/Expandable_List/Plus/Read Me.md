@@ -27,4 +27,4 @@ listUtils
 
 ### Gallery
 
-![Expandable List Plus](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Components/Expandable_List/Plus/Expandable%20List%20Plus.gif)
+![Expandable List Plus](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Components/Expandable_List/Plus/Expandable%20List%20Plus.gif)
