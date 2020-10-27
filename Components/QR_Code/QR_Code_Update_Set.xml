@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2020-10-26 19:16:40">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description/>
+<inserted/>
+<name>QR Update Set</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>91bc5f1e2fc4a010c5d33f96f699b6b9</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-10-26 19:16:40</sys_created_on>
+<sys_id>feed975e2fc4a010c5d33f96f699b6a0</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-10-26 19:16:40</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_dependency_5dfccb922fc4a010c5d33f96f699b656</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_dependency"><sp_dependency action="INSERT_OR_UPDATE"><module/><name>QR CODE</name><page_load>false</page_load><sp_portals/><sys_class_name>sp_dependency</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2020-10-26 18:03:10</sys_created_on><sys_id>5dfccb922fc4a010c5d33f96f699b656</sys_id><sys_mod_count>4</sys_mod_count><sys_name>QR CODE</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sp_dependency_5dfccb922fc4a010c5d33f96f699b656</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2020-10-26 19:13:48</sys_updated_on></sp_dependency></record_update>]]></payload>
+<payload_hash>-1640369735</payload_hash>
+<remote_update_set display_value="QR Update Set">feed975e2fc4a010c5d33f96f699b6a0</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-10-26 19:16:40</sys_created_on>
+<sys_id>32ed975e2fc4a010c5d33f96f699b6a2</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1756654b4dc0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-10-26 19:16:40</sys_updated_on>
+<table/>
+<target_name>QR CODE</target_name>
+<type>Widget Dependency</type>
+<update_domain>global</update_domain>
+<update_guid>bc4d535ecdc4a0109563144e74a916d2</update_guid>
+<update_guid_history>bc4d535ecdc4a0109563144e74a916d2:-1640369735,933dd35ed6c4a010957267ae995793c0:-914644135,9d1d535e1dc4a01086566005f12140cb:-1640369735,d81d1f1ef0c4a010d55eddda0544b462:-1689770695,8e1d079255c4a0107c637edc9b549f0d:-1640369735</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_row_308dd35e2fc4a010c5d33f96f699b6c3</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_row"><sp_row action="INSERT_OR_UPDATE"><class_name/><order>1</order><sp_column/><sp_container display_value="Teste - Container 1">0c8d935e2fc4a010c5d33f96f699b6cd</sp_container><sys_class_name>sp_row</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2020-10-26 19:14:54</sys_created_on><sys_id>308dd35e2fc4a010c5d33f96f699b6c3</sys_id><sys_mod_count>0</sys_mod_count><sys_name>1</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sp_row_308dd35e2fc4a010c5d33f96f699b6c3</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2020-10-26 19:14:54</sys_updated_on></sp_row></record_update>]]></payload>
+<payload_hash>227458150</payload_hash>
+<remote_update_set display_value="QR Update Set">feed975e2fc4a010c5d33f96f699b6a0</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-10-26 19:16:40</sys_created_on>
+<sys_id>3eed975e2fc4a010c5d33f96f699b6a2</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1756655b62f0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-10-26 19:16:40</sys_updated_on>
+<table/>
+<target_name>1</target_name>
+<type>Row</type>
+<update_domain>global</update_domain>
+<update_guid>b88dd35e5cc4a010924a87761821a0c4</update_guid>
+<update_guid_history>b88dd35e5cc4a010924a87761821a0c4:227458150</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_page_466d975e2fc4a010c5d33f96f699b64d</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page"><sp_page action="INSERT_OR_UPDATE"><category>custom</category><css/><draft>false</draft><dynamic_title_structure/><id>teste</id><internal>false</internal><public>false</public><roles/><seo_script/><short_description/><sys_class_name>sp_page</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2020-10-26 19:14:36</sys_created_on><sys_id>466d975e2fc4a010c5d33f96f699b64d</sys_id><sys_mod_count>0</sys_mod_count><sys_name>teste</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sp_page_466d975e2fc4a010c5d33f96f699b64d</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2020-10-26 19:14:36</sys_updated_on><title>Teste</title><use_seo_script>false</use_seo_script></sp_page><sys_translated_text action="delete_multiple" query="documentkey=466d975e2fc4a010c5d33f96f699b64d"/></record_update>]]></payload>
+<payload_hash>1539290085</payload_hash>
+<remote_update_set display_value="QR Update Set">feed975e2fc4a010c5d33f96f699b6a0</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-10-26 19:16:40</sys_created_on>
+<sys_id>7aed975e2fc4a010c5d33f96f699b6a2</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>175665571160000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-10-26 19:16:40</sys_updated_on>
+<table/>
+<target_name>teste</target_name>
+<type>Page</type>
+<update_domain>global</update_domain>
+<update_guid>2c7d975efbc4a01069d4c080f071079d</update_guid>
+<update_guid_history>2c7d975efbc4a01069d4c080f071079d:1539290085</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_container_0c8d935e2fc4a010c5d33f96f699b6cd</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_container"><sp_container action="INSERT_OR_UPDATE"><background_color/><background_image/><background_style>default</background_style><bootstrap_alt>false</bootstrap_alt><class_name/><container_class_name/><name>Teste - Container 1</name><order>1</order><sp_page display_value="teste">466d975e2fc4a010c5d33f96f699b64d</sp_page><subheader>false</subheader><sys_class_name>sp_container</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2020-10-26 19:14:50</sys_created_on><sys_id>0c8d935e2fc4a010c5d33f96f699b6cd</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Teste - Container 1</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sp_container_0c8d935e2fc4a010c5d33f96f699b6cd</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2020-10-26 19:14:50</sys_updated_on><title/><width>container</width></sp_container></record_update>]]></payload>
+<payload_hash>-792828814</payload_hash>
+<remote_update_set display_value="QR Update Set">feed975e2fc4a010c5d33f96f699b6a0</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-10-26 19:16:40</sys_created_on>
+<sys_id>7eed975e2fc4a010c5d33f96f699b6a1</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1756655a73b0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-10-26 19:16:40</sys_updated_on>
+<table/>
+<target_name>Teste - Container 1</target_name>
+<type>Container</type>
+<update_domain>global</update_domain>
+<update_guid>4c8d935ec6c4a010484abe3f290128cf</update_guid>
+<update_guid_history>4c8d935ec6c4a010484abe3f290128cf:-792828814</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_js_include_131d03d22fc4a010c5d33f96f699b664</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_js_include"><sp_js_include action="INSERT_OR_UPDATE"><display_name>QR Code Link</display_name><source>local</source><sys_class_name>sp_js_include</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2020-10-26 18:03:24</sys_created_on><sys_id>131d03d22fc4a010c5d33f96f699b664</sys_id><sys_mod_count>3</sys_mod_count><sys_name>QR Code Link</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_ui_script display_value="QR_CODE">125a17da2fc4a010c5d33f96f699b692</sys_ui_script><sys_update_name>sp_js_include_131d03d22fc4a010c5d33f96f699b664</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2020-10-26 19:13:28</sys_updated_on><url>https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js</url></sp_js_include></record_update>]]></payload>
+<payload_hash>-1959059292</payload_hash>
+<remote_update_set display_value="QR Update Set">feed975e2fc4a010c5d33f96f699b6a0</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-10-26 19:16:40</sys_created_on>
+<sys_id>b6ed975e2fc4a010c5d33f96f699b6a2</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>175665464170000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-10-26 19:16:40</sys_updated_on>
+<table/>
+<target_name>QR Code Link</target_name>
+<type>JS Include</type>
+<update_domain>global</update_domain>
+<update_guid>332d135eddc4a0109f13942adc741b98</update_guid>
+<update_guid_history>332d135eddc4a0109f13942adc741b98:-1959059292,928ad3daf8c4a0108fd3156960a4aefb:-739886026,7b6a179ac2c4a01046bc272d4a923075:-1966452412,652dcb9253c4a01042752dfb36d5654b:-460030877</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_column_f48dd35e2fc4a010c5d33f96f699b6c5</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_column"><sp_column action="INSERT_OR_UPDATE"><class_name/><order>1</order><size>12</size><size_lg/><size_sm/><size_xs/><sp_row display_value="1">308dd35e2fc4a010c5d33f96f699b6c3</sp_row><sys_class_name>sp_column</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2020-10-26 19:14:54</sys_created_on><sys_id>f48dd35e2fc4a010c5d33f96f699b6c5</sys_id><sys_mod_count>0</sys_mod_count><sys_name>1</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sp_column_f48dd35e2fc4a010c5d33f96f699b6c5</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2020-10-26 19:14:54</sys_updated_on></sp_column></record_update>]]></payload>
+<payload_hash>-1405232879</payload_hash>
+<remote_update_set display_value="QR Update Set">feed975e2fc4a010c5d33f96f699b6a0</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-10-26 19:16:40</sys_created_on>
+<sys_id>baed975e2fc4a010c5d33f96f699b6a1</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1756655b6700000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-10-26 19:16:40</sys_updated_on>
+<table/>
+<target_name>1</target_name>
+<type>Column</type>
+<update_domain>global</update_domain>
+<update_guid>cd8dd35e9dc4a010d2774dc9b3c86ac6</update_guid>
+<update_guid_history>cd8dd35e9dc4a010d2774dc9b3c86ac6:-1405232879</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>m2m_sp_dependency_js_include_292dc3d22fc4a010c5d33f96f699b6e5</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_dependency_js_include"><m2m_sp_dependency_js_include action="INSERT_OR_UPDATE"><order>101</order><sp_dependency display_value="QR CODE">5dfccb922fc4a010c5d33f96f699b656</sp_dependency><sp_js_include display_value="QR Code Link ('https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js')">131d03d22fc4a010c5d33f96f699b664</sp_js_include><sys_class_name>m2m_sp_dependency_js_include</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2020-10-26 18:03:25</sys_created_on><sys_id>292dc3d22fc4a010c5d33f96f699b6e5</sys_id><sys_mod_count>1</sys_mod_count><sys_name>QR CODE.QR Code Link ('https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js')</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>m2m_sp_dependency_js_include_292dc3d22fc4a010c5d33f96f699b6e5</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2020-10-26 19:13:15</sys_updated_on></m2m_sp_dependency_js_include></record_update>]]></payload>
+<payload_hash>-418487271</payload_hash>
+<remote_update_set display_value="QR Update Set">feed975e2fc4a010c5d33f96f699b6a0</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-10-26 19:16:40</sys_created_on>
+<sys_id>f2ed975e2fc4a010c5d33f96f699b6a1</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1756654318d0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-10-26 19:16:40</sys_updated_on>
+<table/>
+<target_name>QR CODE.QR Code Link ('https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js')</target_name>
+<type>Dependency JS Includes</type>
+<update_domain>global</update_domain>
+<update_guid>ac2d135e15c4a0106b56d7ce44046868</update_guid>
+<update_guid_history>ac2d135e15c4a0106b56d7ce44046868:-418487271,2d2dc3d2f8c4a010a7852923f55955e6:396446262</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_instance_table_f28dd75e2fc4a010c5d33f96f699b695</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance_table"><sp_instance_table action="INSERT_OR_UPDATE"><active>true</active><class_name/><color>default</color><css/><display_field/><field_list/><filter/><glyph/><id/><maximum_entries>5</maximum_entries><order>1</order><order_by/><order_direction>asc</order_direction><roles/><short_description/><size>md</size><sp_column display_value="1">f48dd35e2fc4a010c5d33f96f699b6c5</sp_column><sp_page/><sp_widget display_value="QR CODE">e6c057562fc4a010c5d33f96f699b6e2</sp_widget><sys_class_name>sp_instance_table</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2020-10-26 19:15:02</sys_created_on><sys_id>f28dd75e2fc4a010c5d33f96f699b695</sys_id><sys_mod_count>0</sys_mod_count><sys_name/><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sp_instance_table_f28dd75e2fc4a010c5d33f96f699b695</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2020-10-26 19:15:02</sys_updated_on><table/><title/><url/><widget_parameters/></sp_instance_table><sys_translated_text action="delete_multiple" query="documentkey=f28dd75e2fc4a010c5d33f96f699b695"/></record_update>]]></payload>
+<payload_hash>803624705</payload_hash>
+<remote_update_set display_value="QR Update Set">feed975e2fc4a010c5d33f96f699b6a0</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-10-26 19:16:40</sys_created_on>
+<sys_id>f2ed975e2fc4a010c5d33f96f699b6a2</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1756655d4600000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-10-26 19:16:40</sys_updated_on>
+<table/>
+<target_name/>
+<type>Instance with Table</type>
+<update_domain>global</update_domain>
+<update_guid>ba8dd75e42c4a010612bfe4016629e96</update_guid>
+<update_guid_history>ba8dd75e42c4a010612bfe4016629e96:803624705</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_widget_e6c057562fc4a010c5d33f96f699b6e2</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function($scope) {
+	/* widget controller */
+	var c = this;
+	new QRCode(document.getElementById("qrcode"), "tel:40280944");
+	new QRCode(document.getElementById("qrcode2"), "https://api.whatsapp.com/send?phone=5511992547746");
+	new QRCode(document.getElementById("qrcode3"), "mailto:mateus.anzolin@organizecloudlabs.com");
+
+	}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css/&gt;&lt;data_table&gt;sp_instance_table&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id/&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {
+
+}]]&gt;&lt;/link&gt;&lt;name&gt;QR CODE&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+
+	
+})(); 
+
+
+]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-10-26 18:19:18&lt;/sys_created_on&gt;&lt;sys_id&gt;e6c057562fc4a010c5d33f96f699b6e2&lt;/sys_id&gt;&lt;sys_mod_count&gt;12&lt;/sys_mod_count&gt;&lt;sys_name&gt;QR CODE&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_e6c057562fc4a010c5d33f96f699b6e2&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-10-26 19:12:26&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;h1&gt;Numero&lt;/h1&gt;
+&lt;div id="qrcode" style="margin-bottom: 40px;"&gt;&lt;/div&gt;
+
+&lt;h1&gt;Whatsapp&lt;/h1&gt;
+&lt;div id="qrcode2" style="margin-bottom: 40px;"&gt;&lt;/div&gt;
+
+&lt;h1&gt;Email&lt;/h1&gt;
+&lt;div id="qrcode3" style="margin-bottom: 40px;"&gt;&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+<payload_hash>184323842</payload_hash>
+<remote_update_set display_value="QR Update Set">feed975e2fc4a010c5d33f96f699b6a0</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-10-26 19:16:40</sys_created_on>
+<sys_id>feed975e2fc4a010c5d33f96f699b6a2</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>175665373100000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-10-26 19:16:40</sys_updated_on>
+<table/>
+<target_name>QR CODE</target_name>
+<type>Widget</type>
+<update_domain>global</update_domain>
+<update_guid>f0fcd3da00c4a01013d9151b19bc4493</update_guid>
+<update_guid_history>f0fcd3da00c4a01013d9151b19bc4493:184323842,82dc1f1e7cc4a01093c63c6a56d8ef46:1654809996,95ba97da5dc4a0107b0dab3f74b16f26:1029653485,090a13da91c4a0102de5ccc0af16636e:2001850225,f1e99f9ad3c4a01003937cacca7e2104:-1005156162,9e595b9ac1c4a010dfdf3ce0392af63a:-671217023,20d8179ad6c4a010e2b380bc88432018:-1308598066,d523df9682c4a010d6d466907381d5b8:-1076787807,4e52939617c4a010c278cb51ad4b2112:1421636453,b8325f569dc4a0102feabdc49d8feaaa:-189827094,3af11f5649c4a010b1e467c44061f9a3:1519927359,23e01b562dc4a0108d16d353728c7e7c:692113513,eac05756ecc4a01056dd67d65ff2cbe3:-1704150647</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
