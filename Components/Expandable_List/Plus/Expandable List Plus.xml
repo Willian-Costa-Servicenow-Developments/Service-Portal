@@ -602,7 +602,7 @@
               &lt;/span&gt;
 
               &lt;span ng-switch-when="glide_date_time" class="date_time"&gt;
-                &lt;sp-date-picker field="datePicker" ng-model="c.modelFields[column.name]" ng-show="view"  sn-change="c.update($index)" ng-model-options="{getterSetter: true}" sn-disabled="false"&gt;&lt;/sp-date-picker&gt;
+                &lt;sp-date-picker field="datePicker" ng-model="c.modelFields[column.name]" ng-show="view"  ng-keypress="getkeys($event, $index)" ng-model-options="{getterSetter: true}" sn-disabled="false"&gt;&lt;/sp-date-picker&gt;
               &lt;/span&gt;
 
               &lt;span ng-switch-default&gt;
