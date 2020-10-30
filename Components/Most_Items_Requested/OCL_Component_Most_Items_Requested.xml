@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2020-10-30 13:45:43">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description>Componente de ranking com os registro de requisições mais recentes</description>
+<inserted/>
+<name>OCL: Component - Most Items Requested</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>2a7772232f0464106f619facf699b6f0</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>organize.willian</sys_created_by>
+<sys_created_on>2020-10-30 13:45:43</sys_created_on>
+<sys_id>bd8832232f0464106f619facf699b6ea</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>organize.willian</sys_updated_by>
+<sys_updated_on>2020-10-30 13:45:43</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_widget_89c0d2d32f4824106f619facf699b6db</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function($scope,$location) {
+  /* widget controller */
+  var c = this;
+	
+	c.goItem = function(item){
+		$location.url('?id=' + c.data.redirect_page + '&amp;sys_id=' + item.sys_id);
+	}
+	
+}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;.container-banner{
+  display: flex;
+  flex-direction: column;
+  color: black;
+  
+}
+.welcome{
+  font-size: 30px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+.services{
+  display: flex;
+  flex-wrap: wrap;
+}
+.services-container{
+  margin-bottom: 30px;
+}
+.service{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+  transition: .2s ease-in-out;
+}
+.title-services{
+  font-size: 18px;
+}
+.img-glyphicon{
+  margin-right: 5px;
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 6px;
+}
+.service-title{
+  margin-top: 5px;
+  word-break: break-word;
+}
+.service-title-none{
+  margin-top: 30px;
+}
+.service:hover{
+  transition: .2s ease-in-out;
+  transform:scale(1.1);
+}
+.search-field{
+    border-radius: 20px;
+  	padding: 0;
+  .input-group{
+    input{
+  		border-radius: 16px 0 0 16px;
+      border: 1px solid white;
+    }
+    .input-group-btn button{
+      border-radius:  0 16px 16px 0;
+      border: 1px solid white;
+    }
+  }
+  .ta-item{
+  	cursor: pointer;
+  }
+}
+@media (max-width: 768px){
+	.search-field{
+    width: 90%;
+  }
+}&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id&gt;ocl_most_items_requested&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]&gt;&lt;/link&gt;&lt;name&gt;OCL Most Items Requested&lt;/name&gt;&lt;option_schema&gt;[{"hint":"write a title","name":"title","section":"Presentation","label":"Title","type":"string"},{"hint":"write a message","name":"no_requirements_message","section":"Presentation","default_value":"No requirements items to display","label":"No Requirements Message","type":"string"},{"name":"table","section":"Data","label":"Table","type":"string"},{"name":"group_by","section":"Data","label":"Group By","type":"string"},{"name":"query_filter","section":"Data","label":"Query Filter","type":"string"},{"name":"maximum_entries","section":"Presentation","default_value":"4","label":"Maximum Entries","type":"string"},{"hint":"page to redirect","name":"redirect_page","section":"Behavior","default_value":"sc_cat_item","label":"Redirect Page","type":"string"}]&lt;/option_schema&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	data.title = gs.getMessage(options.title);
+	data.no_requirements_message = gs.getMessage(options.no_requirements_message);
+	
+	data.table = options.table;
+	data.group_by = options.group_by;
+	data.query_filter = options.query_filter;
+	data.maximum_entries = options.maximum_entries;
+	data.redirect_page = options.redirect_page;
+				
+	data.list_requirements = new global.ComponentPortalsUtils().popularItems(data.table, data.group_by, data.query_filter, data.maximum_entries);
+		
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-10-29 16:13:58&lt;/sys_created_on&gt;&lt;sys_id&gt;89c0d2d32f4824106f619facf699b6db&lt;/sys_id&gt;&lt;sys_mod_count&gt;53&lt;/sys_mod_count&gt;&lt;sys_name&gt;OCL Most Items Requested&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_89c0d2d32f4824106f619facf699b6db&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;organize.willian&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-10-30 13:42:52&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div class="container-banner"&gt;
+  &lt;div class="services-container"&gt;
+    &lt;div class="title-services"&gt;
+    	&lt;!-- title --&gt;
+      {{data.title}}
+    &lt;/div&gt;
+    &lt;div class="services"&gt; 
+      &lt;!-- services --&gt;
+      &lt;div class="service" ng-repeat="service in data.list_requirements" ng-click="c.goItem(service)"&gt;
+        &lt;img src="{{service.icon}}" class="img-glyphicon"&gt;
+        &lt;div class="service-title"&gt;
+        	{{service.label}}
+        &lt;/div&gt;
+      &lt;/div&gt; 
+      &lt;div class="service-title-none" ng-if="data.list_requirements.length == 0"&gt;
+      	{{data.no_requirements_message}}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+<payload_hash>1035887550</payload_hash>
+<remote_update_set display_value="OCL: Component - Most Items Requested">bd8832232f0464106f619facf699b6ea</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>organize.willian</sys_created_by>
+<sys_created_on>2020-10-30 13:45:43</sys_created_on>
+<sys_id>f18832232f0464106f619facf699b6eb</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>17579bf2b120000001</sys_recorded_at>
+<sys_updated_by>organize.willian</sys_updated_by>
+<sys_updated_on>2020-10-30 13:45:43</sys_updated_on>
+<table/>
+<target_name>OCL Most Items Requested</target_name>
+<type>Widget</type>
+<update_domain>global</update_domain>
+<update_guid>9ce73223bb0464102251d54b975978e5</update_guid>
+<update_guid_history>9ce73223bb0464102251d54b975978e5:1035887550,9ffb729ffa882410305154dc835fa235:-1076796501,28cb7e5fb58824109278a87ff465690a:-126835316,cfabfa5fce882410d7aaf6c95d74eb40:-1857697099,669b3e5f4d882410d098bd0d8473f9be:-126835316,f78b725f0a882410da954f9b8bb5dec6:179048187,236b765fd2882410adc99bc3232bbd84:2137243250,a74bbedbf7882410c0be5ef79b0343b0:-1766356029,6d7abedb45882410d7a00d0a5a8703a6:-455802888,7fb9ba1fc588241046689a06641d99aa:-475865820,1e39321f698824109d2588917acd33ac:-1156161954,1439761f5988241053ae65bf037a315f:850179693,9ce8bedbcd8824107344ab97946299c6:-552423577,f0b8fedbf78824105aff3792149b63d4:2124128837,3a787edb14882410a7764daaca88c20e:-1392321361,7e28b69bb8882410628dec4f0024a029:64909542,96777a9ba7882410600ae584bae60af9:1419687366,13c67a5b50882410744238be0cfbf9f3:-129656931,48a6ba9bb2882410968e2787f07fec8d:1752606794,0786369bdc882410fa9368285109fdaf:1034639142,4226f65b59882410bdf5f1f70f705b94:-64013077,def5ba5bcd8824109492a26543d33742:189906013,55c5729b8d882410db0d866f0f4acce9:-357669679,3664365bb6882410a1bdb58b905aab58:1063384677,6934325b7a882410007e426aa3012253:925814293,0d04325b918824105419cd9a114f1a05:2096696053,0e83fa1b9a8824107825e866d49a9581:1831968935,43de121fd1482410663c59bfe7925494:1971498537,239e12dbec48241021cc1e9a54f2892a:-1060795848,e1ed12dbe94824107e5f8497720e74b8:848480556,c2ad169b71482410c9b40685f3c556ff:486825721,1b1d569bf24824109eb701b9a15ec68b:1536541621,660d1a9b1648241038a14f7431a41a6e:859532792,9e4c1a9b4c482410580c80f51ff56820:-297611582,3bfb5e1b314824104466cacaca375a3f:30162549,60abda5b9248241089b2ef289e44b089:-488889604,1bfa1e1b20482410b887e06ab4a2c2aa:-2060218212,292a925bc748241052e710a21cdbb5ab:-1017926543,911ade1b54482410cfa9c7c4f9113cf6:-296046967,d1d91e1b94482410bf48789d77941bd0:2075778015,d689ded742482410b356587d79e62aba:1234477740,65871a17b94824102ab7d0bf66f16d12:48022847,5927d697bc482410a32124b86eb34726:-1787370157,141792971f482410b7f9fc8f62e5153f:1886649716,53e69297c44824105eacca5ce53b6b02:-1116935010,4c86d6977c482410e6ffefcd4b640432:1503933062,26d59697ae4824108473d9edf005198b:1724409907,46555657f4482410d00b93790c12f584:-1801240520,82335e1700482410348d78e4e2195454:958420734,97a25617ff482410e1560477c5d323bc:-1565501075,4092961714482410fbc9e1df0863b196:1025036529,c2729217c34824105cf25b995cd16dd9:-329988974,8e1256d3f5482410faac5415366669d3:-885946418,3fd056d38e482410d1737b6a6a9e552c:-138285119</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_include_0a70e25f2f4824106f619facf699b6a8</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;global.ComponentPortalsUtils&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;ComponentPortalsUtils&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var ComponentPortalsUtils = Class.create();
+ComponentPortalsUtils.prototype = {
+    initialize: function() {
+    },
+	
+	/**SNDOC
+    @name getIcon
+    @description get Catalog item icons
+    @param {String} [item] - Sys_id of item
+    @returns {String} file name
+    @example
+    var icon = new global.ComponentPortalsUtils().getIcon('cff894dcdbc60cd055250fbca3961901');
+
+    //Output:
+    image.iix
+    
+    */
+	
+	getIcon: function(item){
+		
+		var gr = new GlideRecord('sc_cat_item');
+		if(!gr.get(item))
+			return;
+		
+		return gr.getDisplayValue('icon') || gr.getDisplayValue('picture') || '';
+		
+	},
+	
+	/**SNDOC
+	@name popularItems
+	@description Display recent opened items
+	@param {String} [table] - Data table 'sys_db_object'
+	@param {String} [groupBy] - Field on table
+	@param {String} [query] - Filter 
+	@param {Integer} [limit] - How many items to display
+	@returns {JSON} Values
+	@example
+	
+	var pouparItems = new global.ComponentPortalsUtils().popularItems('sc_req_item', 'cat_item', 'request.requested_for=javascript: gs.getUserID()', 5)
+	
+	// Output
+	
+	{
+		item: 'asdas76a67dasda78s',
+		label: 'Apple Iphone 6',
+		icon: 'iphone.iix'
+	}
+	
+	*/
+	popularItems: function(table, groupBy, query, limit){
+		
+		var result = [];
+		limit = limit || 4;
+		
+		var count = 1;
+		
+		var grPItems = new GlideAggregate(table);
+		grPItems.addAggregate('COUNT', groupBy);
+		grPItems.addEncodedQuery(query);
+		grPItems.orderByAggregate('COUNT', groupBy);
+		grPItems.query();
+		
+		while(grPItems.next()){
+			
+			if(count &gt; limit)
+				continue;
+				
+			var items = {};
+			items.sys_id = grPItems.getValue(groupBy);
+			items.label = grPItems.getDisplayValue(groupBy);
+			items.icon = this.getIcon(items.sys_id);
+			items.count = grPItems.getAggregate('COUNT', groupBy);
+			
+			result.push(items);
+			
+			count++;
+		}
+		
+		return result;
+			
+	},
+	
+
+    type: 'ComponentPortalsUtils'
+};]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-10-29 18:01:18&lt;/sys_created_on&gt;&lt;sys_id&gt;0a70e25f2f4824106f619facf699b6a8&lt;/sys_id&gt;&lt;sys_mod_count&gt;17&lt;/sys_mod_count&gt;&lt;sys_name&gt;ComponentPortalsUtils&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_0a70e25f2f4824106f619facf699b6a8&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;organize.willian&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-10-30 13:45:29&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+<payload_hash>422298010</payload_hash>
+<remote_update_set display_value="OCL: Component - Most Items Requested">bd8832232f0464106f619facf699b6ea</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>organize.willian</sys_created_by>
+<sys_created_on>2020-10-30 13:45:43</sys_created_on>
+<sys_id>f98832232f0464106f619facf699b6eb</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>17579c18e650000001</sys_recorded_at>
+<sys_updated_by>organize.willian</sys_updated_by>
+<sys_updated_on>2020-10-30 13:45:43</sys_updated_on>
+<table/>
+<target_name>ComponentPortalsUtils</target_name>
+<type>Script Include</type>
+<update_domain>global</update_domain>
+<update_guid>96783e23c7046410c30726a9c7383ab1</update_guid>
+<update_guid_history>96783e23c7046410c30726a9c7383ab1:422298010,32f8b21ff8882410805552e03f46f6d8:-1062713221,79d7369b1b882410c2f24e042e0ada7d:-1055469823,9841fe57198824100c5071010e20e02f:1358680583,30217697f78824107d884e43fabc0193:1121479103,84d072d7e1882410b2060b0bc138b7e6:2087987670,eca0fe9793882410977623c8e9813cda:1121479103,668f669754882410437acb4e32c3cb51:1571364056,bbfe6a574f882410375817b7485aa154:541785432,c4eee6572e882410d6d5ac7710f66e64:496238404,b74e2e17e8882410e12ed51844b1bfe8:1683274642,652ee6575c88241013e6564c11a7855e:1188885226,850eee171a882410b0db50613ce55d78:-1458676014,c2cde2577c882410a419de98b250a08b:-2109601834,09bd6e17ab882410d31335e00eb28d35:2049277754,b75d6e170d882410b4a34cc32dc36a2f:-1096290579,862d6653268824104ad196a7e437fe86:1293385548,7f696a9325882410523f8c151aa7122e:-2023782546</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
