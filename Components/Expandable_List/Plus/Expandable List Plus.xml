@@ -494,13 +494,7 @@
 	var include = new listUtils(data.table, data.fields);
 	data.p = parseInt(input.p) || 1;
 	data.pagination = include.createPagination(data.limit, data.p);
-	data.columns =  include.getColumns(data.table, data.fields);
-
-	// you need to run the getColumns function first, else you'll receive an empty object
-	data.column_types = include.getColumnType();
-
-
-
+	
 	// Update the data
 	if(input.action == 'refreshData'){
 
@@ -517,6 +511,10 @@
 		getData(data.orderField, asc, data.search, data.filter);
 		return;
 	}
+	
+	data.columns =  include.getColumns(data.table, data.fields);
+	// you need to run the getColumns function first, else you'll receive an empty object
+	data.column_types = include.getColumnType();
 
 	/*
   @description Get the list data
@@ -549,7 +547,7 @@
 		data.num_pages = Math.ceil(gr.getRowCount() / data.pagination.window_size);
 		data.list = include.getRows(gr);
 	}
-	getData();
+	getData('','','', data.filter);
 })(); 
 
 
