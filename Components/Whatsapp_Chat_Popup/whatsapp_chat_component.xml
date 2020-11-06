@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2020-11-06 17:28:40">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description>Componente com a API do whatsapp</description>
+<inserted/>
+<name>OCL: Whatsapp Chat popup</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>115a23792f9820106f619facf699b673</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>organize.willian</sys_created_by>
+<sys_created_on>2020-11-06 17:28:40</sys_created_on>
+<sys_id>7fae6bf92f9820106f619facf699b6ab</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>organize.willian</sys_updated_by>
+<sys_updated_on>2020-11-06 17:28:40</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_ng_template_e76a5e392fd420106f619facf699b670</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_ng_template"&gt;&lt;sp_ng_template action="INSERT_OR_UPDATE"&gt;&lt;id&gt;wpp-icon-template.html&lt;/id&gt;&lt;sp_widget display_value="Whatsapp Chat"&gt;7b651ba52f1020106f619facf699b63d&lt;/sp_widget&gt;&lt;sys_class_name&gt;sp_ng_template&lt;/sys_class_name&gt;&lt;sys_created_by&gt;organize.willian&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-11-06 11:20:46&lt;/sys_created_on&gt;&lt;sys_id&gt;e76a5e392fd420106f619facf699b670&lt;/sys_id&gt;&lt;sys_mod_count&gt;7&lt;/sys_mod_count&gt;&lt;sys_name&gt;wpp-icon-template.html&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_ng_template_e76a5e392fd420106f619facf699b670&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;organize.willian&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-11-06 11:52:18&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;span class="wwp-icon-svg"&gt;
+	&lt;svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="26" height="26" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""&gt;
+      &lt;g&gt;
+        &lt;path xmlns="http://www.w3.org/2000/svg" d="m17.507 14.307-.009.075c-2.199-1.096-2.429-1.242-2.713-.816-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.293-.506.32-.578.878-1.634.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.576-.05-.997-.042-1.368.344-1.614 1.774-1.207 3.604.174 5.55 2.714 3.552 4.16 4.206 6.804 5.114.714.227 1.365.195 1.88.121.574-.091 1.767-.721 2.016-1.426.255-.705.255-1.29.18-1.425-.074-.135-.27-.21-.57-.345z" fill="#ffffff" data-original="#000000" style="" class=""/&gt;
+        &lt;path xmlns="http://www.w3.org/2000/svg" d="m20.52 3.449c-7.689-7.433-20.414-2.042-20.419 8.444 0 2.096.549 4.14 1.595 5.945l-1.696 6.162 6.335-1.652c7.905 4.27 17.661-1.4 17.665-10.449 0-3.176-1.24-6.165-3.495-8.411zm1.482 8.417c-.006 7.633-8.385 12.4-15.012 8.504l-.36-.214-3.75.975 1.005-3.645-.239-.375c-4.124-6.565.614-15.145 8.426-15.145 2.654 0 5.145 1.035 7.021 2.91 1.875 1.859 2.909 4.35 2.909 6.99z" fill="#ffffff" data-original="#000000" style="" class=""/&gt;
+      &lt;/g&gt;
+  &lt;/svg&gt;
+&lt;/span&gt;]]&gt;&lt;/template&gt;&lt;/sp_ng_template&gt;&lt;/record_update&gt;</payload>
+<payload_hash>1576542780</payload_hash>
+<remote_update_set display_value="OCL: Whatsapp Chat popup">7fae6bf92f9820106f619facf699b6ab</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>organize.willian</sys_created_by>
+<sys_created_on>2020-11-06 17:28:40</sys_created_on>
+<sys_id>37ae6bf92f9820106f619facf699b6ac</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1759e8a2b3e0000001</sys_recorded_at>
+<sys_updated_by>organize.willian</sys_updated_by>
+<sys_updated_on>2020-11-06 17:28:40</sys_updated_on>
+<table/>
+<target_name>wpp-icon-template.html</target_name>
+<type>Angular ng-template</type>
+<update_domain>global</update_domain>
+<update_guid>90aa2bb5bb982010bd1db1c3c82f9c71</update_guid>
+<update_guid_history>90aa2bb5bb982010bd1db1c3c82f9c71:1576542780,34b12e3d39d42010f7091ad8e76ec85a:1576542780,8b51a27d1fd4201056a39e5b2e078075:1845556704,ca01aa3df4d4201023e7ede04e0bdf6b:-232906007,1dd0ee3d74d4201088ceb62e549be706:1561168642,a1bf56f960d420107af0f667696345c4:-382368474,150c1679d1d42010da1845041777bf54:1370814338,52ca56f597d420105d4f8b5b75bdab6f:-1018537947,fe7a1a39a8d4201020da069f1e6b0609:-1071108673</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_ng_template_9c03ee7d2fd420106f619facf699b65b</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_ng_template"&gt;&lt;sp_ng_template action="INSERT_OR_UPDATE"&gt;&lt;id&gt;wpp-icon-send-template.html&lt;/id&gt;&lt;sp_widget display_value="Whatsapp Chat"&gt;7b651ba52f1020106f619facf699b63d&lt;/sp_widget&gt;&lt;sys_class_name&gt;sp_ng_template&lt;/sys_class_name&gt;&lt;sys_created_by&gt;organize.willian&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-11-06 11:59:17&lt;/sys_created_on&gt;&lt;sys_id&gt;9c03ee7d2fd420106f619facf699b65b&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;wpp-icon-send-template.html&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_ng_template_9c03ee7d2fd420106f619facf699b65b&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;organize.willian&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-11-06 12:02:52&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;span&gt;
+&lt;svg class="wws-popup__send-btn" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;" xml:space="preserve"&gt;
+  &lt;style type="text/css"&gt;
+    .wws-lau00001{fill:#22C15E80;}
+    .wws-lau00002{fill:#22C15E;}
+  &lt;/style&gt;
+  &lt;path id="path0_fill" class="wws-lau00001" d="M38.9,19.8H7.5L2,39L38.9,19.8z"&gt;&lt;/path&gt;
+  &lt;path id="path0_fill_1_" class="wws-lau00002" d="M38.9,19.8H7.5L2,0.7L38.9,19.8z"&gt;&lt;/path&gt;
+  &lt;/svg&gt;
+&lt;/span&gt;]]&gt;&lt;/template&gt;&lt;/sp_ng_template&gt;&lt;/record_update&gt;</payload>
+<payload_hash>1125316513</payload_hash>
+<remote_update_set display_value="OCL: Whatsapp Chat popup">7fae6bf92f9820106f619facf699b6ab</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>organize.willian</sys_created_by>
+<sys_created_on>2020-11-06 17:28:40</sys_created_on>
+<sys_id>73ae6bf92f9820106f619facf699b6ac</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1759e8a2b0d0000001</sys_recorded_at>
+<sys_updated_by>organize.willian</sys_updated_by>
+<sys_updated_on>2020-11-06 17:28:40</sys_updated_on>
+<table/>
+<target_name>wpp-icon-send-template.html</target_name>
+<type>Angular ng-template</type>
+<update_domain>global</update_domain>
+<update_guid>50aa2bb510982010005cfef624652970</update_guid>
+<update_guid_history>50aa2bb510982010005cfef624652970:1125316513,27146abd14d42010f9d697cf7938972a:1125316513,4343a6bd01d4201094d3497ed5e7d153:1630714205</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_widget_7b651ba52f1020106f619facf699b63d</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function($window) {
+	/* widget controller */
+	var c = this;
+
+	c.open_popup = false;
+
+	// Initialize object Whatsapp
+	c.wwsObj = {
+		"supportNumber": c.data.phone_number
+	};
+
+
+	// Send a message to whatsapp 
+	c.sendMessageWpp = function(){
+		var message = c.wppInput || '';
+		var supportNumber = c.wwsObj.supportNumber;
+		if (message == '')
+			return;
+		var url = 'https://api.whatsapp.com/send?phone=' + supportNumber + '&amp;text=' + message;
+		$window.open(url, "_blank");
+	}
+	
+	// Show and Hide popUp
+	c.chatWindow = function(){
+		if(!c.open_popup)
+			c.open_popup = true;
+		else
+			c.open_popup = false;
+	};
+	
+}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;.clearfix { clear: both; }
+.wwp-shadow {
+  box-shadow: 0 0 50px rgba(0,0,0,0.2);
+}
+
+.wwp-icon  {
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  margin-left: .2em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wwp-icon-svg{
+  position: relative;
+  top: 4px;
+  left: 10px;
+}
+
+.wwp-gradient {
+  z-index: -1;
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  content: "";
+  pointer-events: none;
+  display: none;
+}
+
+.wwp-popup-container * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.wwp-popup-container {
+  width: auto;
+  position: fixed;
+  z-index: 9999999;
+}
+
+.on-left{
+	left:0;
+  .wwp-popup__footer{
+  	float: left;
+    margin-left: 10px;
+  }
+}
+
+.wwp-popup {
+  width: 290px;
+}
+
+.wwp-popup__close-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  float: right;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 28px;
+  cursor: pointer; 
+}
+
+.wwp-popup__support-wrapper{
+  margin-top: 8px;
+}
+
+.wwp-popup__support-img-wrapper{
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  display: inline-block;
+  margin-right: 3px;
+}
+.wwp-popup__support-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+.wwp-popup__support {
+  display: inline-block;
+  vertical-align: bottom;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 232px;
+}
+.wwp-popup__support-about {
+  font-size: 12px;
+  text-align: center;
+  padding: 18px 12px;
+  line-height: 16px;
+  user-select: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.wwp-popup__support-welcome {
+  background-color: #fff;
+  font-size: 14px;
+  padding: 16px 12px;
+  color: #888FBB;
+  line-height: 16px;
+  user-select: none;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.wwp-popup__input-wrapper {
+  width: 232px;
+  margin-top: 14px;
+  float: right;
+  background-color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  position: relative;
+}
+.wwp-popup__input {
+  border: none !important;
+  background-color: transparent !important;
+  outline: none !important;
+  padding: 6px 0 !important;
+  margin: 0 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 14px !important;
+  box-shadow: none !important;
+  color: #000 !important;
+  vertical-align: middle !important;
+  display: inline-block !important;
+  width: 166px !important;
+  height: auto !important;
+}
+.wwp-popup__input::-webkit-input-placeholder {
+  color: #888FBB !important;
+}
+.wwp-popup__send-btn {
+  cursor: pointer;
+  padding: 6px;
+  width: 34px;
+  display: inline-block;
+  vertical-align: middle;
+  user-select: none;
+}
+
+.wwp--bg-color {
+  background-color: #22C15E      
+}
+.wwp--text-color {
+  color: #ffffff        
+}
+
+.wwp-popup__open-btn {
+  font-size: 30px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 14px;
+  cursor: pointer;
+  width: 46px;
+  height: 46px;
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.wwp-popup__open-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wwp-popup-container--position { 
+  right: 12px; 
+  bottom: 12px; 
+}
+
+.wwp-popup__open-btn { 
+  float: right;
+}
+
+.wwp-gradient--position {
+  bottom: 0;
+  right: 0;
+  background: radial-gradient(ellipse at bottom right, rgba(29, 39, 54, 0.2) 0, rgba(29, 39, 54, 0) 72%);
+}
+
+svg.wws-popup__send-btn{
+    width: 18px;
+    position: relative;
+    top: 7px;
+    left: 14px;
+}
+
+hidde&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id&gt;whatsapp_chat&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller, timeout) {
+
+}]]&gt;&lt;/link&gt;&lt;name&gt;Whatsapp Chat&lt;/name&gt;&lt;option_schema&gt;[{"name":"title","section":"Presentation","default_value":"Converse via WhatsApp com a nossa equipe. Tire dúvidas ou agende atendimento.","label":"Title","type":"string"},{"name":"attendant_message","section":"Presentation","default_value":"Oi, como podemos ajudar?","label":"Attendant Message","type":"string"},{"name":"input_message","section":"Presentation","default_value":"Digite sua dúvida aqui...","label":"Input Message","type":"string"},{"name":"phone_number","section":"Behavior","default_value":"5513992113040","label":"Phone Number","type":"string"},{"name":"position_page","section":"Presentation","default_value":"Right","label":"Position on page","type":"choice","choices":[{"label":"Left","value":"Left"},{"label":"Right","value":"Right"}]},{"name":"mobile_only","section":"Data","default_value":"false","label":"Mobile Only","type":"boolean"}]&lt;/option_schema&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	data.title = gs.getMessage(options.title);
+	data.attendant_message = gs.getMessage(options.attendant_message);
+	data.input_message = gs.getMessage(options.input_message);
+	data.position_page = options.position_page;
+	data.phone_number = options.phone_number;
+	data.mobile_only = options.mobile_only || false;	
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-11-05 21:00:49&lt;/sys_created_on&gt;&lt;sys_id&gt;7b651ba52f1020106f619facf699b63d&lt;/sys_id&gt;&lt;sys_mod_count&gt;98&lt;/sys_mod_count&gt;&lt;sys_name&gt;Whatsapp Chat&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_7b651ba52f1020106f619facf699b63d&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;organize.willian&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-11-06 17:28:11&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div class="wwp-popup-container  wwp-popup-container--position" 
+     ng-class="{'on-left': c.data.position_page == 'Left', 'visible-xs': c.data.mobile_only == 'true'}"&gt;
+  
+  &lt;div class="wwp-gradient  wwp-gradient--position"&gt;&lt;/div&gt;
+  &lt;div class="wwp-popup" ng-show="c.open_popup"&gt;
+    &lt;div class="wwp-popup__header"&gt;
+      &lt;div class="wwp-popup__close-btn  wwp-shadow  wwp--bg-color  wwp--text-color"&gt;
+        &lt;i ng-click="c.chatWindow()" class="fa fa-times"&gt;&lt;/i&gt;
+      &lt;/div&gt;
+      &lt;div class="clearfix"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="wwp-popup__body"&gt;
+      &lt;div class=" wwp-popup__support-wrapper"&gt;
+        &lt;div class="wwp-popup__support-img-wrapper"&gt;
+          &lt;!-- img --&gt;
+        &lt;/div&gt;
+        &lt;div class=" wwp-popup__support  wwp-shadow"&gt;
+          &lt;div class=" wwp-popup__support-about  wwp--text-color  wwp--bg-color"&gt;
+            {{c.data.title}}          
+          &lt;/div&gt;
+          &lt;div class=" wwp-popup__support-welcome"&gt;
+            {{c.data.attendant_message}}      
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=" wwp-popup__input-wrapper  wwp-shadow"&gt;
+        &lt;input type="text" ng-model="c.wppInput" class=" wwp-popup__input" placeholder="{{data.input_message}}" autocomplete="off"&gt;  
+        &lt;span ng-click="c.sendMessageWpp()" ng-include="'wpp-icon-send-template.html'"&gt;&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class=" clearfix"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="wwp-popup__footer"&gt;
+    &lt;div ng-click="c.chatWindow()" class=" wwp-popup__open-btn  wwp-shadow  wwp--text-color  wwp--bg-color"&gt;
+      &lt;span ng-include="'wpp-icon-template.html'"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="clearfix"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+<payload_hash>128751384</payload_hash>
+<remote_update_set display_value="OCL: Whatsapp Chat popup">7fae6bf92f9820106f619facf699b6ab</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>organize.willian</sys_created_by>
+<sys_created_on>2020-11-06 17:28:40</sys_created_on>
+<sys_id>f7ae6bf92f9820106f619facf699b6ac</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1759e99f4e70000001</sys_recorded_at>
+<sys_updated_by>organize.willian</sys_updated_by>
+<sys_updated_on>2020-11-06 17:28:40</sys_updated_on>
+<table/>
+<target_name>Whatsapp Chat</target_name>
+<type>Widget</type>
+<update_domain>global</update_domain>
+<update_guid>7c9eaf7925982010ea1c2f3cd1fa6b89</update_guid>
+<update_guid_history>7c9eaf7925982010ea1c2f3cd1fa6b89:128751384,4eef5bb1c1982010541a7123cc6ce774:1193256596,2ff247b136582010a88769c7bda24785:1944677492,54b203b16f582010c5493e77883f5519:-1492273455,f272cf71ec582010f8e6f8083e5ec11d:-1016932621,dc520b71d2582010b39cdb8ab7d7d438:1053913677,cafdf2fda418201014d8318f7bed11d5:-506110904,49dd72fd561820106ec4e28274c77fbc:4940922,d0dd32fd0e182010c001b1693d387dac:-1086045319,767df6bd1f182010336ed9d0eb584328:-793962994,2adc7abd111820104fc8694f799f7852:-8577371,359cb6bd70182010be77030396b60169:455668449,446cb2bd50182010d887506697baf063:273893905,722cfe7d8b182010e14bbf10901b4a57:598720379,d4fbfa7d70182010c6ee5f60fc191c5c:-905253734,2aebfa7d1e1820108275fc674e31b50e:1591294157,33ab727d7b1820108872ab1a7b9eceee:-104642060,c68bb27d1c18201012d7e62e794f9f12:294554609,78fa727d28182010253031bbc3a282e3:2036620478,1daafe3d5c182010bda6f0603297ffda:-72070449,927abab9ed182010aa0c9bfd7b4e2cb7:-1013929849,cd4a3a3d3e1820100333fbb147f182c7:499303249,83d9f63d8e1820107552329fe0de16a4:1163764669,80b9fab93a182010b629ea9fd7478bc7:-1103986942,e2c6b2b923182010ab79c831c34311cf:-830524454,9eb636b97818201059f2b877568def8d:-388672256,a366b6b96a182010b279f1d6b99250cf:1850477413,3c46fa79521820106afdd75320e23708:1342036556,77e5fa796818201088dd68dbc102c614:-1449219813,3fc5fe798b18201063150d1e81b171f2:-990431440,2ea5b6796f182010a86af25376df545a:-1624517843,d745b67964182010cbeac0a3ce11bae3:-480618200,bc253a79c41820102bf4f1aa759f0ec1:-1576099954,1ef4f27934182010163a24d8f4fc7527:1945965032,41e4fe39c4182010beef984e861ca14f:242385992,0284fe399a1820109f8ae292b9b2815a:-379928341,5834be39bd1820107504d7d18448719e:-2097491159,ebe3fa39561820109fb2a39534236be3:13591800,0f5276f55d182010ed19321e5f7704c6:-1583608352,7b8176f54918201063c18983d441edbd:1615718563,7f2136b52b1820101988e1276359ddd0:-1738118208,dca03eb5401820103f5733b9513db8b5:-1764288509,1e50be75ec182010bf675965e8ec7401:898390848,1b307ab56f18201013e87eddbdb6bb32:-1055071231,20af6e7599182010eed6dca5a573d485:911838123,fc7f62b538182010a8c79f9d719aeb22:-916065347,ba1fe6356e182010e2549eed2f6998ff:-1952086571,b7fe6af1141820100a9469ee843aa1f3:-1067267487,6dfeaeb17518201083684e51dd07af0d:-412326335,d1ee2a3584182010c72412f144ea142c:-83731250,aebca235ed18201080b23def42c41c26:-1012951788,a08ca2b18a18201024bad1d7c1769d04:261507035,b1fb26f176182010228cb1aae7320be8:-564618611,875ba6f19e18201091b374bab47a528b:-1791521198,3e0b6eb11d18201010bb12c3cd267ec4:1367371959,1dda26f1ee1820107425645a1168153d:156185528,9c8a6eb1cb182010db40283f2c94eaa7:-1448641524,2d3aa2b174182010cc4ce2fe1fd0690f:-139857454,69d9e2b1ec1820108f71b01afb4593ef:-1346582456,cac96ab1911820107073da05d17aa013:-1392665893,67a9e2b12a182010c34689cbfb41cccf:1682108286,8a3962b162182010866d9a1aa9bb74b2:1639369210,b30962b1e41820105bacd386d517f07f:-180333089,2d882e7154182010b5fdae2e9944d06f:-233308166,0368e631eb1820106daf71e33bb32023:-2119849894,4d87a271fe182010348b3a9a57cfb2dd:127290433,20d62e31df1820108407a2ebf83eb329:-2137110217,feb622311a1820108610448ce5480283:624895892,c3466231c31820108ed3cae07db38e9c:-1040108060,fce5eefdced420100853b10debe0d6b0:-1892956399,62b52231ad1820105929443296b197f3:1661740778,29a5eefd5ad42010e594d15c1952e6d4:-1910346350,6ca5a2fd3dd420107cd4bcc51f1d6ba5:38396366,e505a2fdfcd42010181b18bffa4b91b6:1719380372,f1f42ebdc9d420100f4ef6c1eccdeb93:40603748,cc94a2fda7d420102700484282a86e9f:-1294938466,123462fd17d42010d39941bf5df6585f:514403649,a5a32ebd9bd420109554005c03105187:50359037,1f23ee7d83d42010d40cce299d3e23e0:667403207,24626e7db0d4201065f10d64ed7dbbcd:-1101794409,c342ee7d6cd420107ab55c43ad081850:-2022771289,88e1ae3d72d42010a1f3d08afba04cba:-1922960333,e3c1e27da4d42010bfb8d62070d36662:711074673,61c0ae3de7d42010783c22357317fecc:-1922960333,4620663d9dd420108607a2ec89d40e31:1745671572,42df1af911d42010853441d99ed544b0:272696196,96cf52f9c8d42010b827e649ae506e58:-1465357522,bc4fdef9ecd420105f36c5e5866e6f58:2030237770,daeb5e3941d4201069254da47c4c2e78:1374613590,dfda927958d420105e65fc36039fa55b:1165696268,f96a1a3976d42010ff2f7972dd40532d:-841579167,17d91a3905d420105c5d31256a555302:-2074605097,e89ed32dcf1020100c9992f6c712305d:756950992,6b5edf69c5102010a3df5d1b96b0b5ed:1961303531,5b5b13a912102010de014251f299a73e:-1406138656,5c6a9b6968102010e9d943cab475acb0:-431638756,0768df61ff102010accf5552ba31a9d0:-2020380338,5ff61f21a6102010f76dbddc90a3f1ab:-1355516392,7da55ba5a61020103efef96946bd1bc8:-2060936190</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
