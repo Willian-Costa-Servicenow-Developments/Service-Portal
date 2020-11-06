@@ -1,8 +1,8 @@
-#Whatsapp Chat Popup
+# Whatsapp Chat Popup
 
 Whatsapp Chat Popup is an option for communication between a user and the attendance of a service portal.
 
-##Settings (options):
+## Settings (options):
 
 1 - Mobile Only: For when the floating whatsapp button is displayed only for mobile devices
 2 - Title: Title of the Form.
@@ -11,3 +11,5 @@ Whatsapp Chat Popup is an option for communication between a user and the attend
 5 - Position on Page: Position in which the component will be displayed (left or right)
 6 - Phone Number: Telephone number of the recipient.
 
+### Gallery
+![Button](https://github.com/WillianCostaOCL/service-now-sp/blob/main/Components/Modal_Form/modal_button.png)
