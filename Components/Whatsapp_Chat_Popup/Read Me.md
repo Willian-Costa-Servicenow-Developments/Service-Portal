@@ -16,4 +16,4 @@ Whatsapp Chat Popup is an option for communication between a user and the attend
 
 6 - Phone Number: Telephone number of the recipient.
 
-![Button](https://github.com/WillianCostaOCL/service-now-sp/blob/main/Components/Modal_Form/modal_button.png)
+![Wpp](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Components/Whatsapp_Chat_Popup/img/Screen%20Shot%202020-11-06%20at%2014.07.42.png)
