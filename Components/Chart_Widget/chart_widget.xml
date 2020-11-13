@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unload unload_date="2020-11-13 19:32:07">
+<sp_widget action="INSERT_OR_UPDATE">
+<category>custom</category>
+<client_script><![CDATA[function($scope, $rootScope, spUtil) {
+	/* widget controller */
+	var c = this;
+
+	/*
+	just if you need
+	spUtil.recordWatch($scope, "incident", "active=true^state=3", function(name,data) {
+		$scope.refresh();
+	});
+	*/
+
+	/*Change the report*/
+	$scope.changeChart = function(){
+		c.data.report = $scope.report;
+		$scope.refresh();
+	}
+
+	/*Refresh the chart*/
+	$scope.refresh= function(){
+		c.server.update().then(function(){
+			$scope.constructorHighCharts();
+		});
+	}
+
+	/*Interaction with a filter widget*/
+	$rootScope.$on('FilterChart', function(event,obj) {
+		if(!obj)
+			return;
+		c.data.action = "Filter"
+		/* e.g., c.data.number = obj.number;*/
+		c.server.update().then(function(){
+			c.data.action = '';
+			$scope.constructorHighCharts()
+		});
+	});
+
+	/*Chart constructor*/
+	$scope.constructorHighCharts = function(){
+		Highcharts.chart('chart', {
+			chart: {
+				type: c.data.type //default: line
+			},
+			title: {
+				text: '',
+				style: {
+					display: 'none'
+				}
+			},
+			xAxis: {
+				categories: c.data.chart.categories
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: 'Texto'
+				}
+			},
+			legend: {
+				reversed: true
+			},
+			plotOptions: {
+				pie: c.data.pie,
+				area: {
+					marker: {
+						enabled: false,
+						symbol: 'circle',
+						radius: 2,
+						states: {
+							hover: {
+								enabled: true
+							}
+						}
+					}
+				},
+				column: {
+					stacking: 'normal'
+				}
+			},
+			series: c.data.chart.series,
+			credits: {
+				enabled: false
+			}
+		});
+	}
+
+	$scope.constructorHighCharts();
+}]]></client_script>
+<controller_as>c</controller_as>
+<css/>
+<data_table>sp_instance</data_table>
+<demo_data/>
+<description/>
+<docs display_value=""/>
+<field_list/>
+<has_preview>false</has_preview>
+<id>ocl__chart_widget</id>
+<internal>false</internal>
+<link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+<name>OCL: Chart Widget</name>
+<option_schema>[{"displayValue":"Report","name":"report","section":"Data","label":"Report Name","type":"reference","value":"sys_report","ed":{"reference":"sys_report"}}]</option_schema>
+<public>false</public>
+<roles/>
+<script><![CDATA[(function() {
+
+	var filter = ''; 
+	var report = input.report.value || options.report;
+
+	if(gs.nil(report))
+		return;
+	
+	if(input.action == "Filter"){
+		/*  e.g., 
+		if(!gs.nil(input.number))
+			filter += "^numberLIKE" + input.number;*/
+	};
+	
+	var include = new chartUtils(report, filter);
+	data.chart = include.getChart();
+	data.type = include.getType();
+	data.pie = {};
+
+	/*If the chart's type is Semi Donut*/
+	if(include.getOptionsType() == 'semi_donut'){
+		data.pie = {
+			dataLabels: {
+				enabled: true,
+				distance: 20,
+				style: {
+					fontWeight: 'bold',
+					color: 'white'
+				}
+			},
+			startAngle: -90,
+			endAngle: 90,
+			center: ['50%', '75%'],
+			size: '110%'
+		}
+	}
+})();]]></script>
+<servicenow>false</servicenow>
+<sys_class_name>sp_widget</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-11-03 17:10:31</sys_created_on>
+<sys_id>6a8d08c12f102010c5d33f96f699b6c3</sys_id>
+<sys_mod_count>123</sys_mod_count>
+<sys_name>OCL: Chart Widget</sys_name>
+<sys_package display_value="Global" source="global">global</sys_package>
+<sys_policy/>
+<sys_scope display_value="Global">global</sys_scope>
+<sys_update_name>sp_widget_6a8d08c12f102010c5d33f96f699b6c3</sys_update_name>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-11-13 13:34:51</sys_updated_on>
+<template><![CDATA[<div class>
+  <i class="fa fa-refresh" ng-click="refresh()" style="font-size: 30px; float: right;"></i>
+  <label>Report:
+    <sn-record-picker 
+                      field="report" 
+                      table="'sys_report'" 
+                      display-field="'title'" 
+                      value-field="'sys_id'" 
+                      search-fields="'title'"
+                      multiple="false"
+                      on-change="changeChart()"
+                      page-size="30"
+                      default-query="'typeINbar,horizontal_bar,pie,donut,semi_donut,line,area'">
+    </sn-record-picker>
+  </label>
+</div>
+<div id="chart">
+</div>]]></template>
+</sp_widget>
+</unload>
