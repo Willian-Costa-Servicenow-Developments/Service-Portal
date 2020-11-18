@@ -10,7 +10,7 @@ Here is a place to share codes, widgets, ideas, and anything about Service Porta
 
 
 
-## Let's make a tour
+## Let's take a tour
 
 ### Componets
 
