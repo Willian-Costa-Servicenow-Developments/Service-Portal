@@ -6,7 +6,7 @@ ServiceNow Service Portal Developments
 
 ## Wellcome!
 
-Here is a place to share codes, widgets, ideas and anything about Service Portal.\
+Here is a place to share codes, widgets, ideas and anything about Service Portal.
 
 
 
@@ -47,5 +47,5 @@ Here is a place to share codes, widgets, ideas and anything about Service Portal
 
 ​		
 
-![Organize](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Images/organize.jpeg)
+<p align="center"><img src="https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Images/organize.jpeg" /></p>
 
