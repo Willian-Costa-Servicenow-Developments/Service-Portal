@@ -17,4 +17,4 @@ Page with a animation to make an error more funny
 
 ### Gallery
 
-![404_page]![404_page_animation](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Components/404_Funny_Page/404_page_animation.gif)
+![404_page_animation](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Components/404_Funny_Page/404_page_animation.gif)
