@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unload unload_date="2020-11-18 17:45:56">
+<sp_widget action="INSERT_OR_UPDATE">
+<category>custom</category>
+<client_script><![CDATA[function($scope) {
+	/* widget controller */
+	var c = this;
+	c.img_man = 'fired_man_1.png';
+	c.img_btn = 'button_fired_1.png';
+	c.text = "Please, fire our developer";
+	c.fired = false;
+
+	$scope.hover_button = function(){
+		if(!c.fired){
+			$( ".img_btn" ).fadeOut( 300 );
+			$( ".img_man" ).fadeOut( 300 );
+			c.img_man = 'fired_man_2.png';
+			c.img_btn = 'button_fired_2.png';
+			c.text = "Good bye Mateus!"
+			$( ".img_btn" ).fadeIn( 300 );
+			$( ".img_man" ).fadeIn( 300 );
+			c.fired = true;
+		}
+	};
+}]]></client_script>
+<controller_as>c</controller_as>
+<css>.fire{
+  margin-top: 64px;
+  text-align: center;
+  color: white;
+  font-family: 'Luckiest Guy';
+}
+
+.fire__404{
+  font-size: 86px;
+}
+
+.fire p{
+  margin: 0;
+}
+
+.fire__title, .fire__text{
+  font-size: 32px;
+}
+
+.img_man{
+  margin: auto;
+  margin-bottom: 16px;
+  margin-top: 32px;
+  display: block;
+}
+
+.img_btn{
+  margin: auto;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+@media screen and (max-height: 940px){
+  .fire{
+    margin-top: 32px;
+  }
+
+  .fire__404{
+    font-size: 64px;
+  }
+
+  .fire__title, .fire__text{
+    font-size: 28px;
+  }
+
+  .img_man{
+    width: 200px;
+  }
+
+  .img_btn{
+    width: 150px;
+  }
+}
+</css>
+<data_table>sp_instance</data_table>
+<demo_data/>
+<description/>
+<docs display_value=""/>
+<field_list/>
+<has_preview>false</has_preview>
+<id>ocl__fired</id>
+<internal>false</internal>
+<link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+<name>OCL: Fired</name>
+<option_schema/>
+<public>false</public>
+<roles/>
+<script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	data.link = gs.getProperty("glide.servlet.uri") + 'portal?id=home';
+})();]]></script>
+<servicenow>false</servicenow>
+<sys_class_name>sp_widget</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-11-16 18:18:51</sys_created_on>
+<sys_id>f3f99f012fe4a010c5d33f96f699b64b</sys_id>
+<sys_mod_count>57</sys_mod_count>
+<sys_name>OCL: Fired</sys_name>
+<sys_package display_value="Global" source="global">global</sys_package>
+<sys_policy/>
+<sys_scope display_value="Global">global</sys_scope>
+<sys_update_name>sp_widget_f3f99f012fe4a010c5d33f96f699b64b</sys_update_name>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-11-18 17:34:08</sys_updated_on>
+<template><![CDATA[<div class="fire">
+  <p class="fire__404">404</p>
+  <p class="fire__title">WHAT?<br>An error is unacceptable</p>
+  <img class="fire__img img_man" src="{{c.img_man}}">
+  <img class="fire__img img_btn" src="{{c.img_btn}}" ng-click="hover_button()">
+  <p class="fire__text">
+    {{c.text}} <a ng-if="c.fired" href="{{data.link}}"> - home 
+    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+    </a>
+  </p>
+</div>]]></template>
+</sp_widget>
+</unload>
