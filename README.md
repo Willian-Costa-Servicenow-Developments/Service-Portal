@@ -47,4 +47,4 @@ Here is a place to share codes, widgets, ideas and anything about Service Portal
 
 ​		
 
-<div style="text-align:center"><img src="https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Images/organize.jpeg" /></div>
+<p style="text-align:center"><img src="https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Images/organize.jpeg" /></p>
