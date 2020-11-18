@@ -6,7 +6,7 @@ ServiceNow Service Portal Developments
 
 ## Wellcome!
 
-Here is a place to share codes, widgets, ideas and anything about Service Portal.\
+Here is a place to share codes, widgets, ideas and anything about Service Portal.
 
 
 
