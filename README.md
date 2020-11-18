@@ -6,7 +6,7 @@ ServiceNow Service Portal Developments
 
 ## Wellcome!
 
-Here is a place to share codes, widgets, ideas and anything about Service Portal.
+Here is a place to share codes, widgets, ideas and anything about Service Portal.\
 
 
 
@@ -34,7 +34,7 @@ Here is a place to share codes, widgets, ideas and anything about Service Portal
 | Name                                                         |
 | ------------------------------------------------------------ |
 | [GlideSPScriptable-Cheat-Sheet-1.pdf](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Documentation/GlideSPScriptable-Cheat-Sheet-1.pdf) |
-| [SNDocs.md](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Documentation/SNDocs.md)](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Components/Chart_Widget) |
+| [SNDocs](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Components/Chart_Widget) |
 
 
 
@@ -47,4 +47,5 @@ Here is a place to share codes, widgets, ideas and anything about Service Portal
 
 ​		
 
-<p align="center"><img src="https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Images/organize.jpeg" /></p>
+![Organize](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Images/organize.jpeg)
+
