@@ -23,7 +23,7 @@ Here is a place to share codes, widgets, ideas and anything about Service Portal
 | [Expandable List](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Components/Expandable_List) | When click on a line, this line expands showing another FIELDS |
 | [Indicators](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Components/Indicators) | Nothing yet :D                                               |
 | [Modal Form](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Components/Modal_Form) | Modal with a back-end form                                   |
-| [Most_Items_Requested](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Components/Most_Items_Requested) | List type component with the most requested items from a filter. |
+| [Most Items Requested](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Components/Most_Items_Requested) | List type component with the most requested items from a filter. |
 | [QR Code](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Components/QR_Code) | code to generate QR Codes.                                   |
 | [Whatsapp Chat Popup](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Components/Whatsapp_Chat_Popup) | Whatsapp Chat Popup                                          |
 
