@@ -12,7 +12,7 @@ Here is a place to share codes, widgets, ideas, and anything about Service Porta
 
 ## Let's take a tour
 
-### :gear:  Componets
+### :gear: &nbsp; Componets
 
 | Name                                                         | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -27,14 +27,14 @@ Here is a place to share codes, widgets, ideas, and anything about Service Porta
 | [QR Code](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Components/QR_Code) | Code to generate QR Codes.                                   |
 | [Whatsapp Chat Popup](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Components/Whatsapp_Chat_Popup) | Whatsapp Chat Popup                                          |
 
-### :art: Figma Templates
+### :art: &nbsp; Figma Templates
 
 | Links                                                         |
 | ------------------------------------------------------------ |
-| [Drill Down list:](https://www.figma.com/proto/3wkzuTbs59wcNwLn1MqTfk/Componentes?node-id=4%3A2&scaling=min-zoom) |
+| [Drill Down list](https://www.figma.com/proto/3wkzuTbs59wcNwLn1MqTfk/Componentes?node-id=4%3A2&scaling=min-zoom) |
 
 
-### :blue_book:  Documentation
+### :blue_book: &nbsp; Documentation
 
 | Name                                                         |
 | ------------------------------------------------------------ |
@@ -43,7 +43,7 @@ Here is a place to share codes, widgets, ideas, and anything about Service Porta
 | [Fix Bugs - articles](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Documentation/Fix%20Bugs) |
 
 
-### :computer:  Scripts
+### :computer: &nbsp; Scripts
 
 | File                                                         | Description            |
 | ------------------------------------------------------------ | ---------------------- |
