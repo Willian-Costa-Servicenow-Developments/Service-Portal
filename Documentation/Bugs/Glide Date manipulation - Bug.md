@@ -8,7 +8,7 @@ When we get a value of a Glide Date Time we think recive a string. I don't know 
 
 ## Solution
 
- toString()  <i class="fa fa-star"></i>
+ toString()
 
 ## Example
 
@@ -18,10 +18,8 @@ gr.query();
 
 //wrong
 if (gr.next())
-			var date = gr.getDisplayValue('opened_at').slice(0,10);
+	var date = gr.getDisplayValue('opened_at').slice(0,10);
 //right
 if (gr.next())
-			var date = gr.getDisplayValue('opened_at').toString().slice(0,10);
+	var date = gr.getDisplayValue('opened_at').toString().slice(0,10);
 ```
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
