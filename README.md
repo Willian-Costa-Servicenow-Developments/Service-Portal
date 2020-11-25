@@ -34,7 +34,7 @@ Here is a place to share codes, widgets, ideas, and anything about Service Porta
 | Name                                                         |
 | ------------------------------------------------------------ |
 | [GlideSPScriptable-Cheat-Sheet-1.pdf](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Documentation/GlideSPScriptable-Cheat-Sheet-1.pdf) |
-| [SNDocs](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Components/Chart_Widget) |
+| [SNDocs](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Documentation/SNDocs.md) |
 
 
 
