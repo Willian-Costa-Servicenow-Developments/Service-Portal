@@ -246,9 +246,9 @@
 <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function($scope) {
 	/* widget controller */
 	var c = this;
-	new QRCode(document.getElementById("qrcode"), "tel:40280944");
-	new QRCode(document.getElementById("qrcode2"), "https://api.whatsapp.com/send?phone=5511992547746");
-	new QRCode(document.getElementById("qrcode3"), "mailto:mateus.anzolin@organizecloudlabs.com");
+	new QRCode($('#qrcode')[0], "tel:40280944");
+	new QRCode($('#qrcode2')[0], "https://api.whatsapp.com/send?phone=5511992547746");
+	new QRCode($('#qrcode3')[0], "mailto:mateus.anzolin@organizecloudlabs.com");
 
 	}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css/&gt;&lt;data_table&gt;sp_instance_table&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id/&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {
 
