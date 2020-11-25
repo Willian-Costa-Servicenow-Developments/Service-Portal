@@ -12,7 +12,7 @@ Here is a place to share codes, widgets, ideas, and anything about Service Porta
 
 ## Let's take a tour
 
-### :gear: Componets
+### :gear: - Componets
 
 | Name                                                         | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -29,7 +29,7 @@ Here is a place to share codes, widgets, ideas, and anything about Service Porta
 
 
 
-### :blue_book: Documentation
+### :blue_book: - Documentation
 
 | Name                                                         |
 | ------------------------------------------------------------ |
@@ -38,7 +38,7 @@ Here is a place to share codes, widgets, ideas, and anything about Service Porta
 | [Fix Bugs - articles](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Documentation/Fix%20Bugs) |
 
 
-### :computer: Scripts
+### :computer: - Scripts
 
 | File                                                         | Description            |
 | ------------------------------------------------------------ | ---------------------- |
