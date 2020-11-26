@@ -4,7 +4,7 @@
 
 ## Problem
 
-When we get a value of a Glide Date Time we think recive a string. I don't know what we really recive, but if you try to use some methods like split(''). <b>Sometimes </b> you will see a <span style="color:red">"NaN"</span> or <span style="color:red">"undefined"</span>.
+When we get a value of a "Glide Date Time" we think to receive a string. But if you try to use some methods like split(''). Sometimes you will see a **"NaN"** or **"undefined"**.
 
 ## Solution
 
