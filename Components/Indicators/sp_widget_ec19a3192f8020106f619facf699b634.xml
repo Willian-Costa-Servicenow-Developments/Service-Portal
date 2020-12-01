@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unload unload_date="2020-12-01 13:58:04">
+<sp_widget action="INSERT_OR_UPDATE">
+<category>custom</category>
+<client_script><![CDATA[function($location) {
+  /* widget controller */
+  var c = this;
+	
+	c.redirectPage = function(page){
+		$location.url("?id=" + page);
+	};
+	
+
+	
+}]]></client_script>
+<controller_as>c</controller_as>
+<css>.container-icon{
+
+  .indicator{
+  	color: white;
+    font-size: 20px;
+    width: 100%;
+    display: flex;
+  }
+  
+  .inline-view{
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    .number-indicator{
+      font-size: 22px;
+    }
+    .label-indicator{
+    	font-weigth: bold;
+      margin-right: 5px;
+      &amp;:after{
+      	content: ':';
+      }
+    }
+  }
+  
+  
+  .stylized-view{
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    .number-indicator{
+    	 font-size: 30px;
+    }
+    .label-indicator{
+      float: left;
+    }
+  }
+  
+}</css>
+<data_table>sp_instance_table</data_table>
+<demo_data/>
+<description/>
+<docs display_value=""/>
+<field_list>table,filter,sp_page</field_list>
+<has_preview>false</has_preview>
+<id>ocl_indicators_count</id>
+<internal>false</internal>
+<link><![CDATA[function link(scope, element, attrs, controller) {
+  
+	
+}]]></link>
+<name>OCL Indicators Count</name>
+<option_schema>[{"hint":"Escolha a opção de visualização","name":"display_layout","section":"Presentation","default_value":"inline-view","label":"Display layout","type":"choice","choices":[{"label":"inline-view","value":"inline-view"},{"label":"stylized-view","value":"stylized-view"}]},{"hint":"Digite uma breve descrição","name":"label","section":"Presentation","label":"Label","type":"string"}]</option_schema>
+<public>false</public>
+<roles/>
+<script><![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+	data.display_layout = options.display_layout;
+	data.label = gs.getMessage(options.label);
+	data.table = options.table;
+	data.filter = options.filter || '';
+	data.sp_page = options.sp_page || '';
+
+	data.count = getRecordCount(data.table, data.filter);
+
+	function getRecordCount(table, filter){
+		var ga = new GlideAggregate(table);
+		ga.addAggregate('COUNT');
+		ga.addEncodedQuery(filter);
+		ga.query();
+		if(ga.next())
+			return  ga.getAggregate('COUNT');	
+	}
+
+
+})();]]></script>
+<servicenow>false</servicenow>
+<sys_class_name>sp_widget</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-10-23 17:32:55</sys_created_on>
+<sys_id>ec19a3192f8020106f619facf699b634</sys_id>
+<sys_mod_count>24</sys_mod_count>
+<sys_name>OCL Indicators Count</sys_name>
+<sys_package display_value="Global" source="global">global</sys_package>
+<sys_policy/>
+<sys_scope display_value="Global">global</sys_scope>
+<sys_update_name>sp_widget_ec19a3192f8020106f619facf699b634</sys_update_name>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-12-01 13:57:42</sys_updated_on>
+<template><![CDATA[<div class="container-icon">
+  
+  <div class="indicator {{data.display_layout}}">
+    <span class="number-indicator" ng-click="c.redirectPage(data.sp_page)">{{data.count}}</span>
+    <span class="label-indicator">{{data.label}}</span>
+  </div>
+     
+</div>]]></template>
+</sp_widget>
+</unload>
