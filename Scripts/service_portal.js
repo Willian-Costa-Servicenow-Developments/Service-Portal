@@ -155,17 +155,18 @@ $scope.removeAccents = function(value) {
 
 /* ---------- Remove HTML ----------*/
 $scope.removeHTML = function (html){
-  if(!html) return '';
-  html = html.replace(/<style([\s\S]*?)<\/style>/gi, '');
-  html = html.replace(/<script([\s\S]*?)<\/script>/gi, '');
-  html = html.replace(/<\/div>/ig, '\n');
-  html = html.replace(/<\/li>/ig, '\n');
-  html = html.replace(/<li>/ig, '  *  ');
-  html = html.replace(/<\/ul>/ig, '\n');
-  html = html.replace(/<\/p>/ig, '\n');
-  html = html.replace(/<br\s*[\/]?>/gi, "\n");
-  html = html.replace(/<[^>]+>/ig, '');
-  return html;
+	if(!html) return '';
+	html = html.replace(/<style([\s\S]*?)<\/style>/gi, '');
+	html = html.replace(/<script([\s\S]*?)<\/script>/gi, '');
+	html = html.replace(/<\/div>/ig, '\n');
+	html = html.replace(/<\/li>/ig, '\n');
+	html = html.replace(/<li>/ig, '  *  ');
+	html = html.replace(/<\/ul>/ig, '\n');
+	html = html.replace(/<\/p>/ig, '\n');
+	html = html.replace(/<br\s*[\/]?>/gi, "\n");
+	html = html.replace(/<[^>]+>/ig, '');
+	html = html.replace(/&nbsp;/gi," ");
+	return html;
 }
 
 /*------------ Refresh Effect on Div -------------*/
@@ -191,7 +192,44 @@ if(choiceList.getSize() > 1 && strangeFields.indexOf('state') == -1){
 	return options;
 }
 
-/* ---------  Continue --------- */
-                  .
-                  .
-                  .
+/* ---------  Format Numbers to '1K, 1M' --------- */
+c.convertNumber = function(n){
+	var aux = '';
+	n = n.toString();
+
+	if(n < 1000)
+		return n;
+
+	else if(n <= 9999){
+		aux = n.slice(0, 1);
+		return aux + ',' + n.slice(1,3) + " k";
+	}
+	else if(n <= 99999){
+		aux = n.slice(0, 2);
+		return aux + ',' + n.slice(2,4) + " k";
+	}
+	else if(n <= 999999){
+		aux = n.slice(0, 3);
+		return aux + ',' + n.slice(3,5) + " k";
+	}
+	else if(n <= 9999999){
+		aux = n.slice(0, 1);
+		return aux + ',' + n.slice(1,3) + " M";
+	}
+	else if(n <= 99999999){
+		aux = n.slice(0, 2);
+		return aux + ',' + n.slice(2,5) + " M";
+	}
+	else if(n <= 999999999){
+		aux = n.slice(0, 3);
+		return aux + ',' + n.slice(3,6) + " M";
+	}
+	else if(n <= 9999999999){
+		aux = n.slice(0, 4);
+		return aux + ',' + n.slice(4,7) + " M";
+	}
+	else if(n <= 99999999999){
+		aux = n.slice(0, 5);
+		return aux + ',' + n.slice(5,8) + " M";
+	}
+}
