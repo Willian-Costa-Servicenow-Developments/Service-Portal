@@ -4,8 +4,7 @@
 
 ## Problem
 
-When you use JQuery, sometimes, a function run in more than one widget.
-
+When you use JQuery, sometimes, a function runs in more than one widget.
 It's because JQuery doesn't see just the widget HTML. It sees all page HTML. So, if you have two classes with same name and use $('.yourClassName').toggle() both will be hide.
 
 ## Solution
