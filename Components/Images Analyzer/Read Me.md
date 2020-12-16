@@ -11,3 +11,23 @@ The Image Analyzer checks your Service Portal very easily and quickly for images
 
 ![Images Analyzer](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Components/Images%20Analyzer/Images-Analyzer.png?raw=true)
 
+
+## What are the parameters for a good image
+
+```JAVASCRIPT
+
+  /*
+		Margin values in bytes for image sizes
+	*/
+	data.tolerance_size = 200000;
+	data.max_size = 400000;
+
+```
+
+#### Tolerance: from 200KB to 399KB
+#### Max size: 400KB, on top of that, it is necessary to compress the image
+
+
+## How to use?
+
+Import the component in your instance and access it via Header & Footer widgets (sp_header_footer.do)
