@@ -1,4 +1,4 @@
-# Images Analyzer
+# Image Analyzer
 
 Compressing images means making them lighter, without necessarily losing quality. Technically, compaction is linked to the compression process.
 
