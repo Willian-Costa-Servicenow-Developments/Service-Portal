@@ -31,3 +31,5 @@ The Image Analyzer checks your Service Portal very easily and quickly for images
 ## How to use?
 
 Import the component in your instance and access it via Header & Footer widgets (sp_header_footer.do)
+
+[Download here!](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Components/Images%20Analyzer/sp_header_footer_c400a4ee2f8d201027f5d7492799b629.xml)
