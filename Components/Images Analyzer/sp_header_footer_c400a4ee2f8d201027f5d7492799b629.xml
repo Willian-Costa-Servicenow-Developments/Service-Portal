@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unload unload_date="2020-12-16 12:35:43">
+<sp_header_footer action="INSERT_OR_UPDATE">
+<category>custom</category>
+<client_script><![CDATA[function($window, $timeout,$http) {
+	/* widget controller */
+	var c = this;
+	c.imgList = [];
+	c.arrayListImages = [];
+
+	c.viewAnalyzer = function(){
+		c.data.images = [];
+		$timeout(function(){
+			c.imgList = c.imagesAnalyzer();	
+			c.checkImgsPerformance(c.imgList);
+			c.data.images = c.arrayListImages;
+		});
+	}
+
+	c.imagesAnalyzer = function(){
+		var list = [];
+		var bgList = getAllBGImages();
+		list = getAllTagImages();
+		for(var i in bgList)
+			list.push(bgList[i]);
+		return list;
+	}
+
+	c.checkImgsPerformance = function(images){
+		c.arrayListImages = [];
+		var result = [];
+		for(var i in images){
+			if(images[i].toString())
+				c.fetchImages(images[i].toString());
+		}
+			
+	}
+
+	c.fetchImages = function(image){
+		var item = {};
+		$http({
+			method: "GET",
+			responseType: "arraybuffer",
+			url: image		
+		}).success(function (response) {
+			var size = response.byteLength;
+			item.url = image;
+			item.size = bytesToSize(size);
+			item.issue = (size > c.data.max_size) ? true : false;
+			item.condition = c.conditionPerformance(size);
+			c.arrayListImages.push(item);
+		});
+	}
+
+	c.conditionPerformance = function(size){
+		var condition = '';
+		if(size <= c.data.tolerance_size)
+			condition = "good";		
+		if(size > c.data.tolerance_size && size < c.data.max_size)
+			condition = "attention";
+		if(size > c.data.max_size)
+			condition = "warning";
+		return condition;
+	}
+	
+
+	function bytesToSize(bytes) {
+		var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+		if (bytes == 0) return '0 Byte';
+		var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+		return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+	}
+
+	function getAllTagImages(){
+		var img_collect = document.getElementsByTagName('img'); //collection of image
+		var img_collect_massiv = []; //array for image 
+		for (var i = 0; i < img_collect.length; i++)
+		{
+			img_collect_massiv.push(img_collect[i].src); // push next image
+		}
+		return img_collect_massiv; // return array of image
+	}
+
+	function getAllBGImages(){
+		var url, B= [], A= document.getElementsByTagName('*');
+		A= B.slice.call(A, 0, A.length);
+		while(A.length){
+			url= document.deepCss(A.shift(),'background-image');
+			if(url) url=/url\(['"]?([^")]+)/.exec(url) || [];
+			url= url[1];
+			if(url && B.indexOf(url)== -1) B[B.length]= url;
+		}
+		return B;
+	}
+
+	document.deepCss= function(who, css){
+		if(!who || !who.style) return '';
+		var sty = css.replace(/\-([a-z])/g, function(a, b){
+			return c.data.instance + '/' + b.toUpperCase();
+		});
+		if(who.currentStyle){
+			var str = c.data.instance + '/';
+			str += who.style[sty] || who.currentStyle[sty] || '';
+			return str;
+		}
+		var dv = document.defaultView || window;
+		var str = c.data.instance + '/';
+		str += who.style[sty] || dv.getComputedStyle(who,"").getPropertyValue(css) || '';
+		return str;
+	}
+
+	Array.prototype.indexOf= Array.prototype.indexOf || 
+		function(what, index){
+		index= index || 0;
+		var L= this.length;
+		while(index< L){
+			if(this[index]=== what) return index;
+			++index;
+		}
+		return -1;
+	}
+
+}]]></client_script>
+<controller_as>c</controller_as>
+<css>.rocket-analyzer{
+  display: flex;
+  position: fixed;
+  z-index: 98;
+  bottom: 12px;
+  left: 12px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 25px;
+  background: rgb(66, 153, 225);
+  box-shadow: rgba(26, 32, 44, 0.24) 0px 2px 2px, rgba(26, 32, 44, 0.12) 0px 0px 2px;
+  cursor: pointer;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  outline: none;
+  font-size: 14px;
+  font-weight: bold;  
+  transition: all .2s ease-in-out;
+  svg{
+    path{
+      fill: white;
+    }
+  }
+}
+
+.times-close{
+  position: absolute;
+  right: 9px;
+  top: 8px;
+  cursor: pointer;
+}
+
+.rocket-analyzer:hover{
+  transform: scale(1.1);
+  animation: bounce 0.5s infinite;
+}
+
+.fly-rocket{
+  //animation: bgnone 5s;
+  //animation: fly 5s;
+}
+
+@keyframes bounce{
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.1);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+
+@keyframes bgnone{
+  0%{
+    background: rgb(66, 153, 225);
+  }
+  100%{
+    background: none;
+  }
+}
+
+
+@keyframes fly {
+  0% {
+    background: none;
+    transform: translate3d(0px, 0px, 0);
+    z-index: 999;
+  }
+  50% {
+    background: none;
+    transform: translate3d(0px, -1000px, 0);
+    z-index: 999;
+  }
+  100% {
+    background: rgb(66, 153, 225);
+    transform: translate3d(0px, -1500px, 0);
+    z-index: 999;
+  }
+}
+
+.analyzer-content{
+  display: none;
+  width: 240px;
+  
+  position: fixed;
+  z-index: 99;
+  bottom: 80px;
+  left: 38px;
+  background: rgba(0, 0, 0, .8);
+  -webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, .2);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, .2);
+  border-radius: 14px;
+  color: white;
+  padding: 10px;
+  .img-container{
+  	overflow: auto;
+    max-height: 400px;
+  }
+  .images-analyzer{
+    .images{
+      width: 100%;
+      position: relative;
+      float: left;
+      max-height: 468px;
+      .img-block{
+        width: 100%;
+      }
+      .image{
+        height: 80px;
+        margin-bottom: 15px;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-line-pack: distribute;
+        align-content: space-around;
+        -ms-flex-pack: center;
+        justify-content: center;
+        position: relative;
+        border: 1px solid rgba(0,0,0,0);
+        background: rgba(255,255,255,0.2);
+        -webkit-box-shadow: 0 0 4px 0 rgba(0,0,0,.2);
+        box-shadow: 0 0 4px 0 rgba(0,0,0,.2);
+        border-radius: 14px;
+
+        .ico{
+          position: absolute;
+          right: 10px;
+          bottom: 8px;
+          font-size: 16px;
+        }
+
+        .ico-good{
+          color: #7BE157;
+          &amp;:before {
+            content: "\f058";
+          }
+        }
+
+        .ico-attention{
+          color: #FDE82D;
+          &amp;:before {
+            content: "\f06a";
+          }
+        }
+
+        .ico-warning{
+          color: #FF5858;
+          &amp;:before {
+            content: "\f057";
+          }
+        }
+
+      }
+      .attention{
+        background: rgba(242, 226, 141, 0.4);
+      }
+      .warning{
+        background: rgba(242, 141, 141, 0.4);
+      }
+      img{
+        max-height: 30px;
+      }
+    }
+    .title{
+      font-size: 18px;
+      padding: 3px 7px 13px 12px;
+      display: flex;
+
+      p{
+        float: left;
+        padding: 0px 10px;
+        margin: 0px 0;
+      }
+      svg{
+        width: 24px;
+        float: left;
+        path{
+          fill: white;
+        }
+      }
+    }
+  }
+}
+
+.img-container::-webkit-scrollbar {
+    width: 2px;
+}
+.img-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+.img-container::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+
+}
+</css>
+<data_table>sp_instance</data_table>
+<demo_data/>
+<description/>
+<docs display_value=""/>
+<field_list/>
+<has_preview>false</has_preview>
+<id/>
+<internal>false</internal>
+<link><![CDATA[function link(scope, element, attrs, controller) {
+  
+	
+	$(document).on("click", ".rocket-analyzer", function(){
+		$('.analyzer-content').addClass('show');
+	});
+	
+	$(document).on("click", ".times-close", function(){
+		$('.analyzer-content').removeClass('show');
+	});
+	
+}]]></link>
+<name>Image Analyzer</name>
+<option_schema/>
+<public>false</public>
+<roles/>
+<script><![CDATA[(function() {
+
+	data.canView = true;
+
+	if(!gs.getUser().hasRole('admin'))
+		data.canView = false;
+
+	/*
+		Margin values in bytes for image sizes
+	*/
+	data.tolerance_size = 200000;
+	data.max_size = 400000;
+
+	/*
+		Get Instance URL 
+	*/
+	data.instance = gs.getProperty('glide.servlet.uri');
+
+	data.messages = {};
+	data.messages.good_performance = gs.getMessage('Good performance');
+	data.messages.bad_performance = gs.getMessage('Issue to fix');
+
+})();]]></script>
+<servicenow>false</servicenow>
+<sys_class_name>sp_header_footer</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2020-12-15 17:08:32</sys_created_on>
+<sys_id>c400a4ee2f8d201027f5d7492799b629</sys_id>
+<sys_mod_count>43</sys_mod_count>
+<sys_name>Image Analyzer</sys_name>
+<sys_package display_value="Global" source="global">global</sys_package>
+<sys_policy/>
+<sys_scope display_value="Global">global</sys_scope>
+<sys_update_name>sp_header_footer_c400a4ee2f8d201027f5d7492799b629</sys_update_name>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2020-12-16 12:33:59</sys_updated_on>
+<template><![CDATA[<div ng-show="data.canView" >
+  <button class="rocket-analyzer" ng-click="c.viewAnalyzer(true)">
+    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="31.076px" height="31.076px" viewBox="0 0 31.076 31.076" style="enable-background:new 0 0 31.076 31.076;" xml:space="preserve"><g><g><path d="M21.549,20.227v-3.947c0-8.806-3.725-14.125-5.283-15.964C16.098,0.116,15.851,0.002,15.591,0c-0.261-0.001-0.508,0.112-0.679,0.31c-1.584,1.835-5.384,7.156-5.384,15.97v3.948l-0.729,0.491c-1.405,0.948-2.248,2.533-2.248,4.229v4.711c0,0.279,0.154,0.537,0.4,0.67c0.247,0.132,0.546,0.117,0.778-0.039l2.368-1.577c0.665-0.442,1.445-0.679,2.244-0.679h1.741v2.283c0,0.42,0.34,0.76,0.759,0.76h1.394c0.419,0,0.759-0.34,0.759-0.76v-2.283h1.74c0.799,0,1.58,0.235,2.246,0.68l2.366,1.576c0.232,0.156,0.531,0.171,0.778,0.039c0.246-0.133,0.4-0.391,0.4-0.67v-4.711c0-1.694-0.844-3.279-2.248-4.229L21.549,20.227z M15.539,14.043c-1.446,0-2.62-1.173-2.62-2.619c0-1.447,1.174-2.619,2.62-2.619c1.445,0,2.619,1.172,2.619,2.619C18.158,12.87,16.984,14.043,15.539,14.043z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+  </button>
+</div>
+
+<div class="analyzer-content">
+  <section class="result-container">
+    <div class="images-analyzer">
+      <span class="times-close">
+        <i class="fa fa-times"></i>
+      </span>
+      <div class="title">
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 420.8 420.8" style="enable-background:new 0 0 420.8 420.8;" xml:space="preserve"><g><g><g><path d="M406.8,96.4c-8.4-8.8-20-14-33.2-14h-66.4v-0.8c0-10-4-19.6-10.8-26c-6.8-6.8-16-10.8-26-10.8h-120c-10.4,0-19.6,4-26.4,10.8c-6.8,6.8-10.8,16-10.8,26v0.8h-66c-13.2,0-24.8,5.2-33.2,14c-8.4,8.4-14,20.4-14,33.2v199.2C0,342,5.2,353.6,14,362c8.4,8.4,20.4,14,33.2,14h326.4c13.2,0,24.8-5.2,33.2-14c8.4-8.4,14-20.4,14-33.2V129.6C420.8,116.4,415.6,104.8,406.8,96.4z M400,328.8h-0.4c0,7.2-2.8,13.6-7.6,18.4s-11.2,7.6-18.4,7.6H47.2c-7.2,0-13.6-2.8-18.4-7.6c-4.8-4.8-7.6-11.2-7.6-18.4V129.6c0-7.2,2.8-13.6,7.6-18.4s11.2-7.6,18.4-7.6h77.2c6,0,10.8-4.8,10.8-10.8V81.2c0-4.4,1.6-8.4,4.4-11.2s6.8-4.4,11.2-4.4h119.6c4.4,0,8.4,1.6,11.2,4.4c2.8,2.8,4.4,6.8,4.4,11.2v11.6c0,6,4.8,10.8,10.8,10.8H374c7.2,0,13.6,2.8,18.4,7.6s7.6,11.2,7.6,18.4V328.8z"/><path d="M210.4,130.8c-27.2,0-52,11.2-69.6,28.8c-18,18-28.8,42.4-28.8,69.6s11.2,52,28.8,69.6c18,18,42.4,28.8,69.6,28.8s52-11.2,69.6-28.8c18-18,28.8-42.4,28.8-69.6s-11.2-52-28.8-69.6C262.4,142,237.6,130.8,210.4,130.8z M264.8,284c-14,13.6-33.2,22.4-54.4,22.4S170,297.6,156,284c-14-14-22.4-33.2-22.4-54.4c0-21.2,8.8-40.4,22.4-54.4c14-14,33.2-22.4,54.4-22.4s40.4,8.8,54.4,22.4c14,14,22.4,33.2,22.4,54.4C287.6,250.8,278.8,270,264.8,284z"/><circle cx="352.8" cy="150" r="19.6"/></g></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+        <p>${Image analyzer}</p>
+      </div>
+      <div class="img-container">
+        <div class="images">
+          <div class="col-md-12" ng-repeat="img in c.data.images">
+            <div class="image {{img.condition}}">  
+              <img src="{{img.url}}"><img>
+              <span>{{img.size}}</span>
+              <i class="fa ico ico-{{img.condition}}"></i> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>   
+  </section>
+</div>
+]]></template>
+</sp_header_footer>
+</unload>
