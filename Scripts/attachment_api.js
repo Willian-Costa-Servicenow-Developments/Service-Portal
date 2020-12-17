@@ -1,7 +1,7 @@
 /* 
   HTML
  */
- <input type="file" id="upload_file" >
+ <input type="file" id="upload_file">
  
  /*
   Server Script
@@ -11,17 +11,12 @@
 data.sys_id = input.sys_id || options.record_id || $sp.getParameter("sys_id");
 data.table = input.table || options.record_table || $sp.getParameter("table");
 
-// User for Authentication Basic
+// User for Authentication Basic (admin)
 data.user = "attach_user";
 data.password = "12345";
 
 // Instance name for links
 data.instance_name = gs.getProperty('instance_name');
-
-// Instance Widget record for elements identification
-var instance = $sp.getInstanceRecord();
-data.instanceID = instance.getValue('sp_widget');
-
    
  /*
   Client Script
