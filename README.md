@@ -44,6 +44,7 @@ Here is a place to share codes, widgets, ideas, and anything about Service Porta
 | [SNDocs](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Documentation/SNDocs.md) |
 | [Fix Bugs - articles](https://github.com/Organize-Cloud-Labs/Service-Portal/tree/main/Documentation/Fix%20Bugs) |
 |[GlideRecord and GlideAggregate docs](https://gist.github.com/iamwill/b545331f2934d6239ba2b85f3c1cf9ec)|
+|[GlideAggregate - Guia](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Documentation/GlideAggregate-Guia.pdf)|
 
 
 ### :computer: &nbsp; Scripts
