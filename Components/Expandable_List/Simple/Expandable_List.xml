@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<unload unload_date="2020-10-13 17:01:43">
+<unload unload_date="2021-01-15 15:09:14">
 <sp_widget action="INSERT_OR_UPDATE">
 <category>custom</category>
 <client_script><![CDATA[function($scope) {
@@ -30,10 +30,13 @@
 	$scope.refresh = function(){
 		c.loading = true;
 		c.data.action = '';
+		$('#not_found').addClass('hide');
 		$scope.data.orderField = '';
 		$scope.data.order = '';
+		c.searchText = '';
 		c.server.update().then(function(){
 			c.loading = false;
+			$('#not_found').removeClass('hide');
 		});
 	}
 
@@ -58,7 +61,31 @@
 	}
 }]]></client_script>
 <controller_as>c</controller_as>
-<css>.panel{
+<css>.search{
+  margin-right: 10px;
+  overflow: auto;
+
+  .search__icon{
+    float: right;
+    padding: 7px 12px;
+    border: 1px solid #E5E5E5;
+    border-radius: 0px 6px 6px 0px;
+    border-left: none;
+  }
+
+  .search__input{
+    float: right;
+    border: 1px solid #E5E5E5;
+    border-radius: 6px 0px 0px 6px;
+    padding-left: 12px;
+    width: 250px;
+    height: 30px;
+    margin-right: -3px;
+    border-right: none;
+  }
+}
+
+.panel{
   margin: 10px;
   background: white;
   border-radius: 6px;
@@ -145,26 +172,35 @@
 .close_icon{
   font-size: 20px;
   float: right;
+} 
+
+#not_found{
+  font-size: 19px;
+  text-align: center;
+  padding-bottom: 25px;
+  padding-top: 25px;
+  border: 1px solid #E5E5E5;
+}
+
+#not_found svg{
+  font-size: 50px;
+  margin-bottom: 10px;
 }
 
 .loading{
   border: 1px solid #E5E5E5;
+  text-align: center;
 
-  .loading__loader {
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    margin: 15px auto 15px auto;
-    border-top: 16px solid #2e2e2e;
-    border-bottom: 16px solid #2e2e2e;
-    width: 60px;
-    height: 60px;
+  i{
+    font-size: 35px;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
+    margin-top: 20px;
   }
   p{
-    text-align: center;
     font-size: 21px;
     font-family: 'Helvetica';
+    margin-top: 8px;
   }
 }
 
@@ -178,6 +214,7 @@
   100% { transform: rotate(360deg); }
 }
 
+
 </css>
 <data_table>sp_instance_table</data_table>
 <demo_data/>
@@ -185,27 +222,27 @@
 <docs display_value=""/>
 <field_list>title,table,field_list,maximum_entries</field_list>
 <has_preview>false</has_preview>
-<id/>
+<id>ocl__expandable_list</id>
 <internal>false</internal>
 <link><![CDATA[function link(scope, element, attrs, controller) {
 
 }]]></link>
 <name>OCL: Expandable list</name>
-<option_schema>[{"name":"icon_class","section":"other","default_value":"fa fa-flag","label":"Icon full class - like: \"fa fa-flag\"","type":"string"},{"name":"all_fields","section":"other","label":"All Fields","type":"string"}]</option_schema>
+<option_schema>[{"name":"icon_class","section":"other","default_value":"","label":"Icon full class - like: \"fa fa-flag\"","type":"string"},{"name":"all_fields","section":"other","label":"All Fields","type":"string"}]</option_schema>
 <public>false</public>
 <roles/>
 <script><![CDATA[(function() {
-	/* populate the 'data' object */
-	/* e.g., data.table = $sp.getValue('table'); */
 
+	// Critical Data
 	data.table = options.table || $sp.getParamenter('table');
 	data.fields = options.field_list || $sp.getParamenter('field_list');	
 	data.fields = data.fields.split(',');
 	data.all_fields = options.all_fields || $sp.getParamenter('all_fields');
-	var limit = options.maximum_entries;
+	var limit = options.maximum_entries || 0;
 	if(data.all_fields) data.all_fields = data.all_fields.split(',');
 	data.exp_array =[];
 
+	// Expanded line
 	if(input.action == 'getLine'){
 		var grExp = new GlideRecord(data.table);
 		grExp.get(input.sys_id);
@@ -225,9 +262,24 @@
 	var line = 0, arr_col = [], arr_row = [];
 
 	if(input.action == 'sortByField'){
-		 getData(input.orderField);
+		getData(input.orderField);
 	}
 	
+	var grCol = new GlideRecord(data.table);
+	grCol.setLimit(1);
+	grCol.query();
+
+	if(!grCol.next())
+		return;
+
+	for(var i=0; i < data.fields.length; i++){
+		var column_obj = {
+			label: grCol[data.fields[i]].getLabel(),
+			name: data.fields[i]
+		}
+		data.columns.push(column_obj);
+	}
+
 	function getData(field){
 		var gr = new GlideRecord(data.table);
 		if (field){
@@ -236,8 +288,17 @@
 			else
 				gr.orderByDesc(input.orderField);
 		}
-		if(limit) gr.setLimit(limit);
+		if(limit > 0) gr.setLimit(limit);
 		gr.query();
+
+		if(!gr.isValid()){
+			return
+		}
+
+		data.acl = {w: gr.canWrite(), r: gr.canRead(), c: gr.canCreate(), d: gr.canDelete()}
+		if(!data.acl.r){
+			return
+		}
 
 		while(gr.next()){
 
@@ -245,15 +306,10 @@
 				var obj = {
 					display: gr.getDisplayValue(data.fields[i]) || ' ... ' ,
 					sys_id: gr.getValue('sys_id')
+					/* use it to make a ng-switch, like ng-switch-when="state"
+					type: data.fields[i]*/ 
 				};
 				arr_col.push(obj);
-				if(data.columns.length < data.fields.length){
-					var column_obj = {
-						label: gr[data.fields[i]].getLabel(),
-						name: data.fields[i]
-					}
-					data.columns.push(column_obj);
-				};
 			}
 			arr_row.push(arr_col);
 			arr_row.push(line);
@@ -271,15 +327,22 @@
 <sys_created_by>admin</sys_created_by>
 <sys_created_on>2020-10-08 17:13:52</sys_created_on>
 <sys_id>c41552ac2f331010c5d33f96f699b651</sys_id>
-<sys_mod_count>318</sys_mod_count>
+<sys_mod_count>325</sys_mod_count>
 <sys_name>OCL: Expandable list</sys_name>
 <sys_package display_value="Global" source="global">global</sys_package>
 <sys_policy/>
 <sys_scope display_value="Global">global</sys_scope>
 <sys_update_name>sp_widget_c41552ac2f331010c5d33f96f699b651</sys_update_name>
 <sys_updated_by>admin</sys_updated_by>
-<sys_updated_on>2020-10-13 15:17:21</sys_updated_on>
-<template><![CDATA[<div class="panel">
+<sys_updated_on>2020-11-13 14:05:28</sys_updated_on>
+<template><![CDATA[<!-------- INPUT -------->
+<div class="search">
+  <i class="fa fa-search search__icon"></i>
+  <input type="text" class="search__input" ng-model="c.searchText" placeholder="Search..."> 
+</div>
+
+<!-------- LIST -------->
+<div class="panel">
   <div class="panel-heading">
     <h1>
       <span class="refresh_button" ng-click="refresh()"><i class="fa fa-refresh"></i></span>
@@ -289,7 +352,7 @@
   </div>
   <div class="panel-body list">
     <div ng-show="c.loading" class="loading">
-      <div class="loading__loader"></div>
+      <i class="fa fa-spinner" aria-hidden="true"></i>
       <p>${Loading...}</p>
     </div>
     <table ng-show="!c.loading">
@@ -303,9 +366,9 @@
         </tr>
 
         <!-- List -->
-        <tr ng-repeat="record in data.list">
+        <tr ng-repeat="record in data.list | filter:c.searchText">
           <td ng-click="expand(field,record[1])" ng-repeat="field in record[0]" class="short_col_{{record[1]}} pointer">
-            <span>{{field.display}}</span>
+            <span class="list__short--label">{{field.display}}</span>
           </td>
           <td class="exp_col_{{record[1]}} hide" colspan="{{data.columns.length}}">
             <div class="close_icon">
@@ -322,6 +385,14 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- Not found -->
+    <div ng-if="data.list.length == 0" id="not_found">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-funnel" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"/>
+      </svg>
+      <p>${No result found ...}</p>
+    </div>
   </div>
   <div class="panel-footer">
     <!-- Something -->
