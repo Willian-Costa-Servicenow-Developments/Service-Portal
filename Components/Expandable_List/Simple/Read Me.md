@@ -9,6 +9,7 @@ It is a list that, when you click on a row, the data expands, presenting more fi
 - Maximum entries (optional): max number of lines
 - Title (optional): the title
 - Icon (optional): the title icon
+- Filter (optional)
 - All Fields (mandatory): the fields that will be on the EXPANDABLE list
 
 ### Gallery
