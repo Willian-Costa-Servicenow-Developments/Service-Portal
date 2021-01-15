@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unload unload_date="2021-01-15 14:18:23">
+<sp_widget action="INSERT_OR_UPDATE">
+<category>custom</category>
+<client_script><![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+	
+	$('#myModal2').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) 
+  $("a[href='"+button.data('target-tab')+"']").tab('show');
+})
+	
+	
+};]]></client_script>
+<controller_as>c</controller_as>
+<css>.bigpurple {
+  background-image: url('https://media.istockphoto.com/photos/light-pink-and-purple-defocused-blurred-motion-abstract-background-picture-id1138288771?k=6&amp;m=1138288771&amp;s=612x612&amp;w=0&amp;h=ctKpskhOsLTyH7kH1WMsqtKcTW4V5Ubd49TSwYLEQSA=');
+  //background-color: purple;
+  background-size: cover;
+  width: 585px;
+  height: 380px;
+  color: white;
+  text-align:center;
+  padding: 50px 0 40px 0;
+}
+
+.item-img {
+  text-align: center;
+  display: block;
+  transition: all .2s ease-in-out;
+
+}
+span.item-img:hover {
+  transform: scale(1.1);
+}
+.smaller {
+  //
+  width: 292px;
+  height: 190px;
+  text-align: center;
+}
+.lightgreyone {
+  background-color: #68BE3C;//lightgrey;
+}
+.blueone {
+  background-color: #503498;//lightblue;
+}
+.greenone {
+  background-color: #FFFFFF;//lightgreen;
+}
+.redone {
+  background-color: #011d53;//indianred;
+}
+
+.item-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+.item-text {
+  text-align: center;
+  display: block;
+  margin-bottom: 30px;
+} 
+.profile-item {
+  //text-align: center;
+  display: block;
+  //padding: 10px;
+}
+.profile-button {
+  background-color: none;
+  border: 0;
+  cursor: pointer;
+}
+span.profile-item:hover {
+  transform: scale(1.1) !important;
+  cursor: pointer !important
+}
+span.profile-item {
+  cursor: pointer !important
+    transition: all .2s ease-in-out;;
+}
+.items-title {
+  font-size: 22px;
+  color: #fff;
+  font-weight: 300;
+}
+.content-item {
+  padding-top: 20px;
+}
+.items-title-light {
+  color: #000;
+  font-size: 22px;
+  font-weight: 300;
+}
+.alt-img-size {
+  width: 96px;
+}
+// modal styling
+.animate-bottom {
+  position: relative;
+  animation: animatebottom 0.4s;
+}
+
+@keyframes animatebottom {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+// modal ajustes
+media (min-width: 768px) {
+  .modal-dialog {
+    width: 1170px;
+    margin: 70px auto;
+  }
+}
+.modal-body {
+  height: 88vh;
+}
+div#myModal2 {
+  overflow: hidden !important;
+}
+.modal-dialog {
+  width: 1170px;
+}
+//
+#exTab1 .tab-content {
+  color : black !important;
+  background-color: white; //#428bca;
+  padding : 5px 15px;
+}
+
+#exTab2 h3 {
+  color : black;
+  background-color: white; //#428bca;
+  padding : 5px 15px;
+}
+
+/* remove border radius for the tab */
+
+#exTab1 .nav-pills &gt; li &gt; a {
+  border-radius: 0;
+}
+
+/* change border radius for the tab , apply corners on top*/
+
+#exTab3 .nav-pills &gt; li &gt; a {
+  border-radius: 4px 4px 0 0 ;
+}
+
+#exTab3 .tab-content {
+  color : black;
+  background-color: white; // #428bca;
+  padding : 5px 15px;
+}
+
+.modal-title {
+  color: black;color: black;
+  font-size: 30px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+</css>
+<data_table>sp_instance</data_table>
+<demo_data/>
+<description/>
+<docs display_value=""/>
+<field_list/>
+<has_preview>false</has_preview>
+<id/>
+<internal>false</internal>
+<link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+<name>test grid</name>
+<option_schema/>
+<public>false</public>
+<roles/>
+<script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	data.testOpt = {"table": "incident", "field_list": "number,opened_by", "maximum_entries": "5", "title": "Incident List", "filter": "opened_byDYNAMIC90d1921e5f510100a9ad2572f2b477fe", "all_fields": "number,opened_by"};
+	
+	
+	
+})();]]></script>
+<servicenow>false</servicenow>
+<sys_class_name>sp_widget</sys_class_name>
+<sys_created_by>victorugob</sys_created_by>
+<sys_created_on>2020-12-23 01:00:28</sys_created_on>
+<sys_id>759e42bc2fd16010527a837cf699b652</sys_id>
+<sys_mod_count>237</sys_mod_count>
+<sys_name>test grid</sys_name>
+<sys_package display_value="Global" source="global">global</sys_package>
+<sys_policy/>
+<sys_scope display_value="Global">global</sys_scope>
+<sys_update_name>sp_widget_759e42bc2fd16010527a837cf699b652</sys_update_name>
+<sys_updated_by>victorugob</sys_updated_by>
+<sys_updated_on>2021-01-14 13:17:46</sys_updated_on>
+<template><![CDATA[<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="bigpurple">
+        <span class="item-title">Order Something</span>
+        <span class="item-text">Browse in the Service Catalog</span>
+        <span class="item-img"> <img src="https://i.pinimg.com/originals/41/c3/35/41c33562d5c50720ad69ce9b0cd86585.png" width="350"></span>
+        <!-- modal starts -->
+
+        <div class="modal fade animate" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content animate-bottom">
+              <!-- <div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+<h4 class="modal-title" id="myModalLabel"> My Area </h4> 
+</div> -->
+              <div class="modal-body">
+                <!-- conteudo -->
+                <!-- <div class="container"><h2>Example 3 </h2></div>-->
+                <h4 class="modal-title" id="myModalLabel"> My Area </h4>
+                <div id="exTab3" class="container">	
+                  <ul  class="nav nav-pills">
+                    <li class="active">
+                      <a  href="#1b" data-toggle="tab">My Incidents</a>
+                    </li>
+                    <li><a href="#2b" data-toggle="tab">My Time Cards</a>
+                    </li>
+                    <li><a href="#3b" data-toggle="tab">My Requests</a>
+                    </li>
+                    <li><a href="#4b" data-toggle="tab">My Profile</a>
+                    </li>
+                  </ul>
+
+                  <div class="tab-content clearfix">
+                    <div class="tab-pane active" id="1b">
+                      <div> <widget id="ocl__expandable_list_plus" options="data.testOpt" > </widget></div>
+                    </div>
+                    <div class="tab-pane" id="2b">
+                      <h3>
+                        widget_drill_list
+                      </h3>
+                     <!-- <div> <widget id="widget-sc-cat-item-v2" > </widget></div> -->
+
+                    </div>
+                    <div class="tab-pane" id="3b">
+                      <h3>We applied clearfix to the tab-content to rid of the gap between the tab and the content</h3>
+                    </div>
+                    <div class="tab-pane" id="4b">
+                      <div class="tab-pane active" id="1b">
+                        <div> <widget id="vhb_full_profile" options="data.testOpt"> </widget></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- ends conteudo -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- modal ends -->
+      </div>
+
+
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="smaller redone">
+            <div class="content-item" >
+
+              <span class="profile-item"><a type="submit" class="profile_button" data-toggle="modal" data-target="#myModal2" data-target-tab="#3b" data-backdrop="false">
+                <img src="https://img.icons8.com/nolan/96/request-service.png" />
+                </a></span> <span class="items-title">Your Requests</span>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="smaller blueone">
+            <div class="content-item" >
+
+              <span class="profile-item"><a type="submit" class="profile_button" data-toggle="modal" data-target="#myModal2" data-target-tab="#4b" data-backdrop="false">
+                <img src="https://img.icons8.com/color/96/000000/circled-user-male-skin-type-4--v1.png" />
+                </a></span>                      <span class="items-title">Your Profile</span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="smaller greenone"><div class="content-item" >
+
+            <span class="profile-item"><a type="submit" class="profile_button" data-toggle="modal" data-target="#myModal2" data-target-tab="#1b" data-backdrop="false">
+              <img src="https://img.icons8.com/pastel-glyph/64/4a90e2/information--v1.png" class="alt-img-size" />
+              </a></span>                      <span class="items-title-light">Your Incidents</span>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="smaller lightgreyone">
+            <div class="content-item" >
+
+              <span class="profile-item"><a type="submit" class="profile_button" data-toggle="modal" data-target="#myModal2" data-target-tab="#2b" data-backdrop="false">
+                <img src="https://img.icons8.com/pastel-glyph/64/ffffff/time.png" class="alt-img-size" />
+                </a></span>                      <span class="items-title">Your Time Cards</span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>]]></template>
+</sp_widget>
+</unload>
