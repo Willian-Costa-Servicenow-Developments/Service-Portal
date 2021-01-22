@@ -16,3 +16,7 @@ The widget can unite items from catalogs and categories while browsing the lists
 
 ### Demonstration
 ![Catalog_List](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Components/Catalog%20List/catalog-list.png)
+
+Catalog Items: Identified with arrow icon
+
+Categories: Identified with archive icon
