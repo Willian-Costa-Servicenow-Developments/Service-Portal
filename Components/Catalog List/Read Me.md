@@ -7,6 +7,7 @@ Dynamic list component of categories and catalog items
 The widget can unite items from catalogs and categories while browsing the lists
 
 1 - The first list by default behind the parent categories
+
 2 - When selecting the parent category the next items to be listed will be items and / or categories ... until reaching the last possible level within the catalog
 
 ### Options
