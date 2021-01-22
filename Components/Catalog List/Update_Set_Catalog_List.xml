@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2021-01-22 19:55:50">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description/>
+<inserted/>
+<name>Catalog_List_Component</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>130070fadbf12010aee5a0f2ca961990</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2021-01-22 19:55:49</sys_created_on>
+<sys_id>d6c27c3edbf12010aee5a0f2ca96199f</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2021-01-22 19:55:49</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_widget_078223aadb312010aee5a0f2ca9619d4</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[api.controller=function($location) {
+  /* widget controller */
+  var c = this;
+	
+	c.getNextLevel = function(index, table, element){
+		var parms = {};
+		parms.action = 'nextLevel';
+		parms.element = element;
+		
+		if(table == 'sc_cat_item')
+			// Replace id page
+			$location.url("?id=" + c.data.page + "&amp;sys_id=" + element);
+			
+		c.server.get(parms).then(function(r){
+			c.data.catalog.splice(index + 1, c.data.catalog.length);	
+			c.data.catalog.push(r.data.childs);
+		});
+		
+	};
+	
+};]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;.catalog{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  section{
+    li{
+      list-style: none;
+      padding: 5px 15px;
+      margin 0 5px;
+    }
+  }
+}&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id&gt;catalog_custom&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {
+  $(document).on('click', '.item', function(){
+		$(this).css('background', 'gainsboro');
+	});
+}]]&gt;&lt;/link&gt;&lt;name&gt;Catalog Custom&lt;/name&gt;&lt;option_schema&gt;[{"displayValue":"Catalog","name":"catalog","display_value_list":[],"section":"Data","label":"Catalog","type":"reference","value":"sc_catalog","ed":{"reference":"sc_catalog"}},{"name":"page","section":"other","default_value":"cat_item_itsm","label":"Page","type":"string"}]&lt;/option_schema&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+	data.catalog_id = options.catalog;
+	data.page = options.page;
+
+	var include = new PortalUtils();
+
+	data.catalog = [];
+
+	var elements = {};
+	elements = include.getCategories('sc_catalog', data.catalog_id, 'active=true^parentISEMPTY');
+	data.catalog.push(elements); 
+
+	if(input.action == 'nextLevel'){
+		data.childs = {};
+		data.childs = include.getChildren(input.element);
+	}
+
+
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-01-22 14:05:35&lt;/sys_created_on&gt;&lt;sys_id&gt;078223aadb312010aee5a0f2ca9619d4&lt;/sys_id&gt;&lt;sys_mod_count&gt;49&lt;/sys_mod_count&gt;&lt;sys_name&gt;Catalog Custom&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_078223aadb312010aee5a0f2ca9619d4&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-01-22 19:46:24&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div class="catalog"&gt;
+  
+  &lt;section ng-repeat="cat in data.catalog"&gt;  	
+    &lt;li class="cat item" ng-repeat="item in cat"&gt;
+    	&lt;a ng-click="c.getNextLevel($parent.$index, item.table, item.sys_id)"&gt;
+        &lt;i class="fa {{item.fa}}"&gt;&lt;/i&gt;
+        {{item.title}}
+      &lt;/a&gt;
+    &lt;/li&gt;   
+  &lt;/section&gt;
+  
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+<payload_hash>1901454918</payload_hash>
+<remote_update_set display_value="Catalog_List_Component">d6c27c3edbf12010aee5a0f2ca96199f</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2021-01-22 19:55:49</sys_created_on>
+<sys_id>52c27c3edbf12010aee5a0f2ca9619c5</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1772ba22b530000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2021-01-22 19:55:49</sys_updated_on>
+<table/>
+<target_name>Catalog Custom</target_name>
+<type>Widget</type>
+<update_domain>global</update_domain>
+<update_guid>d0a0f4fa43f120104fc18f8829e49c85</update_guid>
+<update_guid_history>d0a0f4fa43f120104fc18f8829e49c85:1901454918,ed80b0fa07f120106aef65af828523bb:-754317637,ab70387a0cf1201033466a1329bb89fa:-761577404,8a8da47a9cf12010b1f7c2bae2f6b8da:-1515983070,b56d207ab8f12010fb18c06b13d54817:2030905191,b345a036faf12010e179bf23f1493485:-1163222753,c32420f251f120109b94a66c294685c8:793115053,b114a47278f1201033c7305e8d5fd71c:1085624863,a28320f2e5f12010d371f344a8816692:-729852787,d2dd18fe5bb120105a80121c759165ef:-1186727052,d1bdd8be01b1201003a8c1f8facc1358:1972948048,5b7d98be61b1201000eb8e831fb86fc2:1546083642,c59c183e97b120103072f84329c93ac5:-459805874,487c9cfabdb12010a07014c4105ccf45:1217337902,72a99c7a88b12010988a3b8ef8d6a271:1961646750,7f09183e13b12010a1f295d491fea4ba:-1013636983,c80858fa8bb12010781f5885675d582d:-1376901048,f18790fac8b12010bae22c8a3c76357f:2107095711,a4e690bad9b12010e64be4c98338a13f:-581087044,f04590baa5b12010652263de3acbad37:1576110951,c72ac0beb6712010654083fec6992bd2:-1991704206,4759c8b220b12010d4f0e1cfe120af1f:391244082,de1800be617120103ce5a4efe077404b:-248888862,70950cbe7f71201039d95da6f19b42ec:-2071838771,c4850cbe5e712010705387549f5962d5:-1740647466,f783887ecc71201095105cb78120a406:-1373782536,6a230cbe917120106992339958d327cd:425972940,2d230c7e307120100a2ac0a401d673a1:-52635131,deb284f6db7120105a71b2a923d281b8:216496920,1a6244be69712010a052f8e93f3fb62b:1381041568,ad420c7ee37120107772575cdcd93fbc:-1425450847,67e14cf684712010e9b1a345bce9f946:882087616,ca9144f6f27120100ba75571e9694d29:1414343188,ae51487e24712010f918026a6c8a46c1:-1644245583,d554732255712010dfcd025ba48bac27:1797262055,3e5177ee833120109c9be2e5cfbf8a49:-676146304,657d6fae1f312010e24778d7c14c0e78:1119886311,2cdbe3ae243120100081d26f85acf490:771698756,a8cb2bae01312010f26ba031e25f1077:1425003045,c3bb2322be712010664e0ee32941512c:771698756,f2abefee1d312010edfa3afed76e8ce6:-462604775,f25aa3aee6312010a4d63d0626d9b5df:5177,c8c4e3aaf3312010f4629d0093a97579:1157984126,2cb42beab53120104a55166b88e8a9b8:1800130710,5604a7aae43120102fc2698d2d676716:481421195,74f323ea8a3120103cefdc3007f36fd9:-1616558966,30932faaac312010c6e685b685bd482b:-1386518859,9173a3aaf93120100e0f1964aede425a:914247315,fd53e3aa27312010e0f61c80fc7ae1a7:360966356,739263aaf33120102fb4764ab81b1008:1696302272</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_include_8db0fcf2dbf12010aee5a0f2ca9619b0</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;global.PortalUtils&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;true&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;PortalUtils&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var PortalUtils = Class.create();
+PortalUtils.prototype = Object.extendsObject(AbstractAjaxProcessor, {
+
+	initialize: function() {
+	},
+
+	getCategories: function(column, parent, query){
+		var categories = [];
+		var gr = new GlideRecord('sc_category');
+		gr.addEncodedQuery( column + '=' + parent + '^' + query);
+		gr.query();
+
+		while(gr.next()){
+			var record = {};
+			record.sys_id = gr.getUniqueValue();
+			record.table = gr.getTableName();
+			record.title = gr.getDisplayValue('title');
+			record.fa = 'fa-archive';
+			record.description = gr.getDisplayValue('description');
+			categories.push(record);
+		}
+		
+		categories.sort(function(a, b) {
+			return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
+		});
+		
+		return categories;
+	},
+	
+	getCatalogItems: function(category){
+		var catalog_items = [];
+		var gr = new GlideRecord('sc_cat_item_category');
+		gr.addEncodedQuery('sc_category =' + category + '^sc_cat_item.active=true');
+		gr.query();
+		while(gr.next()){
+			var record = {};
+			record.sys_id = gr.getValue('sc_cat_item');
+			record.table = gr.sc_cat_item.getRefRecord().getTableName();
+			record.title = gr.getDisplayValue('sc_cat_item');
+			record.fa = "fa-arrow-right";
+			catalog_items.push(record);
+		}
+		return catalog_items;
+	},
+	
+	getChildren: function(element){
+		var categories = this.getCategories('parent', element, 'active=true');
+		var catalog_items = this.getCatalogItems(element);
+		var list = categories.concat(catalog_items);
+		
+		list.sort(function(a, b) {
+			return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
+		});
+		
+		return list;
+	},
+
+	type: 'PortalUtils'
+});]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-01-22 19:46:44&lt;/sys_created_on&gt;&lt;sys_id&gt;8db0fcf2dbf12010aee5a0f2ca9619b0&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;PortalUtils&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_8db0fcf2dbf12010aee5a0f2ca9619b0&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-01-22 19:47:05&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+<payload_hash>107890452</payload_hash>
+<remote_update_set display_value="Catalog_List_Component">d6c27c3edbf12010aee5a0f2ca96199f</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2021-01-22 19:55:50</sys_created_on>
+<sys_id>6ac27c3edbf12010aee5a0f2ca9619c5</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1772ba2cdba0000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2021-01-22 19:55:50</sys_updated_on>
+<table/>
+<target_name>PortalUtils</target_name>
+<type>Script Include</type>
+<update_domain>global</update_domain>
+<update_guid>92c038fab8f120106f470e81eb6f1144</update_guid>
+<update_guid_history>92c038fab8f120106f470e81eb6f1144:107890452,9db0fcf221f120108b87222510fef9b3:-1642933339</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
