@@ -54,7 +54,13 @@ Here is a place to share codes, widgets, ideas, and anything about Service Porta
 | [general_module.js](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Scripts/general_module.js) | Common scripts         |
 | [service_portal.js](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Scripts/service_portal.js) | Service Portal scripts |
 
-​		
+### :floppy_disk:  Update Set
+
+| File                                                         | Description      |
+| ------------------------------------------------------------ | ---------------- |
+| [Ticket Page](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Templates/Tickets_Page) | Tickets Template |
+
+
 
 <p align="center"><img src="https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Images/organize.jpeg" /></p>
 
