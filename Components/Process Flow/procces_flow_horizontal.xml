@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unload unload_date="2021-01-28 19:36:57">
+<sp_widget action="INSERT_OR_UPDATE">
+<category>custom</category>
+<client_script><![CDATA[function() {
+  var c = this;
+	
+	c.color = function(state,index){
+		 return ((state.order > c.data.active_order) || ((c.data.state.length - index) == 2) || !c.data.show);
+	}
+}]]></client_script>
+<controller_as>c</controller_as>
+<css>.flow{
+  padding-bottom: 15px;
+}
+
+.steps{
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.steps__item{
+  display: inline-block;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 16px;
+  position:relative;
+  width: 25%;
+
+  p{
+    margin-bottom: 0px;
+    text-align: center;
+  }
+}
+
+.icons{
+  position:relative;
+  text-align: center;
+  border-radius: 25px;
+  width: 26px;
+  height: 26px;
+  margin: auto;
+  margin-bottom: 5px;
+  padding-top: 5px;
+  color: white;
+  font-size: 16px;
+  display: block;
+  z-index: 2;
+  font-style: normal;
+}
+
+.icons::before{
+  position: relative;
+}
+
+.steps__item::after{
+  content: " ";
+  position: absolute;
+  top: 26%;
+  width: 100%;
+  left: 50%;
+  height: 2px;
+  z-index: 0;
+}
+
+.pink_line{
+  &amp;::after{
+    background-color: $brand-primary;
+  }
+}
+
+.grey_line{
+  &amp;::after{
+    background-color: #BBAEA6;
+  }
+}
+
+.steps__item:last-child{
+  &amp;::after{
+    display: none;
+  }
+}
+
+.nextStep{
+  background-color: #BBAEA6;
+
+  span{
+    z-index: 2;
+    position: relative;
+  }
+}
+
+.previousStep, .actualStep{
+  background-color: $brand-primary;
+}
+
+@media screen and (max-width: 992px) and (min-width: 768px){
+  .steps__item::after{
+    top: 20%;
+
+  }
+} 
+
+@media screen and (max-width: 657px){
+  .steps__item::after{
+    top: 20%;
+  }
+} 
+
+@media screen and (max-width: 455px){
+  .steps__item p{
+    font-size: 10px;
+  }
+} 
+
+
+
+
+
+
+
+
+
+
+
+</css>
+<data_table>sp_instance</data_table>
+<demo_data/>
+<description/>
+<docs display_value=""/>
+<field_list/>
+<has_preview>false</has_preview>
+<id>acn_workflow_stages</id>
+<internal>false</internal>
+<link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+<name>ACN Workflow Stages</name>
+<option_schema>[]</option_schema>
+<public>false</public>
+<roles/>
+<script><![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+
+	options.table = $sp.getParameter("table");
+	options.record = $sp.getParameter("sys_id");
+
+	var gr = new GlideRecord(options.table);
+	gr.get(options.record)
+	data.currentTable = '';
+	data.atualKey = '';
+	data.canRead = gr.canRead();
+
+	var fields = $sp.getField(gr, 'stage');
+	data.flow = createProcessFlow();
+
+	// Check the process flow query against the current job to see if the conditions match
+
+	function getCurrentSteps(step, table, id) {
+
+		var gnr = new GlideRecord(table);
+		gnr.addEncodedQuery(step);
+		gnr.addQuery('sys_id', id);
+		gnr.query();
+		if (gnr.next()) 
+			return 'warning';
+		else 
+			return 'primary';
+	}
+
+	// Set the previous steps in the flow to success if the current step is further down the order
+	function ActiveSuccess(items) {
+		var i = 0;
+		for (var key in items) {
+			var value = items[key];
+
+			data.atualKey = key;
+			if (value.colour == 'warning') {
+				var index = i;
+				for (var j = 0; j<i; j++) {
+					items[j].colour = 'success';
+				}
+				if (index == items.length) {
+					value.colour = 'sucess';
+				}
+				break;
+			}
+			i++;
+		}
+
+		return items;
+	}
+
+
+	function createProcessFlow() {
+
+		var table = gr.getTableName();
+		var id = gr.getUniqueValue();
+
+		var gf = new GlideRecord('sys_process_flow');
+		gf.addActiveQuery();
+		gf.addQuery('table', table);
+		gf.orderBy('order');
+		gf.query();
+
+		data.currentTable = table;
+		var items = [];
+
+		var count = 0;
+
+		while (gf.next()) {
+
+			count++;
+
+			var item = {};
+			item.name = gs.getMessage(gf.getDisplayValue("label"));
+			item.colour = getCurrentSteps(gf.condition.toString(), table, id);
+			item.number = count;
+			item.stage = gr.getValue('stage');
+			items.push(item);
+
+		}
+
+		items = ActiveSuccess(items);
+		return items;
+
+	}
+
+})();]]></script>
+<servicenow>false</servicenow>
+<sys_class_name>sp_widget</sys_class_name>
+<sys_created_by>organize.gabriella</sys_created_by>
+<sys_created_on>2020-01-17 13:21:27</sys_created_on>
+<sys_id>84b2b057db5680504e5f32ffaa961982</sys_id>
+<sys_mod_count>254</sys_mod_count>
+<sys_name>ACN Workflow Stages</sys_name>
+<sys_package display_value="Global" source="global">global</sys_package>
+<sys_policy/>
+<sys_scope display_value="Global">global</sys_scope>
+<sys_update_name>sp_widget_84b2b057db5680504e5f32ffaa961982</sys_update_name>
+<sys_updated_by>organize.mateus</sys_updated_by>
+<sys_updated_on>2021-01-28 19:20:54</sys_updated_on>
+<template><![CDATA[<div class="flow" ng-if="data.canRead && data.flow.length > 0">
+  <ul class="steps">
+    <li ng-repeat="key in data.flow" class="steps__item" ng-class="{'grey_line': key.colour != 'success', 'pink_line': key.colour == 'success'}">
+      <i 
+         ng-if="key.colour == 'success'" 
+         class="icon-check previousStep icons"
+         aria-hidden="true">
+      </i>
+      <i 
+         ng-if="key.colour == 'warning'" 
+         class="icon-check actualStep icons"
+         aria-hidden="true">
+      </i>
+      <i 
+         class="nextStep icons"
+         ng-if="key.colour != 'success' && key.colour != 'warning'"
+         aria-hidden="true">
+        <span>{{key.number}}</span>
+      </i>
+      <p>
+        {{key.name}}
+      </p>        
+    </li>
+  </ul>
+</div>]]></template>
+</sp_widget>
+</unload>

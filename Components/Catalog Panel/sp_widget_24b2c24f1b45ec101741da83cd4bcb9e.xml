@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unload unload_date="2021-01-28 16:05:05">
+<sp_widget action="INSERT_OR_UPDATE">
+<category>custom</category>
+<client_script><![CDATA[api.controller=function($scope, $timeout, $interval) {
+	/* widget controller */
+	var c = this;
+	/* ---- Tabs -----*/
+	$scope.click = 1;
+	c.selected = '4b6487621bfc6810760ba8ecbc4bcb1b';
+	/* ---- OrderBy -----*/
+	c.order_cards = c.options.order_card;
+	c.order_items = c.options.order_items;
+	c.reverse_cards = c.options.card_reverse;
+	c.reverse_items = c.options.items_reverse;
+
+	if(c.reverse_cards === 'true')
+		c.reverse_cards = true;
+	else if(c.reverse_cards === 'false')
+		c.reverse_cards = false;
+
+	if(c.reverse_items === 'true')
+		c.reverse_items = true;
+	else if(c.reverse_items === 'false')
+		c.reverse_items = false;
+
+	/* ---- Hide/Show -----*/
+	c.eye = 'fa-eye-slash';
+	$scope.show = function(){
+		if(c.eye == 'fa-eye-slash')
+			c.eye = 'fa-eye';
+		else
+			c.eye = 'fa-eye-slash';
+		$scope.run();
+	};
+
+	$scope.selectCat = function(cat){
+		if(c.selected == cat.id)
+			c.selected = undefined;
+		else
+			c.selected = cat.id;
+		$scope.openFilter();
+		$scope.run();
+	}
+
+ function valid(){
+		var tam = parseFloat($(".masonry").height());
+		var element = $('.mansory');
+		if(element.offsetWidth < element.scrollWidth){
+			tam = tam*1.1;
+			$(".masonry").css('max-height',tam);
+			c.valid();
+		}
+	}
+	
+	/* ---- Fix Layout in two columns -----*/
+	$scope.fixMasonry = function(){	
+		$timeout(function(){
+			$(".masonry").css('max-height','none');
+			var tam = parseFloat($(".masonry").height());
+			if(tam > 514 && $(window).width() >= 992){
+				tam = (tam/2)*1.23;
+				$(".masonry").css('max-height',tam);
+			}else
+				$(".masonry").css('max-height','none');
+			valid();
+		},1000);
+	}
+
+	/* ---- Remove HTML Tags -----*/
+	$scope.removeHTML = function (html){
+		if(!html) return '';
+		html = html.replace(/<style([\s\S]*?)<\/style>/gi, '');
+		html = html.replace(/<script([\s\S]*?)<\/script>/gi, '');
+		html = html.replace(/<\/div>/ig, '\n');
+		html = html.replace(/<\/li>/ig, '\n');
+		html = html.replace(/<li>/ig, '  *  ');
+		html = html.replace(/<\/ul>/ig, '\n');
+		html = html.replace(/<\/p>/ig, '\n');
+		html = html.replace(/<br\s*[\/]?>/gi, "\n");
+		html = html.replace(/<[^>]+>/ig, '');
+		html = html.replace(/&nbsp;/gi," ");
+		return html;
+	}
+
+	/* ---- Confirm Modal -----*/
+	c.openJustificative = function(sys_id_item){
+
+		c.item_id = sys_id_item;
+		if(c.data.items_fv.indexOf(c.item_id) == -1){
+			c.submitModal();
+		}else{
+			c.modal("show");
+		}
+	}
+
+	c.submitModal = function(){
+		c.data.item_id = c.item_id;
+		c.server.update().then(function() {
+			c.modal("hide");
+			c.data.item_id = '';
+		});
+	}
+
+	c.modal = function(event){
+
+		$('#myModal').modal(event);
+	}
+
+	if(c.data.catalog_security == 'my_favorite'){
+		$timeout(function(){
+			$("#my_tab_fav").trigger('click'); 
+		},50);
+	}
+
+	$scope.run = function(){
+		$scope.data.fix = !$scope.data.fix;
+	}
+
+	$scope.$watch("data.fix",function(){
+		$scope.fixMasonry();
+	});
+
+};]]></client_script>
+<controller_as>c</controller_as>
+<css>//------------------------TABS------------------------
+.grid-item { width: 200px; }
+.tabs{
+  position: relative;
+  display: flex;
+  justify-content: flex-end; 
+  margin-right: 10px;
+}
+
+.tabs div{
+  padding: 10px 35px;
+}
+
+.selected_tab{
+  border-bottom: 4px solid #0076CE;
+  -webkit-box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, .2);
+  box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, .2);
+}
+.filter-mobile{
+  display: none;
+}
+//------------------------CONTAINER------------------------
+.cat_container{
+  background-color: #F5F5F5;
+  -webkit-box-shadow: 0px 4px 7px 2px rgba(0,0,0,0.2); 
+  box-shadow: 0px 4px 7px 2px rgba(0,0,0,0.2);
+  margin-bottom: 100px;
+  border-radius: 9px;
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+//------------------------ASIDE------------------------
+.cat_aside{
+  border-radius: 9px 0px 0px 9px;
+  width: 30%;
+}
+
+.category{
+  margin-bottom: 2px;
+  padding: 21px 20px;
+  cursor: pointer;
+  background-color: #FFFFFF;
+  display: flex;
+  border-right: 9px solid transparent;
+}
+
+.selected_categ{
+  border-color: #0076CE;
+}
+
+.category:last-child{
+  border-radius: 0px 0px 0px 9px;
+  margin:0px;
+}
+
+.category:first-child{
+  border-radius: 9px 0px 0px 0px;
+}		
+
+.category:hover{
+  opacity: 0.8;
+}
+
+.category__name{
+  font-weight: bold;
+  font-size: 12pt;
+  line-height: 18px;
+  letter-spacing: 0.5px;
+  color: #000000;
+  margin-bottom: 5px;
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.category__desc{
+  font-size: 13px;
+  line-height: 21px;
+  color: #6E6259;
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.cat_icon{
+  margin-right: 15px;
+  width: 36px;
+}
+
+//------------------------BOX------------------------
+.cat_box{
+  border-radius: 9px;
+  width: 70%;
+  padding: 22px 5px 22px 22px;
+  &amp;.tab_2{
+    width: 100%;
+  }
+}
+
+.cat_box__eye{
+  color: #000000;
+  overflow: auto;
+}
+
+.float-left{
+  float: left;
+}
+
+.float-right{
+  float: right;
+}
+
+.cat_items{
+  overflow-y: auto;
+  max-height: 510px;
+}
+
+.masonry { 
+  display: flex;
+  flex-flow: column wrap;
+  width: 48%;
+  max-height:  1200px;
+}
+
+.subcategory{
+  background-color: white;
+  padding: 15px 30px;
+  width: 99%;
+  border-radius: 9px;
+  margin-top: 15px;
+  margin-right: 15px;
+  -webkit-box-shadow: 6px 5px 3px 0px rgba(0, 0, 0, .1);
+  box-shadow: 6px 5px 3px 0px rgba(0, 0, 0, .1);
+}
+
+.subcategory__title{
+  color: black;  
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.sub_icon{
+  margin-right: 15px;
+  width: 36px;
+  float: left;
+}
+
+.sub_name{
+  display: inline-block;
+  float: left;
+  width: 250px;
+  vertical-align: -2px;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.sub{
+  margin-top: 20px;
+}
+
+.no_sub{
+  margin-top: 20px;
+}
+
+.no_sub:first-child{
+  margin-top: 10px;
+}
+
+/*.item_name{
+overflow: hidden;
+display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
+}*/
+
+.item_name a {
+  color: black;
+  font-weight: 600;
+}
+
+.item_name a:hover {
+  color: #0076CE; 
+}
+
+.item_name i{
+  color: #0076CE; 
+}
+
+.item_name a {
+     display: inline-block;
+    width: calc(100% - 20px); 
+}
+
+.item_text{
+  margin-left: 15px;
+  overflow: hidden;
+  display: -webkit-box;
+  //-webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  //font-style: italic;
+}
+
+//------------------------FAVORITE------------------------
+
+.tab_2{
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+  margin: 30px;
+}
+
+.favorite{
+  background: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-radius: 9px;
+  padding: 15px 15px;
+  width: 30%;    
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 30px;
+  word-break: break-word;
+  -webkit-box-shadow: 6px 5px 3px 0px rgba(0, 0, 0, .1);
+  box-shadow: 6px 5px 3px 0px rgba(0, 0, 0, .1);
+
+  a {
+    color: black;
+  }
+  a:hover {
+    color: #0076CE; 
+  }
+}
+
+.favorite__title{
+  font-weight: bold;
+  font-size: 16px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: flex;
+}
+.favorite__desc{
+  font-size: 13px;
+  margin-left: 25px;
+  overflow: hidden;
+  display: -webkit-box;
+  // -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.favorite__icon{
+  color: $brand-primary; 
+  margin-right: 10px;
+}
+
+.star_icon{
+  width: 20px;
+  height: 20px;
+  color: $brand-primary;
+  float:left;
+  &amp;::before{
+    content: "\f006";
+  }
+  &amp;.star_filled{
+    &amp;::before{
+      content: "\f005";
+    }
+  }
+  &amp;.fa-star{
+    margin-top 5px;
+    margin-right: 10px;
+  }
+}
+
+// ----------------------- MODAL -----------------------
+
+.modal-dialog{
+  margin-top: 200px;
+}
+.modal-title{
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 23px;
+  color: #000000;
+}
+.btn_close_modal{
+  position: absolute;
+  top: -45px;
+  color: white;
+  font-weight: 100;
+  font-size: 38px;
+  right: 2px;
+}
+.btn-secondary{
+  background: #CE1126;
+  border: 1px solid #CE1126;
+  box-sizing: border-box;
+  color: white;
+}
+.modal-footer{
+  border: none;
+}
+.group-actions{
+  display: flex;
+  justify-content: center;
+}
+.text-content{
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: center;
+}
+
+//------------------------RESPONSIVE------------------------
+
+@media only screen and (max-width: 993px){
+  .subcategory{
+    width: 100%;}
+  .favorite{
+    width: 50%;   
+  }
+}
+
+@media only screen and (max-width: 768px){
+  .category {
+    padding: 20px 10px;
+    flex-direction: column;
+  }
+  .cat_aside {
+    width: 100%;
+  }
+  .cat_box {
+    border-radius: 9px;
+    width: 100%;
+    padding: 20px;
+    max-height: 514px;
+    &amp;.tab_2{
+      width: 100%;
+    }
+    &amp;.hide_cat_box{
+      display: none;
+    }
+  }
+  .subcategory {
+    padding: 15px;
+    margin-right: 0px;
+  }
+  .filter-mobile{
+    display: block;
+    position: absolute;
+    left: 0;
+    color: #0776ce;
+    font-size: 25px;
+  }
+  .hide_aside{
+    width: 0px;
+    overflow: hidden;
+    opacity: 0;
+  }
+  .favorite{
+    width: 100%;  
+  } 
+}
+
+@media only screen and (min-width: 1200px){
+  .masonry .item {
+    width: 365px;
+  }
+  .masonry {
+    max-height: 1153.12px;
+  }
+}
+
+@media only screen and (max-width: 1199px) and (min-width: 992px){
+  .masonry .item {
+    width: 298px;
+  }
+}
+
+@media only screen and (max-width: 991px){
+  .masonry { 
+    width: 100%;
+    //Prevent JQuery from changing the max-height when running fixMasonry()
+    max-height: none!important;
+  }
+
+  .masonry .item {
+    width: 96%;
+  }
+}
+
+@media only screen and (max-width: 991px) and (min-width: 768px){
+  .cat_items{
+    max-height: 530px;
+  }
+
+  .masonry .item {
+    width: 99%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .cat_items{
+    max-height: 740px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .cat_box.tab_2{
+    overflow-y: auto;
+  }
+}
+
+@media only screen and (max-width: 440px){
+  .filter-mobile{
+    position: relative;
+    left: 0;
+  }
+}
+</css>
+<data_table>sp_instance</data_table>
+<demo_data/>
+<description/>
+<docs display_value=""/>
+<field_list/>
+<has_preview>false</has_preview>
+<id/>
+<internal>false</internal>
+<link><![CDATA[function link(scope, element, attrs, controller) { 
+	if($( window ).width() <= 768)
+		$( ".cat_aside" ).addClass("hide_aside");
+	
+	$( window ).resize(function() {
+		if($( window ).width() <= 768){
+			$( ".cat_aside" ).addClass("hide_aside");
+			$( ".cat_box" ).removeClass("hide_cat_box");
+		}
+		else{
+			$( ".cat_aside" ).removeClass("hide_aside");
+			$( ".cat_box" ).addClass("hide_cat_box");
+		}
+	});
+
+	scope.openFilter = function(){
+		$( ".cat_aside" ).toggleClass("hide_aside");
+		$( ".cat_box" ).toggleClass("hide_cat_box");
+	}
+}]]></link>
+<name>OCL: Catalog Page V2</name>
+<option_schema>[{"hint":"title","name":"order_card","section":"other","label":"Order Cards by (\"title\" or \"order\")","type":"string"},{"name":"card_reverse","section":"other","default_value":"false","label":"Do you want cards in reverse order?","type":"boolean"},{"hint":"name","name":"order_items","section":"other","default_value":"","label":"Order Itens inside the cards (\"name\" or \"order\")","type":"string"},{"name":"items_reverse","section":"other","default_value":"false","label":"Do you want items in reverse order?","type":"boolean"}]</option_schema>
+<public>false</public>
+<roles/>
+<script><![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */	
+
+	/* ---- Get Favorites -----*/
+	data.catalog_security = $sp.getParameter('catalog_security');
+	data.items_fv = new SPFavoriteUtils().getUserFav();
+	if(gs.nil(data.items_fv))
+		data.items_fv = [];
+	else
+		data.items_fv = data.items_fv.split(',');
+
+	if(input){
+		var ret = new SPFavoriteUtils().addFavoriteItem(input.item_id, data.items_fv);
+		data.items_fv = new SPFavoriteUtils().getUserFav();
+		data.favorite = new SPFavoriteUtils().getMyFavoriteCards();
+		return;
+	}
+	
+	/* ---- Get Data -----*/
+	var include = new OCL_SPCategoriesUtilsV2();
+	data.categories = include.getCategories();
+	data.items = include.getAllChilds();	
+
+	data.favorite = new SPFavoriteUtils().getMyFavoriteCards();
+})();]]></script>
+<servicenow>false</servicenow>
+<sys_class_name>sp_widget</sys_class_name>
+<sys_created_by>mateus.anzolin@organizecloudlabs.com</sys_created_by>
+<sys_created_on>2020-12-17 13:36:20</sys_created_on>
+<sys_customer_update>false</sys_customer_update>
+<sys_id>24b2c24f1b45ec101741da83cd4bcb9e</sys_id>
+<sys_mod_count>134</sys_mod_count>
+<sys_name>OCL: Catalog Page V2</sys_name>
+<sys_package display_value="Global" source="global">global</sys_package>
+<sys_policy/>
+<sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+<sys_scope display_value="Global">global</sys_scope>
+<sys_update_name>sp_widget_24b2c24f1b45ec101741da83cd4bcb9e</sys_update_name>
+<sys_updated_by>mateus.anzolin@organizecloudlabs.com</sys_updated_by>
+<sys_updated_on>2021-01-28 15:35:23</sys_updated_on>
+<template><![CDATA[<div>
+  <!--TABS-->
+  <div class="tabs">
+    <div class="filter-mobile" ng-show="click == 1" ng-click="openFilter()"><i class="fa fa-filter"></i></div>
+    <div ng-click="click = 1" ng-class="{selected_tab: click == 1}">All Items</div>
+    <div ng-click="click = 2" id="my_tab_fav" ng-class="{selected_tab: click == 2}">My Favorite Items</div>
+  </div>
+
+  <div class="cat_container">
+
+    <!--ASIDE-->
+    <div class="cat_aside" ng-show="click == 1">
+      <div class="cat_content">
+        <div class="category" ng-class="{selected_categ: c.selected == category.id}" ng-repeat="category in data.categories | filter:search" ng-click="selectCat(category)">
+          <div>
+            <img class="cat_icon" src="/sys_attachment.do?sys_id={{category.icon}}">
+          </div>
+          <div>
+            <div class="category__name">{{category.name}}</div>
+            <div class="category__desc">{{category.desc}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--BOX-->
+    <div class="cat_box" ng-show="click == 1">
+      <div class="cat_box__eye">
+        <span ng-click="show()" class="float-left"><i class="fa {{c.eye}}"></i> Show/Hide Descriptions</span>
+      </div>
+      <div class="cat_items">
+        <div class="masonry">
+          <div class="subcategory item" ng-repeat="subcategory in data.items | filter:c.selected | orderBy:c.order_cards:c.reverse_cards" ng-init="run()">
+            <div class="subcategory__title" ng-if="subcategory.title != ''">
+              <img class="sub_icon"  src="/sys_attachment.do?sys_id={{subcategory.icon}}">
+             	<span class="sub_name">{{subcategory.title}}</span>  
+            </div>
+            <div>
+              <div class="subcategory__desc" ng-repeat="item in subcategory.items | orderBy:c.order_items:c.reverse_items">
+                <h5 class="item_name" ng-class="{'no_sub': subcategory.title == '' , 'sub': subcategory.title != ''}"><i class="fa star_icon {{item.id}}" ng-class="{star_filled : data.items_fv.indexOf(item.id) != -1}" ng-click="c.openJustificative(item.id)" aria-hidden="true"></i> <a href="{{item.url}}">{{item.name}} </a></h5>
+                <div class="item_text" ng-show="c.eye == 'fa-eye'">
+                  {{removeHTML(item.desc)}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--FAVORITE-->
+    <div class="cat_box tab_2" ng-show="click == 2">
+      <div class="favorite" ng-repeat="favorite in data.favorite">
+        <span class="favorite__title"><i class="fa fa-star star_icon star_filled" aria-hidden="true" ng-click="c.openJustificative(favorite.id)"></i><a href="{{favorite.url}}">{{favorite.name}}</a></span>
+        <span class="favorite__desc">{{removeHTML(favorite.desc)}}</span>
+      </div>
+    </div>
+
+    <!--MODAL-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">${Confirmation Message}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span class="btn_close_modal" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="text-content">
+              Are you sure you want to remove this item from your favorites?
+            </p>
+          </div>
+          <div class="modal-footer">
+            <div class="group-actions">
+              <a class="btn btn-secondary" ng-click="c.refresh()">
+                ${No, cancel}
+              </a>
+              <a class="btn btn-primary" ng-click="c.submitModal()">
+                ${Yes, I'm sure}
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>]]></template>
+</sp_widget>
+</unload>

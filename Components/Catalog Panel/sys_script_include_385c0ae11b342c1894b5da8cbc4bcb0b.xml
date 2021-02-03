@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unload unload_date="2021-01-28 16:06:52">
+<sys_script_include action="INSERT_OR_UPDATE">
+<access>package_private</access>
+<active>true</active>
+<api_name>global.SPFavoriteUtils</api_name>
+<caller_access/>
+<client_callable>false</client_callable>
+<description>Script include for the functionality of the favorite components on the portal</description>
+<name>SPFavoriteUtils</name>
+<script><![CDATA[var SPFavoriteUtils = Class.create();
+SPFavoriteUtils.prototype = {
+	initialize: function (inPortalSysId,validateInsertedRecords) {
+		this.portalSysId = inPortalSysId || "537b51a61b080094167b759d1e4bcb75";
+		this.validateInsertedRecords = validateInsertedRecords != null?validateInsertedRecords:false;
+	},
+
+	/**SNDOC
+@name addFavorite
+@description Method that adds a favorite for a user in a specific portal
+@param {string} inRecordTable - The table of the record you are creating a favorite for.
+@param {string} inRecordId - The sys_id of the record you are creating a favorite for.
+@param {string} inUserSysId - (optional) The user you would like to create the favorite for.
+@example
+addFavorite("sc_cat_item", "someCatalogItemSysId");
+*/
+	addFavorite: function (inRecordTable, inRecordId, inUserSysId) {
+		inUserSysId = inUserSysId || gs.getUserID();
+		var returnValue = { Success: false, Message: "There was a problem inserting this favorite.", Result: null };
+		var grFavorite = new GlideRecord("u_portal_favorite");
+		grFavorite.addQuery("u_portal", this.portalSysId);
+		grFavorite.addQuery("u_user", inUserSysId);
+		grFavorite.addQuery("u_favorite_table", inRecordTable);
+		grFavorite.addQuery("u_favorite_id", inRecordId);
+		grFavorite.query();
+		if (!grFavorite.next()) {
+			grFavorite.initialize();
+			grFavorite.setValue("u_portal", this.portalSysId);
+			grFavorite.setValue("u_user", inUserSysId);
+			grFavorite.setValue("u_favorite_table", inRecordTable);
+			grFavorite.setValue("u_favorite_id", inRecordId);
+			if (!this.validateInsertedRecords || grFavorite.u_favorite_id.getDisplayValue()) {
+				grFavorite.insert();
+				returnValue = {
+					Success: true, Message: null, Result: { RecordTable: inRecordTable, RecordId: inRecordId }
+				};
+			}
+			else {
+				returnValue = { Success: false, Message: "Record does not exist.", Result: null };
+			}
+		}
+		else {
+			//if the favorite already exists, just return success
+			returnValue = {
+				Success: true, Message: "The user already has this favorite.", Result: { RecordTable: inRecordTable, RecordId: inRecordId }
+			};
+		}
+		return returnValue;
+	},
+	/**SNDOC
+		@name removeFavorite
+		@description Method that removes a favorite for a user in a specific portal
+		@param {string} inRecordTable - The table of the record you are removing a favorite for.
+		@param {string} inRecordId - The sys_id of the record you are removing a favorite for.
+		@param {string} inUserSysId - (optional) The user you would like to create the favorite for.
+		@example
+		removeFavorite("sc_cat_item", "someCatalogItemSysId");
+		*/
+	removeFavorite: function (inRecordTable, inRecordId, inUserSysId) {
+		inUserSysId = inUserSysId || gs.getUserID();
+		var returnValue = { Success: false, Message: "There was a problem removing this favorite.", Result: null };
+		var grFavorite = new GlideRecord("u_portal_favorite");
+		grFavorite.addQuery("u_portal", this.portalSysId);
+		grFavorite.addQuery("u_user", inUserSysId);
+		grFavorite.addQuery("u_favorite_table", inRecordTable);
+		grFavorite.addQuery("u_favorite_id", inRecordId);
+		grFavorite.deleteMultiple();
+		returnValue = {
+			Success: true, Message: "", Result: { RecordTable: inRecordTable, RecordId: inRecordId }
+		};
+		return returnValue;
+	},
+	/**SNDOC
+			@name getFavorites
+			@description Returns favorites
+			@param {string} inUserSysId - (optional) The user you would like to list favorites for.
+			@param {string} inRecordTable - (optional) The table you would like favorites returned for.
+			@example getFavorites();
+		*/
+	getFavorites: function (inUserSysId, inRecordTable) {
+
+		var returnFavorites = null;
+		inUserSysId = inUserSysId || gs.getUserID();
+		var grFavorite = new GlideRecord("u_portal_favorite");
+		grFavorite.addQuery("u_portal", this.portalSysId);
+		grFavorite.addQuery("u_user", inUserSysId);
+		if (inRecordTable) {
+			grFavorite.addQuery("u_favorite_table", inRecordTable);
+		}
+		grFavorite.query();
+		while (grFavorite.next()) {
+			if (!returnFavorites) {
+				returnFavorites = {};
+			}
+
+			if (!returnFavorites[grFavorite.getValue("u_favorite_table")]) {
+				returnFavorites[grFavorite.getValue("u_favorite_table")] = [];
+			}
+
+			returnFavorites[grFavorite.getValue("u_favorite_table")].push(grFavorite.getValue("u_favorite_id"));
+		}
+		return returnFavorites;
+	},
+
+	/**SNDOC
+	@name addFavoriteItem
+	@description Method responsible for add item on list of items favorites or remove if is exist on the list.
+	@param {string} sys_id - This sys_id will be used to be added or removed.
+	@param {array} items - List of sys_id favorite items.
+	@example
+	addFavoriteItem(item.sys_id, data.items);
+	*/
+	addFavoriteItem: function (sys_id, items) {
+		if (items.indexOf(sys_id) != -1) {
+			if(sys_id)
+			{
+				this.removeFavorite("sc_cat_item",sys_id,gs.getUserID());
+			}
+
+		}
+		else {
+
+			if(sys_id)
+				{
+					this.addFavorite("sc_cat_item",sys_id,gs.getUserID());
+				}			
+		}
+
+	},
+
+	/**SNDOC
+		@name getUserFav
+		@description Method responsible for return all sys_id items favorite from user.
+		@example addFavoriteItem();
+	*/
+	getUserFav: function () {
+		var returnItems = [];
+
+		var queryFavorites = this.getFavorites(gs.getUserID(), "sc_cat_item");
+		if (queryFavorites && queryFavorites["sc_cat_item"] && queryFavorites["sc_cat_item"].length > 0) {
+			returnItems = queryFavorites["sc_cat_item"];
+		}
+
+		return returnItems.join(",");
+	},
+	/**SNDOC
+		@name getMyFavoriteCards
+		@description Method responsible for return all items favorite from sc_cat_item.
+		@example getMyFavoriteCards();
+	*/
+	getMyFavoriteCards: function () {
+		var items = this.getUserFav();
+		var fav = [];
+		var gr = new GlideRecord("sc_cat_item");
+		gr.addEncodedQuery("sc_catalogsLIKE" + gs.getProperty('sro.security_catalog.sys_id'));
+		gr.addEncodedQuery("sys_idIN" + items);
+		gr.query();
+		while (gr.next())
+			fav.push({
+				name: gr.getDisplayValue('name') || '(empty)',
+				url: gs.getProperty("glide.servlet.uri") + 'mysecurity?id=sro_sc_cat_item&sys_id=' + gr.getUniqueValue(),
+				id: gr.getUniqueValue(),
+				desc: gr.getDisplayValue('short_description')
+			});
+		return fav;
+	},
+
+	type: 'SPFavoriteUtils'
+};]]></script>
+<sys_class_name>sys_script_include</sys_class_name>
+<sys_created_by>guilherme.melo@organizecloudlabs.com</sys_created_by>
+<sys_created_on>2020-11-30 14:32:39</sys_created_on>
+<sys_customer_update>false</sys_customer_update>
+<sys_id>385c0ae11b342c1894b5da8cbc4bcb0b</sys_id>
+<sys_mod_count>39</sys_mod_count>
+<sys_name>SPFavoriteUtils</sys_name>
+<sys_package display_value="Global" source="global">global</sys_package>
+<sys_policy/>
+<sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+<sys_scope display_value="Global">global</sys_scope>
+<sys_update_name>sys_script_include_385c0ae11b342c1894b5da8cbc4bcb0b</sys_update_name>
+<sys_updated_by>BRIAN_J_SCOTT</sys_updated_by>
+<sys_updated_on>2021-01-27 00:19:58</sys_updated_on>
+</sys_script_include>
+</unload>

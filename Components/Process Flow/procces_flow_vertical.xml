@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unload unload_date="2021-01-28 18:53:45">
+<sp_widget action="INSERT_OR_UPDATE">
+<category>custom</category>
+<client_script><![CDATA[function($scope) {
+	/* widget controller */
+	var c = this;
+
+
+}]]></client_script>
+<controller_as>c</controller_as>
+<css>.content-all{
+  border: 1px solid #EEEEEE;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 0px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 3px;
+  clear: both;
+  background: white;
+  padding: 31px 35px;
+}
+
+@media(max-width: 768px){
+  .content-all{
+  	display: none;
+  }
+}
+//flow
+
+.ball{
+  margin-right: 10px;
+}
+
+.btn-arrow-right, .btn-arrow-left {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 50px;
+  padding: 4px;
+  text-align: center;
+}
+//Flow
+.color-success{
+  background-color: #EEEEEE;
+  border: 1px solid #999999;
+	box-sizing: border-box;
+  color: $primary;
+  .bar{
+    background-color: #999999;
+    border: 2px solid $branco;
+  }
+}
+
+.color-warning{
+  background-color: $primary;
+  border: 3px solid $primary;
+  color:white;
+  .bar{
+    background-color: #999999;
+    border: 2px solid $branco;
+  }
+}
+
+.color-primary{
+  background-color: #EEEEEE;
+ 	border: 1px solid #999999;
+  .bar{
+    background-color: #999999;
+    border: 2px solid $branco;
+  }
+}
+
+.bar{
+  height: 48px;
+  width: 6px;
+  border-radius: 2px;
+  position: relative;
+  left: 8px;
+  top: 9px;
+}
+
+.flow{
+  margin-bottom: 14px;
+}
+
+.process-flow .flow:last-child{
+  .bar{
+    display: none;
+  }
+}
+.btn:hover{
+	-webkit-transform: none;
+    transform: none;
+}</css>
+<data_table>sp_instance</data_table>
+<demo_data/>
+<description/>
+<docs display_value=""/>
+<field_list/>
+<has_preview>false</has_preview>
+<id>ocl_process_fow</id>
+<internal>false</internal>
+<link/>
+<name>OCL: Process Flow ITSM</name>
+<option_schema/>
+<public>false</public>
+<roles/>
+<script><![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+
+	options.table = $sp.getParameter("table");
+	options.record = $sp.getParameter("sys_id");
+
+	var gr = new GlideRecord(options.table);
+	gr.get(options.record)
+	data.currentTable = '';
+	data.atualKey = '';
+	data.canRead = gr.canRead();
+	
+	var fields = $sp.getField(gr, 'stage');
+	
+	
+
+	data.flow = createProcessFlow();
+	
+	// Check the process flow query against the current job to see if the conditions match
+
+	function getCurrentSteps(step, table, id) {
+
+		var gnr = new GlideRecord(table);
+		gnr.addEncodedQuery(step);
+		gnr.addQuery('sys_id', id);
+		gnr.query();
+		if (gnr.next()) 
+			return 'warning';
+		else 
+			return 'primary';
+	}
+
+	// Set the previous steps in the flow to success if the current step is further down the order
+	function ActiveSuccess(items) {
+		var i = 0;
+		for (var key in items) {
+			var value = items[key];
+
+			data.atualKey = key;
+			if (value.colour == 'warning') {
+				var index = i;
+				for (var j = 0; j<i; j++) {
+					items[j].colour = 'success';
+				}
+				if (index == items.length) {
+					value.colour = 'sucess';
+				}
+				break;
+			}
+			i++;
+		}
+
+		return items;
+	}
+
+	
+	function createProcessFlow() {
+
+		var table = gr.getTableName();
+		var id = gr.getUniqueValue();
+
+		var gf = new GlideRecord('sys_process_flow');
+		gf.addActiveQuery();
+		gf.addQuery('table', table);
+		gf.orderBy('order');
+		gf.query();
+
+		data.currentTable = table;
+		var items = [];
+
+		var count = 0;
+
+		while (gf.next()) {
+
+			count++;
+
+			var item = {};
+			item.name = gs.getMessage(gf.getDisplayValue("label"));
+			item.colour = getCurrentSteps(gf.condition.toString(), table, id);
+			item.number = count;
+			item.stage = gr.getValue('stage');
+			items.push(item);
+
+		}
+
+		items = ActiveSuccess(items);
+		return items;
+
+	}
+
+	
+
+	
+
+	
+})();]]></script>
+<servicenow>false</servicenow>
+<sys_class_name>sp_widget</sys_class_name>
+<sys_created_by>organize.gabriella</sys_created_by>
+<sys_created_on>2019-12-10 14:51:18</sys_created_on>
+<sys_id>c24a5143db2d80d4a087b11ba3961930</sys_id>
+<sys_mod_count>360</sys_mod_count>
+<sys_name>OCL: Process Flow ITSM</sys_name>
+<sys_package display_value="Global" source="global">global</sys_package>
+<sys_policy/>
+<sys_scope display_value="Global">global</sys_scope>
+<sys_update_name>sp_widget_c24a5143db2d80d4a087b11ba3961930</sys_update_name>
+<sys_updated_by>organize.guilherme</sys_updated_by>
+<sys_updated_on>2020-08-24 11:32:23</sys_updated_on>
+<template><![CDATA[<div class="content-all" ng-if="data.flow.length > 0">
+  <div class="process-flow">
+    <div class="visible-md visible-lg" >
+      <article ng-repeat="key in data.flow" type="button" class="flow">
+        <span class="btn ball color-{{key.colour}} btn-arrow-right">
+          <b ng-if="key.colour != 'success'">
+            {{key.number}}
+          </b>
+          <div ng-if="key.colour == 'success'">
+            <i class="fa fa-check"></i>
+          </div>
+          <div class="bar"></div>
+        </span>
+        <span class="flow_txt">{{key.name}}</span>
+      </article>
+    </div>
+  </div>
+</div>
+
+</div>
+]]></template>
+</sp_widget>
+</unload>

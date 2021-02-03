@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<unload unload_date="2021-01-28 16:06:57">
+<sys_script_include action="INSERT_OR_UPDATE">
+<access>package_private</access>
+<active>true</active>
+<api_name>global.OCL_SPCategoriesUtilsV2</api_name>
+<caller_access/>
+<client_callable>false</client_callable>
+<description/>
+<name>OCL_SPCategoriesUtilsV2</name>
+<script><![CDATA[var OCL_SPCategoriesUtilsV2 = Class.create();
+OCL_SPCategoriesUtilsV2.prototype = {
+
+	/**SNDOC
+	@name initialize
+	@description initialize 'categories' and 'categories_ids' attributes.
+	 - The first attribute is an array to store all categories.
+	 - The second attribute is an array to store categories sys_ids. This attribute is to validate duplicated categories.
+	*/
+	initialize: function() {
+		this.categories = [];
+		this.categories_ids = [];
+
+		this.childs = [];
+		this.childs_ids = [];
+
+		this.items = [];
+		this.items_ids = [];
+	},
+
+	getCategories: function(){
+		var gr = new GlideRecord("sc_category");
+		gr.addQuery("sc_catalog",gs.getProperty('ocl.sp.catalog.categorie.mysecurity'));
+		gr.addEncodedQuery('parentISEMPTY');
+		gr.addActiveQuery();
+		gr.orderBy('title');
+		gr.query();
+
+		var icon;
+		while (gr.next()) {
+			icon = gr.getValue('icon');
+			if(!gs.nil(icon))
+				icon = icon.replace('.iix','');
+
+			this.categories_ids.push(gr.getUniqueValue());
+			this.categories.push({
+				name: gr.getDisplayValue('title'),
+				id: gr.getUniqueValue(),
+				icon: icon,
+				desc: gr.getDisplayValue('description')
+			});
+
+			this.childs = this.childs.concat( this.getChilds(gr.getUniqueValue(), icon) );
+		}
+		return this.categories;
+	},
+
+	getChilds: function(id, icon){
+		if(gs.nil(id))
+			return [];
+
+		var gr = new GlideRecord("sc_cat_item_category");
+		gr.addEncodedQuery('sc_category.parent='+id+'^sc_cat_itemISNOTEMPTY^sc_category.active=true');
+		gr.orderBy('sc_category');
+		gr.orderBy('sc_cat_item');
+		gr.query();
+
+		var child_item, child_cat = [], child_cat_ids = [];
+		var index_i = 0, index_c = 0;
+		var i, c;
+
+		while(gr.next()){
+			i = gr.getValue('sc_cat_item');
+			c = gr.getValue('sc_category');
+
+			index_i = this.items_ids.indexOf(i);
+			if(index_i == -1){
+				child_item = this.getCatalogItem(i);
+				this.items.push(child_item);
+				this.items_ids.push(i);
+			}else
+				child_item = this.items[index_i];
+
+			index_c = child_cat_ids.indexOf(c);
+			if(index_c == -1){
+				child_cat.push({
+					title: gr.getDisplayValue('sc_category'),
+					id: gr.getValue('sc_category'),
+					icon: icon,
+					parent: id,
+					items: [child_item],
+					order: this.getOrder(c)
+				});
+				child_cat_ids.push(c);
+				this.childs_ids.push(c);
+			}else{
+				child_cat[index_c].items.push(child_item);
+			}
+		}
+		return child_cat;
+	},
+
+	getCatalogItem: function(id, icon){
+		if(gs.nil(id))
+			return {};
+
+		var gr = new GlideRecord("sc_cat_item");
+		gr.get(id);
+
+		var obj =  {
+			name: gr.getDisplayValue('name') || '(empty)',
+			url: gs.getProperty("glide.servlet.uri") + 'mysecurity?id=sro_sc_cat_item&sys_id=' + gr.getUniqueValue(),
+			id: gr.getUniqueValue(),
+			desc: gr.getDisplayValue('short_description'),
+			order: gr.getValue('order')
+		};
+		return obj;
+
+	},
+
+	
+	getAllChilds: function(){
+		var gr = new GlideRecord("sc_cat_item_category");
+		gr.addEncodedQuery('sc_categoryIN' + this.categories_ids +'^sys_idNOT IN'+ this.items_ids  +'^sc_cat_item.active=true');
+		gr.orderBy('sc_category');
+		gr.query();
+
+		var index, id, item;
+		while(gr.next()){
+			id = gr.getValue('sc_category');
+			index = this.categories_ids.indexOf(id);
+			item = gr.getValue('sc_cat_item');
+			this.childs.push({
+				title: '',
+				id: '',
+				icon: '',
+				parent: this.categories_ids[index],
+				items: [this.getCatalogItem(item)],
+				order: 0
+			});
+		}
+
+
+		return this.childs;
+	},
+	
+	getOrder: function(id){
+		var gr = new GlideRecord("sc_category");
+		gr.get(id);
+		
+		return gr.getValue('order');
+	},
+
+	type: 'OCL_SPCategoriesUtilsV2'
+};]]></script>
+<sys_class_name>sys_script_include</sys_class_name>
+<sys_created_by>mateus.anzolin@organizecloudlabs.com</sys_created_by>
+<sys_created_on>2020-12-17 13:31:25</sys_created_on>
+<sys_customer_update>false</sys_customer_update>
+<sys_id>dc914e4b1b45ec101741da83cd4bcb3b</sys_id>
+<sys_mod_count>29</sys_mod_count>
+<sys_name>OCL_SPCategoriesUtilsV2</sys_name>
+<sys_package display_value="Global" source="global">global</sys_package>
+<sys_policy/>
+<sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+<sys_scope display_value="Global">global</sys_scope>
+<sys_update_name>sys_script_include_dc914e4b1b45ec101741da83cd4bcb3b</sys_update_name>
+<sys_updated_by>gabriella.alves@organizecloudlabs.com</sys_updated_by>
+<sys_updated_on>2020-12-21 15:46:55</sys_updated_on>
+</sys_script_include>
+</unload>
