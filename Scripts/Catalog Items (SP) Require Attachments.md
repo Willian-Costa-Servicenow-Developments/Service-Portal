@@ -33,7 +33,7 @@ In the Left Navigator Bar, go to Service Portal > Portals
 
 Click the Portal you want to adjust. It maybe be the one with URL suffix of "sp".
 
-Click the "info" button for the Theme. The standard theme is "Stock" or “La Jolla”
+Click the "info" button for the Theme. The standard theme is "Stock" or “Custom”
 
 Scroll to the bottom to the JS Include Related List
 
