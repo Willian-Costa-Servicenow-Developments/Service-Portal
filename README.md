@@ -54,7 +54,7 @@ Here is a place to share codes, widgets, ideas, and anything about Service Porta
 | [general_module.js](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Scripts/general_module.js) | Common scripts         |
 | [service_portal.js](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Scripts/service_portal.js) | Service Portal scripts |
 | [attachment_api.js](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Scripts/attachment_api.js) | Attachment REST API Example |
-| [catalog_script_rest_api.js](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Scripts/client_script_rest_api.js) | Catalog Script REST API Example |
+| [catalog_script_rest_api.js](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Scripts/catalog_script_rest_api.js) | Catalog Script REST API Example |
 | [Catalog Items (SP) Require Attachments](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Scripts/Catalog%20Items%20(SP)%20Require%20Attachments/Read%20Me.md) | Solution Catalog Item Mandatory Attachments |
 
 ### :floppy_disk:  Update Set
