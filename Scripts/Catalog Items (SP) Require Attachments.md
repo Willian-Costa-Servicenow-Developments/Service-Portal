@@ -54,20 +54,13 @@ Type: onSubmit
 
 ```JAVASCRIPT
 function onSubmit() {
-	//Works in non-portal ui
-	try {
-		var attachments = document.getElementById('header_attachment_list_label');
-		if (attachments.style.visibility == 'hidden' || attachments.style.display == 'none' ) {
-			g_form.addErrorMessage('You must attach a document before submitting this request.');
-			return false;
-		}
-	}catch(e) {
-		var count = getSCAttachmentCount();
-		if(count <= 0) {
-			g_form.addInfoMessage('You must attach a document before submitting this request.');
-			return false;
-		}
+
+	var count = getSCAttachmentCount();
+	if(count <= 0) {
+		g_form.addInfoMessage('You must attach a document before submitting this request.');
+		return false;
 	}
+	
 }
 ```
 
