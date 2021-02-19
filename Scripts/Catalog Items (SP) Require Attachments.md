@@ -6,8 +6,11 @@ In the Left Navigator Bar, go to System UI > UI Scripts
 Click New
 
 UI Script: GlobalCatalogItemFunctions
+
 UI Type: All
+
 Application: Global
+
 Active: true
 
 ```JAVASCRIPT
@@ -44,7 +47,9 @@ For your catalog item you want to require attachments, use this client script.
 Set the Isolate Script checkbox to false for this script. You may need to add it to the client script form to see the checkbox.
 
 Name: Require Attachment
+
 UI Type: All
+
 Type: onSubmit
 
 ```JAVASCRIPT
