@@ -2,12 +2,12 @@
     "themes": [
         {
             "title": "Sublime Theme",
-            "Class": "sublime_theme",
+            "class": "sublime_theme",
             "default": true
         },
         {
             "title": "Dracula Theme",
-            "Class": "dracula_theme"
+            "class": "dracula_theme"
         }
     ]
 }
