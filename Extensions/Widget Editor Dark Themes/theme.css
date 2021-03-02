@@ -1,0 +1,29 @@
+/*  
+    Theme: Sublime
+*/
+.sublime_theme  .CodeMirror-lines{background: #212121 !important;  color: #e8e8e8 !important;}
+.sublime_theme  .CodeMirror-scroll{background: #212121 !important;}
+.sublime_theme  .CodeMirror-lines [contenteditable]{caret-color: white !important}
+.sublime_theme  .CodeMirror-gutters{background: #151515 !important; border: none !important;}
+.sublime_theme  .CodeMirror-linenumber{ color: #e8e8e8 !important;}
+.sublime_theme  .CodeMirror-cursors{border-color: white !important;}
+.sublime_theme  .CodeMirror-cursor {border-left: 1px solid white !important;}
+.sublime_theme  .CodeMirror-selected { background: #464647 !important;}
+/* Javascript Server Script */
+.sublime_theme  .cm-keyword{color: #E1006C  !important;}
+.sublime_theme  .cm-comment{color: #65EC4F !important;}
+.sublime_theme  .cm-variable{color: #6793F8 !important;}
+.sublime_theme  .cm-property{color: white !important;}
+.sublime_theme  .cm-number {color: #67F8A1 !important;}
+.sublime_theme  .cm-def {color: deepskyblue !important;}
+.sublime_theme  .cm-operator {color: #E1006C !important;}
+.sublime_theme  .cm-atom {color: #67F8A1 !important;}
+.sublime_theme  .cm-variable-2 {color: deepskyblue !important; opacity: 0.8 !important;}
+/* All */
+.sublime_theme  .cm-string {color: #FFA825 !important;}
+/* HTML */
+.sublime_theme  .cm-tag{color: #E1006C  !important;}
+.sublime_theme  .cm-attribute {color: deepskyblue !important;}
+/* CSS */
+.sublime_theme  .cm-qualifier{color: gold !important;}
+/* ===============================================================================================================*/
