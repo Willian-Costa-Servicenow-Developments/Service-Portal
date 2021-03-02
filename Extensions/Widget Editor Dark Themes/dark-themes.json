@@ -1,0 +1,13 @@
+{
+    "themes": [
+        {
+            "title": "Sublime Theme",
+            "class": "sublime_theme",
+            "default": true
+        },
+        {
+            "title": "Dracula Theme",
+            "class": "dracula_theme"
+        }
+    ]
+}
