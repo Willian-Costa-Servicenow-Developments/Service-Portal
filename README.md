@@ -63,7 +63,3 @@ Here is a place to share codes, widgets, ideas, and anything about Service Porta
 | ------------------------------------------------------------ | ---------------- |
 | [Ticket Page](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Templates/Tickets_Page) | Tickets Template |
 
-
-
-<p align="center"><img src="https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Images/organize.jpeg" /></p>
-
