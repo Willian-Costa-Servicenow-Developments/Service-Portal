@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2021-03-17 17:49:20">
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2021-03-22 13:54:37">
 <sys_remote_update_set action="INSERT_OR_UPDATE">
 <application display_value="Global">global</application>
 <application_name>Global</application_name>
@@ -9,22 +9,22 @@
 <deleted/>
 <description/>
 <inserted/>
-<name>ACN: Table With Filter Component </name>
+<name>ACN Table Filter Component V2</name>
 <origin_sys_id/>
 <parent display_value=""/>
 <release_date/>
 <remote_base_update_set display_value=""/>
 <remote_parent_id/>
-<remote_sys_id>9a874ec0070320107a0af0269c1ed037</remote_sys_id>
+<remote_sys_id>e6655fe9070320109eaef19d7c1ed07d</remote_sys_id>
 <state>loaded</state>
 <summary/>
 <sys_class_name>sys_remote_update_set</sys_class_name>
-<sys_created_by>admin</sys_created_by>
-<sys_created_on>2021-03-17 17:49:19</sys_created_on>
-<sys_id>73abde44078320107a0af0269c1ed097</sys_id>
+<sys_created_by>mateus_mazzei</sys_created_by>
+<sys_created_on>2021-03-22 13:54:36</sys_created_on>
+<sys_id>eee5d72d070320109eaef19d7c1ed0b7</sys_id>
 <sys_mod_count>0</sys_mod_count>
-<sys_updated_by>admin</sys_updated_by>
-<sys_updated_on>2021-03-17 17:49:19</sys_updated_on>
+<sys_updated_by>mateus_mazzei</sys_updated_by>
+<sys_updated_on>2021-03-22 13:54:36</sys_updated_on>
 <update_set display_value=""/>
 <update_source display_value=""/>
 <updated/>
@@ -34,24 +34,50 @@
 <application display_value="Global">global</application>
 <category>customer</category>
 <comments/>
+<name>sys_ui_message_2ad4124c070320107a0af0269c1ed0f8</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message"><sys_ui_message action="INSERT_OR_UPDATE"><application/><key>Try to write more than three characters to have a good search</key><language>pb</language><message>Tente escrever mais do que três letras para ter uma boa busca</message><sys_class_name>sys_ui_message</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2021-03-17 17:22:05</sys_created_on><sys_id>2ad4124c070320107a0af0269c1ed0f8</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Try to write more than three characters to have a good search</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_ui_message_2ad4124c070320107a0af0269c1ed0f8</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2021-03-17 17:22:05</sys_updated_on></sys_ui_message></record_update>]]></payload>
+<payload_hash>2022092958</payload_hash>
+<remote_update_set display_value="ACN Table Filter Component V2">eee5d72d070320109eaef19d7c1ed0b7</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>mateus_mazzei</sys_created_by>
+<sys_created_on>2021-03-22 13:54:36</sys_created_on>
+<sys_id>62e5d72d070320109eaef19d7c1ed0b9</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1785a36c9820000001</sys_recorded_at>
+<sys_updated_by>mateus_mazzei</sys_updated_by>
+<sys_updated_on>2021-03-22 13:54:36</sys_updated_on>
+<table/>
+<target_name>Try to write more than three characters to have a good search</target_name>
+<type>Message</type>
+<update_domain>global</update_domain>
+<update_guid>96c5d72d200320100d23308347d3610d</update_guid>
+<update_guid_history>96c5d72d200320100d23308347d3610d:2022092958,cd751e0c0c03201080f55981368f91d2:2022092958</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
 <name>sys_ui_message_1e951e0c070320107a0af0269c1ed0c7</name>
 <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message"><sys_ui_message action="INSERT_OR_UPDATE"><application/><key>No result found</key><language>pb</language><message>Nenhum resultado encontrado</message><sys_class_name>sys_ui_message</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2021-03-17 17:22:43</sys_created_on><sys_id>1e951e0c070320107a0af0269c1ed0c7</sys_id><sys_mod_count>0</sys_mod_count><sys_name>No result found</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_ui_message_1e951e0c070320107a0af0269c1ed0c7</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2021-03-17 17:22:43</sys_updated_on></sys_ui_message></record_update>]]></payload>
 <payload_hash>-309810208</payload_hash>
-<remote_update_set display_value="ACN: Table With Filter Component ">73abde44078320107a0af0269c1ed097</remote_update_set>
+<remote_update_set display_value="ACN Table Filter Component V2">eee5d72d070320109eaef19d7c1ed0b7</remote_update_set>
 <replace_on_upgrade>false</replace_on_upgrade>
-<sys_created_by>admin</sys_created_by>
-<sys_created_on>2021-03-17 17:49:19</sys_created_on>
-<sys_id>33ab964c078320107a0af0269c1ed030</sys_id>
+<sys_created_by>mateus_mazzei</sys_created_by>
+<sys_created_on>2021-03-22 13:54:36</sys_created_on>
+<sys_id>aee5d72d070320109eaef19d7c1ed0b8</sys_id>
 <sys_mod_count>0</sys_mod_count>
-<sys_recorded_at>178413609e00000001</sys_recorded_at>
-<sys_updated_by>admin</sys_updated_by>
-<sys_updated_on>2021-03-17 17:49:19</sys_updated_on>
+<sys_recorded_at>1785a36b7f60000001</sys_recorded_at>
+<sys_updated_by>mateus_mazzei</sys_updated_by>
+<sys_updated_on>2021-03-22 13:54:36</sys_updated_on>
 <table/>
 <target_name>No result found</target_name>
 <type>Message</type>
 <update_domain>global</update_domain>
-<update_guid>9e95da4c97032010b814bb224be60fd8</update_guid>
-<update_guid_history>9e95da4c97032010b814bb224be60fd8:-309810208</update_guid_history>
+<update_guid>45c5572d7903201022bedf5ad1734c5d</update_guid>
+<update_guid_history>45c5572d7903201022bedf5ad1734c5d:-309810208,9e95da4c97032010b814bb224be60fd8:-309810208</update_guid_history>
 <update_set display_value=""/>
 <view/>
 </sys_update_xml>
@@ -70,6 +96,7 @@
 	c.showPagination = true;
 	c.modelFields = {};
 	$scope.view = (c.options.column_filter == 'true'? true : false);
+	$scope.exportTypes = [{label:'PDF', value: 'PDF'}, {label:'Excel', value:'EXCEL'}, {label:'CSV', value:'CSV'}];
 
 	/* Sort the list */
 	$scope.sort = function(field){
@@ -195,19 +222,6 @@
 		return date;
 	}
 
-	/* Convert 2021-02-20 to 20/02/2020*/
-	$scope.formatDate = function(date,datetime){
-		if(!date || date == ' ... ' ) return '...';
-
-		if(!datetime){
-			date = date.split('-');
-			return date[2] + '/' + date[1] + '/' + date[0]
-		}
-		var newDate = date.split(' ');
-		var day = newDate[0].split('-');
-		return day[2] + '/' + day[1] + '/' + day[0] + ' ' + newDate[1];
-	}
-
 	/* Update the list */
 	c.update = function update(index) {
 		c.showPagination = false;
@@ -228,290 +242,318 @@
 
 			c.data.searchFilters.push(record);	
 		}
-		console.log(	c.data.searchFilters	);
 		c.server.update().then(function(){
 			c.showPagination = true;
 			c.data.action = '';
 		});
 	};
-}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;/*------- SEARCH BOX -------*/
-
-.search{
-  overflow: auto;
-  color: black;
-}
-
-.search__icon{
-  float: right;
-  padding: 7.2px 12px;
-  border: 1px solid #c7c7c7;
-  border-radius: 0px 3px 3px 0px;
-  border-left: none;
-  background: white;
-}
-
-.search__input{
-  float: right;
-  border: 1px solid #c7c7c7;
-  border-radius: 3px 0px 0px 3px;
-  padding-left: 12px;
-  width: 250px;
-  height: 30px;
-  border-right: none;
-
-  &amp;amp;::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: black;
-    opacity: 1; /* Firefox */
-  }
-
-  &amp;amp;:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: black;
-  }
-
-  &amp;amp;::-ms-input-placeholder { /* Microsoft Edge */
-    color: black;
-  }
-}
-/*------- END -------*/
-
-/*------- PANEL -------*/
-.panel{
-  margin: 10px 0px 10px 0px;
-  background: white;
-  border-radius: 6px;
-  box-sizing: border-box;
-  font-family: 'Helvetica';
-  color: $brand-primary;
-  border: none;
-  box-shadow: 0px 2px 4px 0px #b5b4b4;
-}
-
-/*Head*/
-.panel-heading{
-  border: none;
-  background-color: $brand-primary;
-  color: white;
-}
-
-.title{
-  font-size: 21px;
-  font-weight: 200;
-  margin: 0;
-}
-
-.title__icon{
-  margin-right: 15px;
-}
-
-.title__button{
-  float: right;
-  font-size: 21px;
-  i {
-    margin-top: 2px;
-    margin-left: 15px;
-  }
-}
-
-.title__button i:hover {
-  font-size: 23px;
-  margin-top: 0;
-  margin-left: 13px;
-}
-
-/*Body*/
-.panel-body{
-  margin: 0px;
-  padding: 0px;
-}
-
-/*Footer*/
-.panel-footer{
-  border: none;
-  background: white;
-  padding: 0px;
-
-  /*pagination*/
-  .pagination{
-    margin: 8px 15px;
-    display: inline;
-  }
-
-  .pagination &amp;gt; li &amp;gt; a, .pagination &amp;gt; li &amp;gt; span {
-    border: 1px solid #c7c7c7;
-    color: black;
-  }
-
-  .page-item a{
-    color: black;
-  } 
-
-  .num_pages{
-    background-color: white;
-    color: black;
-  }
-
-  .num_pages:hover{
-    background-color: white;
-    color: black;
-  }
-
-  nav{
-    padding: 5px;
-    overflow: auto;
-  }
-
-  /*goTo*/
-  .goTo__input{
-    height: 34px;
-    border: 1px solid #c7c7c7;
-    border-radius: 3px;
-    width: 60px;
-  }
-
-  .goTo__button{
-    padding: 7px;
-    border-radius: 3px;
-    border: 1px solid;
-  }
-}
-/*------- END -------*/
-
-/*------- LIST -------*/
-.list{
-  overflow-x: auto;
-
-  table{
-    border: none;
-    border-radius: 6px;
-    border-collapse: collapse;
-    width: 100%;
-  }
-
-  .hover_line:hover {
-    background: #5a8c87;
-    color: white;
-    transition: 0.2s;
-
-    a{
-      color: white;
-    }
-  }
-
-  .hover_line:first-child:hover {
-    background: #3d6965;
-  }
-
-  th{
-    padding: 8px 10px;
-    text-transform: capitalize;
-    background: #3d6965;
-    color: white;
-    font-weight: 400;
-    white-space: nowrap;
-  }
-
-  td{
-    padding: 5px 10px;
-  }
-
-  a{
-    color: $brand-primary;
-  }
-
-  a:hover{
-    color: white;
-    text-decoration: underline;
-  }
-
-}
-
-.zebra_on{
-  background-color: #f6f6f6;
-}
-
-.zebra_off{
-  background-color: white;
-}
-
-.list__short--label{
-  max-width: 300px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display:inline-block;
-}
-
-/*Columns*/
-.search_field{
-  border: 1px solid #3d6965;
-  border-radius: 3px;
-  width: 100%;
-  padding-left: 5px;
-  color: black;
-}
-/*------- END -------*/
-
-/*------- LOADING -------*/ 
-
-.loading{
-  border: 1px solid #c7c7c7;
-  text-align: center;
-  color: $brand-primary;
-  height: 386px;
-}
-
-.loading__icon{
-  font-size: 35px;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
-  margin-top: 110px;
-}
-
-.loading__p{
-  font-size: 21px;
-  font-family: 'Helvetica';
-  margin-top: 8px;
-}
-
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/*------- END -------*/
-
-/*------- NOT FOUND -------*/ 
-
-.not_found{
-  padding-bottom: 25px;
-  padding-top: 25px;
-  border: 1px solid #c7c7c7;
-  text-align: center;
-  color: $brand-primary;
-  height: 386px;
-}
-
-.not_found__icon{
-  font-size: 50px;
-  margin-bottom: 10px;
-  margin-top: 110px;
-}
-
-.not_found__p{
-  font-size: 19px;
-}
-
-/*------- END -------*/
-
-
+}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;/*------- SEARCH BOX -------*/&amp;#13;
+&amp;#13;
+.search{&amp;#13;
+  overflow: auto;&amp;#13;
+  color: black;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.search__icon{&amp;#13;
+  float: right;&amp;#13;
+  padding: 7.2px 12px;&amp;#13;
+  border: 1px solid #c7c7c7;&amp;#13;
+  border-radius: 0px 3px 3px 0px;&amp;#13;
+  border-left: none;&amp;#13;
+  background: white;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.search__input{&amp;#13;
+  float: right;&amp;#13;
+  border: 1px solid #c7c7c7;&amp;#13;
+  border-radius: 3px 0px 0px 3px;&amp;#13;
+  padding-left: 12px;&amp;#13;
+  width: 250px;&amp;#13;
+  height: 30px;&amp;#13;
+  border-right: none;&amp;#13;
+&amp;#13;
+  &amp;amp;::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */&amp;#13;
+    color: black;&amp;#13;
+    opacity: 1; /* Firefox */&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  &amp;amp;:-ms-input-placeholder { /* Internet Explorer 10-11 */&amp;#13;
+    color: black;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  &amp;amp;::-ms-input-placeholder { /* Microsoft Edge */&amp;#13;
+    color: black;&amp;#13;
+  }&amp;#13;
+}&amp;#13;
+/*------- END -------*/&amp;#13;
+&amp;#13;
+/*------- PANEL -------*/&amp;#13;
+.panel{&amp;#13;
+  margin: 10px 0px 10px 0px;&amp;#13;
+  background: white;&amp;#13;
+  border-radius: 6px;&amp;#13;
+  box-sizing: border-box;&amp;#13;
+  font-family: 'Helvetica';&amp;#13;
+  color: $brand-primary;&amp;#13;
+  border: none;&amp;#13;
+  box-shadow: 0px 2px 4px 0px #b5b4b4;&amp;#13;
+}&amp;#13;
+&amp;#13;
+/*Head*/&amp;#13;
+.panel-heading{&amp;#13;
+  border: none;&amp;#13;
+  background-color: $brand-primary;&amp;#13;
+  color: white;&amp;#13;
+  position: relative;&amp;#13;
+}&amp;#13;
+&amp;#13;
+/*Export*/&amp;#13;
+.dropdown_menu{&amp;#13;
+  font-size: 14px;&amp;#13;
+  position: absolute;&amp;#13;
+  top: 45px;&amp;#13;
+  right: 8px;&amp;#13;
+  background: #f6f6f6;&amp;#13;
+  list-style: none;&amp;#13;
+  padding: 8px 10px;&amp;#13;
+  box-shadow: 0px 2px 3px #c3c3c3;&amp;#13;
+  border-radius: 3px;&amp;#13;
+&amp;#13;
+  li{&amp;#13;
+    padding: 8px 0px;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  &amp;amp;:after {&amp;#13;
+    content: " ";&amp;#13;
+    position: absolute;&amp;#13;
+    right: 4px;&amp;#13;
+    top: -8px;&amp;#13;
+    border-top: none;&amp;#13;
+    border-right: 12px solid transparent;&amp;#13;
+    border-left: 12px solid transparent;&amp;#13;
+    border-bottom: 10px solid #f6f6f6;&amp;#13;
+  }&amp;#13;
+}&amp;#13;
+&amp;#13;
+.title__button{&amp;#13;
+  float: right;&amp;#13;
+  font-size: 21px;&amp;#13;
+  i {&amp;#13;
+    margin-top: 2px;&amp;#13;
+    margin-left: 15px;&amp;#13;
+  }&amp;#13;
+}&amp;#13;
+&amp;#13;
+.title{&amp;#13;
+  font-size: 21px;&amp;#13;
+  font-weight: 200;&amp;#13;
+  margin: 0;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.title__icon{&amp;#13;
+  margin-right: 15px;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.title__button i:hover {&amp;#13;
+  font-size: 23px;&amp;#13;
+  margin-top: 0;&amp;#13;
+  margin-left: 13px;&amp;#13;
+}&amp;#13;
+&amp;#13;
+/*Body*/&amp;#13;
+.panel-body{&amp;#13;
+  margin: 0px;&amp;#13;
+  padding: 0px;&amp;#13;
+}&amp;#13;
+&amp;#13;
+/*Footer*/&amp;#13;
+.panel-footer{&amp;#13;
+  border: none;&amp;#13;
+  background: white;&amp;#13;
+  padding: 0px;&amp;#13;
+&amp;#13;
+  /*pagination*/&amp;#13;
+  .pagination{&amp;#13;
+    margin: 8px 15px;&amp;#13;
+    display: inline;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  .pagination &amp;gt; li &amp;gt; a, .pagination &amp;gt; li &amp;gt; span {&amp;#13;
+    border: 1px solid #c7c7c7;&amp;#13;
+    color: black;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  .page-item a{&amp;#13;
+    color: black;&amp;#13;
+  } &amp;#13;
+&amp;#13;
+  .num_pages{&amp;#13;
+    background-color: white;&amp;#13;
+    color: black;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  .num_pages:hover{&amp;#13;
+    background-color: white;&amp;#13;
+    color: black;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  nav{&amp;#13;
+    padding: 5px;&amp;#13;
+    overflow: auto;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  /*goTo*/&amp;#13;
+  .goTo__input{&amp;#13;
+    height: 34px;&amp;#13;
+    border: 1px solid #c7c7c7;&amp;#13;
+    border-radius: 3px;&amp;#13;
+    width: 60px;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  .goTo__button{&amp;#13;
+    padding: 7px;&amp;#13;
+    border-radius: 3px;&amp;#13;
+    border: 1px solid;&amp;#13;
+  }&amp;#13;
+}&amp;#13;
+/*------- END -------*/&amp;#13;
+&amp;#13;
+/*------- LIST -------*/&amp;#13;
+.list{&amp;#13;
+  overflow-x: auto;&amp;#13;
+&amp;#13;
+  table{&amp;#13;
+    border: none;&amp;#13;
+    border-radius: 6px;&amp;#13;
+    border-collapse: collapse;&amp;#13;
+    width: 100%;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  .hover_line:hover {&amp;#13;
+    background: #5a8c87;&amp;#13;
+    color: white;&amp;#13;
+    transition: 0.2s;&amp;#13;
+&amp;#13;
+    a{&amp;#13;
+      color: white;&amp;#13;
+    }&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  .hover_line:first-child:hover {&amp;#13;
+    background: #3d6965;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  th{&amp;#13;
+    padding: 8px 10px;&amp;#13;
+    text-transform: capitalize;&amp;#13;
+    background: #3d6965;&amp;#13;
+    color: white;&amp;#13;
+    font-weight: 400;&amp;#13;
+    white-space: nowrap;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  td{&amp;#13;
+    padding: 5px 10px;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  a{&amp;#13;
+    color: $brand-primary;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  a:hover{&amp;#13;
+    color: white;&amp;#13;
+    text-decoration: underline;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+}&amp;#13;
+&amp;#13;
+.zebra_on{&amp;#13;
+  background-color: #f6f6f6;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.zebra_off{&amp;#13;
+  background-color: white;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.list__short--label{&amp;#13;
+  max-width: 300px;&amp;#13;
+  overflow: hidden;&amp;#13;
+  text-overflow: ellipsis;&amp;#13;
+  white-space: nowrap;&amp;#13;
+  display:inline-block;&amp;#13;
+}&amp;#13;
+&amp;#13;
+/*Columns*/&amp;#13;
+.search_field{&amp;#13;
+  border: 1px solid #3d6965;&amp;#13;
+  border-radius: 3px;&amp;#13;
+  width: 100%;&amp;#13;
+  padding-left: 5px;&amp;#13;
+  color: black;&amp;#13;
+}&amp;#13;
+/*------- END -------*/&amp;#13;
+&amp;#13;
+/*------- LOADING -------*/ &amp;#13;
+&amp;#13;
+.loading{&amp;#13;
+  border: 1px solid #c7c7c7;&amp;#13;
+  text-align: center;&amp;#13;
+  color: $brand-primary;&amp;#13;
+  height: 386px;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.loading__icon{&amp;#13;
+  font-size: 35px;&amp;#13;
+  -webkit-animation: spin 2s linear infinite;&amp;#13;
+  animation: spin 2s linear infinite;&amp;#13;
+  margin-top: 110px;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.loading__p{&amp;#13;
+  font-size: 21px;&amp;#13;
+  font-family: 'Helvetica';&amp;#13;
+  margin-top: 8px;&amp;#13;
+}&amp;#13;
+&amp;#13;
+@-webkit-keyframes spin {&amp;#13;
+  0% { -webkit-transform: rotate(0deg); }&amp;#13;
+  100% { -webkit-transform: rotate(360deg); }&amp;#13;
+}&amp;#13;
+&amp;#13;
+@keyframes spin {&amp;#13;
+  0% { transform: rotate(0deg); }&amp;#13;
+  100% { transform: rotate(360deg); }&amp;#13;
+}&amp;#13;
+&amp;#13;
+/*------- END -------*/&amp;#13;
+&amp;#13;
+/*------- NOT FOUND -------*/ &amp;#13;
+&amp;#13;
+.not_found{&amp;#13;
+  padding-bottom: 25px;&amp;#13;
+  padding-top: 25px;&amp;#13;
+  border: 1px solid #c7c7c7;&amp;#13;
+  text-align: center;&amp;#13;
+  color: $brand-primary;&amp;#13;
+  height: 386px;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.not_found__icon{&amp;#13;
+  font-size: 50px;&amp;#13;
+  margin-bottom: 10px;&amp;#13;
+  margin-top: 110px;&amp;#13;
+}&amp;#13;
+&amp;#13;
+.not_found__p{&amp;#13;
+  font-size: 19px;&amp;#13;
+}&amp;#13;
+&amp;#13;
+/*------- END -------*/&amp;#13;
+&amp;#13;
+&amp;#13;
 &lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id&gt;acn_table_with_filter&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {
   
-}]]&gt;&lt;/link&gt;&lt;name&gt;ACN Table With Filter&lt;/name&gt;&lt;option_schema&gt;[{"name":"table","section":"Data","label":"Table","type":"string"},{"name":"field_list","section":"Data","label":"Fields","type":"string"},{"name":"maximum_entries","section":"Data","label":"Maximum Entries","type":"integer"},{"name":"icon_class","section":"Presentation","default_value":"","label":"Icon full class - like: \"fa fa-flag\"","type":"string"},{"name":"filter","section":"Data","label":"Filter","type":"string"},{"name":"title","section":"Presentation","label":"Title","type":"string"},{"name":"show_search","section":"other","default_value":"true","label":"Show Search","type":"boolean"},{"name":"column_filter","section":"other","default_value":"false","label":"Initialize with column filter","type":"boolean"},{"name":"target","section":"other","default_value":"_blak","label":"Target","type":"choice","choices":[{"label":"_blank","value":"_blank"},{"label":"_self","value":"_self"}]},{"displayValue":"Portal","name":"portal","section":"other","label":"Portal to redirect","type":"string","value":"sys_portal","ed":{"reference":"sys_portal"}},{"displayValue":"Page","name":"page","section":"other","label":"Page","type":"string","value":"sp_page","ed":{"reference":"sp_page"}},{"name":"redirect","section":"other","default_value":"true","label":"Redirect","type":"boolean"}]&lt;/option_schema&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+}]]&gt;&lt;/link&gt;&lt;name&gt;ACN Table With Filter&lt;/name&gt;&lt;option_schema&gt;[{"name":"table","section":"Data","label":"Table","type":"string"},{"name":"field_list","section":"Data","label":"Fields","type":"string"},{"name":"maximum_entries","section":"Data","label":"Maximum Entries","type":"integer"},{"name":"icon_class","section":"Presentation","default_value":"","label":"Icon full class - like: \"fa fa-flag\"","type":"string"},{"name":"filter","section":"Data","label":"Filter","type":"string"},{"name":"title","section":"Presentation","label":"Title","type":"string"},{"name":"show_search","section":"other","default_value":"true","label":"Show Search","type":"boolean"},{"name":"column_filter","section":"other","default_value":"false","label":"Initialize with column filter","type":"boolean"},{"name":"target","section":"other","default_value":"_blak","label":"Target","type":"choice","choices":[{"label":"_blank","value":"_blank"},{"label":"_self","value":"_self"}]},{"displayValue":"Portal","name":"portal","section":"other","label":"Portal to redirect","type":"string","value":"sys_portal","ed":{"reference":"sys_portal"}},{"displayValue":"Page","name":"page","section":"other","label":"Page","type":"string","value":"sp_page","ed":{"reference":"sp_page"}},{"name":"redirect","section":"other","default_value":"true","label":"Redirect","type":"boolean"},{"name":"show_export_icon","section":"other","default_value":"true","label":"Show export icon","type":"boolean"},{"name":"export_view","section":"other","label":"Export View","type":"string"}]&lt;/option_schema&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
 
 	var localInput = {};
 	if(input)
@@ -608,7 +650,7 @@
 })(); 
 
 
-]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-03-17 16:24:45&lt;/sys_created_on&gt;&lt;sys_id&gt;91e74204070320107a0af0269c1ed0c1&lt;/sys_id&gt;&lt;sys_mod_count&gt;22&lt;/sys_mod_count&gt;&lt;sys_name&gt;ACN Table With Filter&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_91e74204070320107a0af0269c1ed0c1&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-03-17 17:24:07&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;!-------- SEARCH BOX --------&gt;
+]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-03-17 16:24:45&lt;/sys_created_on&gt;&lt;sys_id&gt;91e74204070320107a0af0269c1ed0c1&lt;/sys_id&gt;&lt;sys_mod_count&gt;31&lt;/sys_mod_count&gt;&lt;sys_name&gt;ACN Table With Filter&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_91e74204070320107a0af0269c1ed0c1&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;mateus_mazzei&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-03-22 13:44:17&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;!-------- SEARCH BOX --------&gt;
 &lt;div class="search" ng-if="options.show_search == 'true' "&gt;
   &lt;i class="fa fa-search search__icon"&gt;&lt;/i&gt;
   &lt;input type="text" class="search__input" ng-model="c.searchText" placeholder="${Search}..." ng-change="filter()"&gt;
@@ -621,6 +663,14 @@
       &lt;span class="title__button"&gt;
         &lt;i class="fa fa-search search_colunm" ng-click="view = !view" title="Apresentar filtros"&gt;&lt;/i&gt;
         &lt;i class="fa fa-refresh" ng-click="refresh()" title="Atualizar a lista"&gt;&lt;/i&gt;
+        &lt;i class="fa fa-bars" ng-click="showDrop = !showDrop" ng-show="options.show_export_icon == 'true'"&gt;&lt;/i&gt;
+
+        &lt;ul class="dropdown_menu" ng-if="showDrop"&gt;
+          &lt;li ng-repeat="t in ::exportTypes"&gt;
+            &lt;a ng-href="/{{data.table}}_list.do?{{::t.value}}&amp;sysparm_query={{data.exportQueryEncoded}}&amp;sysparm_view={{options.export_view}}&amp;sysparm_fields={{data.fields.join(',')}}" target="_new" tabindex="-1"&gt;${Export as} {{::t.label}}&lt;/a&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+
       &lt;/span&gt;
       &lt;i ng-if="options.icon_class" class="{{options.icon_class}} title__icon"&gt;&lt;/i&gt;
       {{c.options.title}}
@@ -659,7 +709,7 @@
               &lt;span ng-switch-when="glide_date_time" class="date_time"&gt;
                 &lt;input type="date" ng-model="c.modelFields[column.name]"  class="search_field" ng-show="view" class="search_field"  ng-keypress="getkeys($event, $index)"&gt;
               &lt;/span&gt;
-              
+
               &lt;span ng-switch-when="glide_date" class="date_time"&gt;
                 &lt;input type="date" ng-model="c.modelFields[column.name]"  class="search_field" ng-show="view" class="search_field"  ng-keypress="getkeys($event, $index)"&gt;
               &lt;/span&gt;
@@ -673,20 +723,20 @@
         &lt;/tr&gt;
 
         &lt;!-- Lines --&gt;
-        
+
         &lt;tr ng-repeat="record in data.list" ng-disabled="options.redirect == 'false'" ng-click="redirect(record[0])" ng-class="{'zebra_off': $index % 2 == 0, 'zebra_on': $index % 2 != 0, 'hover_line': options.redirect == 'true' }"&gt;
-          
+
           &lt;!-- If redirect --&gt;
           &lt;td  ng-repeat="field in record"  ng-if="options.redirect == 'true'" class="pointer list__short" ng-switch="data.column_types[field.field]"&gt;
             &lt;span class="list__short--label"&gt;&lt;a href="{{data.url + record[0].sys_id}}" target="{{options.target}}" ng-switch-when="glide_date"&gt;{{ formatDate(field.display,false) }}&lt;/a&gt;&lt;/span&gt;
-          	&lt;span class="list__short--label"&gt;&lt;a href="{{data.url + record[0].sys_id}}" target="{{options.target}}" ng-switch-when="glide_date_time"&gt;{{ formatDate(field.display,true) }}&lt;/a&gt;&lt;/span&gt;
+            &lt;span class="list__short--label"&gt;&lt;a href="{{data.url + record[0].sys_id}}" target="{{options.target}}" ng-switch-when="glide_date_time"&gt;{{ formatDate(field.display,true) }}&lt;/a&gt;&lt;/span&gt;
             &lt;span class="list__short--label"&gt;&lt;a href="{{data.url + record[0].sys_id}}" target="{{options.target}}"  ng-switch-default&gt;{{field.display}}&lt;/a&gt;&lt;/span&gt;
           &lt;/td&gt;
-          
-           &lt;!-- Else --&gt;
+
+          &lt;!-- Else --&gt;
           &lt;td  ng-repeat="field in record"   ng-if="options.redirect == 'false'" class="pointer list__short" ng-switch="data.column_types[field.field]"&gt;
-            &lt;span class="list__short--label" ng-switch-when="glide_date"&gt;{{ formatDate(field.display,false) }}&lt;/span&gt;
-          	&lt;span class="list__short--label" ng-switch-when="glide_date_time"&gt;{{ formatDate(field.display,true) }}&lt;/span&gt;
+            &lt;span class="list__short--label" ng-switch-when="glide_date"&gt;{{ field.display }}&lt;/span&gt;
+            &lt;span class="list__short--label" ng-switch-when="glide_date_time"&gt;{{ field.display }}&lt;/span&gt;
             &lt;span class="list__short--label" ng-switch-default&gt;{{field.display}}&lt;/span&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
@@ -728,22 +778,22 @@
   &lt;/div&gt;
 &lt;/div&gt;
 ]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
-<payload_hash>331652732</payload_hash>
-<remote_update_set display_value="ACN: Table With Filter Component ">73abde44078320107a0af0269c1ed097</remote_update_set>
+<payload_hash>796596329</payload_hash>
+<remote_update_set display_value="ACN Table Filter Component V2">eee5d72d070320109eaef19d7c1ed0b7</remote_update_set>
 <replace_on_upgrade>false</replace_on_upgrade>
-<sys_created_by>admin</sys_created_by>
-<sys_created_on>2021-03-17 17:49:19</sys_created_on>
-<sys_id>77ab964c078320107a0af0269c1ed02f</sys_id>
+<sys_created_by>mateus_mazzei</sys_created_by>
+<sys_created_on>2021-03-22 13:54:36</sys_created_on>
+<sys_id>e2e5d72d070320109eaef19d7c1ed0b8</sys_id>
 <sys_mod_count>0</sys_mod_count>
-<sys_recorded_at>178413752c90000001</sys_recorded_at>
-<sys_updated_by>admin</sys_updated_by>
-<sys_updated_on>2021-03-17 17:49:19</sys_updated_on>
+<sys_recorded_at>1785a3640180000001</sys_recorded_at>
+<sys_updated_by>mateus_mazzei</sys_updated_by>
+<sys_updated_on>2021-03-22 13:54:36</sys_updated_on>
 <table/>
 <target_name>ACN Table With Filter</target_name>
 <type>Widget</type>
 <update_domain>global</update_domain>
-<update_guid>76e55e4cda0320107b18f16fd597eba1</update_guid>
-<update_guid_history>76e55e4cda0320107b18f16fd597eba1:331652732,e2841ac8190320103595ef04958e0c77:-1643473575,7274560c05032010e547436bb2079c4c:2073409843,b7449a0c18032010483ca3a3ddc1aeff:-1015240397,5024560c1c032010265a28297507542c:1241931909,9a141a0c1f03201064969bc7929bd044:-1581639960,6bc31ac8ab03201053279ac628717ab3:-737822220,90739e88da032010522c59dc565ca0b3:-1941323281,2bc29ac8a20320104d998da3c7c9c7ac:-1764714308,ba119688440320106d5c18e0c9d3ef7f:-580250450,baf016484203201050567ca61fa39b8b:-783019550,38905648610320109912218c51056d51:-580250450,2870d2484c0320108470d47171226095:-616706662,e25016c4290320102b26a27ad72ceebd:-387642105,c0ef46484a03201004f2500d06f46345:1824450787,0b6f0648e9032010e302485010ed0c60:1974963401,7f4fc2485a032010be93b4cea6a3d936:-1010148039,86acce84c7032010af2b759a1c1e7796:862601290,8dcb8e84f3032010d7cd28914b64da18:1886619864,4f9b0e8495032010d3e0d3d81cda5b71:1158874504,fe2bc684fa03201052ca72ba41823296:1861742603,6aba0e04bb0320103e4ee63d506fcacb:1264903508,4d5882046b032010fa47016f5a7d8fac:1974963401</update_guid_history>
+<update_guid>61a5172dec0320105d42a7b4560a006d</update_guid>
+<update_guid_history>61a5172dec0320105d42a7b4560a006d:796596329,178313a97a032010577907f980f81201:796596329,9e635f694e032010a1a1620edadb5bff:-1715751755,f17f07e50f03201002e06f894613f760:-1046067280,de4f8fa5b7032010d6840d3c353ca1fc:1602345452,0d2fcfa55d0320102f723a2ae9592520:-1181116904,8dee83a55d032010d42ed16b447ce020:1895953750,7e2e8f653e03201079e92b192db9c1dc:1476335935,9ddd4b655803201003e89dbf998847c6:2139061239,f8adcb65bc032010cd5af2c0d411905d:-456420474,76e55e4cda0320107b18f16fd597eba1:331652732,e2841ac8190320103595ef04958e0c77:-1643473575,7274560c05032010e547436bb2079c4c:2073409843,b7449a0c18032010483ca3a3ddc1aeff:-1015240397,5024560c1c032010265a28297507542c:1241931909,9a141a0c1f03201064969bc7929bd044:-1581639960,6bc31ac8ab03201053279ac628717ab3:-737822220,90739e88da032010522c59dc565ca0b3:-1941323281,2bc29ac8a20320104d998da3c7c9c7ac:-1764714308,ba119688440320106d5c18e0c9d3ef7f:-580250450,baf016484203201050567ca61fa39b8b:-783019550,38905648610320109912218c51056d51:-580250450,2870d2484c0320108470d47171226095:-616706662,e25016c4290320102b26a27ad72ceebd:-387642105,c0ef46484a03201004f2500d06f46345:1824450787,0b6f0648e9032010e302485010ed0c60:1974963401,7f4fc2485a032010be93b4cea6a3d936:-1010148039,86acce84c7032010af2b759a1c1e7796:862601290,8dcb8e84f3032010d7cd28914b64da18:1886619864,4f9b0e8495032010d3e0d3d81cda5b71:1158874504,fe2bc684fa03201052ca72ba41823296:1861742603,6aba0e04bb0320103e4ee63d506fcacb:1264903508,4d5882046b032010fa47016f5a7d8fac:1974963401</update_guid_history>
 <update_set display_value=""/>
 <view/>
 </sys_update_xml>
@@ -868,28 +918,33 @@ acnListUtils.prototype = {
 		{display: "2016-12-13 18:46:44", sys_id: "1c741bd70b2322007518478d83673af3"}
 	]
 	*/
-	getRows: function(gr){
+		getRows: function(gr){
 		if(!gr){
 			return;
 		}
-		
+
 		var arr_col = [], list = [];
-		
+
 		while(gr.next()){
 
 			for(var i=0; i &lt; this.f.length; i++){
 				var fld = this.f[i];
 				var obj = {};
-				if (!gr[fld].canRead()) {
-					obj.display = null;
-					obj.sys_id = null;
-				}
-				else {
-					obj.display = gr.getDisplayValue(this.f[i]) || ' ... ' ;
+				var type = this.column_types[this.f[i]];
+				var value = gr.getValue(this.f[i])
+				if (gr[fld].canRead()) {
+					if(value &amp;&amp; value != ' ... ' &amp;&amp; (type == 'glide_date' || type == 'glide_date_time')){
+						var date = new GlideDate();
+						date.setValue(value);
+						obj.display = date.getByFormat("dd/MM/yyyy");
+					}
+					else
+						obj.display = gr.getDisplayValue(this.f[i]) || ' ... ' ;					
 					obj.sys_id = gr.getValue('sys_id');
 					obj.field = this.f[i];
+					obj.value = value;
+					arr_col.push(obj);
 				}
-				arr_col.push(obj);
 			}
 			list.push(arr_col);
 			arr_col = [];
@@ -931,49 +986,23 @@ acnListUtils.prototype = {
 	},
 	
     type: 'acnListUtils'
-};]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-03-17 16:26:16&lt;/sys_created_on&gt;&lt;sys_id&gt;fd784a04070320107a0af0269c1ed021&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;acnListUtils&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_fd784a04070320107a0af0269c1ed021&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-03-17 16:26:16&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
-<payload_hash>1596144612</payload_hash>
-<remote_update_set display_value="ACN: Table With Filter Component ">73abde44078320107a0af0269c1ed097</remote_update_set>
+};]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-03-17 16:26:16&lt;/sys_created_on&gt;&lt;sys_id&gt;fd784a04070320107a0af0269c1ed021&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;acnListUtils&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_fd784a04070320107a0af0269c1ed021&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;mateus_mazzei&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-03-22 13:46:21&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+<payload_hash>502108260</payload_hash>
+<remote_update_set display_value="ACN Table Filter Component V2">eee5d72d070320109eaef19d7c1ed0b7</remote_update_set>
 <replace_on_upgrade>false</replace_on_upgrade>
-<sys_created_by>admin</sys_created_by>
-<sys_created_on>2021-03-17 17:49:19</sys_created_on>
-<sys_id>7fab964c078320107a0af0269c1ed02f</sys_id>
+<sys_created_by>mateus_mazzei</sys_created_by>
+<sys_created_on>2021-03-22 13:54:36</sys_created_on>
+<sys_id>eae5d72d070320109eaef19d7c1ed0b8</sys_id>
 <sys_mod_count>0</sys_mod_count>
-<sys_recorded_at>17841025bb90000001</sys_recorded_at>
-<sys_updated_by>admin</sys_updated_by>
-<sys_updated_on>2021-03-17 17:49:19</sys_updated_on>
+<sys_recorded_at>1785a35ea2a0000001</sys_recorded_at>
+<sys_updated_by>mateus_mazzei</sys_updated_by>
+<sys_updated_on>2021-03-22 13:54:36</sys_updated_on>
 <table/>
 <target_name>acnListUtils</target_name>
 <type>Script Include</type>
 <update_domain>global</update_domain>
-<update_guid>17a8ca04a30320107df55730dbcc935c</update_guid>
-<update_guid_history>17a8ca04a30320107df55730dbcc935c:1596144612</update_guid_history>
-<update_set display_value=""/>
-<view/>
-</sys_update_xml>
-<sys_update_xml action="INSERT_OR_UPDATE">
-<action>INSERT_OR_UPDATE</action>
-<application display_value="Global">global</application>
-<category>customer</category>
-<comments/>
-<name>sys_ui_message_2ad4124c070320107a0af0269c1ed0f8</name>
-<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message"><sys_ui_message action="INSERT_OR_UPDATE"><application/><key>Try to write more than three characters to have a good search</key><language>pb</language><message>Tente escrever mais do que três letras para ter uma boa busca</message><sys_class_name>sys_ui_message</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2021-03-17 17:22:05</sys_created_on><sys_id>2ad4124c070320107a0af0269c1ed0f8</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Try to write more than three characters to have a good search</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_ui_message_2ad4124c070320107a0af0269c1ed0f8</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2021-03-17 17:22:05</sys_updated_on></sys_ui_message></record_update>]]></payload>
-<payload_hash>2022092958</payload_hash>
-<remote_update_set display_value="ACN: Table With Filter Component ">73abde44078320107a0af0269c1ed097</remote_update_set>
-<replace_on_upgrade>false</replace_on_upgrade>
-<sys_created_by>admin</sys_created_by>
-<sys_created_on>2021-03-17 17:49:19</sys_created_on>
-<sys_id>f3ab964c078320107a0af0269c1ed030</sys_id>
-<sys_mod_count>0</sys_mod_count>
-<sys_recorded_at>178413574c20000001</sys_recorded_at>
-<sys_updated_by>admin</sys_updated_by>
-<sys_updated_on>2021-03-17 17:49:19</sys_updated_on>
-<table/>
-<target_name>Try to write more than three characters to have a good search</target_name>
-<type>Message</type>
-<update_domain>global</update_domain>
-<update_guid>cd751e0c0c03201080f55981368f91d2</update_guid>
-<update_guid_history>cd751e0c0c03201080f55981368f91d2:2022092958</update_guid_history>
+<update_guid>d495932db503201066302e65e1041b3d</update_guid>
+<update_guid_history>d495932db503201066302e65e1041b3d:502108260,a90457a9a60320102a34f481e8cdf4b0:502108260,17a8ca04a30320107df55730dbcc935c:1596144612</update_guid_history>
 <update_set display_value=""/>
 <view/>
 </sys_update_xml>
