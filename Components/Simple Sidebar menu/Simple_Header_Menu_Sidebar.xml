@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2021-03-24 19:32:11">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description/>
+<inserted/>
+<name>Component: Simple Menu Sidebar </name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>26e07256070720109eaef19d7c1ed05f</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>willian_costa</sys_created_by>
+<sys_created_on>2021-03-24 19:32:10</sys_created_on>
+<sys_id>36567696070720109eaef19d7c1ed085</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>willian_costa</sys_updated_by>
+<sys_updated_on>2021-03-24 19:32:10</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_css_include_9da04cd807d220109eaef19d7c1ed04a</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_css_include"><sp_css_include action="INSERT_OR_UPDATE"><name>Roboto</name><source>url</source><sp_css/><sys_class_name>sp_css_include</sys_class_name><sys_created_by>anna_furlan</sys_created_by><sys_created_on>2021-02-08 18:24:26</sys_created_on><sys_id>9da04cd807d220109eaef19d7c1ed04a</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Roboto</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sp_css_include_9da04cd807d220109eaef19d7c1ed04a</sys_update_name><sys_updated_by>anna_furlan</sys_updated_by><sys_updated_on>2021-02-08 18:24:26</sys_updated_on><url>https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap</url></sp_css_include></record_update>]]></payload>
+<payload_hash>1424144</payload_hash>
+<remote_update_set display_value="Component: Simple Menu Sidebar ">36567696070720109eaef19d7c1ed085</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>willian_costa</sys_created_by>
+<sys_created_on>2021-03-24 19:32:10</sys_created_on>
+<sys_id>36567696070720109eaef19d7c1ed086</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>17865a879bc0000001</sys_recorded_at>
+<sys_updated_by>willian_costa</sys_updated_by>
+<sys_updated_on>2021-03-24 19:32:10</sys_updated_on>
+<table/>
+<target_name>Roboto</target_name>
+<type>CSS Include</type>
+<update_domain>global</update_domain>
+<update_guid>9532b6560b0720100d18606fb3fff1c3</update_guid>
+<update_guid_history>9532b6560b0720100d18606fb3fff1c3:1424144,69e0ccd8a4d22010f381e600881867a7:1424144</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_css_3f61c41c07d220109eaef19d7c1ed06d</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_css"><sp_css action="INSERT_OR_UPDATE"><css>body, h1, h2, h3, h4, h5, h6, span, p, input{&#13;
+font-family: 'Roboto', sans-serif;&#13;
+}</css><name>Apply Roboto Font</name><sys_class_name>sp_css</sys_class_name><sys_created_by>anna_furlan</sys_created_by><sys_created_on>2021-02-08 18:27:33</sys_created_on><sys_id>3f61c41c07d220109eaef19d7c1ed06d</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Apply Roboto Font</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sp_css_3f61c41c07d220109eaef19d7c1ed06d</sys_update_name><sys_updated_by>anna_furlan</sys_updated_by><sys_updated_on>2021-02-08 18:27:33</sys_updated_on></sp_css></record_update>]]></payload>
+<payload_hash>-1519369293</payload_hash>
+<remote_update_set display_value="Component: Simple Menu Sidebar ">36567696070720109eaef19d7c1ed085</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>willian_costa</sys_created_by>
+<sys_created_on>2021-03-24 19:32:10</sys_created_on>
+<sys_id>72567696070720109eaef19d7c1ed086</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>17865a81af00000001</sys_recorded_at>
+<sys_updated_by>willian_costa</sys_updated_by>
+<sys_updated_on>2021-03-24 19:32:10</sys_updated_on>
+<table/>
+<target_name>Apply Roboto Font</target_name>
+<type>Style Sheet</type>
+<update_domain>global</update_domain>
+<update_guid>d7127ed2ec07201094171a48153ce9c4</update_guid>
+<update_guid_history>d7127ed2ec07201094171a48153ce9c4:-1519369293,1791c41cced22010861bc44e5d2f8e9d:-1519369293</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_theme_4ec6efbe07c220109eaef19d7c1ed05c</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_theme"><sp_theme action="INSERT_OR_UPDATE"><css_variables>/**** COLORS ****/&#13;
+$brand-primary:#9B51E0;&#13;
+$body-bg:#F2F2F2;&#13;
+$state-success-text:#27AE60;&#13;
+$sp-homepage-bg:#fff;&#13;
+$sp-navbar-divider-color:#455464;&#13;
+$dark-text-color: #222;&#13;
+$text-color:#626262;&#13;
+$sp-logo-margin-y:.5rem;&#13;
+$navbar-inverse-link-hover-color:#9B51E0;&#13;
+$panel-bg:#fff;&#13;
+$brand-success:#27AE60;&#13;
+$navbar-inverse-bg:#fff;&#13;
+$brand-alert: #F2C94C;&#13;
+$brand-warning:#F2994A;&#13;
+$brand-danger:#EB5757;&#13;
+$sp-tagline-color:#717171;&#13;
+$navbar-inverse-link-color:#606164;&#13;
+$brand-info:#2D9CDB;&#13;
+$link-color:#2D9CDB;&#13;
+$sp-logo-margin-x:1rem;&#13;
+$btn-default-bg:#fff;&#13;
+$text-muted:#B1B1B1;&#13;
+$border-gray: #D4D4D4;&#13;
+$input-bg: #fff;&#13;
+&#13;
+//&#13;
+main.body {&#13;
+overflow: hidden;&#13;
+}&#13;
+&#13;
+/**** TEXT STYLES ****/&#13;
+body{&#13;
+  font-style: normal;&#13;
+  font-weight: normal;&#13;
+  font-size: 14px;&#13;
+  color: $text-color;&#13;
+}&#13;
+h1{&#13;
+  font-weight: 700;&#13;
+  font-size: 27px;&#13;
+  color: $dark-text-color;&#13;
+}&#13;
+h2{&#13;
+  font-weight: bold;&#13;
+  font-size: 24px;&#13;
+  color: $dark-text-color;&#13;
+}&#13;
+h3{&#13;
+  font-size: 19px;&#13;
+  line-height: 22px;&#13;
+}&#13;
+&#13;
+/*** ESTRUTURA ***/&#13;
+@media (min-width: 992px){&#13;
+  main.body .container {&#13;
+      width: 77vw;&#13;
+  }&#13;
+}&#13;
+.sp-page-root.page section.page{&#13;
+  padding-left: 23vw;&#13;
+}&#13;
+&#13;
+/**** ESTILOS COMUNS ****/&#13;
+&#13;
+/** cards **/&#13;
+&#13;
+.wrapper-itsm-xl {&#13;
+	padding: 15px 50px 15px 50px !important;&#13;
+    }&#13;
+&#13;
+@mixin white-card-style{&#13;
+  background: $panel-bg;&#13;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15);&#13;
+  border-radius: 4px;&#13;
+  padding: 20px;&#13;
+}&#13;
+@mixin purple-card-style{&#13;
+  background: linear-gradient(216.22deg, #9B51E0 11.01%, #6910BB 93.12%);&#13;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15);&#13;
+}&#13;
+&#13;
+/**** RESPONSIVO ****/&#13;
+@media screen and (max-width: 920px){&#13;
+	.sp-page-root.page section.page{&#13;
+  		padding-left: 0vw;&#13;
+	}&#13;
+}&#13;
+&#13;
+@media only screen and (max-width: 500px){  &#13;
+  .wrapper-itsm-xl{&#13;
+  	padding: 15px !important;&#13;
+  }&#13;
+}</css_variables><footer/><footer_fixed>true</footer_fixed><header display_value="ACN [ITSM] temp side menu">302b27b2070620109eaef19d7c1ed09b</header><name>Template ITSM Theme</name><navbar_fixed>true</navbar_fixed><sys_class_name>sp_theme</sys_class_name><sys_created_by>victor_brito</sys_created_by><sys_created_on>2021-02-04 19:18:04</sys_created_on><sys_id>4ec6efbe07c220109eaef19d7c1ed05c</sys_id><sys_mod_count>20</sys_mod_count><sys_name>Template ITSM Theme</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sp_theme_4ec6efbe07c220109eaef19d7c1ed05c</sys_update_name><sys_updated_by>mateus_mazzei</sys_updated_by><sys_updated_on>2021-03-05 12:55:10</sys_updated_on></sp_theme></record_update>]]></payload>
+<payload_hash>2134894056</payload_hash>
+<remote_update_set display_value="Component: Simple Menu Sidebar ">36567696070720109eaef19d7c1ed085</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>willian_costa</sys_created_by>
+<sys_created_on>2021-03-24 19:32:10</sys_created_on>
+<sys_id>7e567696070720109eaef19d7c1ed086</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>17865a4a81d0000001</sys_recorded_at>
+<sys_updated_by>willian_costa</sys_updated_by>
+<sys_updated_on>2021-03-24 19:32:10</sys_updated_on>
+<table/>
+<target_name>Template ITSM Theme</target_name>
+<type>Theme</type>
+<update_domain>global</update_domain>
+<update_guid>c0417ada88c32010c54bd14132c1e111</update_guid>
+<update_guid_history>c0417ada88c32010c54bd14132c1e111:2134894056,f145ab0c303e60107fde755bdcc15264:2134894056,a93608446ef26010337180ebf7b5e6f4:130926374,ff846ddb89e22010673743f064d15a89:-930486948,4a025113b1e2201047359e7af5846b24:-965513234,f7924c1c69d22010436c905ad1c48253:1133115382,8292881c10d22010cdbc59821ca4c5ef:-72235419,e582c81c37d2201039fc546a986f9266:303000523,80dff3c8fcd2201072416724a519f2fa:1082615515,113fb78893d220105bd3b103243289a9:-2128110219,c4753b80ced220100477b78319a96473:-2105775816,24c4ff403ed220103a3a9d3bc4c60b28:610557584,6994ff409ad22010228d2aeb9dc1261f:399396275,2d64378098d22010f9fcffb7132e8a69:-3605398,9765fff24c0620100bb7b607266eb6e2:758413340,0725377a890620105884893a0581d0de:-315250098,99c4b33689062010786ca8ba2d9e748d:625246459,104eeff26d062010fceda359dca4c3f9:-1572797300,6ffbafb230062010bb92ad967ba6ca3a:-1133821482,027be7b200062010a5555d79c06dbae0:-393657170,68482ffe0fc22010d463e5e0b9299f6d:1141055118,ccd6efbebcc2201059698de28a4e41af:-1568013678</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_header_footer_302b27b2070620109eaef19d7c1ed09b</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_header_footer"&gt;&lt;sp_header_footer action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[api.controller=function($scope) {
+  /* widget controller */
+  var c = this;
+	
+	c.hide = true;
+};]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;.nav-container {
+  //max-width: 345px;
+  width: 23vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 19;
+  background-color: #fff;
+  overflow: auto;
+
+}
+.nav-avatar {
+  text-align: center;
+  display: block;
+}
+
+.nav-avatar img {
+  border-radius: 50%;
+  width: 113px;
+  height: 113px;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+.user-content {
+  margin-top: 20%;
+}
+
+.username, .user-title, .user-plus {
+  text-align: center;
+  display: block;
+}
+.username{
+  font-weight: 700;
+  font-size: 24px;
+}
+.user-title {
+  font-size: 19px;
+}
+.user-plus {
+  font-size: 16px;
+}
+.nav-vertical {
+  margin-top: 30px;
+}
+.nav-vertical a {
+  font-size: 15px;
+  color: #000;
+  cursor: pointer;
+}
+.nav-vertical li {
+  border-bottom: 1px solid #ececec;
+  padding: 10px;
+  width: 270px;
+  list-style: none;
+}
+.nav-vertical li img {
+  padding: 10px;
+}
+
+i.glyphicon.glyphicon-chevron-down {
+  color: #A7A7A7;
+  font-size: 10px;
+  margin-left: 7vw;
+}
+
+.menu-child li {
+  border-bottom: none;
+}
+//
+
+.submenu-item {
+  height: 0;
+  overflow: hidden;
+}
+.nav &amp;gt; li &amp;gt; a{
+  width: 100%;
+}
+
+.item-expand {
+  height: auto !important;
+}
+.none {
+  display: none;
+}
+
+.submenu-item li:last-child {
+  border-bottom: none !important;
+}
+.nav-fix {
+  background-color: transparent;
+}
+.nav, .navbar-nav {
+  display: grid !important;
+  width: 100%;
+}
+
+a {
+  border-bottom: 1px solid #ececec;
+  width: 17.4vw;
+  color: #000;
+}
+.fa {
+  margin-right: 10px;
+}
+span.caret {
+  margin-left: 50% !important;
+}
+
+/*.glyphicon-list:before {
+font-size: x-large;
+color: #fff;
+}*/
+
+.dropdown-menu {
+  position: static;
+  padding: 15px;
+  box-shadow: none;
+  border: 0;
+  margin-left: 10%;
+}
+a.dropdown-toggle.sp-menu-has-items {
+  background-color: unset;
+  border-color: #eeeeee;
+}
+//
+
+@media (min-width: 920px) {
+  button.navbar-toggler {
+    display: none;
+  }
+}
+
+@media (max-width: 920px) {
+  button.navbar-toggler {
+    position: fixed;
+    top: 2%;
+    width: 50px;
+    height: 50px;
+    background-color: #8837D4;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.18);
+    border: none;
+    margin-left: 15px;
+    border-radius: 3px;
+    z-index: 20;
+  }
+  .nav-container {
+    width: 100vw;
+    height: 75px;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.18);
+  }
+
+  .user-content {
+    margin-top: 0;
+  }
+
+  .nav-avatar{
+    margin-top: 2%;
+  }
+
+  .navbar-collapse{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 75px;
+    background: #EBEBEB;
+    z-index: 10;
+
+    div{
+      width:100%;
+    }
+    li{
+      border-bottom: solid 1px #ccc;
+      margin: 0px 20px;
+      .glyphicon,  .glyphicon-menu-down span {
+        margin-left: 0% !important;
+        position: absolute;
+        right: 15px;
+        top: 41%;
+      }
+      .dropdown-menu li{
+        border-bottom: none;
+      }
+    }
+  }
+
+  .nav-avatar img {
+    width: 50px;
+    height: 50px;
+    display: inline;
+  }
+
+  .username{
+    font-size: 20px;
+    display: none;
+  }
+  .user-title {
+    display: none;
+  }
+  .user-plus {
+    display: none;
+  }
+}
+//
+
+@media (max-width: 920px) {
+  .hide {
+    display: none !important;
+  }
+} &lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id&gt;itsmtemp_side_menu&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {
+  
+
+}]]&gt;&lt;/link&gt;&lt;name&gt;ACN [ITSM] temp side menu&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+	var menu = $sp.getValue("sp_rectangle_menu");
+	data.menu = $sp.getWidgetFromInstance(menu);
+
+	data.avatarFile = gs.getUser().getAvatar();
+	data.username = gs.getUserDisplayName();
+	data.title = gs.getUser().getRecord().getValue('title');	
+	
+	if(!data.avatarFile) {
+		//
+	} else {
+		data.trueAvatar = data.avatarFile.slice(0,-8);
+	}
+	
+
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;static&gt;false&lt;/static&gt;&lt;sys_class_name&gt;sp_header_footer&lt;/sys_class_name&gt;&lt;sys_created_by&gt;victor_brito&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-02-04 19:37:31&lt;/sys_created_on&gt;&lt;sys_id&gt;302b27b2070620109eaef19d7c1ed09b&lt;/sys_id&gt;&lt;sys_mod_count&gt;249&lt;/sys_mod_count&gt;&lt;sys_name&gt;ACN [ITSM] temp side menu&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_header_footer_302b27b2070620109eaef19d7c1ed09b&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;victor_brito&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-03-05 13:59:54&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div class="nav-container"&gt;
+  &lt;div class="user-content"&gt;
+    &lt;span class="nav-avatar"&gt;&lt;img ng-if="data.avatarFile == null" src="nullavatar.png" /&gt;&lt;img ng-if="data.avatarFile != null" src="{{data.trueAvatar}}"&gt;&lt;/span&gt;
+    &lt;span class="username"&gt;{{data.username}}&lt;/span&gt;
+    &lt;span class="user-title"&gt;Software Engineering&lt;/span&gt;
+    &lt;span class="user-plus"&gt;Lorem ipsum dolor sit&lt;/span&gt;
+    
+    &lt;nav class="navbar navbar-expand-sm navbar-light bg-light nav-fix"&gt;
+      &lt;button class="navbar-toggler" ng-click="c.hide= !c.hide" type="button"  data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"&gt;
+        &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;&lt;img src="bars-itsm-menu.svg"/&gt;&lt;!--i class="glyphicon glyphicon-list"&gt;&lt;/i--&gt;
+      &lt;/button&gt;
+      &lt;div class="collapse navbar-collapse" ng-class="{hide:c.hide}" id="navbarSupportedContent"&gt;
+        &lt;sp-widget widget="::data.menu"&gt;&lt;/sp-widget&gt;
+      &lt;/div&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+]]&gt;&lt;/template&gt;&lt;/sp_header_footer&gt;&lt;/record_update&gt;</payload>
+<payload_hash>879875158</payload_hash>
+<remote_update_set display_value="Component: Simple Menu Sidebar ">36567696070720109eaef19d7c1ed085</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>willian_costa</sys_created_by>
+<sys_created_on>2021-03-24 19:32:10</sys_created_on>
+<sys_id>ba567696070720109eaef19d7c1ed086</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>17865a770970000001</sys_recorded_at>
+<sys_updated_by>willian_costa</sys_updated_by>
+<sys_updated_on>2021-03-24 19:32:10</sys_updated_on>
+<table/>
+<target_name>ACN [ITSM] temp side menu</target_name>
+<type>Header | Footer</type>
+<update_domain>global</update_domain>
+<update_guid>f4f1fa56c407201019711885a3d4d8b1</update_guid>
+<update_guid_history>f4f1fa56c407201019711885a3d4d8b1:879875158,0a143b08da7e6010d32f1ca0fa666e99:879875158,dbc377080a7e6010b466966fff6dae34:-1391031169,03433fc4d17e6010bdd9b46fde932fdd:802885869,8aa137843a7e60103ac0557163a288e5:1006543673,46b0ff44687e6010216e0cce037d393c:-850025561,344cef407c7e6010d5a00bb97b7ba0a2:279310465,512c63806d7e6010be93349534b61fcb:-1355649092,52f6678c883e6010a17364c54285f212:-825075082,cc86ef4cce3e60103a8f90b9bbcb0a87:-100167467,2a26234c9d3e6010e1f23791530730b9:-450950788,25d5ab0c4a3e6010b4eb4facbc09816b:-682029265,f995af0c023e60104bcce2bae5aa2116:1022066634,5405670cfe3e6010e78a460a2c8047ba:-63820141,298367c8613e6010950ffe8e244c8941:312149334,8473e3c8163e601061cac10d4ec1903f:-119518807,c053a3c8783e60106bbf51a0ceab9d19:1130860149,6f41e748e73e6010ed0b048550ed06c5:-1637104265,aa21efc4143e6010386d98463c161159:595649240,e1202fc4563e60106288a3dca14c3e56:-120335014,bcdf93087f3e6010e2da66484b968406:-705578202,e7fedfc40d3e6010d57a42f4e0f3ca3d:913471101,3cbe1bc4333e6010f58e5bd4a6a53f5a:-1481280177,1b5e1bc4dc3e6010262974f834ca0c2f:-1292662866,d71e5b844e3e6010c11d7b9d6f197762:-1286984822,410c5f44fc3e601002e62fba6a5c8167:-1805040874,10eb5f44743e6010561e4385dbc5f95f:-445738536,097b1344613e6010a2741afab34eec53:-1805040874,300bd344e63e60109fb03109eb85c25d:-259072860,980a97046f3e6010c9d2e2310e71a3ac:1384032010,798897c0a43e6010ce08366b137ce698:2064531686,02d7df80dc3e60101f4a4fa45a62d667:1165989204,3e871f80b73e6010eff80e871dda9604:-1669675197,b1779740763e6010fe6a6afda17e7745:-610440478,77571780423e6010f9a503797124f18a:-1858498814,a5071740ce3e601095a7640b1eeb84ea:365440797,d7461b40233e6010f616035dabc1ab36:-1848840203,4bc557403f3e60108557e45ca62a755a:-392486168,b0955740e33e6010e0a2abf2a0878c51:464314054,b53704845bf26010b18b0d97ed77d573:1350458340,96170484c2f26010599e79e5ec93d43a:-1531121693,d6d600841ef26010b2ca59fa74aa50e9:1250781204,f676004486f2601014d65904d32b1387:-22079972,97f5844470f260104733c4ac5d5e2953:1870422094,f075cc0424f26010b0d332277cd36459:989579152,a90508045bf2601064ad094b0594d020:-1990473155,55244cc032f26010f17df4d4ce2c45e3:-1472118523,45f3cc80acf260101249a74d02d337eb:-967169945,07e3c8c0c0f2601074a22daf96fd981e:-1466189478,984300c0cdf260103c60720adcc11943:406858670,f2b1f7b720a260105bffc2d802828689:-1865455574,3171ff77d7a260107420fdbfa4617d51:118127964,b130fb37dfa260104c1cb741b99cb316:-1085027987,eeafab371ea26010864f6e788b496e9e:953849249,6e8fab376aa26010e9cc6c5924d89bf7:-1952408822,ef4f6b730ba26010795ae77b809d79d3:1445946968,609e527bfdae201093b3c495ece498ac:1770693163,b03543e7ff66201069303f87e9da0e06:403454417,6d7383e7136620108ef5382bc8680b45:-284414984,7943cfa7dc6620106e3064a96e45c369:-2022759473,21334b67656620107f1de3e5816811ba:-1648150141,08da6667ea262010130cb0fd15e1077d:-2022759473,33f9eee3a526201094a577d7a7785828:562021592,65382a278826201039de0bc055460381:-704462554,35282a27ad262010c309502396e5904d:1424503279,9499ff8df792601062c4521b5ad922f2:-704462554,1f897b8d9892601003cf73df88e18c00:-879797904,d1293b8d989260101749f8e655ac2fe3:-1968352443,7b09374dfb926010f3872896a926be7d:1703466213,53f8ff4daf926010d6bfd74c72671e86:620737435,1ce8bb4d339260106a1c0ce80892a347:1077187500,1f88378d3592601078f49233bebfc1f0:1791249076,0338734d2a926010c630e4bccfd661a2:-142152736,5327734dca9260106d611714f9419db6:1608703191,c6077f0dec926010273a4ce941e77a49:1612517234,24e67f0d219260108518138f7794ca34:3015207,8cd6734df392601077a0fa507b57706d:1693643328,6595f30d0f926010de26319abcd95c68:-1749881711,dce4b789e4926010fb115ddde8b05a62:-1401086382,a574f7c94b9260109248157a47dc5c35:-1692558404,e011770921926010e1d0120873de9f77:-598712853,a6403bc53e926010c8e6d83b523ecae8:-1054614486,70203bc505926010052b7341221af6e1:-598712853,06bce30531926010b7e7833860f96192:807956500,026ce305e6926010a5ddc88072fa3189:-27277101,e9ebaf813192601065b9a6d7ef6ead6d:88701246,0b46dbc1895260103cc59651af84fc57:-1219046339,5c7513c15b5260102c4e37448da96eb7:366478924,df5553c1845260109c20cde014958809:-1505234278,2d45df81f05260108c007d991a811288:1990957268,b845df81c35260107c1a6e1d1c755462:-447134982,a5255f81cd526010a2af836dc25ea83b:-990747897,2cf4d3815e526010a9b32146f181f2fd:1231168071,3ce49f41945260101b7fd66e173ab69a:-252695215,aa745781ef526010795561dd27060b90:1750086758,7564d381915260103fb1ad2611217f5a:-341591680,1c54d381a45260102739b50aee0f3f01:-761035559,62231741fd526010d7d05ac0b3162878:1645099942,4f925b01885260102d4fef6128049240:-1985022177,2a429701e0526010e95e4ec5ae007f97:1791418163,d5121301375260100fe583b7440f85bc:-1727158378,3b61dfcd92126010bbec7879ffbf3525:1819060235,e6d0d78de7126010dae099568fa09cd8:-2108615422,14509b8d33126010b9efd31229bd275d:-1375009180,b04f078d15126010642e8da9d70f507a:-166742524,e24e0b0d9f12601047a8fc953542c41b:2093760362,1dfc8bc9911260108cbeed231aef335d:-464368495,20ec0fc9cd126010e315c43b47054311:1587069436,23bc8b8943126010bf3c0bb2cc3ed2b9:1162909334,d6ebcfc976126010840afd7fa767f929:-1258094233,e2dbc7c9eb126010e7c7b356519c8ad6:1359026468,55cb4fc9ad126010eb583920a360c767:387043798,05abcbc9c712601040fb29237cb71be9:511128512,0a7b8bc985126010624174d4e502b40e:139740034,146b038989126010ceec5fde1c9bbce8:-848737437,f84bcb491512601071a421469e1273c5:1909742227,b48acf89b11260102f7beafdb8637868:-1423186894,312a0789311260109fbd99b79873de53:1710874747,b41a43890312601082d87702574cac7d:571866842,810a8389ad1260102bb3e241f22d1d08:1710874747,7f7907895d12601079a6786aae764749:1567989178,9c490389631260102f4ae2635bb41fa1:456106612,3539c349d21260102d488961d1404db2:1418270789,f4f807491d1260101d395db38588f3f5:-2132873082,5bb887496a126010a53e9e19294bef0a:-1531573573,5558c749b2126010ba15cac793b32778:-1599490448,b6480fc5561260101064f42cff50727d:-624146227,86388bc5cb126010c4cf87bf300a0849:-1599490448,a318c349f412601089c539af8a3e4991:-516075481,5108c3495f126010eb64070060a3e489:1739748059,aad743491b126010b28c60f9e5e47efb:-1627295073,58d7434955126010d7c7cc3c15b1cb7c:2006052418,75a78bc52e1260104524168855fe2141:-1627295073,94a78fc5a312601024f2a7011d78d09d:-1498795283,14978f09ef126010cb58386d3f893778:1859076434,62423a8968de20103e88a5c6b503dfe7:-263974665,1b32fa89f0de201070b9236d38a3c4e1:1871378280,11f13a899cde201054e45235106ccedf:646558305,40e1f2417fde2010497afb38b517ac42:860068417,b11deac18cde201058849e86396587d4:-1086175492,7a0d66413ade2010b0960ea60e540e4e:-203752782,5c04a6417ede20102c00585c57198617:1794373661,94e326010ade2010f0f2805ba069aa85:-1636029348,6bb3e241a3de20106d11c4d04f385239:-1472521909,9c932601ddde2010e13a1c30fb02d578:-1692694027,1773e2cd979e20107aa88d92fe9be424:-1275946286,1352ae8d0c9e2010955dfe4bade7e5db:-1972699674,70c06ec5109e2010ad268a8bd916c9c6:1334009923,c970ee8d039e2010736949235b8f42aa:1920093783,f79f1ab01c162010603d8b52cdf5ae82:-139459235,b5be9e70371620102ed8294dba712068:-31960710,f29e1e70d716201000c575fa1a4773b6:1888127514,165e9e70661620102e16051a52cd7873:762102423,3d4e92b0c816201020a264559455be7f:316463233,e93e92b00e162010c320a073ff63cd77:-754158769,66fdde70501620104b1d72f191f1278d:-1845658614,3bdd9e70911620103da2f67862cfc11e:-461149712,bccd5e70321620106f6babcc5ac0dd04:1694621950,99bd5a7097162010078fde2662c01bbe:-1522498415,6b7d5a70e8162010fc1fe0e94c34b1b6:1992702874,b84dd2fc56d22010c17bf9d37b717551:1005396365,2e4c9a30d11620105c29a69ea5861b80:-771925651,150cd630a8162010efae58fb89441a66:1331366329,f7bb16309f1620104b10263614c8f288:1847933802,a5bbd230e016201006cf70d9bf48e5f3:-2075020263,ee88d67c87d220107927c0eb45cd2185:-336220902,93581e7c4fd22010b338de65c1c0ab5e:-757274773,a9bd405490162010c7bf4681f0b1176f:1712619622,cf9d00547a16201055eddbe558f5cb38:-927374472,ab6d4c14a1162010f1e7fa598a9df926:1385785979,105d08146e162010b1995276c3b32ea1:58541430,943dc81434162010b48bc18e0aa2306b:1174249662,4b5c8014d3162010fe6be14482407216:-1268049063,57aa889073162010832aa1b286a4f575:-602139713,b969cc50af162010fa8d3a5598faaad8:-895517065,2128c8dc2ed22010fa77a8ea40bafb48:1486351586,7c0604dcf3d22010dc78941f9ac2b3aa:111254795,ced5009c7dd22010b34cdb7af84885c0:832175789,a5738c5c40d22010b87f29d14de802e3:1112707349,ee434c5c10d220107662dc59e0710013:-416267907,9203c45c58d22010ab45c46f548d872b:430549531,b5d2c45cf9d22010ba30feb2c138d2b2:1702853075,f6c2881c80d220101d77c1557590a54d:1330894959,8941041cdfd22010d9c64fdd81d20b46:1702853075,8631001c9ad22010f93d2dce1dd346b9:-590574811,6bc004d853d22010742bbd4037343500:-2099675121,6210c8984bd22010ea9ea086002b9af3:-1694511611,581084d8f6d22010d040298f8d3e21d8:-1941562660,6d9d774867d22010f950fe4fe89f3d08:-1105871653,affa338488d2201019af8613f6384a73:-1744669380,46e977843dd22010544ee881b816a82f:657140838,8da93f44cad220108006cf80e68c6834:-1942656002,d8283704a5d22010679c1f9e6893c34d:2029088475,d7d57f8033d22010090ef084750851a2:-1967872832,52257f8023d22010bcb88fb7acee418c:986126293,6405f780b2d220107a042fb3314005c9:-1555637185,e0b4f78067d22010638795559672f1a7:755539875,bb043380b1d220100b726996daa97b4a:-32954915,f3e3fb4046d220104e94454a279e955a:-2092841331,4ce3b3408bd22010026856f29b7389c3:308897583,3cb33f4036d22010986fa73477facd71:1850865259,04937b4085d22010e90a262e2ab94cef:-45768813,9083bb407cd220108947d8a80fcfa11e:-1768265255,4573b700bed2201069fc0ba8654d6928:1428981489,01f0778ceb9220104002aa9f091caa22:-1768265255,4bd07f8cc3922010b0b842dabd1ffc57:657626451,5bc03f4cdf92201046493c73d56a3894:1290721313,0acf6f8cd2922010f254a40f0ac1b087:-406259428,1e6f6f8cd29220107468ca17ff0fbd4f:-2046711106,946f2f8c67922010532323a6a7ae6e52:-1122347281,6f5f2f8cd1922010121b8b0ccb4bbbd6:-660740653,e01f6b8c99922010de834b450335ee54:-1888502022,ee9d670c989220100dd4766a11d14114:-574333221,2b6de74c049220107c3d5e59c127ef10:1375852859,53ccafc8bd922010376f0ee8ab39c508:520960205,496ca70ce89220108dfd4322eaf6cd6e:-1835243358,594b67c89b922010e8d5183297a3aa62:-777547603,862b6fc8c792201066862b1a5f159bdb:1301458334,1a5a67c8a59220108839f6c4d87d3958:1212438336,ebfa8d539406201073c14cb2f0750a1e:-1603380770,76ea49dfd5c22010246f67bfa83bfaf9:-1453032793,acea8d53fd062010b84c97b2bdba5216:347371294,9fca8d1356062010545a165838553b51:-1453032793,889a09dfcdc22010098622178110e8b2:1493599059,9c5a091f3ec2201070810c910b581341:-148578200,7c1a8d13e8062010784c76cc07556186:1372104861,9ef98d1312062010bc3f1b7774392568:-976137090,0769c11f75c2201024f325b6d290c238:-1049182696,d26941dfb9c22010d84c333b0929ef3b:-1946459752,9e594d136c06201045b50e33fe937554:205221030,f9b70ddf20c2201087f72e2854f0099e:-1904339099,2a7749df53c2201044b1a13aaaefeff1:-1134148294,165709df6ac220103a0fcecb964abc9f:209313262,fc1745dfc7c220101d385582585d4891:-1837250690,dbb641dfc0c220103bec6f48ab14ecec:-704633625,eea6cd5f90c220105038c21c346fe823:1860680456,fd668d9f9dc22010a7abc9f4f4a3a617:1029342639,9e843493b1c22010cec192698ad09248:-2017821993,40747893b5c2201062c041e275cf1509:-1070321599,834ef3ba9c0620104f4fcba84681299f:-242099312,358df77a55062010d13500470eb17dd2:-465347957,3f2df37ecb0620101e6c6b95d68e8bda:-1141319139,60c1bbb6af06201014c8ef8767453354:-158628543,2e0173f22c062010bf0824b7b464fc35:-1000576395,7cd03f360806201039048efaa48a0e1d:558492804,30ae2f36a1062010215887d63f0a2813:911724290,6b5e2f36e30620105daa9f566c01780a:610297248,430e2b36040620102534358bec6d4f98:-1039993486,371d63f29306201062ae0da6a01c384c:-1522618553,b88c63f2440620105d390aa99bfb8256:-129479764,014b27b20e062010c03ab64716de7723:-358180861</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>m2m_sp_theme_css_include_69e0ccd807d220109eaef19d7c1ed0a8</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_theme_css_include"><m2m_sp_theme_css_include action="INSERT_OR_UPDATE"><order>10</order><sp_css_include display_value="Roboto">9da04cd807d220109eaef19d7c1ed04a</sp_css_include><sp_theme display_value="Template ITSM Theme">4ec6efbe07c220109eaef19d7c1ed05c</sp_theme><sys_class_name>m2m_sp_theme_css_include</sys_class_name><sys_created_by>anna_furlan</sys_created_by><sys_created_on>2021-02-08 18:24:27</sys_created_on><sys_id>69e0ccd807d220109eaef19d7c1ed0a8</sys_id><sys_mod_count>1</sys_mod_count><sys_name>Roboto.Template ITSM Theme</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>m2m_sp_theme_css_include_69e0ccd807d220109eaef19d7c1ed0a8</sys_update_name><sys_updated_by>anna_furlan</sys_updated_by><sys_updated_on>2021-02-08 18:25:09</sys_updated_on></m2m_sp_theme_css_include></record_update>]]></payload>
+<payload_hash>-2000460934</payload_hash>
+<remote_update_set display_value="Component: Simple Menu Sidebar ">36567696070720109eaef19d7c1ed085</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>willian_costa</sys_created_by>
+<sys_created_on>2021-03-24 19:32:10</sys_created_on>
+<sys_id>be567696070720109eaef19d7c1ed085</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>17865a84ec00000001</sys_recorded_at>
+<sys_updated_by>willian_costa</sys_updated_by>
+<sys_updated_on>2021-03-24 19:32:10</sys_updated_on>
+<table/>
+<target_name>Roboto.Template ITSM Theme</target_name>
+<type>Stylesheets</type>
+<update_domain>global</update_domain>
+<update_guid>ee2276561f072010b53e388743da791c</update_guid>
+<update_guid_history>ee2276561f072010b53e388743da791c:-2000460934,c811c4d81dd22010d547ee17c8f0a21a:-2000460934,2de0ccd8c1d2201061bf34636bca5caa:786479697</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>m2m_sp_theme_css_include_08b1c41c07d220109eaef19d7c1ed054</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_theme_css_include"><m2m_sp_theme_css_include action="INSERT_OR_UPDATE"><order/><sp_css_include display_value="Apply Roboto">f851401c07d220109eaef19d7c1ed0ca</sp_css_include><sp_theme display_value="Template ITSM Theme">4ec6efbe07c220109eaef19d7c1ed05c</sp_theme><sys_class_name>m2m_sp_theme_css_include</sys_class_name><sys_created_by>anna_furlan</sys_created_by><sys_created_on>2021-02-08 18:27:53</sys_created_on><sys_id>08b1c41c07d220109eaef19d7c1ed054</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Apply Roboto.Template ITSM Theme</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>m2m_sp_theme_css_include_08b1c41c07d220109eaef19d7c1ed054</sys_update_name><sys_updated_by>anna_furlan</sys_updated_by><sys_updated_on>2021-02-08 18:27:53</sys_updated_on></m2m_sp_theme_css_include></record_update>]]></payload>
+<payload_hash>1261872257</payload_hash>
+<remote_update_set display_value="Component: Simple Menu Sidebar ">36567696070720109eaef19d7c1ed085</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>willian_costa</sys_created_by>
+<sys_created_on>2021-03-24 19:32:10</sys_created_on>
+<sys_id>f6567696070720109eaef19d7c1ed085</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>17865a7c3a20000001</sys_recorded_at>
+<sys_updated_by>willian_costa</sys_updated_by>
+<sys_updated_on>2021-03-24 19:32:10</sys_updated_on>
+<table/>
+<target_name>Apply Roboto.Template ITSM Theme</target_name>
+<type>Stylesheets</type>
+<update_domain>global</update_domain>
+<update_guid>b902b29611072010e121995272e8a327</update_guid>
+<update_guid_history>b902b29611072010e121995272e8a327:1261872257,40b1c41c0dd22010aec0bd2eb383a156:1261872257</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_css_include_f851401c07d220109eaef19d7c1ed0ca</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_css_include"><sp_css_include action="INSERT_OR_UPDATE"><name>Apply Roboto</name><source>local</source><sp_css display_value="Apply Roboto Font">3f61c41c07d220109eaef19d7c1ed06d</sp_css><sys_class_name>sp_css_include</sys_class_name><sys_created_by>anna_furlan</sys_created_by><sys_created_on>2021-02-08 18:27:53</sys_created_on><sys_id>f851401c07d220109eaef19d7c1ed0ca</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Apply Roboto</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sp_css_include_f851401c07d220109eaef19d7c1ed0ca</sys_update_name><sys_updated_by>anna_furlan</sys_updated_by><sys_updated_on>2021-02-08 18:27:53</sys_updated_on><url/></sp_css_include></record_update>]]></payload>
+<payload_hash>862490083</payload_hash>
+<remote_update_set display_value="Component: Simple Menu Sidebar ">36567696070720109eaef19d7c1ed085</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>willian_costa</sys_created_by>
+<sys_created_on>2021-03-24 19:32:10</sys_created_on>
+<sys_id>f6567696070720109eaef19d7c1ed086</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>17865a7ed180000001</sys_recorded_at>
+<sys_updated_by>willian_costa</sys_updated_by>
+<sys_updated_on>2021-03-24 19:32:10</sys_updated_on>
+<table/>
+<target_name>Apply Roboto</target_name>
+<type>CSS Include</type>
+<update_domain>global</update_domain>
+<update_guid>6c12fa5671072010b02ce8cee0935da1</update_guid>
+<update_guid_history>6c12fa5671072010b02ce8cee0935da1:862490083,0cb1c41c58d22010c726a2c0b46f7353:862490083</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
