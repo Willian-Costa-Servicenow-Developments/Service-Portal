@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2021-03-22 13:54:37">
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2021-03-30 16:36:04">
 <sys_remote_update_set action="INSERT_OR_UPDATE">
 <application display_value="Global">global</application>
 <application_name>Global</application_name>
@@ -9,22 +9,22 @@
 <deleted/>
 <description/>
 <inserted/>
-<name>ACN Table Filter Component V2</name>
+<name>ACN Table With Filter - V3</name>
 <origin_sys_id/>
 <parent display_value=""/>
 <release_date/>
 <remote_base_update_set display_value=""/>
 <remote_parent_id/>
-<remote_sys_id>e6655fe9070320109eaef19d7c1ed07d</remote_sys_id>
+<remote_sys_id>11578d18075320109eaef19d7c1ed080</remote_sys_id>
 <state>loaded</state>
 <summary/>
 <sys_class_name>sys_remote_update_set</sys_class_name>
 <sys_created_by>mateus_mazzei</sys_created_by>
-<sys_created_on>2021-03-22 13:54:36</sys_created_on>
-<sys_id>eee5d72d070320109eaef19d7c1ed0b7</sys_id>
+<sys_created_on>2021-03-30 16:36:03</sys_created_on>
+<sys_id>9d978918075320109eaef19d7c1ed0c4</sys_id>
 <sys_mod_count>0</sys_mod_count>
 <sys_updated_by>mateus_mazzei</sys_updated_by>
-<sys_updated_on>2021-03-22 13:54:36</sys_updated_on>
+<sys_updated_on>2021-03-30 16:36:03</sys_updated_on>
 <update_set display_value=""/>
 <update_source display_value=""/>
 <updated/>
@@ -34,24 +34,24 @@
 <application display_value="Global">global</application>
 <category>customer</category>
 <comments/>
-<name>sys_ui_message_2ad4124c070320107a0af0269c1ed0f8</name>
-<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message"><sys_ui_message action="INSERT_OR_UPDATE"><application/><key>Try to write more than three characters to have a good search</key><language>pb</language><message>Tente escrever mais do que três letras para ter uma boa busca</message><sys_class_name>sys_ui_message</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2021-03-17 17:22:05</sys_created_on><sys_id>2ad4124c070320107a0af0269c1ed0f8</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Try to write more than three characters to have a good search</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_ui_message_2ad4124c070320107a0af0269c1ed0f8</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2021-03-17 17:22:05</sys_updated_on></sys_ui_message></record_update>]]></payload>
-<payload_hash>2022092958</payload_hash>
-<remote_update_set display_value="ACN Table Filter Component V2">eee5d72d070320109eaef19d7c1ed0b7</remote_update_set>
+<name>sys_ui_message_1e951e0c070320107a0af0269c1ed0c7</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message"><sys_ui_message action="INSERT_OR_UPDATE"><application/><key>No result found</key><language>pb</language><message>Nenhum resultado encontrado</message><sys_class_name>sys_ui_message</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2021-03-17 17:22:43</sys_created_on><sys_id>1e951e0c070320107a0af0269c1ed0c7</sys_id><sys_mod_count>0</sys_mod_count><sys_name>No result found</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_ui_message_1e951e0c070320107a0af0269c1ed0c7</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2021-03-17 17:22:43</sys_updated_on></sys_ui_message></record_update>]]></payload>
+<payload_hash>-309810208</payload_hash>
+<remote_update_set display_value="ACN Table With Filter - V3">9d978918075320109eaef19d7c1ed0c4</remote_update_set>
 <replace_on_upgrade>false</replace_on_upgrade>
 <sys_created_by>mateus_mazzei</sys_created_by>
-<sys_created_on>2021-03-22 13:54:36</sys_created_on>
-<sys_id>62e5d72d070320109eaef19d7c1ed0b9</sys_id>
+<sys_created_on>2021-03-30 16:36:03</sys_created_on>
+<sys_id>1d978918075320109eaef19d7c1ed0c5</sys_id>
 <sys_mod_count>0</sys_mod_count>
-<sys_recorded_at>1785a36c9820000001</sys_recorded_at>
+<sys_recorded_at>1785a36b7f60000001</sys_recorded_at>
 <sys_updated_by>mateus_mazzei</sys_updated_by>
-<sys_updated_on>2021-03-22 13:54:36</sys_updated_on>
+<sys_updated_on>2021-03-30 16:36:03</sys_updated_on>
 <table/>
-<target_name>Try to write more than three characters to have a good search</target_name>
+<target_name>No result found</target_name>
 <type>Message</type>
 <update_domain>global</update_domain>
-<update_guid>96c5d72d200320100d23308347d3610d</update_guid>
-<update_guid_history>96c5d72d200320100d23308347d3610d:2022092958,cd751e0c0c03201080f55981368f91d2:2022092958</update_guid_history>
+<update_guid>45c5572d7903201022bedf5ad1734c5d</update_guid>
+<update_guid_history>45c5572d7903201022bedf5ad1734c5d:-309810208,9e95da4c97032010b814bb224be60fd8:-309810208</update_guid_history>
 <update_set display_value=""/>
 <view/>
 </sys_update_xml>
@@ -60,24 +60,265 @@
 <application display_value="Global">global</application>
 <category>customer</category>
 <comments/>
-<name>sys_ui_message_1e951e0c070320107a0af0269c1ed0c7</name>
-<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message"><sys_ui_message action="INSERT_OR_UPDATE"><application/><key>No result found</key><language>pb</language><message>Nenhum resultado encontrado</message><sys_class_name>sys_ui_message</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2021-03-17 17:22:43</sys_created_on><sys_id>1e951e0c070320107a0af0269c1ed0c7</sys_id><sys_mod_count>0</sys_mod_count><sys_name>No result found</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_ui_message_1e951e0c070320107a0af0269c1ed0c7</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2021-03-17 17:22:43</sys_updated_on></sys_ui_message></record_update>]]></payload>
-<payload_hash>-309810208</payload_hash>
-<remote_update_set display_value="ACN Table Filter Component V2">eee5d72d070320109eaef19d7c1ed0b7</remote_update_set>
+<name>sys_script_include_fd784a04070320107a0af0269c1ed021</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;public&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;global.acnListUtils&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;acnListUtils&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var acnListUtils = Class.create();
+acnListUtils.prototype = {
+	/**SNDOC
+	@name initialize
+    @description Constructor method of listUtils
+    @param {String} [table] - ServiceNow Table
+    @param {array} [fields]  fields of the choose table
+    @example
+
+	var field_arr = ['number','assigned_to','short_description'];
+    var list = new listUtils('incident',field_arr);
+	*/
+
+	initialize: function(table, fields) {
+		this.t = table;
+		this.f = fields;
+		this.strangeFields = ['short_description','description','title','name'];
+		this.column_types = {};
+	},
+
+	/**SNDOC
+	@name getColumns
+    @description Get the columns data of the choose table 
+    @returns {array} Array containing the columns data
+    @example
+
+    var list = new listUtils('incident',field_arr);
+	var columns = list.getColumns();
+
+	//Output:
+    [
+	 {
+		choices [{label: "New", value: "1"},{label: "In Progress", value: "2"},{label: "Canceled", value: "8"}],
+		label: "State",
+		name: "state",
+		type: "_choice"
+	 },
+	 {
+		choices [],
+		label: "Number",
+		name: "number",
+		type: "string"
+	 }
+	]
+	*/
+	getColumns: function(){
+		if(!this.t || !this.f){
+			return;
+		}
+
+		var columns = [];
+		var grCol = new GlideRecord(this.t);
+		grCol.newRecord();
+
+		for(var i=0; i &lt; this.f.length; i++){
+
+			var field = this.f[i];
+			var column_obj = {};
+			var element;
+			var response;
+			if(this.isReferenceField(field)){
+				var refField = field.split('.');
+				var grRef = grCol[refField[0]].getRefRecord();
+				grRef.newRecord();
+				column_obj.table = grRef.getTableName();
+				element = grRef.getElement(refField[1]);
+				column_obj.type = element.getED().getInternalType();
+				column_obj.name = field;
+				column_obj.field = refField[1];
+				response = this.getColumnData(grRef,column_obj);
+			}
+			else{
+				element = grCol.getElement(field);
+				column_obj.type = element.getED().getInternalType();
+				column_obj.table = this.t;
+				column_obj.name = field;
+				column_obj.field = field;
+				response = this.getColumnData(grCol,column_obj);
+			}
+			columns.push(response);
+		};
+		return columns;
+	},
+
+	getColumnData: function(gr, data){
+		if(data.type == 'email')
+			data.type = 'string';
+		
+		var column_obj = {
+			label: gr[data.field].getLabel(),
+			name: data.name,
+			type: data.type
+		};
+		
+		var choiceList =  GlideChoiceList.getChoiceList(data.table, data.field);
+		if(choiceList.getSize() &gt; 1 &amp;&amp; this.strangeFields.indexOf(column_obj.name) == -1){
+			var options = [];
+			for (var i=0; i &lt; choiceList.getSize(); i++) {
+				options.push({'value': choiceList.getChoice(i).getValue(), 'label': choiceList.getChoice(i).getLabel()});
+			}
+			column_obj.type = '_choice';
+			column_obj.choices = options;
+		}
+		else{
+			column_obj.choices = [];
+		}
+		this.column_types[column_obj.name] = column_obj.type;
+		return column_obj;
+	},
+
+	/**SNDOC
+	@name getColumnType
+    @description Get an object with the columns type 
+    @returns {object} Object containing the columns type
+    @example
+
+	//you need run the getColumns function first, else you'll recive an empty object
+	var list = new listUtils('incident',field_arr);
+	var columns_type = list.getColumnType();
+
+	//Output:
+		{number: "string", short_description: "string", state: "_choice", sys_updated_on: "glide_date_time", assigned_to: "reference"}
+	*/
+	getColumnType: function(){
+		return this.column_types;
+	},
+
+	/**SNDOC
+	@name getRows
+    @description Get an array with the list data 
+	@param {GlideRecord} [gr] - GlideRecord 
+    @returns {Array} Array containing all rows
+    @example
+
+	var list = new listUtils('incident',field_arr);
+	var rows = list.getRows();
+
+	//Output:
+	[
+		{display: "INC0000060", sys_id: "1c741bd70b2322007518478d83673af3"},
+		{display: "David Loo", sys_id: "1c741bd70b2322007518478d83673af3"},
+		{display: "Closed", sys_id: "1c741bd70b2322007518478d83673af3"},
+		{display: "Unable to connect to email", sys_id: "1c741bd70b2322007518478d83673af3"},
+		{display: "2016-12-13 18:46:44", sys_id: "1c741bd70b2322007518478d83673af3"}
+	]
+	*/
+	getRows: function(gr){
+		if(!gr){
+			return;
+		}
+
+		var list = [], columns = [];
+
+		while(gr.next()){
+
+			for(var i=0; i &lt; this.f.length; i++){
+				var field = this.f[i];
+				var type = this.column_types[field];
+				var response;
+
+				if(this.isReferenceField(field)){
+					var refField = field.split('.');
+					var grRef = gr[refField[0]].getRefRecord();
+					response = this.getFieldData(grRef,refField[1],field, type);
+				}
+				else
+					response = this.getFieldData(gr,field,false, type);
+				columns.push(response);
+			}
+			list.push(columns);
+			columns = [];
+		}
+		return list;
+	},
+
+	getFieldData: function(gr,field, refName, type){
+		var obj = {}, value;
+
+		if (gr[field].canRead()) {
+			value = gr.getValue(field);
+
+			if(value &amp;&amp; value != ' ... ' &amp;&amp; (type == 'glide_date' || type == 'glide_date_time')){
+				var date = new GlideDate();
+				date.setValue(value);
+				obj.display = date.getByFormat("dd/MM/yyyy");
+			}
+			else
+				obj.display = gr.getDisplayValue(field) || ' ... ' ;					
+			obj.sys_id = gr.getUniqueValue();
+			obj.value = value;
+
+			if(!gs.nil(refName))
+				obj.field = refName;
+			else
+				obj.field = field;
+		}
+		return obj;
+	},
+
+	isReferenceField: function(field){
+		if(gs.nil(field))
+			return;
+		if(field.indexOf('.') == -1)
+			return false;
+		return true;
+	},
+
+	/**SNDOC
+	@name createPagination
+    @description Get an object with the pagination data 
+	@param {Integer} [maximum_entries] - Number of rows per page
+	@param {Integer} [page] - Index of actual page
+    @returns {object} Object containing the pagination data
+    @example
+
+	// you need to run the getColumns function first, else you'll receive an empty object
+	var list = new listUtils('incident',field_arr);
+	var pagination = list.createPagination(10,1);
+
+	//Output:
+	{window_end: 10, window_size: 10, window_start: 0}
+
+	*/
+	createPagination: function(maximum_entries, page){
+		var p, page_index, window_size; 
+		p = parseInt(page) || 1;
+		page_index = p - 1;
+		window_size = parseInt(maximum_entries) || 10;
+
+		if (isNaN(window_size) || window_size &lt; 1)
+			window_size = 20;
+
+		var data = {};
+		data.window_size = window_size;
+		data.window_start  = (page_index * window_size);
+		data.window_end = (((page_index + 1) * window_size));
+
+		return data;
+	},
+
+	type: 'acnListUtils'
+};]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-03-17 16:26:16&lt;/sys_created_on&gt;&lt;sys_id&gt;fd784a04070320107a0af0269c1ed021&lt;/sys_id&gt;&lt;sys_mod_count&gt;26&lt;/sys_mod_count&gt;&lt;sys_name&gt;acnListUtils&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_fd784a04070320107a0af0269c1ed021&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;mateus_mazzei&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-03-30 16:08:09&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-120752529</payload_hash>
+<remote_update_set display_value="ACN Table With Filter - V3">9d978918075320109eaef19d7c1ed0c4</remote_update_set>
 <replace_on_upgrade>false</replace_on_upgrade>
 <sys_created_by>mateus_mazzei</sys_created_by>
-<sys_created_on>2021-03-22 13:54:36</sys_created_on>
-<sys_id>aee5d72d070320109eaef19d7c1ed0b8</sys_id>
+<sys_created_on>2021-03-30 16:36:03</sys_created_on>
+<sys_id>59978918075320109eaef19d7c1ed0c5</sys_id>
 <sys_mod_count>0</sys_mod_count>
-<sys_recorded_at>1785a36b7f60000001</sys_recorded_at>
+<sys_recorded_at>17883f880650000001</sys_recorded_at>
 <sys_updated_by>mateus_mazzei</sys_updated_by>
-<sys_updated_on>2021-03-22 13:54:36</sys_updated_on>
+<sys_updated_on>2021-03-30 16:36:03</sys_updated_on>
 <table/>
-<target_name>No result found</target_name>
-<type>Message</type>
+<target_name>acnListUtils</target_name>
+<type>Script Include</type>
 <update_domain>global</update_domain>
-<update_guid>45c5572d7903201022bedf5ad1734c5d</update_guid>
-<update_guid_history>45c5572d7903201022bedf5ad1734c5d:-309810208,9e95da4c97032010b814bb224be60fd8:-309810208</update_guid_history>
+<update_guid>21368dd4fa532010b27d9997d237c908</update_guid>
+<update_guid_history>21368dd4fa532010b27d9997d237c908:-120752529,a0314dd0dd5320104d8cafcc44f0de8b:-120752529,c78cb05019532010b9fd6f7d3fe46811:620115932,e64cfc109d532010d470d1c2e05f8e1a:315500450,5c3c7c109953201085acb695dc99658c:311191733,19db7810d85320106846648375e9a213:-1225648412,828b74108153201068286e144ae8a397:-559265704,576b341058532010158e27ceac41b450:-1688942251,174bb0101d532010c4969195a787cdeb:1861437300,343bf8dc3a132010b547bc86cf9e0551:-494963250,a99ab8dc2213201020827e9dd628a6b1:224194751,4f1a74dc98132010275025447610f467:44441142,2ec9f0540d132010d15ab3edcebb05fd:915739673,b6caa414b9132010f4e20a1c93edc8ed:1453305876,55b6d10497572010c159e60980e4da6d:1098762516,1b065d04295720109333cbfa52807367:-1512371142,0e85d1040e572010fef9d8e92be91a45:254337940,f835ddc0585720106c2590f6ec22469e:-536677625,2fb459ccd3172010c01eb451572c693a:1843558520,4b9fc5003e572010efe1e981ae21dd17:-560288106,a19db0046017201085583b762dba96e3:-979649933,856db8c0c11720102ae0c9514dca9c3e:1303324910,924db8c05e1720104d66fb9a77cd264c:635347278,51ccb04cbed32010afba09ab0f476dde:-1543237516,699c3c4ca9d3201044d8b0cfc75f5f23:-1755284844,726c30cce8d320100e67a6447eb2cb7c:87775763,a90457a9a60320102a34f481e8cdf4b0:502108260,17a8ca04a30320107df55730dbcc935c:1596144612</update_guid_history>
 <update_set display_value=""/>
 <view/>
 </sys_update_xml>
@@ -650,7 +891,7 @@
 })(); 
 
 
-]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-03-17 16:24:45&lt;/sys_created_on&gt;&lt;sys_id&gt;91e74204070320107a0af0269c1ed0c1&lt;/sys_id&gt;&lt;sys_mod_count&gt;31&lt;/sys_mod_count&gt;&lt;sys_name&gt;ACN Table With Filter&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_91e74204070320107a0af0269c1ed0c1&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;mateus_mazzei&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-03-22 13:44:17&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;!-------- SEARCH BOX --------&gt;
+]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-03-17 16:24:45&lt;/sys_created_on&gt;&lt;sys_id&gt;91e74204070320107a0af0269c1ed0c1&lt;/sys_id&gt;&lt;sys_mod_count&gt;36&lt;/sys_mod_count&gt;&lt;sys_name&gt;ACN Table With Filter&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_91e74204070320107a0af0269c1ed0c1&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;mateus_mazzei&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-03-30 16:27:46&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;!-------- SEARCH BOX --------&gt;
 &lt;div class="search" ng-if="options.show_search == 'true' "&gt;
   &lt;i class="fa fa-search search__icon"&gt;&lt;/i&gt;
   &lt;input type="text" class="search__input" ng-model="c.searchText" placeholder="${Search}..." ng-change="filter()"&gt;
@@ -728,15 +969,11 @@
 
           &lt;!-- If redirect --&gt;
           &lt;td  ng-repeat="field in record"  ng-if="options.redirect == 'true'" class="pointer list__short" ng-switch="data.column_types[field.field]"&gt;
-            &lt;span class="list__short--label"&gt;&lt;a href="{{data.url + record[0].sys_id}}" target="{{options.target}}" ng-switch-when="glide_date"&gt;{{ formatDate(field.display,false) }}&lt;/a&gt;&lt;/span&gt;
-            &lt;span class="list__short--label"&gt;&lt;a href="{{data.url + record[0].sys_id}}" target="{{options.target}}" ng-switch-when="glide_date_time"&gt;{{ formatDate(field.display,true) }}&lt;/a&gt;&lt;/span&gt;
             &lt;span class="list__short--label"&gt;&lt;a href="{{data.url + record[0].sys_id}}" target="{{options.target}}"  ng-switch-default&gt;{{field.display}}&lt;/a&gt;&lt;/span&gt;
           &lt;/td&gt;
 
           &lt;!-- Else --&gt;
           &lt;td  ng-repeat="field in record"   ng-if="options.redirect == 'false'" class="pointer list__short" ng-switch="data.column_types[field.field]"&gt;
-            &lt;span class="list__short--label" ng-switch-when="glide_date"&gt;{{ field.display }}&lt;/span&gt;
-            &lt;span class="list__short--label" ng-switch-when="glide_date_time"&gt;{{ field.display }}&lt;/span&gt;
             &lt;span class="list__short--label" ng-switch-default&gt;{{field.display}}&lt;/span&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
@@ -778,22 +1015,22 @@
   &lt;/div&gt;
 &lt;/div&gt;
 ]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
-<payload_hash>796596329</payload_hash>
-<remote_update_set display_value="ACN Table Filter Component V2">eee5d72d070320109eaef19d7c1ed0b7</remote_update_set>
+<payload_hash>-1547680476</payload_hash>
+<remote_update_set display_value="ACN Table With Filter - V3">9d978918075320109eaef19d7c1ed0c4</remote_update_set>
 <replace_on_upgrade>false</replace_on_upgrade>
 <sys_created_by>mateus_mazzei</sys_created_by>
-<sys_created_on>2021-03-22 13:54:36</sys_created_on>
-<sys_id>e2e5d72d070320109eaef19d7c1ed0b8</sys_id>
+<sys_created_on>2021-03-30 16:36:03</sys_created_on>
+<sys_id>91978918075320109eaef19d7c1ed0c5</sys_id>
 <sys_mod_count>0</sys_mod_count>
-<sys_recorded_at>1785a3640180000001</sys_recorded_at>
+<sys_recorded_at>17883f993aa0000001</sys_recorded_at>
 <sys_updated_by>mateus_mazzei</sys_updated_by>
-<sys_updated_on>2021-03-22 13:54:36</sys_updated_on>
+<sys_updated_on>2021-03-30 16:36:03</sys_updated_on>
 <table/>
 <target_name>ACN Table With Filter</target_name>
 <type>Widget</type>
 <update_domain>global</update_domain>
-<update_guid>61a5172dec0320105d42a7b4560a006d</update_guid>
-<update_guid_history>61a5172dec0320105d42a7b4560a006d:796596329,178313a97a032010577907f980f81201:796596329,9e635f694e032010a1a1620edadb5bff:-1715751755,f17f07e50f03201002e06f894613f760:-1046067280,de4f8fa5b7032010d6840d3c353ca1fc:1602345452,0d2fcfa55d0320102f723a2ae9592520:-1181116904,8dee83a55d032010d42ed16b447ce020:1895953750,7e2e8f653e03201079e92b192db9c1dc:1476335935,9ddd4b655803201003e89dbf998847c6:2139061239,f8adcb65bc032010cd5af2c0d411905d:-456420474,76e55e4cda0320107b18f16fd597eba1:331652732,e2841ac8190320103595ef04958e0c77:-1643473575,7274560c05032010e547436bb2079c4c:2073409843,b7449a0c18032010483ca3a3ddc1aeff:-1015240397,5024560c1c032010265a28297507542c:1241931909,9a141a0c1f03201064969bc7929bd044:-1581639960,6bc31ac8ab03201053279ac628717ab3:-737822220,90739e88da032010522c59dc565ca0b3:-1941323281,2bc29ac8a20320104d998da3c7c9c7ac:-1764714308,ba119688440320106d5c18e0c9d3ef7f:-580250450,baf016484203201050567ca61fa39b8b:-783019550,38905648610320109912218c51056d51:-580250450,2870d2484c0320108470d47171226095:-616706662,e25016c4290320102b26a27ad72ceebd:-387642105,c0ef46484a03201004f2500d06f46345:1824450787,0b6f0648e9032010e302485010ed0c60:1974963401,7f4fc2485a032010be93b4cea6a3d936:-1010148039,86acce84c7032010af2b759a1c1e7796:862601290,8dcb8e84f3032010d7cd28914b64da18:1886619864,4f9b0e8495032010d3e0d3d81cda5b71:1158874504,fe2bc684fa03201052ca72ba41823296:1861742603,6aba0e04bb0320103e4ee63d506fcacb:1264903508,4d5882046b032010fa47016f5a7d8fac:1974963401</update_guid_history>
+<update_guid>be7681181a532010906d5e3e205018ba</update_guid>
+<update_guid_history>be7681181a532010906d5e3e205018ba:-1547680476,c0b5cdd0c453201070d934180db56eb7:-1547680476,f71d3450375320109fb2e006e8270051:1302221899,5bf4f48ccfd32010134a95e27714d916:-1547680476,b3c4744c12d32010b35f179cef82ff58:294621294,d03b951eb5032010cc069b5cf3521d21:-1547680476,178313a97a032010577907f980f81201:796596329,9e635f694e032010a1a1620edadb5bff:-1715751755,f17f07e50f03201002e06f894613f760:-1046067280,de4f8fa5b7032010d6840d3c353ca1fc:1602345452,0d2fcfa55d0320102f723a2ae9592520:-1181116904,8dee83a55d032010d42ed16b447ce020:1895953750,7e2e8f653e03201079e92b192db9c1dc:1476335935,9ddd4b655803201003e89dbf998847c6:2139061239,f8adcb65bc032010cd5af2c0d411905d:-456420474,76e55e4cda0320107b18f16fd597eba1:331652732,e2841ac8190320103595ef04958e0c77:-1643473575,7274560c05032010e547436bb2079c4c:2073409843,b7449a0c18032010483ca3a3ddc1aeff:-1015240397,5024560c1c032010265a28297507542c:1241931909,9a141a0c1f03201064969bc7929bd044:-1581639960,6bc31ac8ab03201053279ac628717ab3:-737822220,90739e88da032010522c59dc565ca0b3:-1941323281,2bc29ac8a20320104d998da3c7c9c7ac:-1764714308,ba119688440320106d5c18e0c9d3ef7f:-580250450,baf016484203201050567ca61fa39b8b:-783019550,38905648610320109912218c51056d51:-580250450,2870d2484c0320108470d47171226095:-616706662,e25016c4290320102b26a27ad72ceebd:-387642105,c0ef46484a03201004f2500d06f46345:1824450787,0b6f0648e9032010e302485010ed0c60:1974963401,7f4fc2485a032010be93b4cea6a3d936:-1010148039,86acce84c7032010af2b759a1c1e7796:862601290,8dcb8e84f3032010d7cd28914b64da18:1886619864,4f9b0e8495032010d3e0d3d81cda5b71:1158874504,fe2bc684fa03201052ca72ba41823296:1861742603,6aba0e04bb0320103e4ee63d506fcacb:1264903508,4d5882046b032010fa47016f5a7d8fac:1974963401</update_guid_history>
 <update_set display_value=""/>
 <view/>
 </sys_update_xml>
@@ -802,207 +1039,24 @@
 <application display_value="Global">global</application>
 <category>customer</category>
 <comments/>
-<name>sys_script_include_fd784a04070320107a0af0269c1ed021</name>
-<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;public&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;global.acnListUtils&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;acnListUtils&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var acnListUtils = Class.create();
-acnListUtils.prototype = {
-  /**SNDOC
-	@name initialize
-    @description Constructor method of listUtils
-    @param {String} [table] - ServiceNow Table
-    @param {array} [fields]  fields of the choose table
-    @example
-	
-	var field_arr = ['number','assigned_to','short_description'];
-    var list = new listUtils('incident',field_arr);
-	*/
-	
-	initialize: function(table, fields) {
-		this.t = table;
-		this.f = fields;
-		this.strangeFields = ['short_description','description','title','name'];
-		this.column_types = {};
-	},
-
-	/**SNDOC
-	@name getColumns
-    @description Get the columns data of the choose table 
-    @returns {array} Array containing the columns data
-    @example
-	
-    var list = new listUtils('incident',field_arr);
-	var columns = list.getColumns();
-	
-	//Output:
-    [
-	 {
-		choices [{label: "New", value: "1"},{label: "In Progress", value: "2"},{label: "Canceled", value: "8"}],
-		label: "State",
-		name: "state",
-		type: "_choice"
-	 },
-	 {
-		choices [],
-		label: "Number",
-		name: "number",
-		type: "string"
-	 }
-	]
-	*/
-	getColumns: function(){
-		if(!this.t || !this.f){
-			return;
-		}
-		
-		var columns = [];
-		var grCol = new GlideRecord(this.t);
-		grCol.newRecord();
-		
-		for(var i in this.f){
-			var element = grCol.getElement(this.f[i]);
-			var column_obj = {
-				label: grCol[this.f[i]].getLabel(),
-				name: this.f[i],
-				type: element.getED().getInternalType()
-			};
-			var choiceList =  GlideChoiceList.getChoiceList(this.t, this.f[i]);
-			if(choiceList.getSize() &gt; 1 &amp;&amp; this.strangeFields.indexOf(column_obj.name) == -1){
-				var options = [];
-				for (var i=0; i &lt; choiceList.getSize(); i++) {
-					options.push({'value': choiceList.getChoice(i).getValue(), 'label': choiceList.getChoice(i).getLabel()});
-				}
-				column_obj.type = '_choice';
-				column_obj.choices = options;
-			}
-			else{
-				column_obj.choices = [];
-			}
-			this.column_types[column_obj.name] = column_obj.type;
-			columns.push(column_obj);
-		}
-		return columns;
-	},
-	
-	/**SNDOC
-	@name getColumnType
-    @description Get an object with the columns type 
-    @returns {object} Object containing the columns type
-    @example
-	
-	//you need run the getColumns function first, else you'll recive an empty object
-	var list = new listUtils('incident',field_arr);
-	var columns_type = list.getColumnType();
-	
-	//Output:
-		{number: "string", short_description: "string", state: "_choice", sys_updated_on: "glide_date_time", assigned_to: "reference"}
-	*/
-	getColumnType: function(){
-		return this.column_types;
-	},
-	
-	/**SNDOC
-	@name getRows
-    @description Get an array with the list data 
-	@param {GlideRecord} [gr] - GlideRecord 
-    @returns {Array} Array containing all rows
-    @example
-	
-	var list = new listUtils('incident',field_arr);
-	var rows = list.getRows();
-	
-	//Output:
-	[
-		{display: "INC0000060", sys_id: "1c741bd70b2322007518478d83673af3"},
-		{display: "David Loo", sys_id: "1c741bd70b2322007518478d83673af3"},
-		{display: "Closed", sys_id: "1c741bd70b2322007518478d83673af3"},
-		{display: "Unable to connect to email", sys_id: "1c741bd70b2322007518478d83673af3"},
-		{display: "2016-12-13 18:46:44", sys_id: "1c741bd70b2322007518478d83673af3"}
-	]
-	*/
-		getRows: function(gr){
-		if(!gr){
-			return;
-		}
-
-		var arr_col = [], list = [];
-
-		while(gr.next()){
-
-			for(var i=0; i &lt; this.f.length; i++){
-				var fld = this.f[i];
-				var obj = {};
-				var type = this.column_types[this.f[i]];
-				var value = gr.getValue(this.f[i])
-				if (gr[fld].canRead()) {
-					if(value &amp;&amp; value != ' ... ' &amp;&amp; (type == 'glide_date' || type == 'glide_date_time')){
-						var date = new GlideDate();
-						date.setValue(value);
-						obj.display = date.getByFormat("dd/MM/yyyy");
-					}
-					else
-						obj.display = gr.getDisplayValue(this.f[i]) || ' ... ' ;					
-					obj.sys_id = gr.getValue('sys_id');
-					obj.field = this.f[i];
-					obj.value = value;
-					arr_col.push(obj);
-				}
-			}
-			list.push(arr_col);
-			arr_col = [];
-		}
-		return list;
-	},
-	
-	/**SNDOC
-	@name createPagination
-    @description Get an object with the pagination data 
-	@param {Integer} [maximum_entries] - Number of rows per page
-	@param {Integer} [page] - Index of actual page
-    @returns {object} Object containing the pagination data
-    @example
-	
-	// you need to run the getColumns function first, else you'll receive an empty object
-	var list = new listUtils('incident',field_arr);
-	var pagination = list.createPagination(10,1);
-	
-	//Output:
-	{window_end: 10, window_size: 10, window_start: 0}
-	
-	*/
-	createPagination: function(maximum_entries, page){
-		var p, page_index, window_size; 
-		p = parseInt(page) || 1;
-		page_index = p - 1;
-		window_size = parseInt(maximum_entries) || 10;
-
-		if (isNaN(window_size) || window_size &lt; 1)
-			window_size = 20;
-
-		var data = {};
-		data.window_size = window_size;
-		data.window_start  = (page_index * window_size);
-		data.window_end = (((page_index + 1) * window_size));
-
-		return data;
-	},
-	
-    type: 'acnListUtils'
-};]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-03-17 16:26:16&lt;/sys_created_on&gt;&lt;sys_id&gt;fd784a04070320107a0af0269c1ed021&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;acnListUtils&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_fd784a04070320107a0af0269c1ed021&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;mateus_mazzei&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-03-22 13:46:21&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
-<payload_hash>502108260</payload_hash>
-<remote_update_set display_value="ACN Table Filter Component V2">eee5d72d070320109eaef19d7c1ed0b7</remote_update_set>
+<name>sys_ui_message_2ad4124c070320107a0af0269c1ed0f8</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message"><sys_ui_message action="INSERT_OR_UPDATE"><application/><key>Try to write more than three characters to have a good search</key><language>pb</language><message>Tente escrever mais do que três letras para ter uma boa busca</message><sys_class_name>sys_ui_message</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2021-03-17 17:22:05</sys_created_on><sys_id>2ad4124c070320107a0af0269c1ed0f8</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Try to write more than three characters to have a good search</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_ui_message_2ad4124c070320107a0af0269c1ed0f8</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2021-03-17 17:22:05</sys_updated_on></sys_ui_message></record_update>]]></payload>
+<payload_hash>2022092958</payload_hash>
+<remote_update_set display_value="ACN Table With Filter - V3">9d978918075320109eaef19d7c1ed0c4</remote_update_set>
 <replace_on_upgrade>false</replace_on_upgrade>
 <sys_created_by>mateus_mazzei</sys_created_by>
-<sys_created_on>2021-03-22 13:54:36</sys_created_on>
-<sys_id>eae5d72d070320109eaef19d7c1ed0b8</sys_id>
+<sys_created_on>2021-03-30 16:36:04</sys_created_on>
+<sys_id>dd978918075320109eaef19d7c1ed0c5</sys_id>
 <sys_mod_count>0</sys_mod_count>
-<sys_recorded_at>1785a35ea2a0000001</sys_recorded_at>
+<sys_recorded_at>1785a36c9820000001</sys_recorded_at>
 <sys_updated_by>mateus_mazzei</sys_updated_by>
-<sys_updated_on>2021-03-22 13:54:36</sys_updated_on>
+<sys_updated_on>2021-03-30 16:36:04</sys_updated_on>
 <table/>
-<target_name>acnListUtils</target_name>
-<type>Script Include</type>
+<target_name>Try to write more than three characters to have a good search</target_name>
+<type>Message</type>
 <update_domain>global</update_domain>
-<update_guid>d495932db503201066302e65e1041b3d</update_guid>
-<update_guid_history>d495932db503201066302e65e1041b3d:502108260,a90457a9a60320102a34f481e8cdf4b0:502108260,17a8ca04a30320107df55730dbcc935c:1596144612</update_guid_history>
+<update_guid>96c5d72d200320100d23308347d3610d</update_guid>
+<update_guid_history>96c5d72d200320100d23308347d3610d:2022092958,cd751e0c0c03201080f55981368f91d2:2022092958</update_guid_history>
 <update_set display_value=""/>
 <view/>
 </sys_update_xml>
