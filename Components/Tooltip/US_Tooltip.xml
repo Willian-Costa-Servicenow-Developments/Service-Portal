@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2021-03-31 14:27:11">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description/>
+<inserted/>
+<name>Tooltip</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>a96335e0db9ba81034230fbca3961970</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>olivia.temp</sys_created_by>
+<sys_created_on>2021-03-31 14:27:10</sys_created_on>
+<sys_id>03a33564db9ba81034230fbca3961959</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>olivia.temp</sys_updated_by>
+<sys_updated_on>2021-03-31 14:27:10</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_ng_template_ba7d141f1b678810ca618488ec4bcb88</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_ng_template"&gt;&lt;sp_ng_template action="INSERT_OR_UPDATE"&gt;&lt;id&gt;recordTooltipTemplate&lt;/id&gt;&lt;sp_widget display_value="OCL Record Tooltip"&gt;b33067f21b2b4810ca618488ec4bcb46&lt;/sp_widget&gt;&lt;sys_class_name&gt;sp_ng_template&lt;/sys_class_name&gt;&lt;sys_created_by&gt;adalberto&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-03-19 15:07:39&lt;/sys_created_on&gt;&lt;sys_id&gt;ba7d141f1b678810ca618488ec4bcb88&lt;/sys_id&gt;&lt;sys_mod_count&gt;17&lt;/sys_mod_count&gt;&lt;sys_name&gt;recordTooltipTemplate&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_ng_template_ba7d141f1b678810ca618488ec4bcb88&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;olivia.temp&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-03-31 14:26:52&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div&gt;
+  &lt;div class='ocl-record-tooltip-content'&gt;
+    &lt;div class='ocl-record-tooltip-loading' ng-if="c.loading"&gt;
+      &lt;div class='sp-loading-indicator la-sm'&gt;
+        &lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class='ocl-record-tooltip-error' ng-if="!c.loading &amp;&amp; c.error"&gt;
+      ${An error ocurred while loading the information, please try again later}
+    &lt;/div&gt;
+    &lt;div class='ocl-record-tooltip-body'&gt;
+      &lt;div class='ocl-record-tooltip-field' ng-repeat="field in c.fields"&gt;
+        &lt;span class=''&gt;&lt;b&gt;{{field.label}}:&lt;/b&gt;&lt;/span&gt;
+        &lt;span class='value'&gt;{{field.display_value}}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_ng_template&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-2147080985</payload_hash>
+<remote_update_set display_value="Tooltip">03a33564db9ba81034230fbca3961959</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>olivia.temp</sys_created_by>
+<sys_created_on>2021-03-31 14:27:10</sys_created_on>
+<sys_id>47a33564db9ba81034230fbca3961959</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>17888ae12340000001</sys_recorded_at>
+<sys_updated_by>olivia.temp</sys_updated_by>
+<sys_updated_on>2021-03-31 14:27:10</sys_updated_on>
+<table/>
+<target_name>recordTooltipTemplate</target_name>
+<type>Angular ng-template</type>
+<update_domain>global</update_domain>
+<update_guid>62937524c79ba8101f30963c6050b53a</update_guid>
+<update_guid_history>62937524c79ba8101f30963c6050b53a:-2147080985,f5d6bc08b518901056fde49281df97d9:-1276160685,06a63808bc1890107b77873746f4c1b8:1363713596,a08829139d6b88106d98c8327020d264:-944055312,c3b2e91ff22b88103f4a95644d1b6c37:1607417394,78de519b592b88101499e7b444df8f39:1934538133,804cd51b5b2b8810b8ae532ce6aa1b61:403748856,962c951b622b8810af883b6bafe314df:-372096789,c21c951ba62b8810fd1991177d445002:-632538069,b0fb151b422b8810d119e361be808758:-1417687443,75db511b542b8810681f83fa4a9aec4e:-1999149807,6c775557902b8810708a3a4a038d0205:1941768419,64beac9790a78810606bef2783b15509:21557705,a0ba6457aea78810b713df8e0fb6eba4:1461003980,e58ae0573da78810fae248c741c3aa39:21557705,9739641721a78810f540f957f5bbb379:1461003980,b20960178ca78810022a1ba1ac860d66:21557705,909d141f66678810fdf20a690d6e1827:1461003980</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_widget_b33067f21b2b4810ca618488ec4bcb46</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function() {
+	/* widget controller */
+	var c = this;
+	c.loading = true;
+	c.error = false;
+	
+	c.title = "";
+
+	c.loadData = function() {
+		c.loading = true;
+		c.server.get({
+			"action": "getData",
+			"table": c.options.table,
+			"id": c.options.record,
+			"fields": c.options.fields,
+			"title": c.options.title
+		}).then(function(response) {
+			if(!response.data.error) {
+				c.fields = response.data.obj;
+
+				if(response.data.title)
+					c.title = response.data.title;
+				
+				c.error = false;
+				c.loading = false;
+
+			} else {
+				c.error = true
+			}
+		})
+	};
+
+	c.loadData()
+
+}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;.ocl-record-tooltip-popover {&amp;#13;
+  .popover-title {&amp;#13;
+    text-align: center;&amp;#13;
+  }&amp;#13;
+}&amp;#13;
+&amp;#13;
+  .ocl-record-tooltip-content {&amp;#13;
+    width: 200px;&amp;#13;
+    height: 90px;&amp;#13;
+    overflow: hidden;&amp;#13;
+  }&amp;#13;
+  .ocl-record-tooltip-header {&amp;#13;
+    text-align: center;&amp;#13;
+    padding: 10px;&amp;#13;
+    .title {&amp;#13;
+      font-size: 16px;&amp;#13;
+    }&amp;#13;
+  }&amp;#13;
+  .ocl-record-tooltip-loading {&amp;#13;
+    display: flex;&amp;#13;
+    align-items: center;&amp;#13;
+    justify-content: center;&amp;#13;
+    height: 100%;&amp;#13;
+&amp;#13;
+    .sp-loading-indicator {&amp;#13;
+      color: black;&amp;#13;
+    }&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  .ocl-record-tooltip-body {&amp;#13;
+    display: flex;&amp;#13;
+    flex-wrap: wrap;&amp;#13;
+    overflow: hidden;&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  .ocl-record-tooltip-field {&amp;#13;
+    width: 100%;&amp;#13;
+    display: flex;&amp;#13;
+    padding: 5px;&amp;#13;
+&amp;#13;
+    .value {&amp;#13;
+      padding-left: 5px;&amp;#13;
+    }&amp;#13;
+  }&amp;#13;
+&amp;#13;
+  .ocl-record-tooltip-error {&amp;#13;
+    display: flex;&amp;#13;
+    align-items: center;&amp;#13;
+    text-align: center;&amp;#13;
+    height: 100%;&amp;#13;
+  }&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;true&lt;/has_preview&gt;&lt;id&gt;ocl-record-tooltip&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) { 
+}]]&gt;&lt;/link&gt;&lt;name&gt;OCL Record Tooltip&lt;/name&gt;&lt;option_schema&gt;[{"name":"table","section":"Data","label":"Table","type":"string"},{"name":"record","section":"Data","label":"Record","type":"string"}]&lt;/option_schema&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {	
+	if(!input)
+		return;
+	if(input.action == "getData") {
+		var gr = new GlideRecord(input.table);
+		if(gr.get(input.id)) {
+			data.obj = {};
+			data.obj = $sp.getFields(gr, input.fields);
+			
+			if(input.title) {
+				data.title = gr.getDisplayValue(input.title);
+			}
+		} else {
+			data.error = true;
+		}
+		
+	}
+	
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;adalberto&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-03-18 16:01:34&lt;/sys_created_on&gt;&lt;sys_id&gt;b33067f21b2b4810ca618488ec4bcb46&lt;/sys_id&gt;&lt;sys_mod_count&gt;141&lt;/sys_mod_count&gt;&lt;sys_name&gt;OCL Record Tooltip&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_b33067f21b2b4810ca618488ec4bcb46&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;olivia.temp&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-03-31 14:26:26&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div&gt;
+  &lt;span class="{{::options.iconClass || 'glyphicon glyphicon-info-sign'}}"
+        uib-popover-template="'recordTooltipTemplate'"
+        popover-title="{{c.title}}"
+        popover-placement="{{c.options.placement || 'auto'}}"
+        popover-trigger="{{c.options.trigger || 'mouseenter'}}"
+        popover-class="ocl-record-tooltip-popover {{c.options.className}}"
+        popover-popup-close-delay="{{c.options.popupCloseDelay || 0}}"
+        popover-popup-delay="{{c.options.popupDelay || 0}}"
+        popover-is-open="{{c.options.isOpen || false}}"
+        popover-animation="{{c.options.animation || true}}"
+        &gt;&lt;/span&gt;
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+<payload_hash>706605358</payload_hash>
+<remote_update_set display_value="Tooltip">03a33564db9ba81034230fbca3961959</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>olivia.temp</sys_created_by>
+<sys_created_on>2021-03-31 14:27:10</sys_created_on>
+<sys_id>4fa33564db9ba81034230fbca3961959</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>17888adab540000001</sys_recorded_at>
+<sys_updated_by>olivia.temp</sys_updated_by>
+<sys_updated_on>2021-03-31 14:27:10</sys_updated_on>
+<table/>
+<target_name>OCL Record Tooltip</target_name>
+<type>Widget</type>
+<update_domain>global</update_domain>
+<update_guid>cc837124809ba8109e3440a5e397596c</update_guid>
+<update_guid_history>cc837124809ba8109e3440a5e397596c:706605358,196325a94ab81450e778378132bf525d:256487108,bd33256df6b81450724119c6139adc49:86272935,2496b408c3189010a0dd6c510e997457:-771248042,2b56f4c4c118901052226cc6be951ba1:-335332106,705e1c0c5454901012790344e698ba64:-771248042,2a2e980c56549010983e79faf3e6091b:-925742612,b0a9f5db8d6b88107bdc2efaf517ed0a:-1938217714,094571db646b8810e73501d478400577:746104886,133531dbc66b8810e4dc9e2711d7c001:-1640052122,9425b59b796b88109fa4e5c4399c69f1:390587602,c1eda117136b8810827f6ac505453554:1518681643,1eb8e913136b88102d131b12960d7f56:587617710,fdb8e913236b881017d4a03b0b19d860:125366056,84a8a913cf6b88105fcb187a458b03b9:-204782298,c9986913a26b88106f047d5df648f598:1133225960,40f3695fda2b8810c3006b73e498f6f6:587617710,6273a15f7a2b8810feb17a138581d4a3:1501662354,07b2e91fb12b8810f945cb4402443235:-764201974,7e9edd1bdc2b8810e02d79cdb42efe6a:535982877,3aecdd1b8c2b8810b0b6ee68714bb660:918373202,056c591b7c2b8810a5ccbc959030deb2:1768779254,bbab111bd22b881099c249c18135ca9e:-776055601,e35b5dd7602b8810399f7b5335ee691d:263431823,9b2b99d7942b88106ba7c6c3b331985b:-1038492694,581b51d7792b8810893d9be4edd58d30:28006484,6cdad5d7bd2b881089c772c2db61ce16:146355363,2c7759d3392b8810da85caa6f04d98e7:-896458125,bdc49d93622b88106e895079f2a461fb:1921664227,acd1419704e788108a13109954d5f954:-637504269,e6b101970de78810953e7fde9f9bca36:-1919063518,585e7cd30ee78810697f5720f2fcc76e:1255000509,272ef8d357e788109cdd8bccd2f78e14:344262371,471e78d3dde7881086a56824f2ac4f92:-2086338290,c294301fb9a78810340a2ee1a79e027f:36229073,d484f0db7ca788104ba61f4ce99aec89:-1535407537,064370dbcda7881026a73be20d0abf9e:399968703,644370dbeaa788105faa5b6b70f0e593:750830369,002370db21a78810f07f9cc7b5200251:242331515,6382f89b90a78810677d2831148bac40:-920599380,5671309b8ca788103101341b780e8010:-1455235953,1861bc5b21a78810fc0d1c64adebebfe:646890827,b141785b58a78810b82613f7a24b6af6:1224467404,bde0305bc5a788105e977c51048f774f:726519998,4ed0bc1b3ba78810aa579044af436e82:-941484855,94efac1bb2a7881010f1fa24d60b727a:1230665599,60afa81b19a78810c0ea4e3fafbc1847:-1699713060,808f601bf7a78810ca2aa21d6bf6d33d:198186935,417e6cd789a78810ff7072d6743c3af6:1090912100,f91ba45753a78810d1178d120f5f3ade:-2020559016,d1caa457eea7881046292232ddc82cb5:-1465068008,e0ba6457fba788109b13a49a087a79a2:-405439711,4559641711a788108c5de97ffdd687d2:29363823,d7396417caa78810b63130e9ddba9377:722814996,0fd8201713a78810ac78c0e8c988e308:73106682,d3b8acd32ca7881046b780de01694d89:1925159976,d0b8acd352a7881037a459af36e0d1cb:-1244746713,fca8a8d37ca78810102bbc8d195299f0:1727415394,5148a8d324a78810f84ddc4a0295496f:1124240141,d228e09329a78810f0cdf12165f6bcc3:2076129821,10a36813e3a78810e87f84242fcb61e7:1486559277,fe132413d4a788103c43f47c4a660229:904778345,5e03201366a7881024d58ce40d0f6be0:1318894554,f3e260131da7881041aa6677f4654e5c:1992498556,67622cdf6c678810a0ded657bf3c0d3e:1347124254,6061ec9f1d6788100e0a569a4209440b:-455093743,6a21ac9f9c6788107eedd4658050f4c8:-299670793,c511a89fa1678810c3a26574817e55e1:-421564554,52c0689f55678810aba523a10840f59e:-974739539,88b0e49f166788101432d6d2a49777c1:1231540593,8140e09f0f678810d369c304f68ade92:1118336647,9720609f3a678810435bf32ad9c66229:-624025448,08ffd85fef678810ddb81ccc8b5d4fce:955174687,15cfdc5f31678810a5b61a3ca422bd00:1431542485,757f985f2c67881001b53028524313cb:-1486690016,546f185fd2678810131b52cd80557059:1473289906,9f5f985f0c6788109c86936ad7bc7a16:-1109771502,755e9c1f40678810d8c930d346f38e25:1674981993,962e1c1f41678810f589d07d920997ae:284354303,847dd85b7b678810eba0a8816e7eacee:596446873,0579c6cba4ef4810531ccb8f0bb32e0c:855607997,1c19c2cb6fef4810561f92586e2a1054:1981802312,e5d802cbdcef481095911f265d73f986:207537010,61d8ce8b58ef48107cc4888961237e6f:61597026,63b8ca8bb7ef48109ca2dc5ea6a10f7f:-1445873134,95bb384b502f48109a6643c269c2b46d:141790437,b58bfc0ba42f4810138c50d1ac2d3394:-1374353391,dd8b344b822f48103641ec99e3b6246c:-2024135104,476af40b392f481043af5976cf22f782:1013069354,61d73487722f48104a7d0a2500954758:141790437,24367047df2f48109ad1f8c0894c4097:-1036760101,a40670472f2f48104333ba63b450c048:424869366,5083b4c33a2f481094360216e44585f3:542990908,b473b4c36c2f4810195f2ed877e89729:47758652,6d53b0c32b2f481025ec209795344098:1813373532,0f1330c35e2f4810d45577e900d0d340:542990908,b7e2fc838c2f4810402ac20ec69a2c78:1879022324,ffb1b403222f4810de6e993034a9b4e7:-1820843969,6d10b0cfa4eb48109dcc78463365d734:-122619863,fbbeec4f04eb4810891ab2bd420da40a:406941509,043e684f2eeb4810f5debe8db0f54281:-1267718479,e378208b91eb4810e01c1c663f75bdb5:-307458142,d2a7ec0b14eb48105a4628b64d71106a:2047602489,b467644b42eb4810ee1c67e75dc75a63:1359629054,3db6ac0b7ceb48103b5df44d9fead0f1:-250726046,24b6e80b6eeb48104df62206d73807cd:602024623,efa6280b3deb48109e84b4add94472f1:1215854609,8756acc7b2eb4810245347624e80d8a6:-923638550,5946a80ba9eb481057f05dfcfd4e076c:1628877635,a2f4a48733eb481087b4047c1fdbc5ac:-1075075903,bc09984feaab4810d94d3f62ee14b7a2:1945438351,ebf7984f6eab48107fc34bd3eb847b96:-1023215879,fb57d04ff4ab4810c62f054dd00cd7b0:-1327172067,7a47904fdfab4810345f1d403c6352dd:-1853079979,1f17dc0f6eab48109b6aa06a74048f66:2055297429,92e65c0ffbab4810ee375c842c3539f9:570846896,34c6d80f2aab481023cd9f740bd274e3:873159142,1186940fb1ab4810e888bf3d906a55b3:1426819,6546d00ff1ab48105aa3f376c1321359:-2081628099,cff594cbf4ab481024632876c8475825:-1567872547,d5f494cb38ab4810a410c514de0b6c31:1228945849,afd49c8b64ab48105310bf04860785b3:1480928459,911f44c7b4ab48108c72e7ed40628ab1:1829777594,61f580436eab4810b3c82f79623eea83:1714135586,d6854c03c0ab48107c155f3e5745a79c:1779272047,5515c003efab4810ce68fa1dc2a9ef4a:1559412224,3083cc0f6a6b48102816455dacb1dd2c:921818667,37c9b33ae36b481069b855da93e1d258:-690694259,7eb9fff6bb6b4810dd1dbc0dcd079b59:-947889523,6889fff6e26b48104c8e7aba6cabff43:-2022998488,22413f32c76b4810726dd4a4f9dfb9a9:1089033845,6ef0f332656b4810c1dc14749384b7f5:-1648236306,14fe2bba322b48100cb9be44e000448e:-95838840,8c6cefba472b4810c86d8944c13e20a4:1201744139,fe8827ba202b48102a632e06902166de:349948657,954827ba692b48101f4dbbae5b3b23d7:1937345479,3d15673a732b481000dde0332de17e5a:-218911613,adf4e33a0c2b4810aac0282becd5b6f0:2101073158,4be427f6a62b4810f6a3ee300d2b4182:1486156556,51b3a3f69e2b481085dd99d2ea41f3a1:-1502279192,f843a3f6002b4810a4ea568f26be13c5:-2112335106,5450a736bb2b4810a52e9103f5af0b89:1860801663</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
