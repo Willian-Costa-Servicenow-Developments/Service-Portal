@@ -370,6 +370,9 @@ acnListUtils.prototype = {
 		$scope.data.order = '';
 		c.searchText = '';
 		c.data.p = 1;
+		c.goPage = 1;
+		c.data.searchFilters = [];
+		c.data.search = '';
 
 		for(var f in c.data.fields){
 			var key = c.data.fields[f];
