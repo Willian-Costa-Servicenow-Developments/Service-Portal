@@ -14,7 +14,6 @@ The widget can join items from catalogs and categories while browsing lists
 
 - Catalog: service catalog record reference
 
-
 ### Demonstration
 ![Catalog_List](https://github.com/Organize-Cloud-Labs/Service-Portal/blob/main/Components/Catalog%20List/catalog-list.png)
 
