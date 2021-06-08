@@ -12,9 +12,7 @@ When you're at Branding Editor. Sometimes you can change something and break you
 
 ## Solution
 
-Go to your portal record and look at this option in the Portal Record, check if there is sys_id empty or something else that looks strange
-
-![d59c6c27-6fa2-411f-8bc9-11ec1b93fa97](../images/d59c6c27-6fa2-411f-8bc9-11ec1b93fa97.jpg)
+Go to your thema record and look for something wrongl, like "rgb(0,0,0,0.4)" instead of "rgba(0,0,0,0.4)". Fix the CSS issues and reload the page.
 
 Other option is  change a color on Brand Editor. So this option will appear
 
