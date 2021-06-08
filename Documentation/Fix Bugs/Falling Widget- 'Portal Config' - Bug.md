@@ -12,7 +12,7 @@ When you're at Branding Editor. Sometimes you can change something and break you
 
 ## Solution
 
-Go to your thema record and look for something wrongl, like "rgb(0,0,0,0.4)" instead of "rgba(0,0,0,0.4)". Fix the CSS issues and reload the page.
+Go to your thema record and look for something wrong, like "rgb(0,0,0,0.4)" instead of "rgba(0,0,0,0.4)". Fix the CSS issues and reload the page.
 
 Other option is  change a color on Brand Editor. So this option will appear
 
