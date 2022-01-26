@@ -2,7 +2,7 @@
 
 ### HTML example:
 ```html
-  <sp-widget widget="item.recordTooltip"></sp-widget> 
+  <sp-widget widget="item.tooltip"></sp-widget> 
 ```
 
 
