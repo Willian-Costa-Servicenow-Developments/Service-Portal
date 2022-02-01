@@ -1,0 +1,7 @@
+Property: 
+
+glide.service-portal.notification_timeout.seconds
+
+
+
+PS: set to 0 so that the message is closed only through user action
