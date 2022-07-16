@@ -1,0 +1,1706 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2022-07-16 12:45:10">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description/>
+<inserted/>
+<name>Component List v2</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>61d948a087381510f7c5cbfc0ebb3520</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>willian.costa</sys_created_by>
+<sys_created_on>2022-07-16 12:45:10</sys_created_on>
+<sys_id>76bac4e087381510f7c5cbfc0ebb35d5</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>willian.costa</sys_updated_by>
+<sys_updated_on>2022-07-16 12:45:10</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_include_7d2704d71b881510f087a79fe54bcb6a</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;global.MosaicListUtils&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;MosaicListUtils&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var MosaicListUtils = Class.create();
+MosaicListUtils.prototype = {
+	/**SNDOC
+	@name initialize
+    @description Constructor method of listUtils
+    @param {String} [table] - ServiceNow Table
+    @param {array} [fields]  fields of the choose table
+    @example
+
+	var field_arr = ['number','assigned_to','short_description'];
+    var list = new listUtils('incident',field_arr);
+	*/
+
+	initialize: function(table, fields, can_edit_fields, tooltip_fields) {
+		this.t = table;
+		this.f = fields;
+		this.tooltip_f = tooltip_fields;
+		this.strangeFields = ['short_description','description','title','name'];
+		this.can_edit_fields = can_edit_fields;
+		this.column_types = {};
+	},
+
+	/**SNDOC
+	@name getColumns
+    @description Get the columns data of the choose table 
+    @returns {array} Array containing the columns data
+    @example
+
+    var list = new listUtils('incident',field_arr);
+	var columns = list.getColumns();
+
+	//Output:
+    [
+	 {
+		choices [{label: "New", value: "1"},{label: "In Progress", value: "2"},{label: "Canceled", value: "8"}],
+		label: "State",
+		name: "state",
+		type: "_choice"
+	 },
+	 {
+		choices [],
+		label: "Number",
+		name: "number",
+		type: "string"
+	 }
+	]
+	*/
+	getColumns: function(){
+		if(!this.t || !this.f){
+			return;
+		}
+
+		var columns = [];
+		var grCol = new GlideRecord(this.t);
+		grCol.newRecord();
+
+		for(var i=0; i &lt; this.f.length; i++){
+
+			var field = this.f[i];
+			var column_obj = {};
+			var element;
+			var response;
+			//Is Reference field
+			if(this.isReferenceField(field)){
+				var refField = field.split('.');
+				var last = refField.length - 1;
+				var grRef = null;
+				// 2 levels of reference dot walk
+				if(refField.length &lt; 3){
+					grRef = grCol[refField[0]].getRefRecord();
+					grRef.newRecord();
+					element = grRef.getElement(refField[last]);
+					column_obj.type = element.getED().getInternalType();
+					column_obj.label = grRef[refField[last]].getLabel();
+				// 3 levels of reference dot walk
+				}else{
+					// Is a filter reference field
+					if(refField[1].includes('ref_')){
+						var ref_table = refField[1].toString().slice(4);
+						grRef = new GlideRecord(ref_table);
+						grRef.isNewRecord();
+						element = grRef.getElement(refField[last]);
+						column_obj.label = grRef[refField[last]].getLabel();
+						column_obj.type = (element.getED()) ? element.getED().getInternalType() : 'string';
+					}else{
+						var parent = grCol[refField[0]].getRefRecord();
+						parent.newRecord();
+						var child  = parent[refField[1]].getRefRecord();
+						child.newRecord();
+						grRef = child[refField[1]].getRefRecord();
+						grRef.newRecord();
+						element = grRef.getElement(refField[last]);
+						column_obj.label = grRef[refField[last]].getLabel();		
+						column_obj.type = (element.getED()) ? element.getED().getInternalType() : 'string';
+					}
+
+				}
+				column_obj.name = field;
+				column_obj.field = refField[last];
+				column_obj.table = grRef.getTableName();
+				//column_obj.label = grRef.getLabel();
+				response = this.getColumnData(grRef,column_obj);
+			}
+			else{
+				element = grCol.getElement(field);
+				column_obj.type = element.getED().getInternalType();
+				column_obj.table = element.getRefRecord().getTableName()|| this.t;
+				column_obj.label = element.getLabel();
+				column_obj.name = field;
+				column_obj.field = field;
+				response = this.getColumnData(grCol,column_obj);
+			}
+			columns.push(response);
+		};
+		return columns;
+	},
+
+	getColumnData: function(glide, column_obj){
+		if(column_obj.type == 'email')
+			column_obj.type = 'string';
+
+		/*var column_obj = {
+			label: glide[data.field].getLabel(),
+			name: data.name,
+			table: glide.getTableName(),
+			type: data.type
+		};*/
+
+		var choiceList =  GlideChoiceList.getChoiceList(column_obj.table, column_obj.field);
+		if(choiceList.getSize() &gt; 1 &amp;&amp; this.strangeFields.indexOf(column_obj.name) == -1){
+			var options = [];
+			for (var i=0; i &lt; choiceList.getSize(); i++) {
+				options.push({'value': choiceList.getChoice(i).getValue(), 'label': choiceList.getChoice(i).getLabel()});
+			}
+			column_obj.type = '_choice';
+			column_obj.choices = options;
+		}
+		else{
+			column_obj.choices = [];
+		}
+		this.column_types[column_obj.name] = column_obj.type;
+		return column_obj;
+	},
+
+	/**SNDOC
+	@name getColumnType
+    @description Get an object with the columns type 
+    @returns {object} Object containing the columns type
+    @example
+
+	//you need run the getColumns function first, else you'll recive an empty object
+	var list = new listUtils('incident',field_arr);
+	var columns_type = list.getColumnType();
+
+	//Output:
+		{number: "string", short_description: "string", state: "_choice", sys_updated_on: "glide_date_time", assigned_to: "reference"}
+	*/
+	getColumnType: function(){
+		return this.column_types;
+	},
+
+	/**SNDOC
+	@name getRows
+    @description Get an array with the list data 
+	@param {GlideRecord} [gr] - GlideRecord 
+    @returns {Array} Array containing all rows
+    @example
+
+	var list = new listUtils('incident',field_arr);
+	var rows = list.getRows();
+
+	//Output:
+	[
+		{display: "INC0000060", sys_id: "1c741bd70b2322007518478d83673af3"},
+		{display: "David Loo", sys_id: "1c741bd70b2322007518478d83673af3"},
+		{display: "Closed", sys_id: "1c741bd70b2322007518478d83673af3"},
+		{display: "Unable to connect to email", sys_id: "1c741bd70b2322007518478d83673af3"},
+		{display: "2016-12-13 18:46:44", sys_id: "1c741bd70b2322007518478d83673af3"}
+	]
+	*/
+	getRows: function(gr, fields, haveChilds){
+		if(!gr){
+			return;
+		}
+
+		var list = [], columns = [];
+		var sp = new GlideSPScriptable();
+
+
+		while(gr.next()){
+
+			if(fields)
+				this.f = fields;
+
+			if(!gr.canRead())
+				continue;
+
+
+			for(var i=0; i &lt; this.f.length; i++){
+				var field = this.f[i];
+				var type = this.column_types[field];
+				var response;
+
+				if(this.isReferenceField(field)){
+					var refField = field.split('.');
+					var grRef = null;
+					if(refField.length &lt; 3){
+						grRef = gr[refField[0]].getRefRecord();
+					}else{
+						var parent = gr[refField[0]].getRefRecord();
+						grRef = parent[refField[1]].getRefRecord();
+					}
+					response = this.getFieldData(grRef,refField[refField.length -1],field, type, haveChilds);
+				}
+				else
+					response = this.getFieldData(gr,field,false, type, haveChilds);
+
+				columns.push(response);
+			}
+			list.push({
+				sys_id: gr.getUniqueValue(),
+				table: gr.getTableName(),
+				sys_class_name: gr.getValue('sys_class_name') || '',
+				tooltip: sp.getWidget("dgs-record-tooltip", {
+					table:  gr.getTableName(),
+					record: gr.getUniqueValue(),
+					fields: this.tooltip_f,
+					placement: 'right',
+					trigger: "mouseenter",
+					title: "sysapproval",
+					className: "test-class"
+				}),
+				columns: columns
+			});
+			columns = [];
+		}
+		return list;
+	},
+
+	getFieldData: function(gr,field, refName, type, haveChilds){
+		var sp = new GlideSPScriptable();
+		var obj = {}, value;
+
+		//if (gr[field].canRead()) {
+		value = gr.getValue(field);
+
+		if(value &amp;&amp; value != ' ... ' &amp;&amp; (type == 'glide_date' || type == 'glide_date_time')){
+			var date = new GlideDate();
+			date.setValue(value);
+			obj.display = date.getByFormat("dd/MM/yyyy");
+		}
+		else
+			obj.display = gr.getDisplayValue(field) || '' ;	
+		
+		if(haveChilds)
+			obj.childs = this.haveChilds(obj.sys_id);
+
+		obj.element = field;
+		obj.label = gr.getElement(field).getLabel();
+		obj.field_style = this.getFieldStyle(gr.getTableName(), field, value) || '';
+		obj.value = value;
+
+		if(this.can_edit_fields &amp;&amp; this.can_edit_fields.indexOf(field)  !== -1)
+			obj.edit = true;
+		else
+			obj.edit = false;
+
+
+		if(!gs.nil(refName))
+			obj.field = refName;
+		else
+			obj.field = field;
+		//}
+	
+		return obj;
+	},
+
+
+	getFieldStyle: function(table, field,value){
+		var aggStyle = new GlideAggregate('sys_ui_style');
+		aggStyle.addQuery('name=' + table + '^element=' + field + '^value=' + value);
+		aggStyle.groupBy('style');
+		aggStyle.query();
+
+		if(aggStyle.next())
+			return aggStyle.getValue('style');
+	},
+
+	isReferenceField: function(field){
+		if(gs.nil(field))
+			return;
+		if(field.indexOf('.') == -1)
+			return false;
+		return true;
+	},
+
+
+	haveChilds: function(record){
+		var agg = new GlideAggregate(this.t);
+		agg.addAggregate('COUNT');
+		agg.addEncodedQuery('parent=' + record);
+		agg.query();
+		if(agg.next())
+			return parseInt(agg.getAggregate('COUNT'));	
+		else
+			return 0;
+	},
+
+	/**SNDOC
+	@name createPagination
+    @description Get an object with the pagination data 
+	@param {Integer} [maximum_entries] - Number of rows per page
+	@param {Integer} [page] - Index of actual page
+    @returns {object} Object containing the pagination data
+    @example
+
+	// you need to run the getColumns function first, else you'll receive an empty object
+	var list = new listUtils('incident',field_arr);
+	var pagination = list.createPagination(10,1);
+
+	//Output:
+	{window_end: 10, window_size: 10, window_start: 0}
+
+	*/
+	createPagination: function(maximum_entries, page){
+		var p, page_index, window_size; 
+		p = parseInt(page) || 1;
+		page_index = p - 1;
+		window_size = parseInt(maximum_entries) || 10;
+
+		if (isNaN(window_size) || window_size &lt; 1)
+			window_size = 20;
+
+		var data = {};
+		data.window_size = window_size;
+		data.window_start  = (page_index * window_size);
+		data.window_end = (((page_index + 1) * window_size));
+
+		return data;
+	},
+
+	type: 'MosaicListUtils'
+};]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;willian.costa&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-06-17 18:45:44&lt;/sys_created_on&gt;&lt;sys_id&gt;7d2704d71b881510f087a79fe54bcb6a&lt;/sys_id&gt;&lt;sys_mod_count&gt;39&lt;/sys_mod_count&gt;&lt;sys_name&gt;MosaicListUtils&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_7d2704d71b881510f087a79fe54bcb6a&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;willian.costa&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-07-08 17:34:49&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+<payload_hash>1258636053</payload_hash>
+<remote_update_set display_value="Component List v2">76bac4e087381510f7c5cbfc0ebb35d5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>willian.costa</sys_created_by>
+<sys_created_on>2022-07-16 12:45:10</sys_created_on>
+<sys_id>36bac4e087381510f7c5cbfc0ebb35d6</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>182070993690000001</sys_recorded_at>
+<sys_updated_by>willian.costa</sys_updated_by>
+<sys_updated_on>2022-07-16 12:45:10</sys_updated_on>
+<table/>
+<target_name>MosaicListUtils</target_name>
+<type>Script Include</type>
+<update_domain>global</update_domain>
+<update_guid>2e7a40e0c7381510a8f8fa0896a78b00</update_guid>
+<update_guid_history>2e7a40e0c7381510a8f8fa0896a78b00:1258636053,3740cc0699a4dd508b4f8c9965bae556:1258636053,18104c061ea4dd502454067de55c14ce:-264118805,2f7ffff15ea4dd50f79470b86560cccd:-494680195,609ef7f14ca4dd50ee2b8fbc43240d80:1564556748,0f3e77f171a4dd50b54b8c3ff85de49f:-555489539,b5fd3fb1e8a4dd50701c30012fbcc485:1375940165,8c7d3fb150a4dd503c59035c022e7b0a:199807215,da1db7b18da4dd50a09d683ba31fc193:1375940165,d99cb3717ba4dd50857ac80b7e6b30e9:-1638235937,73691ff57924dd503944dec82a7b4530:1375940165,2a8eb5255f249d5068dd6750b3db3ae4:193223168,acbdb9e176249d504dcc9aa8c9865244:1732448583,f05d79e150249d502cfe0607e45ecab3:-1689474407,610380245ed8591094f94e1a9724f087:-674969134,0f697b5827985910bd287c2ff2725f9b:-575136046,45a8fb18ef985910f53bf22da8b3b4cf:-660805017,13587b1893985910c74144965b968916:-1375566702,68483b185c98591061af11314f9886f7:119941465,a7f7f318c0985910c069a9648828c6ef:-241584921,7b27f7d4d8985910f1bf5f0d465ca926:398161157,28f6ff9486985910fc6e9d1c5afd94f9:1066630271,16c6ff948798591024f3907b60c1cf5e:183962253,bf96bb942d98591045d95287a77d50a4:1643281621,e686bb943898591094e0d9780d14b009:-142882675,47663b94b79859100c097a23ec0bae13:-312475859,5836f3946e98591061cd4ae731031093:457799804,5106bb54cb9859109c3a22358cae4104:-2053027495,ddc5b3546f9859108f4388a36981d102:1800908604,b4a5f354df985910ff1ce6c001146fb1:349180879,8e65335483985910e1589033a2c4b1f6:1862436081,c471bbdcae58591052837a4d0a61d695:-999495413,804c6b94515859102a839651bd772300:-91705966,cadbef94635859101b9adc7451cc094f:1962266947,98a96b94e7585910b1bdec3729232d77:1274458599,3259ab948f585910bba7004411a26bae:77992656,413963942f585910ec74866860913051:-2068235030,69a1679cf3185910182e6490380ecd50:1274458599,4f2c9bc867941910ceaca6161a094ae9:-1995398256,34bb5bc8439419103e7bf9631d15b526:-152935294,847b5f88619419100a7c21191457bfb3:-404408168,13475b84009419109a63c151c744a896:-152935294,68e69784bc9419106d463eed75add721:-1687663288,89939f801c9419103ec766a249c35a3d:969793616,ab135780db941910d48bf7717aafd4a6:245182065,f0d257400f9419108ba09d2e9170f15c:1926335350,8e6528d7c00c1510b64dacb4e998a73c:-1995398256,ed7e98df78c81510e34cb397c74dae5b:363287124,823e14df4fc81510aa2ff15b8618be98:-2016273620,982e985f15c8151090b4baaf86dd4bd1:549862951,c6bd9c9fd7c8151045471f7571083846:206989373,264ad4dbbbc81510882fdaf03fb3dc84:363287124,981a50db09c81510db88fcd0d1a2798c:1923591892,20a95c9ba8c815106c781d376eb69e28:1188560318,b527441be98815101fd6e0d70de9457d:-937932541</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_include_77a6eb59875091508c830e1d0ebb35f2</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;global.ComponentFormView&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;ComponentFormView&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var ComponentFormView = Class.create();
+ComponentFormView.prototype = {
+    initialize: function(table, sys_id) {
+		this.table = table;
+		this.sys_id = sys_id || '-1';
+    },
+	
+	getForm: function(){
+		var sp = new GlideSPScriptable();
+		var form = sp.getForm(this.table, this.sys_id, null, 'mobile');
+		return {
+			form: form._fields,
+			section: form._sections 
+		};
+	},
+
+    type: 'ComponentFormView'
+};]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;willian.costa&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-06-24 16:17:38&lt;/sys_created_on&gt;&lt;sys_id&gt;77a6eb59875091508c830e1d0ebb35f2&lt;/sys_id&gt;&lt;sys_mod_count&gt;9&lt;/sys_mod_count&gt;&lt;sys_name&gt;ComponentFormView&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_77a6eb59875091508c830e1d0ebb35f2&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;willian.costa&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-06-27 13:50:52&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-914995387</payload_hash>
+<remote_update_set display_value="Component List v2">76bac4e087381510f7c5cbfc0ebb35d5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>willian.costa</sys_created_by>
+<sys_created_on>2022-07-16 12:45:10</sys_created_on>
+<sys_id>72bac4e087381510f7c5cbfc0ebb35d6</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>182070a23cd0000001</sys_recorded_at>
+<sys_updated_by>willian.costa</sys_updated_by>
+<sys_updated_on>2022-07-16 12:45:10</sys_updated_on>
+<table/>
+<target_name>ComponentFormView</target_name>
+<type>Script Include</type>
+<update_domain>global</update_domain>
+<update_guid>739a44e0783815102ed109b4ce0bd3a2</update_guid>
+<update_guid_history>739a44e0783815102ed109b4ce0bd3a2:-914995387,0493621abf5c15501d94259f39f42c0f:-914995387,d153221a595c1550c720237dfb489560:-326892252,767e1e161c5c1550578e191b4d55efee:-914995387,e01d96166e5c155077bde3198bb83e7d:2115817205,f579da52525c1550709e1c200c5315d5:-978312555,3c6eb9692b18915016c2e8dc4713df41:-1590840588,fd7773958990915012d0831228a81bfc:-116528315,0557f71506909150216932291c87b955:-398498705,44817f51fc9091508bb9606e7fce6f7e:856310471,7c6823d903509150680728b09c26ee4b:812931805</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sp_widget_2057ccd71b881510f087a79fe54bcbfb</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function($scope, $rootScope, $window, $timeout, spUtil, spModal) {
+	/* widget controller */
+	var c = this;
+	
+	console.log(c.data.list);
+
+	var eventNames = {
+		click: 'data_table.click',
+		setFilter: 'data_table.setFilter',
+		setKeywords: 'data_table.setKeywords'
+	};
+
+	spUtil.recordWatch($scope, c.data.table, c.data.filter, function(name, data) { 
+		c.server.update();
+	});
+
+	$scope.$on('widget-filter-breadcrumbs.queryModified', function(e, newFilter ){
+		c.data.new_filter = newFilter;
+		c.server.update();
+	})
+	
+	c.filterButton = function(){
+		$rootScope.$broadcast('open.filter.breadcrumbs', true);
+	}
+
+	/* Variables */
+	c.loading = false;
+	c.showPagination = true;
+	c.modelFields = {};
+	$scope.view = (c.options.column_filter == 'true'? true : false);
+	$scope.exportTypes = [{label:'PDF', value: 'PDF'}, {label:'Excel', value:'EXCEL'}, {label:'CSV', value:'CSV'}];
+
+	/* Sort the list */
+	$scope.sort = function(index, field, direction){
+		c.data.action = 'refreshData';
+		$scope.resetSort();
+		c.data.column_fields[index].order = direction;
+		c.data.orderField = field;
+		c.data.order = direction;
+		c.server.update().then(function(){
+			c.data.action = '';
+		});
+	}
+
+	/* Reset state of sort fields */
+	$scope.resetSort = function(){
+		c.data.column_fields.forEach(function(item){
+			item.order = 'asc';
+		});
+	}
+
+	/* Verify if is ASC or DESC */
+	$scope.setOrderBy = function(field) {
+		var order = "asc";
+		if ($scope.data.orderField == field) {
+			if ($scope.data.order == "asc")
+				order = "desc";
+			else
+				order = "asc";
+		}
+		$scope.data.orderField = field;
+		$scope.data.order = order;
+	}
+
+	/* Refresh the list */
+	$scope.refresh = function(){
+		c.showPagination = false
+		c.loading = true;
+		c.data.action = '';
+		$scope.data.orderField = '';
+		$scope.data.order = '';
+		c.searchText = '';
+		c.data.p = 1;
+		c.goPage = 1;
+		c.data.searchFilters = [];
+		c.data.search = '';
+
+		for(var f in c.data.fields){
+			var key = c.data.fields[f];
+			c.modelFields[key] = '';
+		}
+
+		c.server.update().then(function(){
+			c.loading = false;
+			c.showPagination = true;
+		});
+	}
+
+	/* Filter in all table */
+	$scope.filter = function(){
+		c.data.p = 1;
+		c.data.action = 'refreshData';
+		c.data.search = c.searchText;
+		c.server.update().then(function(){
+			c.data.action = '';
+		});
+	}
+
+	/* Verify if the user pressed "enter" */
+	$scope.getkeys = function(event, index){
+		if(event.keyCode == 13)
+			c.update(index);
+	}
+
+	/* Redirect */
+	$scope.redirect = function(record){
+		var parms = {};
+		parms.table = record.table;
+		parms.sys_id = record.sys_id;
+		parms.id = c.options.sp_page;
+		$window.open("?sys_id="+parms.sys_id+"&amp;id="+parms.id+"&amp;table="+parms.table, '_self');
+	}
+
+
+	$scope.goTo = function(element) {
+		var animationDuration = 1000;
+		$('html').animate({
+			scrollTop : $(element).offset().top
+		}, animationDuration);
+
+	}
+
+
+	/* Previous page */
+	c.prevPage = function(){
+		if(c.data.p == 1)
+			return;
+
+		c.data.p--;
+		c.data.maximum_entries = c.options.maximum_entries;
+		c.data.action = 'refreshData';
+		c.server.update().then(function(){
+			c.data.action = '';
+		});
+	}
+
+	/* Next page */
+	c.nextPage = function(){
+		if(c.data.p == c.data.num_pages)
+			return;
+		c.data.p++;
+		c.data.maximum_entries = c.options.maximum_entries;
+		c.data.action = 'refreshData';
+		c.server.update().then(function(){
+			c.data.action = '';
+		});
+	}
+
+	/* Go to any page */
+	c.goToPage = function(pag){
+		if(pag &gt; c.data.num_pages || pag &lt; 1)
+			return;
+
+		c.data.p = pag;
+		c.data.maximum_entries = c.options.maximum_entries;
+		c.data.action = 'refreshData';
+		c.server.update().then(function(){
+			c.data.action = '';
+		});
+	}
+
+	function lessThan10(date){
+		if(!date) return;
+		if(date &lt; 10)
+			return '0' + date.toString();
+		return date.toString();
+	}
+
+	/* Change JSDate to SNDate */
+	function jsDateToSN(day, type){
+		if(!day) return;
+		var date = day.getFullYear() + '-' + lessThan10(day.getMonth() + 1)+ '-' + lessThan10(day.getDate());
+
+		//Use this code if you want to use hours
+		//var hours = lessThan10(day.getHours()) + ':' + lessThan10(day.getMinutes()) + ':' + lessThan10(day.getSeconds());
+		//if(type == 'glide_date_time')
+		//	return  date + ' ' + hours;
+		return date;
+	}
+
+	/* Update the list */
+	c.update = function update(index) {
+		c.showPagination = false;
+		c.data.action = 'refreshData';
+		c.data.p = 1;
+		c.data.searchFilters = [];
+
+		for(var f in c.data.fields){
+			var key = c.data.fields[f];
+			var record = {};
+			record.field = key;
+			record.type = c.data.column_types[key];
+
+			if(record.type == "glide_date_time" || record.type == "glide_date")
+				record.value = jsDateToSN(c.modelFields[key], record.type)
+			else
+				record.value = c.modelFields[key];
+
+			c.data.searchFilters.push(record);	
+		}
+
+		c.server.update().then(function(){
+			c.showPagination = true;
+			c.data.action = '';
+		});
+	};
+
+
+	c.verifyCheck  = function(item){
+		var listSelectedRecords = [];
+		c.data.list.forEach(function(item, index){
+			if(item.checked)
+				listSelectedRecords.push(item.sys_id);
+		});
+		$rootScope.$broadcast("selected.list_records", listSelectedRecords);
+	}
+	
+	$rootScope.$on("selected.button_all", function(evt, data){
+		var listSelectedRecords = [];
+		c.data.list.forEach(function(item, index){
+			item.checked = data;
+			if(item.checked)
+				listSelectedRecords.push(item.sys_id);
+		});
+		$rootScope.$broadcast("selected.list_records", listSelectedRecords);
+	});
+
+
+}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;/*------- SEARCH BOX -------*/
+
+.search{
+  overflow: auto;
+  color: black;
+}
+
+.search__icon{
+  float: right;
+  padding: 7.2px 12px;
+  border: 1px solid #c7c7c7;
+  border-radius: 0px 3px 3px 0px;
+  border-left: none;
+  background: white;
+}
+
+.search__input{
+  float: right;
+  border: 1px solid #c7c7c7;
+  border-radius: 3px 0px 0px 3px;
+  padding-left: 12px;
+  width: 250px;
+  height: 30px;
+  border-right: none;
+
+  &amp;amp;::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: black;
+    opacity: 1; /* Firefox */
+  }
+
+  &amp;amp;:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: black;
+  }
+
+  &amp;amp;::-ms-input-placeholder { /* Microsoft Edge */
+    color: black;
+  }
+}
+
+/*------- END -------*/
+
+
+.sprint-select{
+  .select2-choice{
+    border: 1px solid #E0E0E0;
+    .select2-chosen{
+      font-size: 14px;
+    }
+    .select2-arrow{
+      border-left: none;
+    }
+  }
+}
+
+/*------- PANEL -------*/
+.panel{
+ 
+  border-radius: 20px;
+  box-sizing: border-box;
+  box-shadow: none;
+  font-family: 'Helvetica';
+  border: none;
+  padding-bottom: 20px;
+  color: #363636;
+}
+
+.static{
+  position: static;
+}
+
+.content-field{
+	display: flex;
+      justify-content: space-between;
+}
+
+.tooltip-record{
+    z-index: 1;
+    float: right;
+    position: relative;
+      padding: 0 8px;
+    //tooltip: 20px;
+}
+
+.filter-button{
+	color: $brand-primary;
+  cursor: pointer;
+}
+
+.filter-breadcrumbs{
+  .breadcrumbs{
+  	display: none;
+  }
+}
+
+.field-element{
+  display: flex;
+  align-items: center;
+  
+  .field_style{
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 8px;
+    background-color: $brand-primary;
+    margin: 0 6px 0 0;
+	}
+  .danger-style{
+  	background: #a33d05;
+  }
+}
+
+
+
+/*Head*/
+.panel-heading{
+  border: none;
+  color: black;
+  position: relative;
+  .title{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    .left-head{
+      font-weight: 500;
+    }
+    h1{
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px){
+  .panel-heading{
+    .title{
+      grid-template-columns: 3fr 1fr;
+      grid-row-gap: 12px;
+    }
+  }
+}
+
+
+/*Export*/
+.dropdown_menu{
+  font-size: 14px;
+  position: absolute;
+  top: 45px;
+  right: 8px;
+  background: #f6f6f6;
+  list-style: none;
+  padding: 8px 10px;
+  box-shadow: 0px 2px 3px #c3c3c3;
+  border-radius: 3px;
+  z-index: 1;
+
+  li{
+    padding: 8px 0px;
+  }
+
+  &amp;amp;:after {
+    content: " ";
+    position: absolute;
+    right: 4px;
+    top: -8px;
+    border-top: none;
+    border-right: 12px solid transparent;
+    border-left: 12px solid transparent;
+    border-bottom: 10px solid #f6f6f6;
+  }
+}
+
+.title__button{
+  display: flex;
+  justify-content: flex-end;
+  font-size: 21px;
+  color: $brand-primary;
+  i {
+    margin-top: 2px;
+    margin-left: 15px;
+  }
+}
+
+.title{
+  font-size: 21px;
+  font-weight: 200;
+  margin: 0;
+}
+
+.title__icon{
+  margin-right: 15px;
+}
+
+.title__button i:hover {
+  font-size: 23px;
+  margin-top: 0;
+  margin-left: 13px;
+}
+
+/*Body*/
+.panel-body{
+  margin: 0px;
+  padding: 0px;
+}
+
+/*Footer*/
+.panel-footer{
+  border: none;
+  background: white;
+  padding: 0px;
+
+  /*pagination*/
+  .pagination{
+    margin: 8px 15px;
+    margin-left: 0;
+    display: inline;
+    .current{
+      background: #E8E8E8;
+    }
+    #btn_next, #btn_prev{
+      .page-link{
+        background: $brand-primary;
+				color: white;
+      }
+
+    }
+  }
+
+  .pagination &amp;gt; li &amp;gt; a, .pagination &amp;gt; li &amp;gt; span {
+    border: 1px solid #c7c7c7;
+    color: black;
+
+    .fa{
+      margin: 0 auto;
+    }
+  }
+
+  .page-item a{
+    color: black;
+  } 
+
+  .num_pages{
+    background-color: white;
+    color: black;
+  }
+
+  .num_pages:hover{
+    background-color: white;
+    color: black;
+  }
+
+  nav{
+    padding: 5px;
+    overflow: auto;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /*goTo*/
+  .goTo__input{
+    height: 34px;
+    border: 1px solid #c7c7c7;
+    border-radius: 3px;
+    width: 60px;
+  }
+
+  .goTo__button{
+    padding: 7px;
+    border-radius: 3px;
+    border: 1px solid;
+  }
+
+  .total_rows{
+    margin: 0;
+  }
+}
+/*------- END -------*/
+
+/*------- LIST -------*/
+.list{
+  width: 100%;
+  //overflow-x: auto;
+
+  table{
+    border: none;
+    border-radius: 6px;
+    border-collapse: collapse;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    
+    tr.row-field{
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 3px;
+      &amp;amp;:nth-of-type(odd){	
+      	//background-color: #F9F9F9;
+      }
+    }
+  }
+
+  .hover_line:hover, .active-line {
+    background: #CDD6FE;
+    color: $brand-secondary;
+    transition: 0.2s;
+
+    .story_points{
+      background: $brand-secondary;
+    }
+
+    a{
+      color: white;
+    }
+  }
+
+  .hover_line:first-child:hover {
+    background: #3d6965;
+  }
+
+  th{
+    padding: 0 12px 4px 0;
+    text-transform: capitalize;
+    //border-bottom: 1px solid $brand-primary;
+    font-weight: 400;
+    white-space: nowrap;
+    &amp;amp;:last-child{
+    	padding-right: 0;
+    }
+    .fa{
+      color: $brand-primary;
+    }
+  }
+
+  td{
+    padding: 15px 10px;
+    font-weight: 300;
+    color: $brand-primary;
+    &amp;amp;:first-child{
+      border-left: 3px solid;
+      border-radius: 3px;
+    }
+    .story_points{
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      background: #FCBD30;
+      border-radius: 15px;
+      color: white;
+    }
+  }
+
+  a{
+    color:#333;
+  }
+
+  a:hover{
+    color: white;
+    text-decoration: underline;
+  }
+
+}
+
+.zebra_on{
+
+}
+
+.zebra_off{
+
+}
+
+.row-field{
+  //border-bottom: 1px solid #8D97C3;
+  &amp;amp;:last-child{
+    border: none;
+  }
+}
+
+.list__short--label{
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  //white-space: nowrap;
+  display:inline-block;
+}
+
+/*Columns*/
+.search_field{
+  border-radius: 3px;
+  width: 100%;
+  padding-left: 5px;
+  color: black;
+  border-color: #DCDCDC;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.form-control{
+	height: 28px;
+}
+
+.column-header{
+  display: flex;
+  align-items: center;
+  .sort-by{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    .glyphicon{
+      margin: 0 8px;
+      font-size: 10px;
+      color: $brand-primary;
+    }
+  }
+}
+
+/*------- END -------*/
+
+/*------- LOADING -------*/ 
+
+.loading{
+  border: 1px solid #c7c7c7;
+  text-align: center;
+  color: $brand-primary;
+  height: 386px;
+}
+
+.loading__icon{
+  font-size: 35px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  margin-top: 110px;
+}
+
+.loading__p{
+  font-size: 21px;
+  font-family: 'Helvetica';
+  margin-top: 8px;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/*------- END -------*/
+
+/*------- NOT FOUND -------*/ 
+
+.not_found{
+  padding-bottom: 25px;
+  padding-top: 25px;
+  text-align: center;
+  color: $brand-primary;
+  height: 386px;
+}
+
+.not_found__icon{
+  font-size: 50px;
+  margin-bottom: 10px;
+  margin-top: 110px;
+}
+
+.not_found__p{
+  font-size: 19px;
+}
+
+/*------- END -------*/
+
+.hidden-label{
+  display: none;
+}
+
+@media screen and (max-width: 1199px) {
+
+  .hidden-label{
+    display: block;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 2.6rem;
+    font-size: 13px;
+    color: $brand-primary;
+  }
+
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+
+  tr.head{
+    display: none;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+  }
+
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: center;
+  }
+
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+#goTo{
+  position: absolute;
+  top: 0;
+}
+
+@media screen and (max-width: 767px){
+  #goTo{
+    position: relative;
+  }
+}
+
+
+&lt;/css&gt;&lt;data_table&gt;sp_instance_table&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list&gt;table,order_by,order_direction,field_list,filter,title,sp_page&lt;/field_list&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id&gt;dgs_mosaic_component_list&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {
+  
+	/*$(document).on('click', ".filter-button", function(){
+		$('#filterToggle').trigger('click');
+	})*/
+	
+	/*scope.filterButton = function(){
+		$('#filterToggle').trigger('click');
+	}*/
+	
+}]]&gt;&lt;/link&gt;&lt;name&gt;DGS: Mosaic Component List&lt;/name&gt;&lt;option_schema&gt;[{"name":"maximum_entries","section":"Data","label":"Maximum Entries","type":"integer"},{"name":"show_search","section":"other","default_value":"true","label":"Show Search","type":"boolean"},{"name":"column_filter","section":"other","default_value":"false","label":"Initialize with column filter","type":"boolean"},{"name":"show_export_icon","section":"other","default_value":"true","label":"Show export icon","type":"boolean"},{"name":"export_view","section":"Presentation","label":"Export View","type":"string"},{"name":"special_field_group","section":"Data","label":"Special Field Group","type":"field_name"},{"name":"special_field_group_choices","section":"Data","label":"Special Field Group Choices","type":"string"},{"name":"danger_record_table","section":"Data","label":"Danger Record Table","type":"string"},{"name":"enable_select_box","section":"other","label":"Enable Select Box","type":"boolean"},{"name":"tooltip_fields","section":"Data","label":"Tooltip Fields","type":"field_list"}]&lt;/option_schema&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles&gt;Digisystem,sn_customerservice.consumer,sn_customerservice.customer&lt;/roles&gt;&lt;script&gt;&lt;![CDATA[(function() {
+
+	// Critical Data
+	data.title = ($sp.getParameter('title')) ? gs.getMessage($sp.getParameter('title')) : options.title;
+	data.table = input.table || options.table || $sp.getParamenter('table');
+	data.fields =  options.field_list || $sp.getParamenter('field_list');
+	data.tooltip_fields = options.tooltip_fields;
+	data.filter = input.new_filter || $sp.getParameter('filter') || options.filter || '';
+	data.special_field_group = options.special_field_group;
+	data.special_field_group_choices = (options.special_field_group_choices) ? JSON.parse(options.special_field_group_choices) : [];
+	data.danger_record_table = options.danger_record_table;
+		
+	//data.fields += ",parent.ref_sc_req_item.u_category";
+	data.fields = input.fields || data.fields.split(',');
+			
+	data.all_fields = input.all_fields || options.all_fields || $sp.getParamenter('all_fields');
+	data.limit = input.maximum_entries || options.maximum_entries || 0;
+	data.event_name = options.event_name;
+
+	// Initialize field order directions
+	if(!input){
+		data.column_fields = [];
+		data.fields.forEach(function(item){
+			data.column_fields.push({order: 'asc'});
+		});
+	}
+
+	if(data.all_fields) 
+		data.all_fields = data.all_fields.split(',');
+
+
+	data.exp_array =[];
+	data.orderField = input.orderField || options.order_by || data.orderField || '';
+	data.search = input.search || data.search || '';
+	data.url = gs.getProperty("glide.servlet.uri") + options.portal + '?table='+ data.table + '&amp;id=' + options.page + '&amp;sys_id=';
+
+	// Query conditions
+	var direction = input.order || '';
+	var operator_queries = [];
+	operator_queries['string'] = "LIKE";
+	operator_queries["reference"] = "LIKE";
+	operator_queries["glide_date_time"] = "LIKE";
+	operator_queries["glide_date"] = "LIKE";
+	operator_queries["glide_list"] = "LIKE";
+	operator_queries["translated_text"] = "LIKE";
+	operator_queries["integer"] = "=";
+	operator_queries["decimal"] = "=";
+	operator_queries["choice"] = "LIKE";
+	operator_queries["_choice"] = "=";
+	operator_queries["boolean"] = "=";
+	operator_queries["percent_complete"] = "=";
+
+	// Call the Include
+	var listUtils = new global.MosaicListUtils(data.table, data.fields, true, data.tooltip_fields);
+
+	data.p = parseInt(input.p) || 1;
+	data.pagination = listUtils.createPagination(data.limit, data.p);
+	data.columns =  listUtils.getColumns(data.table, data.fields);
+
+	// you need to run the getColumns function first, else you'll receive an empty object
+	data.column_types = listUtils.getColumnType();
+
+	// Update the data
+	if(input.action == 'refreshData'){
+
+		// 
+		data.column_fields = input.column_fields;
+
+		for(var i in input.searchFilters){
+			var field = input.searchFilters[i].field;
+			var type = input.searchFilters[i].type;
+			var operator = (input.searchFilters[i].value.includes('IN')) ? "" : operator_queries[type];
+			var value = input.searchFilters[i].value;
+
+			if(value){
+				data.filter = data.filter + "^" + field + operator + value;
+
+			}
+		}
+
+
+		getData(data.orderField, direction, data.search, data.filter);
+		return;
+	}
+
+
+	getData(data.orderField, options.order_direction,'', data.filter);
+
+
+	/*
+  @description Get the list data
+  @param {String} [order] - Field that we will sort
+  @param {String} [asc]  If the sort is ASC or DESC
+	@param {String} [text]  Keyword
+	@param {String} [filter]  Query to filter data
+	*/
+	function getData(order_field, direction, text,filter){
+
+		
+		var gr = new GlideRecord(data.table);
+
+		if (order_field){
+			if (direction == "asc")
+				gr.orderBy(order_field);
+			else
+				gr.orderByDesc(order_field);
+		}
+
+
+		if(text){
+			gr.addQuery('123TEXTQUERY321', text + "*");
+		}
+		if(filter){
+			gr.addEncodedQuery(filter);
+		}
+
+		gr.chooseWindow(data.pagination.window_start,data.pagination.window_end);
+		gr.query();
+
+
+		if(!gr.isValid()){
+			return;
+		}
+
+		data.verify_filter = gr.getEncodedQuery();
+
+		data.row_count = gr.getRowCount();
+
+		data.num_pages = Math.ceil(data.row_count / data.pagination.window_size);
+		data.exportQueryEncoded = encodeURIComponent(gr.getEncodedQuery());
+		data.list = listUtils.getRows(gr);
+
+
+	}
+
+
+	var breadcrumbWidgetParams = {
+		table: data.table,
+		query: data.filter,
+		enable_filter: true
+	};
+
+	data.filterBreadcrumbs = $sp.getWidget('custom_filter_breadcrumbs', breadcrumbWidgetParams);
+
+
+
+})(); 
+
+
+]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;willian.costa&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-06-17 18:46:27&lt;/sys_created_on&gt;&lt;sys_id&gt;2057ccd71b881510f087a79fe54bcbfb&lt;/sys_id&gt;&lt;sys_mod_count&gt;196&lt;/sys_mod_count&gt;&lt;sys_name&gt;DGS: Mosaic Component List&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_2057ccd71b881510f087a79fe54bcbfb&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;willian.costa&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-07-08 17:52:42&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;!-------- SEARCH BOX --------&gt;
+&lt;!--&lt;div class="search" ng-if="options.show_search == 'true' "&gt;
+&lt;i class="fa fa-search search__icon"&gt;&lt;/i&gt;
+&lt;input type="text" class="search__input" ng-model="c.searchText" placeholder="${Search}..." ng-change="filter()"&gt;
+&lt;/div&gt;--&gt;
+
+&lt;!-------- PANEL --------&gt;
+&lt;div class="panel"&gt;
+  &lt;div class="panel-heading"&gt;
+    &lt;div class="title"&gt;
+
+      &lt;div class="left-head"&gt;
+        &lt;i ng-if="options.icon_class" class="{{options.icon_class}} title__icon"&gt;&lt;/i&gt;
+        &lt;span class="icon-filter filter-button" ng-click="c.filterButton()"&gt;&lt;/span&gt;
+        {{data.title}}
+
+      &lt;/div&gt;
+
+      &lt;span class="title__button"&gt;
+        &lt;i class="fa fa-search search_colunm" ng-click="view = !view" title="Apresentar filtros"&gt;&lt;/i&gt;
+        &lt;i class="fa fa-refresh" ng-click="refresh()" title="Atualizar a lista"&gt;&lt;/i&gt;
+        &lt;i class="fa fa-bars" ng-click="showDrop = !showDrop" ng-show="options.show_export_icon == 'true'"&gt;&lt;/i&gt;
+
+        &lt;ul class="dropdown_menu" ng-if="showDrop"&gt;
+          &lt;li ng-repeat="t in ::exportTypes"&gt;
+            &lt;a ng-href="/{{data.table}}_list.do?{{::t.value}}&amp;sysparm_query={{data.exportQueryEncoded}}&amp;sysparm_view={{options.export_view}}&amp;sysparm_fields={{data.fields.join(',')}}" target="_new" tabindex="-1"&gt;${Export as} {{::t.label}}&lt;/a&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+
+      &lt;/span&gt;
+
+    &lt;/div&gt;
+    &lt;div class="filter-breadcrumbs"&gt;
+      &lt;sp-widget widget="data.filterBreadcrumbs"&gt;&lt;/sp-widget&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="panel-body list static"&gt;
+
+    &lt;!-- Loading --&gt;
+    &lt;div ng-show="c.loading" class="loading"&gt;
+      &lt;i class="fa fa-spinner loading__icon" aria-hidden="true"&gt;&lt;/i&gt;
+      &lt;p class="loading__p"&gt;${Loading}...&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-------- LIST --------&gt;
+    &lt;table ng-show="!c.loading"&gt;
+      &lt;tbody&gt;
+        &lt;!-- Columns Name --&gt;
+        &lt;tr class="head"&gt;
+          &lt;th ng-if="options.enable_select_box == 'true'"&gt;&lt;/th&gt;
+          &lt;th ng-repeat="column in data.columns"&gt;
+            &lt;span class="column-header"&gt;
+              {{column.label}}
+              &lt;span class="sort-by"&gt;
+                &lt;i class="glyphicon glyphicon-triangle-top" ng-click="sort($index, column.name, 'asc')" ng-show="c.data.column_fields[$index].order == 'desc'"&gt;&lt;/i&gt;
+                &lt;i class="glyphicon glyphicon-triangle-bottom" ng-click="sort($index, column.name, 'desc')" ng-show="c.data.column_fields[$index].order == 'asc'"&gt;&lt;/i&gt;
+              &lt;/span&gt;
+
+            &lt;/span&gt;
+
+            &lt;div ng-switch="column.type"&gt;
+
+              &lt;span ng-switch-when="_choice"&gt;
+                &lt;span ng-if="column.field == data.special_field_group &amp;&amp; data.special_field_group &amp;&amp; data.special_field_group_choices.length &gt; 0"&gt;
+									&lt;select ng-show="view" ng-model="c.modelFields[column.name]" ng-change="c.update($index)" class="search_field form-control"&gt;
+                    &lt;option ng-repeat="choice in data.special_field_group_choices" value="{{choice.option}}"&gt;{{choice.label}}&lt;/option&gt;
+                  &lt;/select&gt;
+                &lt;/span&gt;
+                &lt;span ng-if="(!data.special_field_group &amp;&amp; data.special_field_group_choices.length == 0) || column.field != data.special_field_group"&gt;
+                  &lt;select ng-show="view" ng-model="c.modelFields[column.name]" ng-change="c.update($index)" class="search_field form-control"&gt;
+                    &lt;option ng-repeat="choice in column.choices" value="{{choice.value}}"&gt;{{choice.label}}&lt;/option&gt;
+                  &lt;/select&gt;
+                &lt;/span&gt;
+
+              &lt;/span&gt;
+
+              &lt;span ng-switch-when="glide_date_time" class="date_time"&gt;
+                &lt;input type="date" ng-model="c.modelFields[column.name]"  ng-show="view" class="search_field form-control"  ng-keypress="getkeys($event, $index)"&gt; &lt;!--  --&gt;
+              &lt;/span&gt;
+
+              &lt;span ng-switch-when="glide_date" class="date_time"&gt;
+                &lt;input type="date" ng-model="c.modelFields[column.name]"  class="search_field form-control" ng-show="view" class="search_field"  ng-keypress="getkeys($event, $index)"&gt;
+              &lt;/span&gt;
+
+              &lt;span ng-switch-default&gt;
+                &lt;input class="search_field form-control" type="text" ng-show="view" ng-model="c.modelFields[column.name]" ng-keypress="getkeys($event, $index)"&gt;
+              &lt;/span&gt;
+
+            &lt;/div&gt;
+          &lt;/th&gt;
+        &lt;/tr&gt;
+
+        &lt;!-- Lines --&gt;
+
+        &lt;tr ng-repeat="record in data.list"  class="row-field hover_line" ng-class="{'zebra_off': $index % 2 == 0, 'zebra_on': $index % 2 != 0, 'active-line': c.activeLine == $index }"&gt;
+         	&lt;td class="text-center" ng-if="options.enable_select_box == 'true'"&gt;
+            &lt;input type="checkbox" ng-model="record.checked"  ng-change="c.verifyCheck(record)"&gt;
+          &lt;/td&gt;
+          &lt;td ng-click="redirect(record); c.activeLine = $index" ng-repeat="field in record.columns" class="pointer list__short" ng-switch="data.column_types[field.field]"&gt;
+            &lt;div class="content-field"&gt;
+              &lt;div class="hidden-label" ng-if="$parent.$first"&gt;
+                &lt;span&gt;{{field.label}}&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;span ng-switch-default class="field-element {{field.element}}"&gt;
+                &lt;!-- --&gt;
+                &lt;span ng-if="field.field_style || $first" class="field_style" style="{{field.field_style}}" ng-class="{'danger-style': data.danger_record_table.includes(field.sys_class_name)}"&gt;&lt;/span&gt;
+                {{field.display}}
+              &lt;/span&gt;
+              &lt;span class="tooltip-record" ng-if="record.tooltip &amp;&amp; $first"&gt;
+                &lt;sp-widget widget="record.tooltip"&gt;&lt;/sp-widget&gt;
+              &lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;!-- NOT FOUND --&gt;
+    &lt;div ng-if="data.num_pages == 0 &amp;&amp; !c.loading" class="not_found"&gt;
+      &lt;i class="fa fa-filter not_found__icon"&gt;&lt;/i&gt;
+      &lt;p class="not_found__p"&gt;${No result found} ...&lt;/p&gt;
+      &lt;p class="not_found__p" ng-if="c.searchText.length &gt; 0 &amp;&amp; c.searchText.length &lt;= 3"&gt;${Try to write more than three characters to have a good search}.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- FOOTER  --&gt;
+  &lt;div class="panel-footer" ng-if="data.list.length &gt; 0"&gt;
+
+    &lt;!-- First list --&gt;
+    &lt;nav aria-label="Page navigation" ng-if="c.showPagination"&gt;
+      &lt;ul class="pagination" ng-if="data.num_pages &gt;= 1 &amp;&amp; data.num_pages &lt; 11"&gt;
+        &lt;li class="page-item" ng-click="c.prevPage()" id="btn_prev"&gt;&lt;a class="page-link" href="javascript:void(0)"&gt;&lt;i class="fa fa-angle-left"&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li ng-repeat="i in [].constructor(data.num_pages) track by $index" class="page-item" ng-click="c.goToPage($index + 1)" &gt;
+          &lt;a class="page-link" href="javascript:void(0)" ng-class="{current: ($index + 1) == data.p}"&gt;{{$index + 1}}&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="page-item" id="btn_next" ng-click="c.nextPage()"&gt;&lt;a class="page-link" href="javascript:void(0)"&gt;&lt;i class="fa fa-angle-right"&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;!-- Second list --&gt;
+      &lt;ul class="pagination" ng-if="data.num_pages &gt;= 11"&gt;
+        &lt;li class="page-item" ng-click="c.prevPage()" id="btn_prev"&gt;&lt;a class="page-link" href="javascript:void(0)"&gt;&lt;i class="fa fa-angle-left"&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="page-item"&gt;&lt;span class="num_pages"&gt;{{data.p}} ${of} {{data.num_pages}}&lt;/span&gt;&lt;/li&gt;
+        &lt;li class="page-item" id="btn_next" ng-click="c.nextPage()"&gt;&lt;a class="page-link" href="javascript:void(0)"&gt;&lt;i class="fa fa-angle-right"&gt;&lt;/i&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;span class="goTo" ng-if="data.num_pages &gt;= 11"&gt;
+        &lt;input type="number" class="goTo__input" ng-model="c.goPage"&gt;
+        &lt;button class="btn-primary goTo__button" ng-click="c.goToPage(c.goPage)"&gt;${Go}&lt;/button&gt;
+      &lt;/span&gt;
+
+      &lt;span class="pull-right total_rows"&gt;${Rows} - {{data.row_count}}&lt;/span&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+  &lt;div id="goTo"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+<payload_hash>1978639652</payload_hash>
+<remote_update_set display_value="Component List v2">76bac4e087381510f7c5cbfc0ebb35d5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>willian.costa</sys_created_by>
+<sys_created_on>2022-07-16 12:45:10</sys_created_on>
+<sys_id>7abac4e087381510f7c5cbfc0ebb35d5</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1820708d6440000001</sys_recorded_at>
+<sys_updated_by>willian.costa</sys_updated_by>
+<sys_updated_on>2022-07-16 12:45:10</sys_updated_on>
+<table/>
+<target_name>DGS: Mosaic Component List</target_name>
+<type>Widget</type>
+<update_domain>global</update_domain>
+<update_guid>3a4a8ca0d83815100e7d65cf35426abd</update_guid>
+<update_guid_history>3a4a8ca0d83815100e7d65cf35426abd:1978639652,7964840adba4dd502ab7ac8405352662:1978639652,fa20cc0679a4dd50c95ca2ce3b9f6e20:-1740985734,a8be3ff1e1a4dd50911ea0a1ed46d45f:45414876,f2bc73b1b5a4dd50eb947a7ef1dbec02:687116792,c04b3371eaa4dd50508b458269d8f04d:-2067359187,0c1997f5b624dd50c38a4f76e3772f2b:-1897228071,a09807ade1e49d501382a5a51b7ac1d0:730993367,ef5883ad03e49d506a774f221ee6bdb3:-275313211,f24883ade2e49d500817e19fbfe20e1d:1285088190,f7d00729d5e49d501eedc9db792b2ee6:-2005105501,e42fbea533e49d50c3765a62755d5594:2131618433,b1ee7aa55de49d50cc940927de98d9c8:1658070888,45deb6a569e49d507fc31a2f7b22a974:65024916,677c6a292fa49d50191f93d91bc43ef2:-1147507416,2d5ce6294aa49d50bf87a9803990b6e5:-1053536420,f2cb66e5e5a49d50bafc8b8e6ce88dd9:-1548892746,2819ae6555a49d50afd2923976e412a6:1730104017,e417aee1a2a49d50790a144d6f83ab11:-919854733,f0a66ae192a49d50d2fb5221fa721bdd:102400558,2666a6e19ca49d50e1805f26b362855b:1205019673,13b32261cea49d50af9f82650b7cd1a5:-1595553048,9a636a2119a49d50b47a19602ac1dd8c:835539451,6991a6ed8f649d50ba05ab1fe81be5d7:-283389431,9f71e2ed2a649d50b448e9ecd9dad771:32822603,3760a6ad3a649d50e2e16fccf8341c39:1968101656,5196cea9f6249d506d4414306b0f4dac:945516753,e356caa9af249d5004b95b4aa3415ecb:-1782380943,cb930e2946249d50d22d2244c13345ee:985655561,8c33c62989249d50fd264a9eb772c17a:-755377346,d0e2cae51f249d50d6117ce497fd963a:811867742,4f120ae5e9249d50433d6ca4745db8d9:394044446,f10242e56f249d5025841a45a2390af3:1229446828,62a182e563249d50d572f03e2217e515:-984026885,657102e579249d50ff1829b49ed4cb37:710729819,5978ec6cb85c5910293721bde8fe9157:-1777362703,c5682c6ce25c5910d1d431f549dff5b0:1037917911,ab6377901a98591075a02488720dcd5f:-1519914409,e5d8eb54dd58591030192483e57dd628:1592832272,7c88ab54eb585910de7ed23ca1d7313a:577036636,ba71a39c411859104bd2d2469c2c0e65:-776425002,d261af5cc41859108471ad5d3fe737f7:1437575805,8f31235cc11859104295a97c86087cc4:417985624,5c116b5c2018591003482100cf738735:-960035699,ff41bfc418181910883e2dbd75574dad:1854039615,45217bc4b418191034711a08dc494abd:-824976606,bef077c47118191090f804b222497dad:-1146445237,5ec0ff848d181910344795562c0b5caf:-1672941395,e4a0bf84b21819108f649d3c483e9e79:723205111,11707b84a6181910c11421312bf8ef31:1836722713,3a60b78472181910ed5182a2b1825fb7:1526811050,7460f784371819101265e19ae4e798b2:-291753067,9800bf440518191081ecf96fcf89d7fe:1836722713,d7b7630c65d41910d907e23343d3f5e8:1249108116,5e96ef8804d419108cc9c231940e3523:362309040,d9d5a38874d4191003408a15a57c1ce1:-1310775559,f8c5ef48f9d4191015ddc01d43e06e08:2108324852,26a56f48e5d41910eac00b0ebcba7e5c:-1310775559,0a85eb48d8d4191037356e7af1e41690:1253374389,cd752b4835d419104162b3230ebc9423:1152947189,5f25a3489fd4191013fdf2d0e9f3270b:1395527580,cf15e70821d419108e4272692d671f2c:1152947189,54a4a70864d41910704c9599b46bc86a:1588847926,41746308bdd419105b6dbb89952a6c7d:-647625462,07146bc474d41910ce15ec93542e3ff9:-2126011434,aa04a7c4a5d41910893cf6de93c9b107:237138594,40f367c4d1d41910ae26a967a09df31b:-31814280,38d323c468d41910bde52832da0767e3:-1083243198,68c36f849fd41910f09faac89aa98cda:2079684312,92836784ccd419105b53e923ee1d4527:237138594,6ce2af0435d41910bce3fe45c838d16b:-608413870,fcb227042ad4191098d6d00362fb599e:2090322640,f7826f048ad41910099a4a99fec2ba90:-1679373882,aff1a30470d4191010fff496b36478cf:868557260,42e1678080d41910b56b751efa1b4f2f:2033469677,606ed38c399419104b2ba13044d0c5b2:-2117529540,72addb4c7f9419104a43925badca4cc1:692185524,be4d974c5d941910c22c2c28d2051a38:2086195750,202d574c1e94191026c013c6e0f4c59c:167897765,165c970c32941910880c326cebc62f8d:234700315,563cd30c0b9419104c43893529314d93:1714722993,adcb57c816941910cee6f6b55567fa2e:-769815837,b09b9b88a29419104a580c8a695d017f:-1076309950,403bdf8872941910e8bcca6c12ead0e0:-776830821,ff9a93888294191081133ab1acc32b9c:-149638593,9b6ad3880f94191098805251750782de:436413171,592a1fc49b9419100638f749d44d1c11:-1799417905,87e4d7043b941910ccc28bf8732c4417:220994662,11ffc38cb35419108428ca229b643d4f:167897765,468f838cc854191055419353bb9b86e5:306215549,4f2f0f4c40541910980d8e00b224d8c6:1561413778,81ad030cee541910dcb9caa9224335b5:355263650,c49dcfc836541910aa2f767aa453a4c2:504646177,e31607c04d541910c058370855a6c8be:-1983976463,07f50bc0bb541910a9cf9a5d60c54be4:567025450,74f587c02c541910e76baa96f6b6e96f:1686402254,83e5c7c05e541910c105cf98e7fcf149:422621710,71d5c3c081541910089fa8504bceaa18:1686402254,a5a50f80df541910e4f866e73d8ecbd3:-1919628653,e9750f8062541910ec4138351bb78c2a:1941312843,67244340455419109744e7811ef58cf1:1225218516,51044f0032541910b8c87ccb2ee10f09:1578171153,31e3cb00b95419106e9083579058211a:-1662722392,c6330fccd9141910773b551f8b35cd3b:1365220567,e20383cc71141910138278089f967f26:1085604176,3f4b7e44521419102558f0af15054708:-219967184,5b6a3a44f214191086c994267e8a48c2:-1921899036,4b2a7e04c8141910c3d6ae9db2564c7c:1630621524,e6397604281419100d50ca6ac1aa8080:-137335375,ba19b204dc141910589da199e3cbbfc3:1986454441,0b28fe8089141910fe25c1acfa5ec678:835474837,2ed7f680d7141910119327da30fa4403:545752661,42d7f6800a141910292cc36e5084e22a:393125839,61773280cc1419108fece7f963ea8d72:-672959715,b3d6fa40ef1419103a0553e6a3aad5f5:-1171863137,edb6ba004b141910cb10176ec72065ee:-474200879,8354f68c2bd019108e40b31bb99057da:-75056321,571036886fd019105d79565ba1538135:-747469952,ed00f288bed0191059fa3168c8c2ff14:-895667561,43a5e24c6b901910af441a9d5b14ab0b:1083306558,7d5ddec09890191026bf9657f5d31105:-1742140173,183d9ec0e39019109bd69cccfd9bec21:-1087131651,671d16c0cc901910e6c8613a7aa91fba:1595719467,5bdcd6c066901910cdce6634db92d5be:-1546300441,5bcc928083901910841b445df6cdafda:1752821963,d8ac16808f901910e3c06f2f0c13395b:-1076532781,179cd680e1901910c4f2aaf0aebe8892:-172382546,09ebd680e7901910d8c55ca4d9963789:-458002800,e09b9e40869019106dfabf515c2ebb91:-1909206687,70ca9240dc901910d6b526a667931843:1748337715,2dba52400a90191068f9753c637b915f:1280925890,93b95acc3e501910b79e29a59664ad66:1748337715,82f812cc3b50191016da833739d1a681:1398037634,39e852cc5c5019104eae8bb0d2bd471e:-956611579,aad85e8c70501910a009910def57e4b0:-1623809660,06b81e8c6e501910f3591ff8ec1f33c0:2026085439,1e98128cf0501910bdfd98cfd08dbdc8:-1650479940,9888968c5a501910ab239953bf7f3867:1987260285,3458d28c46501910bb5cbc17112b68a3:762238928,5748568cdd501910fadae43417a4f139:2084142336,8bc75a4c4c50191099c7474507aa4d0b:-725983661,f7a7de0ce35019103d252963fc9dffab:-35838726,aa57524c90501910beb83fdf0c5fd4f2:19644939,1337124c76501910ce569fa6182e63ea:-1410829629,91d61a0c4a5019100541746a329a126d:1987260285,3ab6120c515019104aea48ad99ad6a06:-959320566,5946dec882501910ea5fbbf15ce5e238:-876565699,45069ac894501910ce88a1183a4160fe:-2103589830,aea552c8a95019104a3e7fe82996c198:1041592171,6325da48ea5019104c4ed47f36c58969:-1610853549,7c0516889550191069c3d719a427b83b:1041592171,a3d4d28876501910a91a31e3133366bb:-876565699,265b06cc8a1019101702ae0b42d25682:-996381102,abdac2cce9101910b3905870144b0cdb:419204328,d0cda013f24c1510b663155423744217:-1183719623,85ad6cdf590c151027782f3d43fca755:238761813,9a6de0df210c15103627d6b64fd98c24:-1358472160,0f1da0df5e0c151048cb229eafa4d8e7:-1749361424,2ebca0dfa30c151085a8ad5630e9d517:-541652322,e58c289f490c1510470d5df075fb932b:-2012811971,248ce89f460c1510d95ecb7d0bb65c74:-1783179397,085c289fcf0c15107201358bffcdf433:-1748917090,b82ce05f3e0c1510acb9ebf17d921291:-2109207911,6e7b6c5f640c1510b6807f919bcfde02:-365183820,69caac1f3f0c151066ebee0f4cc561d9:317453584,46aae8db1d0c15104c050882b11cc6c2:1901534573,bd8ae8db090c1510e94044ea2299a1d7:503640079,cc8aac1f2f0c1510f55db92d45b3ea00:-1159548597,83296c9bbe0c151039dd57271bd714ba:-395640831,4c09e4dbd00c15103b356b04bb02234f:-1273419815,76b860db980c1510ca99de0d80d23240:1217007147,2ea7a05b5b0c151030dd5c920bfc1e4e:-481317096,ef47e85b280c15109beb1d189ae2e847:-1690895668,cb16641b950c1510fd0a311137df2452:804000328,1cd56cd7100c1510fcd9f98c63245e23:1942939425,caa52cd71b0c15109376bcb590ca9687:-1481142040,064560d73e0c1510420db98d43149fd2:-1960334217,73d4e897df0c15109b3e62fc0013a33e:-1328575803,991420571c0c1510b702faf677e9a4e1:-2116296053,ea636417100c1510d480d9ae1833ee2a:-424960940,fb7268d3690c1510ee4a6652a3973273:-134666846,ce2220d3fe0c1510a6971a7799947e53:-845014886,7731ecdf4ec8151092d560d72b33b629:1635774868,f321a093ab0c1510fc020c8badbdb0da:1928745698,e811a853310c15108abd27f5e22688fd:863784024,78b0a853fe0c15101030764ba54fdee2:-1623049102,6e60acdf5ac81510b7af567c931076e7:1571199994,693d109f80c8151006d8f68da710ee95:-916118180,d29c985faac815109f126646f97e5727:-606264198,ca0c1c1f92c8151004a7df8370b5ff90:-1949904273,d40cd81f73c81510df12015f93850372:-1677471991,71ab18db28c815103287fb8d761e3a34:-1585630865,10ab5c9b08c8151009f13b0243d57233:685957691,268b581f9bc81510251ab0da8cf96ea2:-1585630865,c563941733c815103f202b2c0fe69c5a:-1840468888,042318d38ec81510dbe8df9bef8b3b65:1209057939,56c21cd34bc815104c47e0b90194623f:588903210,d1c2d49390c815101acbb60f39cbfda2:-992595600,927254d314c815105b27fe9329a1f93c:-1254719145,fa42949312c81510b905dd597ebeb348:1822974199,81e1541347c81510bb7e5e56f03f3788:1736146670,54e194935fc81510ffff37e45bfcf23a:1935206312,1c515413f9c8151076deb955988002b7:1736146670,97015013e0c81510e83bcf1c6c43aabf:-1266040317,96ffc0134ac815101e2905478b6c8b0d:352450992,1b4fcc9f21881510558d75c94fe49091:452674161,0297081bef881510e9d8c925f59e679a:-1129819400,6857081b838815108380a8ee5dabce4d:-55262121</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_script_include_b1aec6d8878c9990f7c5cbfc0ebb3542</name>
+<payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;global.ComponentSimpleList&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;ComponentSimpleList&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var ComponentSimpleList = Class.create();
+ComponentSimpleList.prototype = {
+	/*
+		var list = new ComponentSimpleList('incident', 'active=true', 'number,short_description,state', 1);
+	*/
+    initialize: function(table, filter, fields, currentPage) {
+		this.table = table;
+		this.fields = fields;
+		this.filter = filter;
+		this.current_page = currentPage;
+    },
+	
+	/*
+		list.createComponent()
+	*/
+	createComponent: function(){
+		
+		if(!this.table || !this.fields)
+			return {status: 400, error: "Table or Fields not informed"};
+		
+		if(!this.existsTable())
+			return {status: 400, error: "Table is not found"};
+		
+		var component = {};
+		component.status = 200;
+		component.rowCount = this.getRowCount();
+		component.pages = Math.ceil(component.rowCount / 10);
+		component.currentPage = this.current_page;
+		component.createPagination = this.createPagination(10, component.currentPage);
+		component.columns = this.getColumns();
+		component.rows = this.getRows(component.createPagination);
+		return component;
+	},
+	
+	existsTable: function(){
+		var gr = new GlideRecord(this.table);
+		return gr.isValid();
+	},
+	
+	getColumns: function(){
+		if(!this.table || !this.fields)
+			return;
+		
+		var sp = new GlideSPScriptable();
+		var gr = new GlideRecord(this.table);
+		gr.newRecord();
+		
+		var fields = sp.getFields(gr, this.fields);
+		var field_list = [];
+		fields.forEach(function(item){
+			field_list.push(item.label);
+		});
+		return field_list;
+	},
+	
+	getRows: function(pagination){
+		if(!this.table || !this.fields)
+			return;
+		
+		
+		var list = [];
+		
+		var sp = new GlideSPScriptable();
+		var gr = new GlideRecord(this.table);
+		gr.addEncodedQuery(this.filter);
+		gr.chooseWindow(pagination.window_start, pagination.window_end);
+		gr.query();
+		
+		while(gr.next()){
+			var record = {};
+			record.sys_id = gr.getUniqueValue();
+			record.columns = sp.getFields(gr, this.fields); //this.getFields(gr, this.fields);
+			
+			list.push(record);
+		}
+		
+		return list;
+	},
+	
+	getFields: function(gr, fields){
+		var columns = [];
+		fields = fields.split(',');
+		fields.forEach(function(item){
+			columns.push(item);
+		});
+		return columns;
+	},	
+	
+	getRowCount: function(){
+		if(!this.table || !this.fields)
+			return;
+		var agg = new GlideAggregate(this.table);
+		agg.addAggregate('COUNT');
+		agg.addEncodedQuery(this.filter);
+		agg.query();
+		if(agg.next())
+			return parseInt(agg.getAggregate('COUNT'));
+	},
+	
+	createPagination: function(maximum_entries, page){
+		var p, page_index, window_size; 
+		p = parseInt(page) || 1;
+		page_index = p - 1;
+		window_size = parseInt(maximum_entries) || 10;
+
+		if (isNaN(window_size) || window_size &lt; 1)
+			window_size = 20;
+
+		var data = {};
+		data.window_size = window_size;
+		data.window_start  = (page_index * window_size);
+		data.window_end = (((page_index + 1) * window_size));
+
+		return data;
+	},
+
+    type: 'ComponentSimpleList'
+};]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;willian.costa&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-06-08 21:19:59&lt;/sys_created_on&gt;&lt;sys_id&gt;b1aec6d8878c9990f7c5cbfc0ebb3542&lt;/sys_id&gt;&lt;sys_mod_count&gt;28&lt;/sys_mod_count&gt;&lt;sys_name&gt;ComponentSimpleList&lt;/sys_name&gt;&lt;sys_package display_value="Global" source="global"&gt;global&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Global"&gt;global&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_b1aec6d8878c9990f7c5cbfc0ebb3542&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;willian.costa&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-06-10 05:04:15&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+<payload_hash>-1755672903</payload_hash>
+<remote_update_set display_value="Component List v2">76bac4e087381510f7c5cbfc0ebb35d5</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>willian.costa</sys_created_by>
+<sys_created_on>2022-07-16 12:45:10</sys_created_on>
+<sys_id>f6bac4e087381510f7c5cbfc0ebb35d6</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>182070a55690000001</sys_recorded_at>
+<sys_updated_by>willian.costa</sys_updated_by>
+<sys_updated_on>2022-07-16 12:45:10</sys_updated_on>
+<table/>
+<target_name>ComponentSimpleList</target_name>
+<type>Script Include</type>
+<update_domain>global</update_domain>
+<update_guid>72aac4e058381510ec9b64b238c87309</update_guid>
+<update_guid_history>72aac4e058381510ec9b64b238c87309:-1755672903,940845f0c4041d90e4f90aada93b4d7b:-1755672903,d625457016041d90d77692ac6841c8f2:970204243,5c644570cd041d9058b9dc0c8d521cc3:1877889580,9693c930dc041d902698c83d3d675c09:-445414072,5043453089041d9002a8f879b6b3cc3a:460356178,c313c13002041d90bbddf9d9372f2f24:-552095533,8772c5fcb3c01d90db3c09d7b6e308f4:460356178,ec42c5fc47c01d90f04974abec2c50fc:329201315,f2c109bce6c01d90da315e5649e0befe:-190913363,192109bc53c01d90c6733d5f0162a1c7:1424509507,7180c57c88c01d90953b805647c1adc4:582793585,967d0724ab8cd99034afa15f65fe9565:-807346909,5f4d0324d48cd990cb8233642d0014b1:-664395388,a0bc8fa00e8cd990044a079652327229:1543997132,a75bcba0608cd99090f9fffd803501fd:1803387898,2fda07a0658cd99034eef99c1db61de6:595355074,529947603f8cd9909193f1e80e087c02:776549861,5027e2dc0dcc99909e398a7bf33846b4:-24080222,8707669cd2cc9990dc40b01437843f8a:1728611871,5306669cb8cc99901b6fe3254012f282:310373645,aa22ae5888cc99905f20e85d50fd6a50:578808573,4480ea5828cc9990ee0d7ce024105c6d:-1595643149,42102e1843cc99908bbdfc2c1dd8b07b:2131849450,afdf5218decc99905f57a0808fee8029:-991240250,210e1218b8cc99906a59e0509095d85a:79008296,88ea5e1485cc9990d133824dd9a8e31d:-997733252,d79a5e14c6cc9990d4374feee2e92a17:-462353069,15749edc6d8c9990ef62053b0373100c:2016839566,2d24569c828c9990e2f1d4d1795a3b96:-1627853236</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
